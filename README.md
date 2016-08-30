@@ -15,6 +15,19 @@ Open RMS will be developed on a .Net platform using C# 6.0 developed within a Vi
 
 The application will be able to be hosted on public internet servers or private intranet servers.
 
+### Modules
+The application will be split into modules which in most cases will map directly to a "bounded context" within the domain.
+
++ Product Managment
++ Product Metadata
++ Product Inventory
++ Location Management
++ Store Metadata
++ Distribution Managment
++ Product in Transit
++ Supply Chain Management
+
+
 
 ### Architecture, Patterns, Technologies and Methodologies
 
@@ -62,6 +75,20 @@ A simple example of the intended CQRS architecture can be found at this blog pos
 ##### Angular 2
 ##### Sql Server 2016
 
+
+### Folder Structure
+
+
+
+### Documentation
++ Format
++ Location
+
+#### Format
+Where appropriate project documentation should be in markdown with a suffix of ".md"
+
+#### Location
+Where possible project documentation should be in appropriately nested folders with the "Documentation" folder inside the solution root. The exception to this is the "README.md" and "LICENCE" files which should remain at the root.
 
 ### Contribution
 

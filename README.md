@@ -52,12 +52,18 @@ It is intended that the solution will use the following architecture, patterns, 
 #### Architecture
 
 + CQRS (Command Query Responsability Segragation) But not with Event Sourcing
+ + Queries
+ + Commands
 + Onion / Hexagonal Architecture
-+ Dependecy Injection
-
 
 ##### CQRS (Command Query Responsability Segragation) But not with Event Sourcing
 The project will use CQRS and have separarate "stacks" for queries reading from the database and commands writing to the database. The QueryStack will use the lightweight [StoredProcedureFramework](https://www.nuget.org/packages/Dibware.StoredProcedureFramework/) for fast querying and [EntityFramework](https://www.nuget.org/packages/EntityFramework/) for the Command Stack.
+
+###### Queries
+Queries should return either a SearchResult<T> where zero or more results are expected of a type, or a SingleSearchResult<T> where zero or one results are expected. Where arguments are more than one or two in length an object should be defined to hold the parameters. If paging is required then the object should implement the `IPagedQueryParameter` interface which contains the `StartAt` property which indicates where the paging is to start and the `Take` property indicating upto how many records to take.
+
+###### Commands
+Commands should never return a value and should always be defined as a `void` method.
 
 A simple example of the intended CQRS architecture can be found at this blog post [Using Entity Framework and the Store Procedure Framework To Achieve CQRS](http://www.duanewingett.info/2016/08/02/UsingEntityFrameworkAndTheStoreProcedureFrameworkToAchieveCQRSPart1.aspx)
 
@@ -67,6 +73,10 @@ A simple example of the intended CQRS architecture can be found at this blog pos
 ##### Domain Driven Design 
 ##### Dependecy Injection
 ##### Test First or Test After Test driven development
+##### Repository pattern
+##### Unit of Work pattern
+##### CQS (Command Query Separation)
+The will be a string drive to ensure a separation of commands and queries in methods. To try and 
 
 #### Technologies
 ##### MVC (to serve master views)

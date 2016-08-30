@@ -21,14 +21,14 @@ The application will be able to be hosted on public internet servers or private 
 It is intended that the solution will use the following architecture, patterns, technologies and methodologies.
 + Architecture
  + CQRS (Command Query Responsability Segragation) But not with Event Sourcing
- + CQS (Command Query Separation)
  + Onion / Hexagonal Architecture
- + Dependecy Injection
 + Patterns and Practices
  + Domain Driven Design 
+ + Dependecy Injection
  + Test First or Test After Test driven development
  + Repository pattern
  + Unit of Work pattern
+ + CQS (Command Query Separation)
 + Technologies
  + MVC (to serve master views)
  + Web API (for CRUD)
@@ -38,20 +38,21 @@ It is intended that the solution will use the following architecture, patterns, 
 
 #### Architecture
 
-#### CQRS (Command Query Responsability Segragation) But not with Event Sourcing
++ CQRS (Command Query Responsability Segragation) But not with Event Sourcing
++ Onion / Hexagonal Architecture
++ Dependecy Injection
+
+
+##### CQRS (Command Query Responsability Segragation) But not with Event Sourcing
 The project will use CQRS and have separarate "stacks" for queries reading from the database and commands writing to the database. The QueryStack will use the lightweight [StoredProcedureFramework](https://www.nuget.org/packages/Dibware.StoredProcedureFramework/) for fast querying and [EntityFramework](https://www.nuget.org/packages/EntityFramework/) for the Command Stack.
 
 A simple example of the intended CQRS architecture can be found at this blog post [Using Entity Framework and the Store Procedure Framework To Achieve CQRS](http://www.duanewingett.info/2016/08/02/UsingEntityFrameworkAndTheStoreProcedureFrameworkToAchieveCQRSPart1.aspx)
 
-+ Onion / Hexagonal Architecture
-+ Dependecy Injection
-
-##### CQRS (Command Query Responsability Segragation) But not with Event Sourcing
 ##### Onion / Hexagonal Architecture
-##### Dependecy Injection
 
 #### Patterns and Practices
 ##### Domain Driven Design 
+##### Dependecy Injection
 ##### Test First or Test After Test driven development
 
 #### Technologies

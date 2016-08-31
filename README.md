@@ -16,7 +16,7 @@ Open RMS will be developed on a .Net platform using C# 6.0 developed within a Vi
 The application will be able to be hosted on public internet servers or private intranet servers.
 
 ### Modules
-The application will be split into modules which in most cases will map directly to a "bounded context" within the domain.
+The application will be split into modules which in most cases will map directly to a "bounded context" within the domain. Although the application will share a single database, each module will have it's own stack from client to data access. This will allow multiple modules to be worked upon at any one time with limited impact to the other modules. There will be common elements that will be shared accross all  
 
 + Product Managment
 + Product Metadata
@@ -27,7 +27,8 @@ The application will be split into modules which in most cases will map directly
 + Product in Transit
 + Supply Chain Management
 
-
+#### ProductManagement
+The ProductManagent module will be developed first and once the code, sturcture and format is complete and "signed off" then this will be the template module which all other modules should adhere to. 
 
 ### Architecture, Patterns, Technologies and Methodologies
 

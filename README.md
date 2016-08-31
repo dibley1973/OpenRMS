@@ -126,6 +126,9 @@ ORMS.ProductManagement.Domain.Entities
 ORMS.ProductManagement.Domain.Entities.Repositories
 ```
 
+### Automated Tests
+Both unit tests and integration tests will be applied to cover as much code as sensibly possible. 100% test coverage is not possible for the whole project, but should be achevable for **ALL** code in the Domain.
+
 ### Documentation
 + Format
 + Location

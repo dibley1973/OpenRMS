@@ -19,12 +19,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{D5FA0A16-2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{1621397E-8E19-46DD-95EA-2F552FDB8C65}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ORMS.Shared.SharedKernel", "Code\Shared\ORMS.Shared.SharedKernel\ORMS.Shared.SharedKernel.xproj", "{4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORMS.Shared.SharedKernel.UnitTests", "Code\Shared\ORMS.Shared.SharedKernel.UnitTests\ORMS.Shared.SharedKernel.UnitTests.csproj", "{C2C7A604-215A-4868-8564-E0FF51BA6BFE}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2C7A604-215A-4868-8564-E0FF51BA6BFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C7A604-215A-4868-8564-E0FF51BA6BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C7A604-215A-4868-8564-E0FF51BA6BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C7A604-215A-4868-8564-E0FF51BA6BFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{872F0A08-2BD0-4537-915E-31EE1A5CA31C} = {3BB8AE01-0E7D-44A0-A5C4-9E6AB7AEA03C}
 		{1621397E-8E19-46DD-95EA-2F552FDB8C65} = {D5FA0A16-2438-4106-92B6-3ADE2C1C602B}
+		{4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1} = {1621397E-8E19-46DD-95EA-2F552FDB8C65}
+		{C2C7A604-215A-4868-8564-E0FF51BA6BFE} = {1621397E-8E19-46DD-95EA-2F552FDB8C65}
 	EndGlobalSection
 EndGlobal

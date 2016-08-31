@@ -55,16 +55,20 @@ It is intended that the solution will use the following architecture, patterns, 
  + Commands
 + Onion / Hexagonal Architecture
 
-##### CQRS (Command Query Responsability Segragation) 
-The project will use CQRS and have separarate "stacks" for queries reading from the database and commands writing to the database. The QueryStack will use the lightweight [StoredProcedureFramework](https://www.nuget.org/packages/Dibware.StoredProcedureFramework/) for fast querying and [EntityFramework](https://www.nuget.org/packages/EntityFramework/) for the Command Stack.
+##### CQRS (Command Query Responsability Segregation) 
+The project will use CQRS and have separarate "stacks" for queries reading from the database and commands writing to the database. The *Query Stack* will use the lightweight [StoredProcedureFramework](https://www.nuget.org/packages/Dibware.StoredProcedureFramework/) for fast querying and [EntityFramework](https://www.nuget.org/packages/EntityFramework/) for the *Command Stack*.
 
 ###### Queries
-Queries should return either a SearchResult<T> where zero or more results are expected of a type, or a SingleSearchResult<T> where zero or one results are expected. Where arguments are more than one or two in length an object should be defined to hold the parameters. If paging is required then the object should implement the `IPagedQueryParameter` interface which contains the `StartAt` property which indicates where the paging is to start and the `Take` property indicating upto how many records to take.
+The *Query Stack* will use a vertical N-Tier *reporting* style of architecture with the *Application Services* referencing the *Read Model*, and the *Read Model* accessing data straight from the database via the *storedProcedureFramework*.
+
+Queries should return either a SearchResult<T> where zero or more results are expected of a type, or a SingleSearchResult<T> where zero or one results are expected. Where arguments are more than one or two in length an object should be defined to hold the parameters. If paging is required then the object should implement the `IPagedQueryParameter` interface which contains the `StartAt` property which indicates where the paging is to start and the `Take` property indicating upto how many records to take. The 
 
 ###### Commands
-Commands should never return a value and should always be defined as a `void` method.
+The *Command Stack* will use Onion architecture and a Domain Driven Development practice. Commands should never return a value and should always be defined as a `void` method. Identities for new entities should be created by the domain and assigned to the Entities before inserting into the database. IF the identity for the entity is a *Long Integer* then the High-Low principle may be followed with the next "n" available identities queried from the database. If the identity for the entity is an Guid then the domain can generate it's own.
 
 A simple example of the intended CQRS architecture can be found at this blog post [Using Entity Framework and the Store Procedure Framework To Achieve CQRS](http://www.duanewingett.info/2016/08/02/UsingEntityFrameworkAndTheStoreProcedureFrameworkToAchieveCQRSPart1.aspx)
+
+ 
 
 ##### Onion / Hexagonal Architecture
 At the centre of the onion will be the *Shared.Kernel* which will contain the basic building blocks needed and share accross all bounded contexts. This is where the base `Entity` and `ValueObject` classes will reside. It will also contain any *non*-problem domain objects, for instance the `Maybe<T>` amplifier. Around the *Shared.Kernel* will be wrapped the *Domain.Core*. This is where all of the domain logic should live within the *Domain Entities*, *Value Objects*, *Domain Events* and *Aggregates*. Around this layer will be wrapped the *Domain Services*, *Factories* and *Repositories*. Around this layer will wrap the *Application Services* and the *Integration Tests*.

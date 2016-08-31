@@ -10,8 +10,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{872F0A08-2BD0-4537-915E-31EE1A5CA31C}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Images\Readme_OnionArchitecture.png = Documentation\Images\Readme_OnionArchitecture.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{872F0A08-2BD0-4537-915E-31EE1A5CA31C} = {3BB8AE01-0E7D-44A0-A5C4-9E6AB7AEA03C}
 	EndGlobalSection
 EndGlobal

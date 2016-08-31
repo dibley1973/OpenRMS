@@ -2,21 +2,19 @@
 
 ~ This document is a work in progress ~
 
-Open RMS is an Open Source project with the intention of delivering a retail management platform that is free to install, use, modify and distribute. The product will continue to evolve as the key technologies mature. 
+Open RMS is an Open Source project with the intention of delivering a retail management system that is free to install, free to use, free to modify and free to distribute. The aim of the product is to provide system which has key modules which can then be extended with private bespoke modules by developers within retail businessed or additional public modules developed by the wider open source community for the expansion of teh project. The product will continue to evolve as the key technologies mature. 
 
-## Target consumers
+## Target Consumers
 
-The finished product will be aimed primarily at small to medium size business where Excel and Access based solutions are far from ideal.
-
-
+The finished product will be aimed primarily at small to medium size business where Microsoft Excel and Access based solutions are far from ideal.
 
 ## Development
-Open RMS will be developed on a .Net platform using C# 6.0 developed within a Visual Studio 2015 solution. It will feature key modules like Product Managment, Product Metadata, Product Stock, Location Management (Both Store and Distribution Centre / Hubs) as part of the main open source code but will allow other module to be developed independently and plugged into the main application.
+Open RMS will be developed on a .Net platform using C# 6.0 and will be developed within a Visual Studio 2015 solution. It will feature key modules like *Product Managment*, *Product Metadata*, *Product Stock*, *Location Management* (both *Store* and *Distribution Centre / Hubs*) as part of the main open source code but will allow other modules to be developed independently and plugged into the main application.
 
-The application will be able to be hosted on public internet servers or private intranet servers.
+The application will be able to be hosted on public internet servers or private *on-prem* or *off-prem* intranet servers.
 
 ### Modules
-The application will be split into modules which in most cases will map directly to a "bounded context" within the domain. Although the application will share a single database, each module will have it's own stack from client to data access and databse project. This will allow multiple modules to be worked upon at any one time with limited impact to the other modules. There will be common elements that will be shared accross all modules, like for instance the `SharedKernel` which might contain the base classes for Entities and ValueObjects.
+The application will be split into modules which in most cases will map directly to a "bounded context" within the the problem domain. Although the application will share a single database, each module will have it's own stack from client to data access and databse project. This will allow multiple modules to be worked upon at any one time with limited impact to the other modules. There will be common elements that will be shared accross all modules, like for instance the `SharedKernel` which might contain the base classes for Entities and ValueObjects.
 
 + Product Managment
 + Product Metadata
@@ -31,10 +29,10 @@ The application will be split into modules which in most cases will map directly
 The ProductManagent module will be developed first and once the code, sturcture and format is complete and "signed off" then this will be the template module which all other modules should adhere to. 
 
 ### Architecture, Patterns, Technologies and Methodologies
-
 It is intended that the solution will use the following architecture, patterns, technologies and methodologies.
+
 + Architecture
- + CQRS (Command Query Responsability Segragation) But not with Event Sourcing
+ + CQRS (Command Query Responsability Segragation) 
  + Onion / Hexagonal Architecture
 + Patterns and Practices
  + Domain Driven Design 
@@ -52,12 +50,12 @@ It is intended that the solution will use the following architecture, patterns, 
 
 #### Architecture
 
-+ CQRS (Command Query Responsability Segragation) But not with Event Sourcing
++ CQRS (Command Query Responsability Segragation) 
  + Queries
  + Commands
 + Onion / Hexagonal Architecture
 
-##### CQRS (Command Query Responsability Segragation) But not with Event Sourcing
+##### CQRS (Command Query Responsability Segragation) 
 The project will use CQRS and have separarate "stacks" for queries reading from the database and commands writing to the database. The QueryStack will use the lightweight [StoredProcedureFramework](https://www.nuget.org/packages/Dibware.StoredProcedureFramework/) for fast querying and [EntityFramework](https://www.nuget.org/packages/EntityFramework/) for the Command Stack.
 
 ###### Queries
@@ -69,6 +67,9 @@ Commands should never return a value and should always be defined as a `void` me
 A simple example of the intended CQRS architecture can be found at this blog post [Using Entity Framework and the Store Procedure Framework To Achieve CQRS](http://www.duanewingett.info/2016/08/02/UsingEntityFrameworkAndTheStoreProcedureFrameworkToAchieveCQRSPart1.aspx)
 
 ##### Onion / Hexagonal Architecture
+At the centre of the onion will be the *Shared.Kernel* which will contain the basic building blocks needed and share accross all bounded contexts. This is where the base `Entity` and `ValueObject` classes will reside. It will also contain any *non*-problem domain objects, for instance the `Maybe<T>` amplifier. Around the *Shared.Kernel* will be wrapped the *Domain.Core*. This is where all of the domain logic should live within the *Domain Entities*, *Value Objects*, *Domain Events* and *Aggregates*. Around this layer will be wrapped the *Domain Services*, *Factories* and *Repositories*. Around this layer will wrap the *Application Services* and the *Integration Tests*.
+
+![Onion Architecture](Images/Readme_OnionArchitecture.png "Onion Architecture")
 
 #### Patterns and Practices
 ##### Domain Driven Design 
@@ -88,6 +89,7 @@ The will be a string drive to ensure a separation of commands and queries in met
 
 
 ### Folder Structure
+```
 +--- ORMS
 |    +--- Documentation
 |    +--- Product Managment
@@ -101,6 +103,7 @@ The will be a string drive to ensure a separation of commands and queries in met
 |    + etc.
 |    +--- Shared
 |         + SharedKernal
+```
 
 ### Documentation
 + Format

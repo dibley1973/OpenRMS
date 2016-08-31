@@ -16,7 +16,7 @@ Open RMS will be developed on a .Net platform using C# 6.0 developed within a Vi
 The application will be able to be hosted on public internet servers or private intranet servers.
 
 ### Modules
-The application will be split into modules which in most cases will map directly to a "bounded context" within the domain. Although the application will share a single database, each module will have it's own stack from client to data access. This will allow multiple modules to be worked upon at any one time with limited impact to the other modules. There will be common elements that will be shared accross all  
+The application will be split into modules which in most cases will map directly to a "bounded context" within the domain. Although the application will share a single database, each module will have it's own stack from client to data access and databse project. This will allow multiple modules to be worked upon at any one time with limited impact to the other modules. There will be common elements that will be shared accross all modules, like for instance the `SharedKernel` which might contain the base classes for Entities and ValueObjects.
 
 + Product Managment
 + Product Metadata
@@ -88,8 +88,19 @@ The will be a string drive to ensure a separation of commands and queries in met
 
 
 ### Folder Structure
-
-
++--- ORMS
+|    +--- Documentation
+|    +--- Product Managment
+|    |    +--- 01.Client
+|    |    +--- 02.ApplicationServices
+|    |    +--- 03.
+|    + Product Metadata
+|    + Product Inventory
+|    + Location Management
+|    + Store Metadata
+|    + etc.
+|    +--- Shared
+|         + SharedKernal
 
 ### Documentation
 + Format

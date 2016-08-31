@@ -1,4 +1,5 @@
-﻿{
+{
+  "title": "Open RMS Shared Kernel",
   "version": "1.0.0-*",
 
   "dependencies": {

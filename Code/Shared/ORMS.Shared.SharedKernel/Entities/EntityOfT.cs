@@ -7,8 +7,13 @@
     /// Indicates the type of the entities identifier. Normally a Long or Guid
     /// </typeparam>
     public abstract class Entity<T>
-        where T : class
+        where T : struct 
     {
+        protected Entity(T id)
+        {
+            Id = id;
+        }
+
         /// <summary>
         /// Gets the identity for the entity
         /// </summary>
@@ -21,9 +26,10 @@
             if (ReferenceEquals(other, null)) return false;
             if (ReferenceEquals(this, other)) return true;
             if (GetType() != other.GetType()) return false;
-            if (Id == default(T) || other.Id == default(T)) return false;
 
-            return Id == other.Id;
+            if (Id.Equals(default(T)) || other.Id.Equals(default(T))) return false;
+
+            return Id.Equals(other.Id);
         }
 
         public static bool operator ==(Entity<T> a, Entity<T> b)

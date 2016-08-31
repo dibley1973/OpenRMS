@@ -123,7 +123,7 @@ ORMS.ProductManagement.ApplicationServices
 ORMS.ProductManagement.ApplicationServices.IntegrationTests
 ORMS.ProductManagement.Domain.Services
 ORMS.ProductManagement.Domain.Entities
-ORMS.ProductManagement.Domain.Entities.Repositories
+ORMS.ProductManagement.Domain.Repositories
 ```
 
 ### Documentation

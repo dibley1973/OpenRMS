@@ -94,19 +94,36 @@ The will be a string drive to ensure a separation of commands and queries in met
 
 ### Folder Structure
 ```
-+--- ORMS
-|    +--- Documentation
-|    +--- Product Managment
-|    |    +--- 01.Client
-|    |    +--- 02.ApplicationServices
-|    |    +--- 03.
-|    + Product Metadata
-|    + Product Inventory
-|    + Location Management
-|    + Store Metadata
-|    + etc.
-|    +--- Shared
-|         + SharedKernal
++-- ORMS
+|   +-- Documentation
+|   +-- Code
+|       +-- Product Managment
+|       |   +-- 01.Client
+|       |   +-- 02.ApplicationServices
+|       |   +-- 03.
+|       + Product Metadata
+|       + Product Inventory
+|       + Location Management
+|       + Store Metadata
+|       + etc.
+|       +-- Shared
+|           + SharedKernal
+```
+
+### Namespacing
+Even though abreviations in code are evil the base namespace will be `ORMS`, standing for "Open Retail Management Service".
+
+Examples of the name spacing for the *Shared Kernel* and the *Product Management* module are shown below.
+
+```
+ORMS
+ORMS.Shared.SharedKernel
+ORMS.Shared.SharedKernel.UnitTests
+ORMS.ProductManagement.ApplicationServices
+ORMS.ProductManagement.ApplicationServices.IntegrationTests
+ORMS.ProductManagement.Domain.Services
+ORMS.ProductManagement.Domain.Entities
+ORMS.ProductManagement.Domain.Entities.Repositories
 ```
 
 ### Documentation

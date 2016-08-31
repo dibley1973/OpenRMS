@@ -15,11 +15,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{872F0A
 		Documentation\Images\Readme_OnionArchitecture.png = Documentation\Images\Readme_OnionArchitecture.png
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{D5FA0A16-2438-4106-92B6-3ADE2C1C602B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{1621397E-8E19-46DD-95EA-2F552FDB8C65}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{872F0A08-2BD0-4537-915E-31EE1A5CA31C} = {3BB8AE01-0E7D-44A0-A5C4-9E6AB7AEA03C}
+		{1621397E-8E19-46DD-95EA-2F552FDB8C65} = {D5FA0A16-2438-4106-92B6-3ADE2C1C602B}
 	EndGlobalSection
 EndGlobal

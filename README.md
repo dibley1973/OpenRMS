@@ -69,7 +69,7 @@ A simple example of the intended CQRS architecture can be found at this blog pos
 ##### Onion / Hexagonal Architecture
 At the centre of the onion will be the *Shared.Kernel* which will contain the basic building blocks needed and share accross all bounded contexts. This is where the base `Entity` and `ValueObject` classes will reside. It will also contain any *non*-problem domain objects, for instance the `Maybe<T>` amplifier. Around the *Shared.Kernel* will be wrapped the *Domain.Core*. This is where all of the domain logic should live within the *Domain Entities*, *Value Objects*, *Domain Events* and *Aggregates*. Around this layer will be wrapped the *Domain Services*, *Factories* and *Repositories*. Around this layer will wrap the *Application Services* and the *Integration Tests*.
 
-![Onion Architecture](Images/Readme_OnionArchitecture.png "Onion Architecture")
+![Onion Architecture](https://github.com/dibley1973/OpenRMS/blob/master/Documentation/Images/Readme_OnionArchitecture.png?raw=true "Onion Architecture")
 
 #### Patterns and Practices
 ##### Domain Driven Design 

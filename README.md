@@ -18,17 +18,21 @@ The application will be split into modules which in most cases will map directly
 
 Below is a list of initial modules but the intension would be to make the application extensible so new modules could be written and plugged in as the requirement becomes appparent.
 
-+ Product Managment
-+ Product Metadata
++ Location Management (2nd Milestone)
++ Product Managment (3rd Milestone)
++ Product Location Management
++ Location Attribute Management
++ Product Attributes  Management
 + Product Inventory
-+ Location Management
 + Store Metadata
 + Distribution Managment
 + Product in Transit
 + Supply Chain Management
 
-#### ProductManagement
-The ProductManagent module will be developed first and once the code, sturcture and format is complete and "signed off" then this will be the template module which all other modules should adhere to. 
+#### Location Management
+The Location Managent module will be developed first and once the code, sturcture and format is complete and "signed off" then this will be the template module which all other modules should adhere to. 
+
+#### Product Management
 
 ### Architecture, Patterns, Technologies and Methodologies
 It is intended that the solution will use the following architecture, patterns, technologies and methodologies.

@@ -8,10 +8,15 @@ Open RMS is an Open Source project with the intention of delivering a retail man
 
 The finished product will be aimed primarily at small to medium size business where Microsoft Excel and Access based solutions are far from ideal.
 
+
 ## Development
 Open RMS will be developed on a .Net platform using .Net Core and will be developed within a Visual Studio 2015 solution. It will feature key modules like *Product Managment*, *Product Metadata*, *Product Stock*, *Location Management* (both *Store* and *Distribution Centre / Hubs*) as part of the main open source code but will allow other modules to be developed independently and plugged into the main application.
 
 The application will be able to be hosted on public internet servers or private *on-prem* or *off-prem* intranet servers.
+
+### Milestones
+The development milestones can be found [here](https://github.com/dibley1973/OpenRMS/milestones). There will be an ongoing process to enmsure they are up to date. 
+
 
 ### Modules
 The application will be split into modules which in most cases will map directly to a "bounded context" within the the problem domain. Although the application will share a single database, each module will have it's own stack from client to data access and databse project. This will allow multiple modules to be worked upon at any one time with limited impact to the other modules. There will be common elements that will be shared accross all modules, like for instance the `SharedKernel` which might contain the base classes for Entities and ValueObjects.

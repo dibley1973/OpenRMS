@@ -21,8 +21,7 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 
         public Product Execute(CreateProductCommand command)
         {
-            if (command == null)
-                throw new ArgumentNullException("command");
+            if (command == null) throw new ArgumentNullException(nameof(command));
 
             // Ensure name is unique
             if (_repository.Query().Any(p => p.Name == command.Name))
@@ -31,7 +30,8 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
             var product = new Product(command.Name, command.Description);
 
             _repository.Create(product);
-            _repository.Save();
+            //_repository.Save();
+            //_unitOfWork.Save();
 
             return product;
         }

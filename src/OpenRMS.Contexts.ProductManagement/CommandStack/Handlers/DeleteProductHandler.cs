@@ -21,13 +21,12 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 
         public Product Execute(DeleteProductCommand command)
         {
-            if (command == null)
-                throw new ArgumentNullException("command");
+            if (command == null) throw new ArgumentNullException(nameof(command));
 
             var product = _repository.GetForId(command.Id);
 
             _repository.Delete(product);
-            _repository.Save();
+            //_repository.Save();
 
             return product;
         }

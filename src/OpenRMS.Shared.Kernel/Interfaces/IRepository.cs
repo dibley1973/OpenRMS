@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace OpenRMS.Shared.Kernel.Interfaces
 {
-    public interface IRepository<T> where T : Entity
+    public interface IRepository<Entity> 
+        //where TEntity : Entity<TId>
+        //where TId : struct
     {
-        IEnumerable<T> GetAll();
-        T GetForId(Guid id);
-        IQueryable<T> Query();
-        void Create(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-        void Save();
+        IEnumerable<Entity> GetAll();
+        Entity GetForId(Guid id);
+        IQueryable<Entity> Query();
+        void Create(Entity entity);
+        void Update(Entity entity);
+        void Delete(Entity entity);
+        //void Save();
     }
 }

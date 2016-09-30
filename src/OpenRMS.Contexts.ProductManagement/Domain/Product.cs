@@ -1,12 +1,10 @@
 ﻿using OpenRMS.Shared.Kernel.BaseClasses;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OpenRMS.Contexts.ProductManagement.Domain
 {
-    public class Product : Entity
+    public class Product : Entity<Guid>
     {
         #region Properties
 
@@ -50,10 +48,8 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
         /// <param name="description">The description of the product</param>
         public void SetValues(string name, string description)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentNullException("name");
-            if (string.IsNullOrWhiteSpace(description))
-                throw new ArgumentNullException("description");
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(description)) throw new ArgumentNullException(nameof(description));
 
             Name = name;
             Description = description;

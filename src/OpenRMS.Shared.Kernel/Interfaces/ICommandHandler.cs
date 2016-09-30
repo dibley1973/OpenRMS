@@ -1,13 +1,12 @@
 ﻿using OpenRMS.Shared.Kernel.BaseClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OpenRMS.Shared.Kernel.Interfaces
 {
-    public interface ICommandHandler<T, R> where T : Command where R : Entity
+    public interface ICommandHandler<in TCommand, out TEntity> 
+        where TCommand : Command 
+        //where TEntity : Entity<TId>
+        //where TId : struct
     {
-        R Execute(T command);
+        TEntity Execute(TCommand command);
     }
 }

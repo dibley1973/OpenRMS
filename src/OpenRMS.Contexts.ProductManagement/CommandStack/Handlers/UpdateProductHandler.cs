@@ -21,14 +21,13 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 
         public Product Execute(UpdateProductCommand command)
         {
-            if (command == null)
-                throw new ArgumentNullException("command");
+            if (command == null) throw new ArgumentNullException(nameof(command));
 
             var product = _repository.GetForId(command.Id);
             product.SetValues(command.Name, command.Description);
 
             _repository.Update(product);
-            _repository.Save();
+            //_repository.Save();
 
             return product;
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenRMS.Contexts.ProductManagement.Domain
 {
-    public class ProductAttribute : Entity
+    public class ProductAttribute : Entity<Guid>
     {
         #region Properties
 
@@ -47,10 +47,8 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
         /// <param name="value">The value of the product attribute.</param>
         public void SetValues(string name, string value)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentNullException("name");
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentNullException("value");
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
 
             Name = name;
             Value = Value;

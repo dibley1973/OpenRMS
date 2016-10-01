@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenRMS.Contexts.ProductManagement.Domain;
+using OpenRMS.Contexts.ProductManagement.Interfaces;
 using OpenRMS.Shared.Kernel.Interfaces;
 
 namespace OpenRMS.Console
 {
-    internal class FakeProductRepository : IRepository<Product>
+    internal class FakeProductRepository : IProductRepository /*,  IRepository<Product>*/
     {
         public void Create(Product entity)
         {
@@ -28,15 +29,20 @@ namespace OpenRMS.Console
             throw new NotImplementedException();
         }
 
-        public IQueryable<Product> Query()
+        public Product GetForName(string name)
         {
             throw new NotImplementedException();
         }
 
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
+        //public IQueryable<Product> Query()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void Save()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public void Update(Product entity)
         {

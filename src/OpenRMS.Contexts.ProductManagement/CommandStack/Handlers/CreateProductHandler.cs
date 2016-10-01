@@ -7,14 +7,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OpenRMS.Contexts.ProductManagement.Interfaces;
 
 namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 {
     public class CreateProductHandler : ICommandHandler<CreateProductCommand, Product>
     {
-        private readonly IRepository<Product> _repository;
+        private readonly IProductRepository _repository;
 
-        public CreateProductHandler(IRepository<Product> repository)
+        public CreateProductHandler(IProductRepository repository)
         {
             _repository = repository;
         }
@@ -24,8 +25,10 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
             if (command == null) throw new ArgumentNullException(nameof(command));
 
             // Ensure name is unique
-            if (_repository.Query().Any(p => p.Name == command.Name))
-                throw new ArgumentException("command.Name");
+            //if (_repository.Query().Any(p => p.Name == command.Name))
+            //    throw new ArgumentException("command.Name");
+
+            if (_repository.GetForName(command.Name) != null) throw new ArgumentException("command.Name");
 
             var product = new Product(command.Name, command.Description);
 

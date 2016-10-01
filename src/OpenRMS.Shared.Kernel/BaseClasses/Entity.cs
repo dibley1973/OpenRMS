@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace OpenRMS.Shared.Kernel.BaseClasses
 {
     /// <summary>

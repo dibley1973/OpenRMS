@@ -1,21 +1,18 @@
-﻿using OpenRMS.Shared.Kernel.BaseClasses;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OpenRMS.Shared.Kernel.Interfaces
 {
-    public interface IRepository<Entity> 
+    public interface IRepository<TEntity> 
         //where TEntity : Entity<TId>
         //where TId : struct
     {
-        IEnumerable<Entity> GetAll();
-        Entity GetForId(Guid id);
-        IQueryable<Entity> Query();
-        void Create(Entity entity);
-        void Update(Entity entity);
-        void Delete(Entity entity);
+        IEnumerable<TEntity> GetAll();
+        TEntity GetForId(Guid id);
+        //IQueryable<Entity> Query();
+        void Create(TEntity entity);
+        void Update(TEntity entity);
+        void Delete(TEntity entity);
         //void Save();
     }
 }

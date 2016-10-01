@@ -11,6 +11,7 @@
       "type": "platform",
       "version": "1.0.1"
     },
+    "NETStandard.Library": "1.6.0",
     "OpenRMS.Contexts.ProductManagement": "1.0.0-*",
     "OpenRMS.Shared.Kernel": "1.0.0-*"
   },

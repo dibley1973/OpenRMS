@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.Extensions.DependencyInjection;
 using OpenRMS.Shared.Kernel.Interfaces;
 using OpenRMS.Contexts.ProductManagement.Domain;
@@ -12,6 +11,7 @@ using OpenRMS.Contexts.ProductManagement.CommandStack.Handlers;
 using OpenRMS.Contexts.ProductManagement.QueryStack.Handlers;
 using OpenRMS.Contexts.ProductManagement.CommandStack.Services;
 using OpenRMS.Contexts.ProductManagement.QueryStack.Services;
+using OpenRMS.Contexts.ProductManagement.Interfaces;
 
 namespace OpenRMS.Console
 {
@@ -40,7 +40,9 @@ namespace OpenRMS.Console
         {
             IServiceCollection services = new ServiceCollection();
 
-            services.AddTransient<IRepository<Product>, FakeProductRepository>();
+            //services.AddTransient<IRepository<Product>, FakeProductRepository>();
+            //services.AddTransient<IProductRepository, FakeProductRepository>();
+            services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddTransient<IDataSource<ProductDto>, FakeProductDataSource>();
 
             services.AddTransient<IProductCommandService, ProductCommandService>();

@@ -12,9 +12,9 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 {
     public class UpdateProductHandler : ICommandHandler<UpdateProductCommand, Product>
     {
-        private readonly IRepository<Product> _repository;
+        private readonly IRepository<Product, Guid> _repository;
 
-        public UpdateProductHandler(IRepository<Product> repository)
+        public UpdateProductHandler(IRepository<Product, Guid> repository)
         {
             _repository = repository;
         }
@@ -23,13 +23,15 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
         {
             if (command == null) throw new ArgumentNullException(nameof(command));
 
-            var product = _repository.GetForId(command.Id);
-            product.SetValues(command.Name, command.Description);
+            var result = _repository.GetForId(command.Id);
+            //product.SetValues(command.Name, command.Description);
 
-            _repository.Update(product);
+            if (!result.HasValue()) throw new InvalidOperationException("Cannot update product");
+
+            _repository.Update(result.Entity);
             //_repository.Save();
 
-            return product;
+            return result.Entity;
         }
     }
 }

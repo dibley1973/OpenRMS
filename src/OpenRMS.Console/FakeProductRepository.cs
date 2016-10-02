@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenRMS.Contexts.ProductManagement.Domain;
 using OpenRMS.Contexts.ProductManagement.Interfaces;
+using OpenRMS.Shared.Kernel.Amplifiers;
 using OpenRMS.Shared.Kernel.Interfaces;
 
 namespace OpenRMS.Console
@@ -24,12 +25,17 @@ namespace OpenRMS.Console
             throw new NotImplementedException();
         }
 
-        public Product GetForId(Guid id)
+        public Maybe<Product, Guid> GetForId(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Product GetForName(string name)
+        //public Product GetForId(Guid id)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public Maybe<Product, Guid> GetForName(string name)
         {
             throw new NotImplementedException();
         }

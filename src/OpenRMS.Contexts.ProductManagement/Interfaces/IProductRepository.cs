@@ -1,10 +1,12 @@
-﻿using OpenRMS.Contexts.ProductManagement.Domain;
+﻿using System;
+using OpenRMS.Contexts.ProductManagement.Domain;
 using OpenRMS.Shared.Kernel.Interfaces;
+using OpenRMS.Shared.Kernel.Amplifiers;
 
 namespace OpenRMS.Contexts.ProductManagement.Interfaces
 {
-    public interface IProductRepository : IRepository<Product>
+    public interface IProductRepository : IRepository<Product, Guid>
     {
-        Product GetForName(string name);
+        Maybe<Product, Guid> GetForName(string name);
     }
 }

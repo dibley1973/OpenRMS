@@ -1,10 +1,12 @@
-﻿namespace OpenRMS.Shared.Kernel.Interfaces
+﻿using System;
+
+namespace OpenRMS.Shared.Kernel.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         /// <summary>
-        /// Commits the current atomic transaction
+        /// Completes the current atomic transaction
         /// </summary>
-        void Commit();
+        void Complete();
     }
 }

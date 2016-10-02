@@ -12,9 +12,9 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 {
     public class DeleteProductHandler : ICommandHandler<DeleteProductCommand, Product>
     {
-        private readonly IRepository<Product> _repository;
+        private readonly IRepository<Product, Guid> _repository;
 
-        public DeleteProductHandler(IRepository<Product> repository)
+        public DeleteProductHandler(IRepository<Product, Guid> repository)
         {
             _repository = repository;
         }
@@ -23,12 +23,15 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
         {
             if (command == null) throw new ArgumentNullException(nameof(command));
 
-            var product = _repository.GetForId(command.Id);
+            var result = _repository.GetForId(command.Id);
 
-            _repository.Delete(product);
+            if (!result.HasValue()) throw new InvalidOperationException("Cannot delete product");
+            
+            _repository.Delete(result.Entity);
             //_repository.Save();
+            
 
-            return product;
+            return result.Entity;
         }
     }
 }

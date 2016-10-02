@@ -10,49 +10,59 @@ namespace OpenRMS.Console
 {
     internal class FakeProductRepository : IProductRepository /*,  IRepository<Product>*/
     {
+        private List<Product> _products = new List<Product>()
+        {
+            new Product( id: Guid.NewGuid(), name: "Product 1", description: "Product 1 Description", attributes: new List<ProductAttribute>() ),
+            new Product( id:Guid.NewGuid(), name: "Product 2", description: "Product 2 Description", attributes: new List<ProductAttribute>() ),
+            new Product( id:Guid.NewGuid(), name: "Product 3", description: "Product 3 Description", attributes: new List<ProductAttribute>() )
+        };
+
         public void Create(Product entity)
         {
-            throw new NotImplementedException();
+            _products.Add(entity);
         }
 
         public void Delete(Product entity)
         {
-            throw new NotImplementedException();
+            var hasEntity = _products.Any(product => product == entity);
+            if (!hasEntity)
+            {
+                throw new InvalidOperationException("product not found to delete");
+            }
+            _products.Remove(entity);
         }
 
         public IEnumerable<Product> GetAll()
         {
-            throw new NotImplementedException();
+            return _products;
         }
 
         public Maybe<Product, Guid> GetForId(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            var product = _products.SingleOrDefault(p => p.Id == id);
 
-        //public Product GetForId(Guid id)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            if (product == null) return new Maybe<Product, Guid>();
+
+            return new Maybe<Product, Guid>(product);
+        }
 
         public Maybe<Product, Guid> GetForName(string name)
         {
-            throw new NotImplementedException();
+            var product = _products.SingleOrDefault(p => p.Name == name);
+
+            if (product == null) return new Maybe<Product, Guid>();
+
+            return new Maybe<Product, Guid>(product);
         }
-
-        //public IQueryable<Product> Query()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Save()
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public void Update(Product entity)
         {
-            throw new NotImplementedException();
+            var product = _products.SingleOrDefault(p => p.Id == entity.Id);
+
+            if (product == null) throw new InvalidOperationException("product not found in collection");
+
+            product.SetValues(entity.Name, entity.Description);
+
         }
     }
 }

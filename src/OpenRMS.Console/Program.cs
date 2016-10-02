@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,33 @@ namespace OpenRMS.Console
                 System.Console.WriteLine(string.Format("Description: {0}", product.Description));
                 System.Console.WriteLine();
             }
+
+            var productRepository = _serviceProvider.GetService<IProductRepository>();
+
+            System.Console.WriteLine("Count of produts in repository: {0}", productRepository.GetAll().Count());
+            var newProduct = new Product("Test Added Product", "The product added in the colsole test");
+            productRepository.Create(newProduct);
+            System.Console.WriteLine("Count of produts in repository: {0}", productRepository.GetAll().Count());
+
+            /* Add new product to repo */
+            var retrievedProductResult = productRepository.GetForId(newProduct.Id);
+            var productNotFound = !retrievedProductResult.HasValue();
+            if (productNotFound) throw new InvalidOperationException("new product not found in collection");
+            
+            /* retrieve the new product */
+            var retrievedProduct = retrievedProductResult.Entity;
+            System.Console.WriteLine(string.Format("RetrievedProduct Id: {0}", retrievedProduct.Id));
+            System.Console.WriteLine(string.Format("RetrievedProduct Name: {0}", retrievedProduct.Name));
+            System.Console.WriteLine(string.Format("RetrievedProduct Description: {0}", retrievedProduct.Description));
+
+            /* NOT retrieve a product that does not exist */
+            var noProductResult = productRepository.GetForId(Guid.Empty);
+            var productFound = noProductResult.HasValue();
+            if (productFound) throw new InvalidOperationException("a product was found in collection when it should not have had");
+            System.Console.WriteLine("Did not find a non-existent product");
+
+
+
 
             System.Console.Read();
         }

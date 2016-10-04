@@ -13,28 +13,26 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 {
     public class CreateProductHandler : ICommandHandler<CreateProductCommand, Product>
     {
-        private readonly IProductRepository _repository;
+        private readonly IProductManagementUnitOfWork _unitOfWork;
 
-        public CreateProductHandler(IProductRepository repository)
+        public CreateProductHandler(IProductManagementUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
 
         public Product Execute(CreateProductCommand command)
         {
-            if (command == null) throw new ArgumentNullException(nameof(command));
+            if (command == null)
+                throw new ArgumentNullException(nameof(command));
 
             // Ensure name is unique
-            //if (_repository.Query().Any(p => p.Name == command.Name))
-            //    throw new ArgumentException("command.Name");
-
-            if (_repository.GetForName(command.Name) != null) throw new ArgumentException("command.Name");
+            if (_unitOfWork.ProductRepository.GetForName(command.Name).HasValue())
+                throw new ArgumentException("command.Name");
 
             var product = new Product(command.Name, command.Description);
 
-            _repository.Create(product);
-            //_repository.Save();
-            //_unitOfWork.Save();
+            _unitOfWork.ProductRepository.Create(product);
+            _unitOfWork.Complete();
 
             return product;
         }

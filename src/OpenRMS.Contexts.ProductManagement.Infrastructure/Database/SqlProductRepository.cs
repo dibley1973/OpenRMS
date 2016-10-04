@@ -6,7 +6,7 @@ using OpenRMS.Contexts.ProductManagement.Domain;
 using OpenRMS.Contexts.ProductManagement.Interfaces;
 using OpenRMS.Shared.Kernel.Amplifiers;
 
-namespace OpenRMS.Contexts.ProductManagement.Infrastructure
+namespace OpenRMS.Contexts.ProductManagement.Infrastructure.Database
 {
     public class SqlProductRepository : IProductRepository
     {

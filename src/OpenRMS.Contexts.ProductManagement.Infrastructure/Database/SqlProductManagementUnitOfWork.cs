@@ -2,8 +2,8 @@
 using OpenRMS.Contexts.ProductManagement.Interfaces;
 using OpenRMS.Shared.Kernel.Interfaces;
 
-namespace OpenRMS.Contexts.ProductManagement.Infrastructure
-{
+namespace OpenRMS.Contexts.ProductManagement.Infrastructure.Database
+{ 
     /// <summary>
     /// This UnitOfWork is specific for the current bounded context only, ProductManagement.
     /// </summary>

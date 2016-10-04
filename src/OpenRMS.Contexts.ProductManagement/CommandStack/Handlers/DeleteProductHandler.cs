@@ -1,5 +1,6 @@
 ﻿using OpenRMS.Contexts.ProductManagement.CommandStack.Commands;
 using OpenRMS.Contexts.ProductManagement.Domain;
+using OpenRMS.Contexts.ProductManagement.Interfaces;
 using OpenRMS.Contexts.ProductManagement.QueryStack.Dto;
 using OpenRMS.Contexts.ProductManagement.QueryStack.Services;
 using OpenRMS.Shared.Kernel.Interfaces;
@@ -12,24 +13,26 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 {
     public class DeleteProductHandler : ICommandHandler<DeleteProductCommand, Product>
     {
-        private readonly IRepository<Product, Guid> _repository;
+        private readonly IProductManagementUnitOfWork _unitOfWork;
 
-        public DeleteProductHandler(IRepository<Product, Guid> repository)
+        public DeleteProductHandler(IProductManagementUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
 
         public Product Execute(DeleteProductCommand command)
         {
-            if (command == null) throw new ArgumentNullException(nameof(command));
+            if (command == null)
+                throw new ArgumentNullException(nameof(command));
 
-            var result = _repository.GetForId(command.Id);
+            var result = _unitOfWork.ProductRepository.GetForId(command.Id);
 
-            if (!result.HasValue()) throw new InvalidOperationException("Cannot delete product");
+            // Ensure product exists to delete
+            if (!result.HasValue())
+                throw new InvalidOperationException("Product does not exist.");
             
-            _repository.Delete(result.Entity);
-            //_repository.Save();
-            
+            _unitOfWork.ProductRepository.Delete(result.Entity);
+            _unitOfWork.Complete();
 
             return result.Entity;
         }

@@ -1,5 +1,6 @@
 ﻿using OpenRMS.Contexts.ProductManagement.CommandStack.Commands;
 using OpenRMS.Contexts.ProductManagement.Domain;
+using OpenRMS.Contexts.ProductManagement.Interfaces;
 using OpenRMS.Contexts.ProductManagement.QueryStack.Dto;
 using OpenRMS.Contexts.ProductManagement.QueryStack.Services;
 using OpenRMS.Shared.Kernel.Interfaces;
@@ -12,24 +13,28 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 {
     public class UpdateProductHandler : ICommandHandler<UpdateProductCommand, Product>
     {
-        private readonly IRepository<Product, Guid> _repository;
+        private readonly IProductManagementUnitOfWork _unitOfWork;
 
-        public UpdateProductHandler(IRepository<Product, Guid> repository)
+        public UpdateProductHandler(IProductManagementUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
 
         public Product Execute(UpdateProductCommand command)
         {
-            if (command == null) throw new ArgumentNullException(nameof(command));
+            if (command == null)
+                throw new ArgumentNullException(nameof(command));
 
-            var result = _repository.GetForId(command.Id);
-            //product.SetValues(command.Name, command.Description);
+            var result = _unitOfWork.ProductRepository.GetForId(command.Id);            
 
-            if (!result.HasValue()) throw new InvalidOperationException("Cannot update product");
+            // Ensure product exists to update
+            if (!result.HasValue())
+                throw new InvalidOperationException("Product does not exist.");
 
-            _repository.Update(result.Entity);
-            //_repository.Save();
+            result.Entity.SetValues(command.Name, command.Description);
+
+            _unitOfWork.ProductRepository.Update(result.Entity);
+            _unitOfWork.Complete();
 
             return result.Entity;
         }

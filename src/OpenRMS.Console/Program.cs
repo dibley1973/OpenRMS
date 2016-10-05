@@ -13,6 +13,8 @@ using OpenRMS.Contexts.ProductManagement.QueryStack.Handlers;
 using OpenRMS.Contexts.ProductManagement.CommandStack.Services;
 using OpenRMS.Contexts.ProductManagement.QueryStack.Services;
 using OpenRMS.Contexts.ProductManagement.Interfaces;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using OpenRMS.Contexts.ProductManagement.Infrastructure.SqlDatabase;
 
 namespace OpenRMS.Console
 {
@@ -68,8 +70,6 @@ namespace OpenRMS.Console
         {
             IServiceCollection services = new ServiceCollection();
 
-            //services.AddTransient<IRepository<Product>, FakeProductRepository>();
-            //services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddTransient<IDataSource<ProductDto>, FakeProductDataSource>();
 
@@ -84,6 +84,7 @@ namespace OpenRMS.Console
             services.AddTransient<IQueryHandler<SearchProductsQuery, IEnumerable<ProductDto>>, SearchProductsHandler>();
 
             _serviceProvider = services.BuildServiceProvider();
+
         }
     }
 }

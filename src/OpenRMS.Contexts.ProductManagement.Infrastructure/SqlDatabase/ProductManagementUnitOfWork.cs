@@ -9,10 +9,10 @@ namespace OpenRMS.Contexts.ProductManagement.Infrastructure.SqlDatabase
     /// </summary>
     public class ProductManagementUnitOfWork : IProductManagementUnitOfWork
     {
-        private readonly ProductManagmentContext _context;
+        private readonly ProductManagementContext _context;
         private bool _disposed;
 
-        public ProductManagementUnitOfWork(ProductManagmentContext context)
+        public ProductManagementUnitOfWork(ProductManagementContext context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
 

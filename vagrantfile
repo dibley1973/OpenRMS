@@ -1,0 +1,43 @@
+#
+# Vagrant configuration for open rms development environment
+#
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+    # Plugin required. Run command line below.
+    # vagrant plugin install vagrant-hostmanager
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
+    
+    # DB host configuration
+    config.vm.define "db" do |db|
+        db.vm.box = "bento/ubuntu-14.04"
+        db.vm.hostname = "openrms-db"
+
+        db.vm.provider "virtualbox" do |v|
+            v.name = "Open RMS Database Server"
+            v.memory = 2048
+            v.cpus = 1
+        end
+
+        db.vm.network :public_network, ip: '192.168.0.201'
+        db.vm.network :private_network, ip: '192.168.56.101'
+        db.vm.synced_folder ".", "/opt/openrms", :mount_options => ["dmode=777","fmode=777"]
+
+        db.vm.provision "shell", path: "deployment/puppet-bootstrap/ubuntu.sh"
+        db.vm.provision :puppet do |puppet|
+            puppet.manifests_path = 'puppet/manifests'
+            puppet.module_path = 'puppet/modules'
+            puppet.manifest_file = 'site.pp'
+            puppet.options = "--hiera_config /opt/openrms/puppet/hiera.yaml --disable_warnings deprecations"
+        end
+    end
+
+end

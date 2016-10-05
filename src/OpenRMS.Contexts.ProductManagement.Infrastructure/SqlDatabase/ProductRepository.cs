@@ -10,9 +10,9 @@ namespace OpenRMS.Contexts.ProductManagement.Infrastructure.SqlDatabase
 {
     public class ProductRepository : IProductRepository
     {
-        private ProductManagmentContext _context;
+        private ProductManagementContext _context;
 
-        public ProductRepository(ProductManagmentContext context)
+        public ProductRepository(ProductManagementContext context)
         {
             if(context == null) throw new ArgumentNullException(nameof(context));
 

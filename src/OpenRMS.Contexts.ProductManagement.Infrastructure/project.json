@@ -2,6 +2,8 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.2",
+    "Microsoft.EntityFrameworkCore": "1.0.1",
     "NETStandard.Library": "1.6.0",
     "OpenRMS.Contexts.ProductManagement": "1.0.0-*"
   },

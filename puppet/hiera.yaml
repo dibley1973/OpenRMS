@@ -1,0 +1,10 @@
+---
+:backends: yaml
+:yaml:
+  :datadir: "%{settings::manifestdir}/configuration"
+:hierarchy:
+  - "%{::clientcert}"
+  - "%{::environment}"
+  - "virtual_%{::is_virtual}"
+  - common
+:logger: console

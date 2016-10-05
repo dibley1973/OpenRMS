@@ -35,23 +35,34 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
         public ProductAttribute(Guid id, string name, string value)
             : base(id)
         {
-            SetValues(name, value);
+            ChangeName(name);
+            ChangeValue(value);
         }
 
         #endregion
 
         /// <summary>
-        /// Sets the shallow properties of the product attribute.
+        /// Changes the product attributes name.
         /// </summary>
-        /// <param name="name">The name of the product attribute.</param>
-        /// <param name="value">The value of the product attribute.</param>
-        public void SetValues(string name, string value)
+        /// <param name="name">The new name of the product attribute.</param>
+        public void ChangeName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
 
             Name = name;
-            Value = Value;
+        }
+
+        /// <summary>
+        /// Changes the product attributes value.
+        /// </summary>
+        /// <param name="value">The new value of the product attribute.</param>
+        public void ChangeValue(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(nameof(value));
+
+            Value = value;
         }
     }
 }

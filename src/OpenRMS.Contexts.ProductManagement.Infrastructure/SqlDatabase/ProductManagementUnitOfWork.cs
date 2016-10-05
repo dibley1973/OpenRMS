@@ -2,23 +2,23 @@
 using OpenRMS.Contexts.ProductManagement.Interfaces;
 using OpenRMS.Shared.Kernel.Interfaces;
 
-namespace OpenRMS.Contexts.ProductManagement.Infrastructure.Database
+namespace OpenRMS.Contexts.ProductManagement.Infrastructure.SqlDatabase
 { 
     /// <summary>
     /// This UnitOfWork is specific for the current bounded context only, ProductManagement.
     /// </summary>
-    public class SqlProductManagementUnitOfWork : IProductManagementUnitOfWork
+    public class ProductManagementUnitOfWork : IProductManagementUnitOfWork
     {
-        private readonly SqlProductManagmentContext _context;
+        private readonly ProductManagmentContext _context;
         private bool _disposed;
 
-        public SqlProductManagementUnitOfWork(SqlProductManagmentContext context)
+        public ProductManagementUnitOfWork(ProductManagmentContext context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
 
             _context = context;
 
-            ProductRepository = new SqlProductRepository(_context);
+            ProductRepository = new ProductRepository(_context);
         }
 
         public IProductRepository ProductRepository { get; }
@@ -37,7 +37,7 @@ namespace OpenRMS.Contexts.ProductManagement.Infrastructure.Database
             GC.SuppressFinalize(this);
         }
 
-        ~SqlProductManagementUnitOfWork()
+        ~ProductManagementUnitOfWork()
         {
             Dispose(false);
         }

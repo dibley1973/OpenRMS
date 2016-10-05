@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace OpenRMS.Shared.Kernel.Interfaces
 {
-    public interface IDataSource<T> where T : DataTransferObject
+    /// <summary>
+    /// An interface that provides access to a data source.
+    /// </summary>
+    /// <typeparam name="TDataTransferObject">The type of DTO returned by the data source.</typeparam>
+    public interface IDataSource<TDataTransferObject> where TDataTransferObject : DataTransferObject
     {
-        IEnumerable<T> GetAll();
-        T GetForId(Guid id);
-        IQueryable<T> Query();
+        IEnumerable<TDataTransferObject> GetAll();
+        TDataTransferObject GetForId(Guid id);
+        IQueryable<TDataTransferObject> Query();
     }
 }

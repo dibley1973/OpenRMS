@@ -10,7 +10,7 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
 
         public string Name { get; protected set; }
         public string Description { get; protected set; }
-        public virtual ICollection<ProductAttribute> Attributes { get; set; }
+        public virtual ICollection<ProductAttribute> Attributes { get; protected set; }
 
         #endregion
 
@@ -35,39 +35,34 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
         public Product(Guid id, string name, string description, ICollection<ProductAttribute> attributes)
             : base(id)
         {
-            SetValues(name, description);
+            ChangeName(name);
+            ChangeDescription(description);
             Attributes = attributes ?? new List<ProductAttribute>();
         }
 
         #endregion
 
-
+        /// <summary>
+        /// Changes the products name.
+        /// </summary>
+        /// <param name="name">The new name of the product.</param>
         public void ChangeName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
 
             Name = name;
-        }
-
-        public void ChangeDescription(string description)
-        {
-            if (string.IsNullOrWhiteSpace(description)) throw new ArgumentNullException(nameof(description));
-
-            Description = description;
         }
 
         /// <summary>
-        /// Sets the shallow properties of the product.
+        /// Changes the products description.
         /// </summary>
-        /// <param name="name">The name of the product.</param>
-        /// <param name="description">The description of the product</param>
-        [Obsolete]
-        public void SetValues(string name, string description)
+        /// <param name="description">The new description of the product.</param>
+        public void ChangeDescription(string description)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-            if (string.IsNullOrWhiteSpace(description)) throw new ArgumentNullException(nameof(description));
+            if (string.IsNullOrWhiteSpace(description))
+                throw new ArgumentNullException(nameof(description));
 
-            Name = name;
             Description = description;
         }
     }

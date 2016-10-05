@@ -61,7 +61,8 @@ namespace OpenRMS.Console
 
             if (product == null) throw new InvalidOperationException("product not found in collection");
 
-            product.SetValues(entity.Name, entity.Description);
+            product.ChangeName(entity.Name);
+            product.ChangeDescription(entity.Description);
 
         }
     }

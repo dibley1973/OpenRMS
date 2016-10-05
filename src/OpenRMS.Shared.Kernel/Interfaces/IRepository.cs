@@ -6,21 +6,18 @@ using OpenRMS.Shared.Kernel.BaseClasses;
 namespace OpenRMS.Shared.Kernel.Interfaces
 {
     /// <summary>
-    /// 
+    /// An interface that provides access to a repository of entities.
     /// </summary>
-    /// <typeparam name="TEntity">The type of teh entity</typeparam>
-    /// <typeparam name="TId">The type of the entity's identifier</typeparam>
+    /// <typeparam name="TEntity">The type of the entity.</typeparam>
+    /// <typeparam name="TId">The type of the entity's identifier.</typeparam>
     public interface IRepository<TEntity, TId> 
         where TEntity : Entity<TId>
         where TId : struct
     {
         IEnumerable<TEntity> GetAll();
         Maybe<TEntity, TId> GetForId(TId id);
-
-        //IQueryable<Entity> Query();
         void Create(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
-        //void Save();
     }
 }

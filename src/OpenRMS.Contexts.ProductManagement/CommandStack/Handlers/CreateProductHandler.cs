@@ -8,33 +8,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OpenRMS.Contexts.ProductManagement.Interfaces;
+using OpenRMS.Contexts.ProductManagement.Resources;
 
 namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 {
+    /// <summary>
+    /// Handles the command to create a product.
+    /// </summary>
     public class CreateProductHandler : ICommandHandler<CreateProductCommand, Product>
     {
-        private readonly IProductManagementUnitOfWork _unitOfWork;
+        private readonly IProductManagementUnitOfWorkFactory _unitOfWorkFactory;
 
-        public CreateProductHandler(IProductManagementUnitOfWork unitOfWork)
+        /// <summary>
+        /// Construct.
+        /// </summary>
+        /// <param name="unitOfWorkFactory">A factory that can create units of work.</param>
+        public CreateProductHandler(IProductManagementUnitOfWorkFactory unitOfWorkFactory)
         {
-            _unitOfWork = unitOfWork;
+            _unitOfWorkFactory = unitOfWorkFactory;
         }
 
+        /// <summary>
+        /// Executes the command.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <returns>The product created by the command.</returns>
         public Product Execute(CreateProductCommand command)
         {
             if (command == null)
                 throw new ArgumentNullException(nameof(command));
 
-            // Ensure name is unique
-            if (_unitOfWork.ProductRepository.GetForName(command.Name).HasValue())
-                throw new ArgumentException(nameof(command.Name));
+            using (IProductManagementUnitOfWork unitOfWork = _unitOfWorkFactory.CreateUnitOfWork())
+            {
+                // Ensure name is unique
+                if (unitOfWork.ProductRepository.GetForName(command.Name).HasValue())
+                    throw new InvalidOperationException(string.Format(ExceptionMessages.NameAlreadyTaken, command.Name));
 
-            var product = new Product(command.Name, command.Description);
+                var product = new Product(command.Name, command.Description);
 
-            _unitOfWork.ProductRepository.Create(product);
-            _unitOfWork.Complete();
-
-            return product;
+                unitOfWork.ProductRepository.Create(product);
+                unitOfWork.Complete();
+                
+                return product;
+            }
         }
     }
 }

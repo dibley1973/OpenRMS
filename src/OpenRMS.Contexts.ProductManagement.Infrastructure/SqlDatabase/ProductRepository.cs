@@ -6,13 +6,13 @@ using OpenRMS.Contexts.ProductManagement.Domain;
 using OpenRMS.Contexts.ProductManagement.Interfaces;
 using OpenRMS.Shared.Kernel.Amplifiers;
 
-namespace OpenRMS.Contexts.ProductManagement.Infrastructure.Database
+namespace OpenRMS.Contexts.ProductManagement.Infrastructure.SqlDatabase
 {
-    public class SqlProductRepository : IProductRepository
+    public class ProductRepository : IProductRepository
     {
-        private SqlProductManagmentContext _context;
+        private ProductManagmentContext _context;
 
-        public SqlProductRepository(SqlProductManagmentContext context)
+        public ProductRepository(ProductManagmentContext context)
         {
             if(context == null) throw new ArgumentNullException(nameof(context));
 

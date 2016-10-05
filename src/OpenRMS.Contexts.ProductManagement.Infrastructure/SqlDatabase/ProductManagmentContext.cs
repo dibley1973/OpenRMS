@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace OpenRMS.Contexts.ProductManagement.Infrastructure.Database
+namespace OpenRMS.Contexts.ProductManagement.Infrastructure.SqlDatabase
 {
-    public class SqlProductManagmentContext : IDisposable
+    public class ProductManagmentContext : IDisposable
     {
         public void Dispose()
         {

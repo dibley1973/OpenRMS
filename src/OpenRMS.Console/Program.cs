@@ -75,8 +75,8 @@ namespace OpenRMS.Console
 
             services.AddTransient<IProductCommandService, ProductCommandService>();
             services.AddTransient<ICommandHandler<CreateProductCommand, Product>, CreateProductHandler>();
-            services.AddTransient<ICommandHandler<UpdateProductCommand, Product>, UpdateProductHandler>();
-            services.AddTransient<ICommandHandler<DeleteProductCommand, Product>, DeleteProductHandler>();
+            services.AddTransient<ICommandHandler<UpdateProductCommand>, UpdateProductHandler>();
+            services.AddTransient<ICommandHandler<DeleteProductCommand>, DeleteProductHandler>();
 
             services.AddTransient<IProductQueryService, ProductQueryService>();
             services.AddTransient<IQueryHandler<GetAllProductsQuery, IEnumerable<ProductDto>>, GetAllProductsHandler>();

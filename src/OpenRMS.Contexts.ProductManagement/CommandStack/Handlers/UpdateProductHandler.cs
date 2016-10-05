@@ -3,6 +3,7 @@ using OpenRMS.Contexts.ProductManagement.Domain;
 using OpenRMS.Contexts.ProductManagement.Interfaces;
 using OpenRMS.Contexts.ProductManagement.QueryStack.Dto;
 using OpenRMS.Contexts.ProductManagement.QueryStack.Services;
+using OpenRMS.Contexts.ProductManagement.Resources;
 using OpenRMS.Shared.Kernel.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,34 +12,45 @@ using System.Threading.Tasks;
 
 namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 {
-    public class UpdateProductHandler : ICommandHandler<UpdateProductCommand, Product>
+    /// <summary>
+    /// Handles the command to update a product.
+    /// </summary>
+    public class UpdateProductHandler : ICommandHandler<UpdateProductCommand>
     {
-        private readonly IProductManagementUnitOfWork _unitOfWork;
+        private readonly IProductManagementUnitOfWorkFactory _unitOfWorkFactory;
 
-        public UpdateProductHandler(IProductManagementUnitOfWork unitOfWork)
+        /// <summary>
+        /// Construct.
+        /// </summary>
+        /// <param name="unitOfWorkFactory">A factory that can create units of work.</param>
+        public UpdateProductHandler(IProductManagementUnitOfWorkFactory unitOfWorkFactory)
         {
-            _unitOfWork = unitOfWork;
+            _unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public Product Execute(UpdateProductCommand command)
+        /// <summary>
+        /// Executes the command.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        public void Execute(UpdateProductCommand command)
         {
             if (command == null)
                 throw new ArgumentNullException(nameof(command));
 
-            var result = _unitOfWork.ProductRepository.GetForId(command.Id);            
+            using (IProductManagementUnitOfWork unitOfWork = _unitOfWorkFactory.CreateUnitOfWork())
+            {
+                var result = unitOfWork.ProductRepository.GetForId(command.Id);
 
-            // Ensure product exists to update
-            if (!result.HasValue())
-                throw new InvalidOperationException("Product does not exist.");
+                // Ensure product exists to update
+                if (!result.HasValue())
+                    throw new InvalidOperationException(string.Format(ExceptionMessages.ProductNotFound, command.Id));
 
-            result.Entity.ChangeName(command.Name);
-            result.Entity.ChangeDescription(command.Description);
-            //result.Entity.SetValues(command.Name, command.Description);
+                result.Entity.ChangeName(command.Name);
+                result.Entity.ChangeDescription(command.Description);
 
-            _unitOfWork.ProductRepository.Update(result.Entity);
-            _unitOfWork.Complete();
-
-            return result.Entity;
+                unitOfWork.ProductRepository.Update(result.Entity);
+                unitOfWork.Complete();
+            }
         }
     }
 }

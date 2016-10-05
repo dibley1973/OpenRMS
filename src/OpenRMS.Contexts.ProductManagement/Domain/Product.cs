@@ -41,11 +41,27 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
 
         #endregion
 
+
+        public void ChangeName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
+
+            Name = name;
+        }
+
+        public void ChangeDescription(string description)
+        {
+            if (string.IsNullOrWhiteSpace(description)) throw new ArgumentNullException(nameof(description));
+
+            Description = description;
+        }
+
         /// <summary>
         /// Sets the shallow properties of the product.
         /// </summary>
         /// <param name="name">The name of the product.</param>
         /// <param name="description">The description of the product</param>
+        [Obsolete]
         public void SetValues(string name, string description)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));

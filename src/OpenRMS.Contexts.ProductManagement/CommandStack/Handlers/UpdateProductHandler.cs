@@ -31,7 +31,9 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
             if (!result.HasValue())
                 throw new InvalidOperationException("Product does not exist.");
 
-            result.Entity.SetValues(command.Name, command.Description);
+            result.Entity.ChangeName(command.Name);
+            result.Entity.ChangeDescription(command.Description);
+            //result.Entity.SetValues(command.Name, command.Description);
 
             _unitOfWork.ProductRepository.Update(result.Entity);
             _unitOfWork.Complete();

@@ -27,7 +27,7 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 
             // Ensure name is unique
             if (_unitOfWork.ProductRepository.GetForName(command.Name).HasValue())
-                throw new ArgumentException("command.Name");
+                throw new ArgumentException(nameof(command.Name));
 
             var product = new Product(command.Name, command.Description);
 

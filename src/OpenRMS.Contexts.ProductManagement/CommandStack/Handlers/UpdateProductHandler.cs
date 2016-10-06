@@ -39,18 +39,31 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 
             using (IProductManagementUnitOfWork unitOfWork = _unitOfWorkFactory.CreateUnitOfWork())
             {
+                EnsureProductNameIsNotAlreadyTaken(command, unitOfWork);
+
                 var result = unitOfWork.ProductRepository.GetForId(command.Id);
 
                 // Ensure product exists to update
                 if (!result.HasValue())
                     throw new InvalidOperationException(string.Format(ExceptionMessages.ProductNotFound, command.Id));
 
+                
                 result.Entity.ChangeName(command.Name);
                 result.Entity.ChangeDescription(command.Description);
 
                 unitOfWork.ProductRepository.Update(result.Entity);
                 unitOfWork.Complete();
             }
+        }
+
+        private static void EnsureProductNameIsNotAlreadyTaken(UpdateProductCommand command,
+            IProductManagementUnitOfWork unitOfWork)
+        {
+            var repository = unitOfWork.ProductRepository;
+            var productWithSameNameResult = repository.GetForName(command.Name);
+            var nameIsTaken = productWithSameNameResult.HasValue();
+
+            if (nameIsTaken) throw new InvalidOperationException(string.Format(ExceptionMessages.NameAlreadyTaken, command.Name));
         }
     }
 }

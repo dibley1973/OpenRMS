@@ -14,21 +14,43 @@ using OpenRMS.Contexts.ProductManagement.CommandStack.Services;
 using OpenRMS.Contexts.ProductManagement.QueryStack.Services;
 using OpenRMS.Contexts.ProductManagement.Interfaces;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using OpenRMS.Contexts.ProductManagement.Infrastructure.SqlDatabase;
+using OpenRMS.Contexts.ProductManagement.Infrastructure.PostgreSql;
+using Microsoft.EntityFrameworkCore;
 
 namespace OpenRMS.Console
 {
     public class Program
     {
-        private static IServiceProvider _serviceProvider;
+        private static IServiceCollection _services = new ServiceCollection();
 
         public static void Main(string[] args)
         {
             ConfigureIoC();
+            ConfigureDatabase();
 
-            IProductQueryService productQueries = _serviceProvider.GetService<IProductQueryService>();
+            var serviceProvider = _services.BuildServiceProvider();
 
-            foreach (var product in productQueries.GetAll())
+            // Manky code to ensure the database has been created.
+            serviceProvider.GetService<PostgreSqlProductManagementContext>().Database.EnsureCreated();
+
+            // Create some products
+            var createProductOne = new CreateProductCommand("Product One", "Product one description.");
+            var createProductTwo = new CreateProductCommand("Product Two", "Product two description.");
+            var createProductThree = new CreateProductCommand("Product Three", "Product three description.");
+
+            var productCommands = serviceProvider.GetService<IProductCommandService>();
+            productCommands.CreateProduct(createProductOne);
+            productCommands.CreateProduct(createProductTwo);
+            productCommands.CreateProduct(createProductThree);
+
+            // Output some info on the products
+            var productRepository = serviceProvider.GetService<IProductRepository>();
+            var products = productRepository.GetAll();
+
+            System.Console.WriteLine("Count of produts in repository: {0}", products.Count());
+            System.Console.WriteLine();
+
+            foreach (Product product in products)
             {
                 System.Console.WriteLine(string.Format("Product Id: {0}", product.Id));
                 System.Console.WriteLine(string.Format("Name: {0}", product.Name));
@@ -36,55 +58,35 @@ namespace OpenRMS.Console
                 System.Console.WriteLine();
             }
 
-            var productRepository = _serviceProvider.GetService<IProductRepository>();
-
-            System.Console.WriteLine("Count of produts in repository: {0}", productRepository.GetAll().Count());
-            var newProduct = new Product("Test Added Product", "The product added in the colsole test");
-            productRepository.Create(newProduct);
-            System.Console.WriteLine("Count of produts in repository: {0}", productRepository.GetAll().Count());
-
-            /* Add new product to repo */
-            var retrievedProductResult = productRepository.GetForId(newProduct.Id);
-            var productNotFound = !retrievedProductResult.HasValue();
-            if (productNotFound) throw new InvalidOperationException("new product not found in collection");
-            
-            /* retrieve the new product */
-            var retrievedProduct = retrievedProductResult.Entity;
-            System.Console.WriteLine(string.Format("RetrievedProduct Id: {0}", retrievedProduct.Id));
-            System.Console.WriteLine(string.Format("RetrievedProduct Name: {0}", retrievedProduct.Name));
-            System.Console.WriteLine(string.Format("RetrievedProduct Description: {0}", retrievedProduct.Description));
-
-            /* NOT retrieve a product that does not exist */
-            var noProductResult = productRepository.GetForId(Guid.Empty);
-            var productFound = noProductResult.HasValue();
-            if (productFound) throw new InvalidOperationException("a product was found in collection when it should not have had");
-            System.Console.WriteLine("Did not find a non-existent product");
-
-
-
-
             System.Console.Read();
+        }
+
+        private static void ConfigureDatabase()
+        {
+            _services.AddDbContext<PostgreSqlProductManagementContext>(options =>
+                options.UseNpgsql("User ID=openrms;Password=password;Host=openrms-db;Port=5432;Database=openrms;Pooling=true;")
+            );
         }
 
         private static void ConfigureIoC()
         {
-            IServiceCollection services = new ServiceCollection();
+            //_services.AddTransient<IProductRepository, FakeProductRepository>();
+            _services.AddTransient<IDataSource<ProductDto>, FakeProductDataSource>();
 
-            services.AddTransient<IProductRepository, FakeProductRepository>();
-            services.AddTransient<IDataSource<ProductDto>, FakeProductDataSource>();
+            _services.AddTransient<IProductRepository, PostgreSqlProductRepository>();
+            _services.AddTransient<IProductManagementUnitOfWork, PostgreSqlProductManagementUnitOfWork>();
+            _services.AddTransient<IProductManagementUnitOfWorkFactory, PostgreSqlProductManagementUnitOfWorkFactory>();
+            _services.AddTransient<PostgreSqlProductManagementContext, PostgreSqlProductManagementContext>();
 
-            services.AddTransient<IProductCommandService, ProductCommandService>();
-            services.AddTransient<ICommandHandler<CreateProductCommand, Product>, CreateProductHandler>();
-            services.AddTransient<ICommandHandler<UpdateProductCommand>, UpdateProductHandler>();
-            services.AddTransient<ICommandHandler<DeleteProductCommand>, DeleteProductHandler>();
+            _services.AddTransient<IProductCommandService, ProductCommandService>();
+            _services.AddTransient<ICommandHandler<CreateProductCommand, Product>, CreateProductHandler>();
+            _services.AddTransient<ICommandHandler<UpdateProductCommand>, UpdateProductHandler>();
+            _services.AddTransient<ICommandHandler<DeleteProductCommand>, DeleteProductHandler>();
 
-            services.AddTransient<IProductQueryService, ProductQueryService>();
-            services.AddTransient<IQueryHandler<GetAllProductsQuery, IEnumerable<ProductDto>>, GetAllProductsHandler>();
-            services.AddTransient<IQueryHandler<GetProductForIdQuery, ProductDto>, GetProductForIdHandler>();
-            services.AddTransient<IQueryHandler<SearchProductsQuery, IEnumerable<ProductDto>>, SearchProductsHandler>();
-
-            _serviceProvider = services.BuildServiceProvider();
-
+            _services.AddTransient<IProductQueryService, ProductQueryService>();
+            _services.AddTransient<IQueryHandler<GetAllProductsQuery, IEnumerable<ProductDto>>, GetAllProductsHandler>();
+            _services.AddTransient<IQueryHandler<GetProductForIdQuery, ProductDto>, GetProductForIdHandler>();
+            _services.AddTransient<IQueryHandler<SearchProductsQuery, IEnumerable<ProductDto>>, SearchProductsHandler>();
         }
     }
 }

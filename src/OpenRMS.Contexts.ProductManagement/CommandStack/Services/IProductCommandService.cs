@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace OpenRMS.Contexts.ProductManagement.CommandStack.Services
 {
+    /// <summary>
+    /// An interface that provides access to a service of product commands.
+    /// </summary>
     public interface IProductCommandService
     {
         Guid CreateProduct(CreateProductCommand command);

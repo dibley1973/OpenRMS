@@ -5,24 +5,37 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
     /// <summary>
     /// The base class which all entities should inherit from
     /// </summary>
-    /// <typeparam name="TId">
-    /// Indicates the type of the entities identifier. Normally a Long or Guid
-    /// </typeparam>
+    /// <typeparam name="TId">Indicates the type of the entities identifier. Normally a Long or Guid.</typeparam>
     public abstract class Entity<TId>
         where TId : struct
     {
+       /// <summary>
+        /// Gets the identity for the entity
+        /// </summary>
+        public TId Id { get; private set; }
+
+        /// <summary>
+        /// Parameterless contructor.
+        /// </summary>
+        protected Entity() { }
+
+        /// <summary>
+        /// Construct.
+        /// </summary>
+        /// <param name="id">The identifier of the entity.</param>
         protected Entity(TId id)
         {
-            if (id.Equals(default(TId))) throw new ArgumentNullException(nameof(id));
+            if (id.Equals(default(TId)))
+                throw new ArgumentNullException(nameof(id));
 
             Id = id;
         }
 
         /// <summary>
-        /// Gets the identity for the entity
+        /// 
         /// </summary>
-        public TId Id { get; }
-
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             var other = obj as Entity<TId>;
@@ -36,6 +49,12 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
             return Id.Equals(other.Id);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static bool operator ==(Entity<TId> a, Entity<TId> b)
         {
             if (ReferenceEquals(a, null) && ReferenceEquals(b, null)) return true;
@@ -44,6 +63,12 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
             return a.Equals(b);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static bool operator !=(Entity<TId> a, Entity<TId> b)
         {
             return !(a == b);

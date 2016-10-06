@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OpenRMS.Contexts.ProductManagement.Domain
 {
-    public class Product : Entity<Guid>
+    public class Product : AggregateRoot<Guid> // Entity<Guid>
     {
         #region Properties
 
@@ -48,10 +48,11 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
         /// <param name="name">The new name of the product.</param>
         public void ChangeName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
 
             Name = name;
+
+            AddDomainEvent(new ProductNameChangedEvent(name));
         }
 
         /// <summary>

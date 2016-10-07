@@ -39,7 +39,7 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
 
             using (IProductManagementUnitOfWork unitOfWork = _unitOfWorkFactory.CreateUnitOfWork())
             {
-                EnsureProductNameIsNotAlreadyTaken(command, unitOfWork);
+                EnsureProductNameIsNotAlreadyTaken(command.Name, unitOfWork.ProductRepository);
 
                 var result = unitOfWork.ProductRepository.GetForId(command.Id);
 
@@ -56,14 +56,18 @@ namespace OpenRMS.Contexts.ProductManagement.CommandStack.Handlers
             }
         }
 
-        private static void EnsureProductNameIsNotAlreadyTaken(UpdateProductCommand command,
-            IProductManagementUnitOfWork unitOfWork)
+        /// <summary>
+        /// Ensures the product name has not been taken.
+        /// </summary>
+        /// <param name="name">The name to check the status of.</param>
+        /// <param name="unitOfWork"></param>
+        private static void EnsureProductNameIsNotAlreadyTaken(string name, IProductRepository productRepository)
         {
-            var repository = unitOfWork.ProductRepository;
-            var productWithSameNameResult = repository.GetForName(command.Name);
+            var productWithSameNameResult = productRepository.GetForName(name);
             var nameIsTaken = productWithSameNameResult.HasValue();
 
-            if (nameIsTaken) throw new InvalidOperationException(string.Format(ExceptionMessages.NameAlreadyTaken, command.Name));
+            if (nameIsTaken)
+                throw new InvalidOperationException(string.Format(ExceptionMessages.NameAlreadyTaken, name));
         }
     }
 }

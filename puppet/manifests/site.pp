@@ -1,3 +1,3 @@
 node 'openrms-db' {
-  include roles::openrms::db
+  include profiles::openrms-db
 }

@@ -33,32 +33,73 @@ namespace OpenRMS.Console
             // Manky code to ensure the database has been created.
             serviceProvider.GetService<PostgreSqlProductManagementContext>().Database.EnsureCreated();
 
+            var productRepository = serviceProvider.GetService<IProductRepository>();
+            var productCommands = serviceProvider.GetService<IProductCommandService>();
+
+            // Delete products if they exist
+            System.Console.WriteLine("Deleting existing products.");
+            System.Console.WriteLine("Count of products already in repository: {0}", productRepository.GetAll().Count());
+            foreach (Product product in productRepository.GetAll())
+            {
+                System.Console.WriteLine(string.Format("Deleting Product Id: {0}", product.Id));
+                productCommands.DeleteProduct(new DeleteProductCommand(product.Id));
+            }
+            System.Console.WriteLine();
+
             // Create some products
+            System.Console.WriteLine("Creating some new products");
+
             var createProductOne = new CreateProductCommand("Product One", "Product one description.");
             var createProductTwo = new CreateProductCommand("Product Two", "Product two description.");
             var createProductThree = new CreateProductCommand("Product Three", "Product three description.");
 
-            var productCommands = serviceProvider.GetService<IProductCommandService>();
-            productCommands.CreateProduct(createProductOne);
-            productCommands.CreateProduct(createProductTwo);
-            productCommands.CreateProduct(createProductThree);
+            var productOneId = productCommands.CreateProduct(createProductOne);
+            System.Console.WriteLine(string.Format("Created Product Id: {0}", productOneId));
 
-            // Output some info on the products
-            var productRepository = serviceProvider.GetService<IProductRepository>();
-            var products = productRepository.GetAll();
+            var productTwoId = productCommands.CreateProduct(createProductTwo);
+            System.Console.WriteLine(string.Format("Created Product Id: {0}", productTwoId));
 
-            System.Console.WriteLine("Count of produts in repository: {0}", products.Count());
+            var productThreeId = productCommands.CreateProduct(createProductThree);
+            System.Console.WriteLine(string.Format("Created Product Id: {0}", productThreeId));
             System.Console.WriteLine();
 
-            foreach (Product product in products)
+            // Output some info on the products
+            OutputProductInfo(productRepository);
+
+            // Updating products
+            System.Console.WriteLine("Updating products");
+
+            var updateProductOne = new UpdateProductCommand(productOneId, "Updated Product One", "Updated product one description.");
+            var updateProductTwo = new UpdateProductCommand(productTwoId, "Updated Product Two", "Updated product two description.");
+            var updateProductThree = new UpdateProductCommand(productThreeId, "Updated Product Three", "Updated product three description.");
+
+            productCommands.UpdateProduct(updateProductOne);
+            System.Console.WriteLine(string.Format("Updated Product Id: {0}", productOneId));
+
+            productCommands.UpdateProduct(updateProductTwo);
+            System.Console.WriteLine(string.Format("Updated Product Id: {0}", productTwoId));
+
+            productCommands.UpdateProduct(updateProductThree);
+            System.Console.WriteLine(string.Format("Updated Product Id: {0}", productThreeId));
+            System.Console.WriteLine();
+
+            System.Console.Read();
+        }
+
+        private static void OutputProductInfo(IProductRepository productRepository)
+        {
+            System.Console.WriteLine("Fetching information on products.");
+            System.Console.WriteLine();
+            System.Console.WriteLine("Count of products in repository: {0}", productRepository.GetAll().Count());
+            System.Console.WriteLine();
+
+            foreach (Product product in productRepository.GetAll())
             {
                 System.Console.WriteLine(string.Format("Product Id: {0}", product.Id));
                 System.Console.WriteLine(string.Format("Name: {0}", product.Name));
                 System.Console.WriteLine(string.Format("Description: {0}", product.Description));
                 System.Console.WriteLine();
             }
-
-            System.Console.Read();
         }
 
         private static void ConfigureDatabase()

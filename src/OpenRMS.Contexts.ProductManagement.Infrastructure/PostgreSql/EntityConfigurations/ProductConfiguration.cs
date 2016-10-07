@@ -21,8 +21,7 @@ namespace OpenRMS.Contexts.ProductManagement.Infrastructure.PostgreSql.EntityCon
             entityBuilder.HasKey(product => product.Id);
 
             // A product has many attributes
-            entityBuilder.HasMany(product => product.Attributes).WithOne().HasPrincipalKey(product => product.Id);
-                
+            entityBuilder.HasMany(product => product.Attributes).WithOne().HasPrincipalKey(product => product.Id);                
         }
     }
 }

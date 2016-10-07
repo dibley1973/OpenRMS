@@ -5,6 +5,7 @@ using System.Linq;
 using OpenRMS.Contexts.ProductManagement.Domain;
 using OpenRMS.Contexts.ProductManagement.Interfaces;
 using OpenRMS.Shared.Kernel.Amplifiers;
+using Microsoft.EntityFrameworkCore;
 
 namespace OpenRMS.Contexts.ProductManagement.Infrastructure.PostgreSql
 {

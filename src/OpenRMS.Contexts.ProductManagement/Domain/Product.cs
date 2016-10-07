@@ -8,13 +8,18 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
     {
         #region Properties
 
-        public string Name { get; protected set; }
-        public string Description { get; protected set; }
-        public virtual ICollection<ProductAttribute> Attributes { get; protected set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public virtual ICollection<ProductAttribute> Attributes { get; private set; }
 
         #endregion
 
         #region Construct
+
+        /// <summary>
+        /// Parameterless constructor.
+        /// </summary>
+        private Product() : base() { }
 
         /// <summary>
         /// Construct.

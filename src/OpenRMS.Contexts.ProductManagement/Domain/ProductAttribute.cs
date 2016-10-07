@@ -10,12 +10,17 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
     {
         #region Properties
 
-        public string Name { get; protected set; }
-        public string Value { get; protected set; }
+        public string Name { get; private set; }
+        public string Value { get; private set; }
 
         #endregion
 
         #region Construct
+
+        /// <summary>
+        /// Parameterless constructor.
+        /// </summary>
+        private ProductAttribute() : base() { }
 
         /// <summary>
         /// Construct.

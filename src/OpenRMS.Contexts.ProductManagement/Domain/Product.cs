@@ -4,7 +4,10 @@ using System.Collections.Generic;
 
 namespace OpenRMS.Contexts.ProductManagement.Domain
 {
-    public class Product : AggregateRoot<Guid> // Entity<Guid>
+    /// <summary>
+    /// Represents a product.
+    /// </summary>
+    public class Product : AggregateRoot<Guid>
     {
         #region Properties
 

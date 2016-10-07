@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenRMS.Contexts.ProductManagement.Domain
 {
+    /// <summary>
+    /// Represents a product attribute.
+    /// </summary>
     public class ProductAttribute : Entity<Guid>
     {
         #region Properties

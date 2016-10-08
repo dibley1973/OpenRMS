@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -138,7 +137,6 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         public void ImplicitOperator_GivenNullEntity_ReturnsEmptyMaybe()
         {
             // ARRANGE
-            //FakeProduct product = null;
             Maybe<FakeProduct, int> maybe = (FakeProduct)null;
 
             // ACT

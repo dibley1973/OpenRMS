@@ -9,7 +9,7 @@ namespace OpenRMS.Shared.Kernel
 {
     public static class DomainEvents
     {
-        private static List<Type> _staticHandlers;
+        //private static List<Type> _staticHandlers;
 
         static DomainEvents()
         {
@@ -26,15 +26,15 @@ namespace OpenRMS.Shared.Kernel
         public static void Dispatch<TEvent>(TEvent domainEvent)
             where TEvent : IDomainEvent
         {
-            foreach (Type staticHandler in _staticHandlers)
-            {
-                // When .Net core allows!
-                //if (typeof(IDomainEventHandler<TEvent>).IsAssignableFrom(staticHandler))
-                //{
-                //    IDomainEventHandler<TEvent> instance =
-                //        (IDomainEventHandler<TEvent>) Activator.CreateInstance(staticHandler);
-                //}
-            }
+            //foreach (Type staticHandler in _staticHandlers)
+            //{
+            //    // When .Net core allows!
+            //    //if (typeof(IDomainEventHandler<TEvent>).IsAssignableFrom(staticHandler))
+            //    //{
+            //    //    IDomainEventHandler<TEvent> instance =
+            //    //        (IDomainEventHandler<TEvent>) Activator.CreateInstance(staticHandler);
+            //    //}
+            //}
         }
     }
 }

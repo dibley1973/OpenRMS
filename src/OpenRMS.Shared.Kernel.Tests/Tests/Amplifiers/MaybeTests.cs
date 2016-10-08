@@ -119,7 +119,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         }
 
         [TestMethod]
-        public void GetEnumerator_AfterConstructionWithAnInstantiatedArgument_ReturnsEntityAsFirstItemInSequnce()
+        public void GetEnumerator_AfterConstructionWithAnInstantiatedArgument_ReturnsEntityAsOnlyItemInSequnce()
         {
             // ARRANGE
             var product = new FakeProduct();
@@ -127,10 +127,12 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
 
             // ACT
             var actual = maybe.First();
+            var actualCount = maybe.Count();
 
             // ASSERT
             actual.Should().NotBeNull();
             actual.Should().BeSameAs(product);
+            actualCount.Should().Be(1);
         }
 
         [TestMethod]

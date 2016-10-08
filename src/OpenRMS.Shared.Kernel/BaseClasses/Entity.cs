@@ -25,8 +25,7 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
         /// <param name="id">The identifier of the entity.</param>
         protected Entity(TId id)
         {
-            if (id.Equals(default(TId)))
-                throw new ArgumentNullException(nameof(id));
+            if (id.Equals(default(TId))) throw new ArgumentNullException(nameof(id));
 
             Id = id;
         }

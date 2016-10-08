@@ -15,9 +15,9 @@ namespace OpenRMS.Shared.Kernel.Amplifiers
 
         public Maybe(TEntity entity)
         {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity),
-                    "Consider using default constructor if passing null was intended");
+            //if (entity == null)
+            //    throw new ArgumentNullException(nameof(entity),
+            //        "Consider using default constructor if passing null was intended");
 
             _entity = entity;
         }

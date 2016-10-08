@@ -107,7 +107,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         }
 
         [TestMethod]
-        public void GetEnumerator_AfterConstructionWithNullArgument_THEN()
+        public void GetEnumerator_AfterConstructionWithNullArgument_ReturnsNoItemsInSequnce()
         {
             // ARRANGE
             var maybe = new Maybe<FakeProduct, int>(null);
@@ -120,14 +120,13 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         }
 
         [TestMethod]
-        public void GetEnumerator_AfterConstructionWithAnInstantiatedArgument_THEN()
+        public void GetEnumerator_AfterConstructionWithAnInstantiatedArgument_ReturnsEntityAsFirstItemInSequnce()
         {
             // ARRANGE
             var product = new FakeProduct();
             var maybe = new Maybe<FakeProduct, int>(product);
 
             // ACT
-            //IEnumerable<FakeProduct> list = maybe.First();
             var actual = maybe.First();
 
             // ASSERT

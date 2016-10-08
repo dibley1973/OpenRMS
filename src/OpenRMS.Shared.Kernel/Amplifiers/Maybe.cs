@@ -37,17 +37,6 @@ namespace OpenRMS.Shared.Kernel.Amplifiers
         }
 
         /// <summary>
-        /// Determines whether this instance has value.
-        /// </summary>
-        /// <returns>
-        ///   <c>true</c> if this instance has value; otherwise, <c>false</c>.
-        /// </returns>
-        public bool HasValue()
-        {
-            return _entity != null;
-        }
-
-        /// <summary>
         /// Gets the entity if it exists .
         /// </summary>
         /// <value>
@@ -89,6 +78,17 @@ namespace OpenRMS.Shared.Kernel.Amplifiers
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        /// <summary>
+        /// Determines whether this instance has value.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this instance has value; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasValue()
+        {
+            return _entity != null;
         }
 
         /// <summary>

@@ -94,19 +94,21 @@ namespace OpenRMS.Shared.Kernel.Amplifiers
         /// <summary>
         /// Casts an object of <see cref="TEntity"/> to an object of type <see cref="Maybe{TEntity, TId}"/>
         /// </summary>
-        /// <param name="value">The <see cref="TEntity"/> to cast from</param>
-        public static implicit operator Maybe<TEntity, TId>(TEntity value)
+        /// <param name="entity">The <see cref="TEntity"/> to cast from</param>
+        public static implicit operator Maybe<TEntity, TId>(TEntity entity)
         {
-            return new Maybe<TEntity, TId>(value);
+            return new Maybe<TEntity, TId>(entity);
         }
 
         /// <summary>
         /// Casts an object of type <see cref="Maybe{TEntity, TId}"/> to an object of type <see cref="TEntity"/>
         /// </summary>
-        /// <param name="value">The <see cref="Maybe{TEntity, TId}"/> to cast from</param>
-        public static implicit operator TEntity(Maybe<TEntity, TId> value)
+        /// <param name="maybe">The <see cref="Maybe{TEntity, TId}"/> to cast from</param>
+        public static implicit operator TEntity(Maybe<TEntity, TId> maybe)
         {
-            return value.Entity;
+            return maybe.HasValue() 
+                ? maybe.Entity 
+                : null;
         }
     }
 }

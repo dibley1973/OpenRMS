@@ -161,5 +161,34 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
             maybe.HasValue().Should().BeTrue();
             maybe.Entity.Should().BeSameAs(product);
         }
+
+        [TestMethod]
+        public void ImplicitOperator_GivenMaybeWithNoEntity_ReturnsNull()
+        {
+            // ARRANGE
+            var product = new FakeProduct();
+            var maybe = new Maybe<FakeProduct, int>();
+
+            // ACT
+            FakeProduct actual = maybe;
+
+            // ASSERT
+            actual.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ImplicitOperator_GivenMaybeWithEntity_ReturnsEntity()
+        {
+            // ARRANGE
+            var product = new FakeProduct();
+            var maybe = new Maybe<FakeProduct, int>(product);
+
+            // ACT
+            FakeProduct actual = maybe;
+
+            // ASSERT
+            actual.Should().NotBeNull();
+            actual.Should().BeSameAs(product);
+        }
     }
 }

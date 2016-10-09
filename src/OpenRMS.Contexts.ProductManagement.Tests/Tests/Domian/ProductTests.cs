@@ -21,7 +21,7 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domian
             Action action = () => new Product(id, name, description, null);
 
             // ASSERT
-            Assert.ThrowsException<ArgumentNullException>(action);
+            action.ShouldThrow<ArgumentNullException>();
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domian
             Action action = () => new Product(id, name, description, null);
 
             // ASSERT
-            Assert.ThrowsException<ArgumentNullException>(action);
+            action.ShouldThrow<ArgumentNullException>();
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domian
             Action action = () => new Product(id, name, description, null);
 
             // ASSERT
-            Assert.ThrowsException<ArgumentNullException>(action);
+            action.ShouldThrow<ArgumentNullException>();
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domian
             Action action = () => new Product(id, name, description, null);
 
             // ASSERT
-            Assert.ThrowsException<ArgumentNullException>(action);
+            action.ShouldThrow<ArgumentNullException>();
         }
 
         [TestMethod]
@@ -85,7 +85,7 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domian
             Action action = () => new Product(id, name, description, null);
 
             // ASSERT
-            Assert.ThrowsException<ArgumentNullException>(action);
+            action.ShouldThrow<ArgumentNullException>();
         }
 
         [TestMethod]
@@ -117,7 +117,7 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domian
             Action action = () => new Product(id, Description, description, null);
 
             // ASSERT
-            Assert.ThrowsException<ArgumentNullException>(action);
+            action.ShouldThrow<ArgumentNullException>();
         }
 
         [TestMethod]
@@ -133,7 +133,7 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domian
             Action action = () => new Product(id, Description, description, null);
 
             // ASSERT
-            Assert.ThrowsException<ArgumentNullException>(action);
+            action.ShouldThrow<ArgumentNullException>();
         }
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domian
             Action action = () => new Product(id, Description, description, null);
 
             // ASSERT
-            Assert.ThrowsException<ArgumentNullException>(action);
+            action.ShouldThrow<ArgumentNullException>();
         }
 
         [TestMethod]

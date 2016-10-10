@@ -15,7 +15,7 @@ namespace OpenRMS.Shared.Kernel.Interfaces
         where TId : struct
     {
         IEnumerable<TEntity> GetAll();
-        Maybe<TEntity, TId> GetForId(TId id);
+        Maybe<TEntity> GetForId(TId id);
         void Create(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);

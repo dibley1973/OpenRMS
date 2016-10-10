@@ -11,9 +11,10 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
     {
         #region Properties
 
+        public string Code { get; }
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public virtual ICollection<ProductAttribute> Attributes { get; private set; }
+        public virtual ICollection<ProductAttribute> Attributes { get; private set; } = new List<ProductAttribute>();
 
         #endregion
 
@@ -24,28 +25,20 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
         /// </summary>
         private Product() : base() { }
 
-        /// <summary>
-        /// Construct.
-        /// </summary>
-        /// <param name="name">The name of the product.</param>
-        /// <param name="description">The description of the product</param>
-        public Product(string name, string description)
-            : this(Guid.NewGuid(), name, description, null)
+        public Product(string code, string name)
+            : this(Guid.NewGuid(), code, name, string.Empty)
         { }
-
-        /// <summary>
-        /// Construct.
-        /// </summary>
-        /// <param name="id">The id of the product.</param>
-        /// <param name="name">The name of the product.</param>
-        /// <param name="description">The description of the product</param>
-        /// <param name="attributes">The attributes of the product</param>
-        public Product(Guid id, string name, string description, ICollection<ProductAttribute> attributes)
+        
+        public Product(Guid id, string code , string name, string description)
             : base(id)
         {
+            if (string.IsNullOrWhiteSpace(code))
+                throw new ArgumentNullException(nameof(code));
+
+            Code = code;
+            
             ChangeName(name);
             ChangeDescription(description);
-            Attributes = attributes ?? new List<ProductAttribute>();
         }
 
         #endregion
@@ -74,5 +67,6 @@ namespace OpenRMS.Contexts.ProductManagement.Domain
 
             Description = description;
         }
+
     }
 }

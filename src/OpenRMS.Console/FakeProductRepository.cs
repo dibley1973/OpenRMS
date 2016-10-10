@@ -37,22 +37,22 @@ namespace OpenRMS.Console
             return _products;
         }
 
-        public Maybe<Product, Guid> GetForId(Guid id)
+        public Maybe<Product> GetForId(Guid id)
         {
             var product = _products.SingleOrDefault(p => p.Id == id);
 
-            if (product == null) return new Maybe<Product, Guid>();
+            if (product == null) return new Maybe<Product>();
 
-            return new Maybe<Product, Guid>(product);
+            return new Maybe<Product>(product);
         }
 
-        public Maybe<Product, Guid> GetForName(string name)
+        public Maybe<Product> GetForName(string name)
         {
             var product = _products.SingleOrDefault(p => p.Name == name);
 
-            if (product == null) return new Maybe<Product, Guid>();
+            if (product == null) return new Maybe<Product>();
 
-            return new Maybe<Product, Guid>(product);
+            return new Maybe<Product>(product);
         }
 
         public void Update(Product entity)

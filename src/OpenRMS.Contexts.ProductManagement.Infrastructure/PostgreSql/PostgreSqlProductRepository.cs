@@ -42,12 +42,12 @@ namespace OpenRMS.Contexts.ProductManagement.Infrastructure.PostgreSql
         /// </summary>
         /// <param name="id">The ID of the product that is required.</param>
         /// <returns>A product with the specified ID if found.</returns>
-        public Maybe<Product, Guid> GetForId(Guid id)
+        public Maybe<Product> GetForId(Guid id)
         {
             var product = _context.Set<Product>().SingleOrDefault(p => p.Id == id);
 
             // TODO: Review if thsi would be preferred?
-            return new Maybe<Product, Guid>(product);
+            return new Maybe<Product>(product);
 
             //return product != null
             //    ? new Maybe<Product, Guid>(product)
@@ -59,11 +59,11 @@ namespace OpenRMS.Contexts.ProductManagement.Infrastructure.PostgreSql
         /// </summary>
         /// <param name="name">The name of the product that is required.</param>
         /// <returns>A product with the specified name if found.</returns>
-        public Maybe<Product, Guid> GetForName(string name)
+        public Maybe<Product> GetForName(string name)
         {
             var product = _context.Set<Product>().SingleOrDefault(p => p.Name == name);
 
-            return new Maybe<Product, Guid>(product);
+            return new Maybe<Product>(product);
         }
 
         /// <summary>

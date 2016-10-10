@@ -10,6 +10,6 @@ namespace OpenRMS.Contexts.ProductManagement.Interfaces
     /// </summary>
     public interface IProductRepository : IRepository<Product, Guid>
     {
-        Maybe<Product, Guid> GetForName(string name);
+        Maybe<Product> GetForName(string name);
     }
 }

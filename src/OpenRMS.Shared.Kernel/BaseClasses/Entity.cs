@@ -12,7 +12,7 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
        /// <summary>
         /// Gets the identity for the entity
         /// </summary>
-        public TId Id { get; private set; }
+        public TId Id { get;  }
 
         /// <summary>
         /// Parameterless contructor.

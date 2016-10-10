@@ -5,8 +5,6 @@
   },
 
   "dependencies": {
-    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.2",
-    "Microsoft.EntityFrameworkCore": "1.0.1",
     "Microsoft.Extensions.DependencyInjection": "1.0.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
     "Microsoft.NETCore.App": {
@@ -14,10 +12,8 @@
       "version": "1.0.1"
     },
     "NETStandard.Library": "1.6.0",
-    "OpenRMS.Contexts.ProductManagement": "1.0.0-*",
-    "OpenRMS.Contexts.ProductManagement.Infrastructure": "1.0.0-*",
-    "OpenRMS.Shared.Kernel": "1.0.0-*",
-    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0"
+    "Newtonsoft.Json": "9.0.1"
+
   },
 
   "frameworks": {

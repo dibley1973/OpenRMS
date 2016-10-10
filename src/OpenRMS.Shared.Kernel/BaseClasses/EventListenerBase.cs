@@ -1,6 +1,6 @@
 ﻿namespace OpenRMS.Shared.Kernel.BaseClasses
 {
-    public abstract class EventListernerBase<TAggregateRoot, TId>
+    public abstract class EventListenerBase<TAggregateRoot, TId>
         where TAggregateRoot : AggregateRoot<TId>
         where TId : struct
     {

@@ -6,6 +6,13 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+	# Plugin required. Run command line below.
+    # vagrant plugin install vagrant-hostmanager
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
+
     # DB host configuration
     config.vm.define "db" do |db|
         db.vm.box = "bento/ubuntu-14.04"

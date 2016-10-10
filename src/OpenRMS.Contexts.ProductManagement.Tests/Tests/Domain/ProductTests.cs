@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenRMS.Contexts.ProductManagement.Domain;
 
-namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domian
+namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
 {
     [TestClass]
     public class ProductTests

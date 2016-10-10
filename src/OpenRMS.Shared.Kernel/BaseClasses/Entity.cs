@@ -10,19 +10,18 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
         where TId : struct
     {
         private readonly int _hashCode;
-        private readonly TId _id;
 
         /// <summary>
         /// Gets the identity for the entity
         /// </summary>
-        public TId Id => _id;
+        public TId Id { get; private set; }
 
         /// <summary>
         /// Parameterless contructor.
         /// </summary>
         protected Entity()
         {
-            _id = default(TId);
+            Id = default(TId);
             _hashCode = GetHashCodeCore();
         }
 
@@ -34,7 +33,7 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
         {
             if (id.Equals(default(TId))) throw new ArgumentNullException(nameof(id));
 
-            _id = id;
+            Id = id;
             _hashCode = GetHashCodeCore();
         }
 

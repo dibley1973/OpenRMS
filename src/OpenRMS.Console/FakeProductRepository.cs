@@ -12,9 +12,9 @@ namespace OpenRMS.Console
     {
         private List<Product> _products = new List<Product>()
         {
-            new Product( id: Guid.NewGuid(), name: "Product 1", description: "Product 1 Description", attributes: new List<ProductAttribute>() ),
-            new Product( id:Guid.NewGuid(), name: "Product 2", description: "Product 2 Description", attributes: new List<ProductAttribute>() ),
-            new Product( id:Guid.NewGuid(), name: "Product 3", description: "Product 3 Description", attributes: new List<ProductAttribute>() )
+            new Product( id: Guid.NewGuid(), code: "1", name: "Product 1", description: "Product 1 Description" ),
+            new Product( id:Guid.NewGuid(), code: "2", name: "Product 2", description: "Product 2 Description" ),
+            new Product( id:Guid.NewGuid(), code: "3", name: "Product 3", description: "Product 3 Description" )
         };
 
         public void Create(Product entity)

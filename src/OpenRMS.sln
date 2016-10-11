@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12CF8E4F-D9C7-4491-B91E-DCEE61D961C5}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
-		..\tests\global.json = ..\tests\global.json
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.ProductManagement", "OpenRMS.Contexts.ProductManagement\OpenRMS.Contexts.ProductManagement.xproj", "{63BF5079-1792-4983-9222-3A8DC3AAA8AD}"
@@ -17,9 +16,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Console", "OpenRMS.
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.ProductManagement.Infrastructure", "OpenRMS.Contexts.ProductManagement.Infrastructure\OpenRMS.Contexts.ProductManagement.Infrastructure.xproj", "{0265865C-9E7E-490D-B45F-9E79DCE1070B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E9D6458E-63C9-46A6-9D1F-8BFC369689C8}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.ProductManagementTests", "..\tests\OpenRMS.Contexts.ProductManagementTests\OpenRMS.Contexts.ProductManagementTests.xproj", "{E87E91CA-02F2-4A9C-81D4-BF623A9025A7}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Shared.Kernel.Tests", "OpenRMS.Shared.Kernel.Tests\OpenRMS.Shared.Kernel.Tests.xproj", "{E8778BF1-6F6E-4B63-8C9A-7EF6F861060B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,15 +40,12 @@ Global
 		{0265865C-9E7E-490D-B45F-9E79DCE1070B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0265865C-9E7E-490D-B45F-9E79DCE1070B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0265865C-9E7E-490D-B45F-9E79DCE1070B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E87E91CA-02F2-4A9C-81D4-BF623A9025A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E87E91CA-02F2-4A9C-81D4-BF623A9025A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E87E91CA-02F2-4A9C-81D4-BF623A9025A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E87E91CA-02F2-4A9C-81D4-BF623A9025A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8778BF1-6F6E-4B63-8C9A-7EF6F861060B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8778BF1-6F6E-4B63-8C9A-7EF6F861060B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8778BF1-6F6E-4B63-8C9A-7EF6F861060B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8778BF1-6F6E-4B63-8C9A-7EF6F861060B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{E87E91CA-02F2-4A9C-81D4-BF623A9025A7} = {E9D6458E-63C9-46A6-9D1F-8BFC369689C8}
 	EndGlobalSection
 EndGlobal

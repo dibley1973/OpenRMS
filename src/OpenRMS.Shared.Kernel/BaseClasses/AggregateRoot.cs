@@ -17,7 +17,7 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
         /// <summary>
         /// Parameterless constructor.
         /// </summary>
-        protected AggregateRoot() : base()
+        protected AggregateRoot()
         {
             _domainEvents = new List<IDomainEvent>();
         }

@@ -46,12 +46,7 @@ namespace OpenRMS.Contexts.ProductManagement.Infrastructure.PostgreSql
         {
             var product = _context.Set<Product>().SingleOrDefault(p => p.Id == id);
 
-            // TODO: Review if thsi would be preferred?
             return new Maybe<Product>(product);
-
-            //return product != null
-            //    ? new Maybe<Product, Guid>(product)
-            //    : new Maybe<Product, Guid>();
         }
 
         /// <summary>

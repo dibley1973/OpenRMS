@@ -9,7 +9,9 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
     public abstract class Entity<TId>
         where TId : struct
     {
-       /// <summary>
+        private readonly int _hashCode;
+
+        /// <summary>
         /// Gets the identity for the entity
         /// </summary>
         public TId Id { get;  }
@@ -17,7 +19,11 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
         /// <summary>
         /// Parameterless contructor.
         /// </summary>
-        protected Entity() { }
+        protected Entity()
+        {
+            Id = default(TId);
+            _hashCode = GetHashCodeCore();
+        }
 
         /// <summary>
         /// Construct.
@@ -28,6 +34,7 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
             if (id.Equals(default(TId))) throw new ArgumentNullException(nameof(id));
 
             Id = id;
+            _hashCode = GetHashCodeCore();
         }
 
         /// <summary>
@@ -42,10 +49,11 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
             if (ReferenceEquals(other, null)) return false;
             if (ReferenceEquals(this, other)) return true;
             if (GetType() != other.GetType()) return false;
-
             if (Id.Equals(default(TId)) || other.Id.Equals(default(TId))) return false;
 
-            return Id.Equals(other.Id);
+            if (!IsTransient() && !other.IsTransient() && Id.Equals(other.Id)) return true;
+
+            return false;
         }
 
         /// <summary>
@@ -78,6 +86,17 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
+        {
+            // ReSharper disable once NonReadonlyMemberInGetHashCode
+            return _hashCode;
+        }
+
+        public virtual bool IsTransient()
+        {
+            return Id.Equals(default(TId));
+        }
+
+        private int GetHashCodeCore()
         {
             return (GetType().ToString() + Id).GetHashCode();
         }

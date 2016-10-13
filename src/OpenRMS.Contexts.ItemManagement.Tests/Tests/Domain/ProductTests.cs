@@ -109,12 +109,12 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string Description = "Item 1";
+            string name = "Item 1";
             string description = null;
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, Description, description);
+            Action action = () => new Item(id, name, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -125,12 +125,12 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string Description = "Item 1";
+            string name = "Item 1";
             string description = "";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, Description, description);
+            Action action = () => new Item(id, name, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -141,12 +141,12 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string Description = "Item 1";
+            string name = "Item 1";
             string description = " ";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, Description, description);
+            Action action = () => new Item(id, name, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();

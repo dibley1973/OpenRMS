@@ -67,7 +67,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain
         /// <param name="description">The new description of the product.</param>
         public void ChangeDescription(string description)
         {
-            if (string.IsNullOrWhiteSpace(description))
+            if (description==null)
                 throw new ArgumentNullException(nameof(description));
 
             Description = description;

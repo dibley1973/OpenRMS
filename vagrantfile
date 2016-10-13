@@ -13,6 +13,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.hostmanager.ignore_private_ip = false
     config.hostmanager.include_offline = true
 
+    # Wireless LAN adapter Wireless Network Connection:
+    config.vm.network "public_network", bridge: "Wireless LAN adapter Wireless Network Connection"
+
     # DB host configuration
     config.vm.define "db" do |db|
         db.vm.box = "bento/ubuntu-14.04"

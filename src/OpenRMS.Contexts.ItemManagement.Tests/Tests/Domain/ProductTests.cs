@@ -18,7 +18,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description, null);
+            Action action = () => new Item(id, name, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -34,7 +34,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description, null);
+            Action action = () => new Item(id, name, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -50,7 +50,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description, null);
+            Action action = () => new Item(id, name, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -66,7 +66,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description, null);
+            Action action = () => new Item(id, name, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -82,7 +82,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description, null);
+            Action action = () => new Item(id, name, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -97,7 +97,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
             string description = "Item One";
 
             // ACT
-            var actual = new Item(id, name, description, null);
+            var actual = new Item(id, name, description);
 
             // ASSERT
             actual.Should().NotBeNull();
@@ -114,7 +114,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, Description, description, null);
+            Action action = () => new Item(id, Description, description,);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -130,7 +130,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, Description, description, null);
+            Action action = () => new Item(id, Description, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -146,7 +146,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, Description, description, null);
+            Action action = () => new Item(id, Description, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -161,7 +161,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
             string description = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
 
             // ACT
-            var actual = new Item(id, name, description, null);
+            var actual = new Item(id, name, description);
 
             // ASSERT
             actual.Should().NotBeNull();

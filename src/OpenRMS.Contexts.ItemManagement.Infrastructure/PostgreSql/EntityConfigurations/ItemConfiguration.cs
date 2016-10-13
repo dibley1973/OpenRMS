@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenRMS.Contexts.ItemManagement.Domain;
+using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 
 namespace OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql.EntityConfigurations
 {

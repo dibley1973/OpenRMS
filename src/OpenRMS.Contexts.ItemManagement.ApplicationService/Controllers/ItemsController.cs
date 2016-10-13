@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OpenRMS.Contexts.ItemManagement.CommandStack.Services;
-using OpenRMS.Contexts.ItemManagement.Interfaces;
-using OpenRMS.Contexts.ItemManagement.Domain;
-using OpenRMS.Contexts.ItemManagement.CommandStack.Commands;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Services;
+using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
+using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 
 namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
 {

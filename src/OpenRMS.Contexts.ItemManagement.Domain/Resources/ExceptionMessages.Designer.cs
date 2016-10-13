@@ -10,7 +10,7 @@
 
 using System.Reflection;
 
-namespace OpenRMS.Contexts.ItemManagement.Resources {
+namespace OpenRMS.Contexts.ItemManagement.Domain.Resources {
     /// <summary>
     ///    A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

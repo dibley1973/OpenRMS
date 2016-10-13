@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenRMS.Contexts.ItemManagement.Interfaces;
+using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 
 namespace OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql
 { 

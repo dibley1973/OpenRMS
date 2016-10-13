@@ -1,11 +1,11 @@
 ﻿using System;
-using OpenRMS.Contexts.ItemManagement.CommandStack.Commands;
-using OpenRMS.Contexts.ItemManagement.Domain;
-using OpenRMS.Contexts.ItemManagement.Interfaces;
-using OpenRMS.Contexts.ItemManagement.Resources;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
+using OpenRMS.Contexts.ItemManagement.Domain.Entities;
+using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
+using OpenRMS.Contexts.ItemManagement.Domain.Resources;
 using OpenRMS.Shared.Kernel.Interfaces;
 
-namespace OpenRMS.Contexts.ItemManagement.CommandStack.Handlers
+namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers
 {
     /// <summary>
     /// Handles the command to create a product.

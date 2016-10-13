@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using OpenRMS.Contexts.ItemManagement.CommandStack.Commands;
-using OpenRMS.Contexts.ItemManagement.Interfaces;
-using OpenRMS.Contexts.ItemManagement.Resources;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
+using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Shared.Kernel.Interfaces;
+using OpenRMS.Contexts.ItemManagement.Domain.Resources;
 
-namespace OpenRMS.Contexts.ItemManagement.CommandStack.Handlers
+namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers
 {
     /// <summary>
     /// Handles the command to update a product.

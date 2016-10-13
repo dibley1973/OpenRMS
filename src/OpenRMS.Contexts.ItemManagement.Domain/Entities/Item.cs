@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenRMS.Shared.Kernel.BaseClasses;
 
-namespace OpenRMS.Contexts.ItemManagement.Domain
+namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
 {
     /// <summary>
     /// Represents a product.

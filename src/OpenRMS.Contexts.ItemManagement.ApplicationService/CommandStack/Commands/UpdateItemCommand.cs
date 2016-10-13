@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenRMS.Shared.Kernel.BaseClasses;
 
-namespace OpenRMS.Contexts.ItemManagement.CommandStack.Commands
+namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands
 {
     /// <summary>
     /// A command that will update a product.

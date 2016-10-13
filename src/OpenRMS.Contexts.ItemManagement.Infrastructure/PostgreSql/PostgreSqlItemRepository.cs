@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenRMS.Contexts.ItemManagement.Domain;
-using OpenRMS.Contexts.ItemManagement.Interfaces;
+using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Shared.Kernel.Amplifiers;
+using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 
 namespace OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql
 {

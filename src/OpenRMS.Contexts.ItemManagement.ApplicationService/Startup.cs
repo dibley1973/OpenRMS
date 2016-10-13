@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using OpenRMS.Contexts.ItemManagement.Interfaces;
+using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Shared.Kernel.Interfaces;
-using OpenRMS.Contexts.ItemManagement.CommandStack.Services;
-using OpenRMS.Contexts.ItemManagement.CommandStack.Handlers;
-using OpenRMS.Contexts.ItemManagement.CommandStack.Commands;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Services;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
 using OpenRMS.Contexts.ItemManagement.Domain;
 using OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql;
 using Microsoft.EntityFrameworkCore;
+using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 
 namespace OpenRMS.Contexts.ItemManagement.Api
 {

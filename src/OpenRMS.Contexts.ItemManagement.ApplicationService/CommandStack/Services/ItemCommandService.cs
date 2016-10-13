@@ -1,9 +1,10 @@
 ﻿using System;
-using OpenRMS.Contexts.ItemManagement.CommandStack.Commands;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
 using OpenRMS.Contexts.ItemManagement.Domain;
 using OpenRMS.Shared.Kernel.Interfaces;
+using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 
-namespace OpenRMS.Contexts.ItemManagement.CommandStack.Services
+namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Services
 {
     /// <summary>
     /// A service that allows various product commands to be executed.

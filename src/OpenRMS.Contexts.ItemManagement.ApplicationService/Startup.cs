@@ -12,7 +12,6 @@ using OpenRMS.Shared.Kernel.Interfaces;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Services;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
-using OpenRMS.Contexts.ItemManagement.Domain;
 using OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql;
 using Microsoft.EntityFrameworkCore;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
-using OpenRMS.Contexts.ItemManagement.Domain;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql.EntityConfigurations;
 

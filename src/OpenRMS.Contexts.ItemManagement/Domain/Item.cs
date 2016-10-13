@@ -25,10 +25,24 @@ namespace OpenRMS.Contexts.ItemManagement.Domain
         /// <summary>
         /// Construct.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
+        /// <param name="name">The name of the product.</param>
+        /// <param name="description">The description of the product</param>
         public Item(string name, string description)
             : base(Guid.NewGuid())
+        {
+            ChangeName(name);
+            ChangeDescription(description);
+        }
+
+        /// <summary>
+        /// Construct.
+        /// </summary>
+        /// <param name="id">The id of the product.</param>
+        /// <param name="name">The name of the product.</param>
+        /// <param name="description">The description of the product</param>
+        /// <param name="attributes">The attributes of the product</param>
+        public Item(Guid id, string name, string description)
+            : base(id)
         {
             ChangeName(name);
             ChangeDescription(description);

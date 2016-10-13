@@ -8,13 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.ProductManagement", "OpenRMS.Contexts.ProductManagement\OpenRMS.Contexts.ProductManagement.xproj", "{63BF5079-1792-4983-9222-3A8DC3AAA8AD}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.ItemManagement", "OpenRMS.Contexts.ItemManagement\OpenRMS.Contexts.ItemManagement.xproj", "{63BF5079-1792-4983-9222-3A8DC3AAA8AD}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Shared.Kernel", "OpenRMS.Shared.Kernel\OpenRMS.Shared.Kernel.xproj", "{517BF113-A37D-47A5-8F6F-477A6D0C7806}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Console", "OpenRMS.Console\OpenRMS.Console.xproj", "{91D341BD-603D-4F84-8D8C-5A21BAEBB3E1}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.ProductManagement.Infrastructure", "OpenRMS.Contexts.ProductManagement.Infrastructure\OpenRMS.Contexts.ProductManagement.Infrastructure.xproj", "{0265865C-9E7E-490D-B45F-9E79DCE1070B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.ItemManagement.Infrastructure", "OpenRMS.Contexts.ItemManagement.Infrastructure\OpenRMS.Contexts.ItemManagement.Infrastructure.xproj", "{0265865C-9E7E-490D-B45F-9E79DCE1070B}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Shared.Kernel.Tests", "OpenRMS.Shared.Kernel.Tests\OpenRMS.Shared.Kernel.Tests.xproj", "{E8778BF1-6F6E-4B63-8C9A-7EF6F861060B}"
 EndProject

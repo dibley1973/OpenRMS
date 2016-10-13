@@ -7,73 +7,72 @@ using OpenRMS.Shared.Kernel.Resources;
 namespace OpenRMS.Shared.Kernel.Amplifiers
 {
     /// <summary>
-    /// An amplifier of the the specified <see cref="TEntity"/> which the programmer to specify
-    /// that the <see cref="TEntity"/> may or may not be present.
+    /// An amplifier of the the specified <see cref="T"/> which the programmer to specify
+    /// that the <see cref="T"/> may or may not be present.
     /// </summary>
-    /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    /// <typeparam name="TId">The type of the entity's identifier.</typeparam>
-    /// <seealso cref="System.Collections.Generic.IEnumerable{TEntity}" />
-    public class Maybe<TEntity, TId> : IEnumerable<TEntity>
-        where TEntity : Entity<TId>
-        where TId : struct
+    /// <typeparam name="T">The type of the @value.</typeparam>
+    /// <typeparam name="TId">The type of the @value's identifier.</typeparam>
+    /// <seealso cref="System.Collections.Generic.IEnumerable{T}" />
+    public class Maybe<T> : IEnumerable<T>
+        where T : class
     {
-        private readonly TEntity _entity;
+        private readonly T _value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Maybe{TEntity, TId}"/> class without an entity.
+        /// Initializes a new instance of the <see cref="Maybe{T}"/> class without an @value.
         /// </summary>
         public Maybe() { }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="Maybe{TEntity, TId}"/> class with an entity.
+        /// Initializes a new instance of the <see cref="Maybe{T}"/> class with an @value.
         /// </summary>
-        /// <param name="entity">
-        /// The entity to construct the instance with. If a null reference entity is provided as the 
-        /// then the instance is treated as not having an entity;
+        /// <param name="value">
+        /// The @value to construct the instance with. If a null reference @value is provided as the 
+        /// then the instance is treated as not having an @value;
         /// </param>
-        public Maybe(TEntity entity)
+        public Maybe(T value)
         {
-            _entity = entity;
+            _value = value;
         }
 
         /// <summary>
-        /// Gets the entity if it exists .
+        /// Gets the @value if it exists .
         /// </summary>
         /// <value>
-        /// The entity.
+        /// The @value.
         /// </value>
         /// <exception cref="System.InvalidOperationException">
-        /// Thrown if there is no entity to return.</exception>
-        public TEntity Entity
+        /// Thrown if there is no @value to return.</exception>
+        public T Value
         {
             get
             {
-                if (HasValue()) return _entity;
+                if (HasValue()) return _value;
 
-                throw new InvalidOperationException(string.Format(ExceptionMessages.NoEntityToReturn, typeof(TEntity), nameof(HasValue)));
+                throw new InvalidOperationException(string.Format(ExceptionMessages.NoEntityToReturn, typeof(T), nameof(HasValue)));
             }
         }
 
         /// <summary>
-        /// Returns an enumerator that will yield the <see cref="TEntity"/> if one exists or nothing if it does not.
+        /// Returns an enumerator that will yield the <see cref="T"/> if one exists or nothing if it does not.
         /// </summary>
         /// <returns>
-        /// An enumerator that can be used to yield the <see cref="TEntity"/> if it exists.
+        /// An enumerator that can be used to yield the <see cref="T"/> if it exists.
         /// </returns>
-        public IEnumerator<TEntity> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             if (HasValue())
             {
-                yield return _entity;
+                yield return _value;
             }
         }
 
         /// <summary>
-        /// Returns an enumerator that will yield the <see cref="TEntity"/> if one exists.
+        /// Returns an enumerator that will yield the <see cref="T"/> if one exists.
         /// </summary>
         /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator" /> object that can be used to will 
-        /// yield the <see cref="TEntity"/> if one exists.
+        /// An <see cref="T:System.Collections.IEnumerator" /> value that can be used to will 
+        /// yield the <see cref="T"/> if one exists.
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -88,26 +87,26 @@ namespace OpenRMS.Shared.Kernel.Amplifiers
         /// </returns>
         public bool HasValue()
         {
-            return _entity != null;
+            return _value != null;
         }
 
         /// <summary>
-        /// Casts an object of <see cref="TEntity"/> to an object of type <see cref="Maybe{TEntity, TId}"/>
+        /// Casts an value of <see cref="T"/> to an value of type <see cref="Maybe{T}"/>
         /// </summary>
-        /// <param name="entity">The <see cref="TEntity"/> to cast from</param>
-        public static implicit operator Maybe<TEntity, TId>(TEntity entity)
+        /// <param name="value">The <see cref="T"/> to cast from</param>
+        public static implicit operator Maybe<T>(T value)
         {
-            return new Maybe<TEntity, TId>(entity);
+            return new Maybe<T>(value);
         }
 
         /// <summary>
-        /// Casts an object of type <see cref="Maybe{TEntity, TId}"/> to an object of type <see cref="TEntity"/>
+        /// Casts an value of type <see cref="Maybe{T}"/> to an value of type <see cref="T"/>
         /// </summary>
-        /// <param name="maybe">The <see cref="Maybe{TEntity, TId}"/> to cast from</param>
-        public static implicit operator TEntity(Maybe<TEntity, TId> maybe)
+        /// <param name="maybe">The <see cref="Maybe{T}"/> to cast from</param>
+        public static implicit operator T(Maybe<T> maybe)
         {
             return maybe.HasValue() 
-                ? maybe.Entity 
+                ? maybe.Value 
                 : null;
         }
     }

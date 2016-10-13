@@ -14,10 +14,10 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         public void Entity_AfterConstructionWithNoArgument_ThrowsException()
         {
             // ARRANGE
-            var maybe = new Maybe<FakeProduct, int>();
+            var maybe = new Maybe<FakeProduct>();
 
             // ACT
-            Func<object> action = () => maybe.Entity;
+            Func<object> action = () => maybe.Value;
 
             // ASSERT
 
@@ -28,10 +28,10 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         public void Entity_AfterConstructionWithNullArgument_ThrowsException()
         {
             // ARRANGE
-            var maybe = new Maybe<FakeProduct, int>(null);
+            var maybe = new Maybe<FakeProduct>(null);
 
             // ACT
-            Func<object> action = () => maybe.Entity;
+            Func<object> action = () => maybe.Value;
 
             // ASSERT
 
@@ -43,10 +43,10 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         {
             // ARRANGE
             var product = new FakeProduct();
-            var maybe = new Maybe<FakeProduct, int>(product);
+            var maybe = new Maybe<FakeProduct>(product);
 
             // ACT
-            var actual = maybe.Entity;
+            var actual = maybe.Value;
 
             // ASSERT
             actual.Should().Be(product);
@@ -56,7 +56,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         public void HasValue_AfterConstructionWithNoArgument_ReturnsFalse()
         {
             // ARRANGE
-            var maybe = new Maybe<FakeProduct, int>();
+            var maybe = new Maybe<FakeProduct>();
 
             // ACT
             var actual = maybe.HasValue();
@@ -69,7 +69,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         public void HasValue_AfterConstructionWithNullArgument_ReturnsFalse()
         {
             // ARRANGE
-            var maybe = new Maybe<FakeProduct, int>(null);
+            var maybe = new Maybe<FakeProduct>(null);
 
             // ACT
             var actual = maybe.HasValue();
@@ -83,7 +83,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         {
             // ARRANGE
             var product = new FakeProduct();
-            var maybe = new Maybe<FakeProduct, int>(product);
+            var maybe = new Maybe<FakeProduct>(product);
 
             // ACT
             var actual = maybe.HasValue();
@@ -96,7 +96,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         public void GetEnumerator_AfterConstructionWithNoArgument_THEN()
         {
             // ARRANGE
-            var maybe = new Maybe<FakeProduct, int>();
+            var maybe = new Maybe<FakeProduct>();
 
             // ACT
             var actual = maybe.FirstOrDefault();
@@ -109,7 +109,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         public void GetEnumerator_AfterConstructionWithNullArgument_ReturnsNoItemsInSequnce()
         {
             // ARRANGE
-            var maybe = new Maybe<FakeProduct, int>(null);
+            var maybe = new Maybe<FakeProduct>(null);
 
             // ACT
             var actual = maybe.FirstOrDefault();
@@ -123,7 +123,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         {
             // ARRANGE
             var product = new FakeProduct();
-            var maybe = new Maybe<FakeProduct, int>(product);
+            var maybe = new Maybe<FakeProduct>(product);
 
             // ACT
             var actual = maybe.First();
@@ -139,7 +139,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         public void ImplicitOperator_GivenNullEntity_ReturnsEmptyMaybe()
         {
             // ARRANGE
-            Maybe<FakeProduct, int> maybe = (FakeProduct)null;
+            Maybe<FakeProduct> maybe = (FakeProduct)null;
 
             // ACT
             
@@ -152,13 +152,13 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         {
             // ARRANGE
             var product = new FakeProduct();
-            Maybe<FakeProduct, int> maybe = product;
+            Maybe<FakeProduct> maybe = product;
 
             // ACT
 
             // ASSERT
             maybe.HasValue().Should().BeTrue();
-            maybe.Entity.Should().BeSameAs(product);
+            maybe.Value.Should().BeSameAs(product);
         }
 
         [TestMethod]
@@ -166,7 +166,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         {
             // ARRANGE
             var product = new FakeProduct();
-            var maybe = new Maybe<FakeProduct, int>();
+            var maybe = new Maybe<FakeProduct>();
 
             // ACT
             FakeProduct actual = maybe;
@@ -180,7 +180,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
         {
             // ARRANGE
             var product = new FakeProduct();
-            var maybe = new Maybe<FakeProduct, int>(product);
+            var maybe = new Maybe<FakeProduct>(product);
 
             // ACT
             FakeProduct actual = maybe;

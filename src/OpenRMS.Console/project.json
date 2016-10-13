@@ -14,10 +14,10 @@
       "version": "1.0.1"
     },
     "NETStandard.Library": "1.6.0",
-    "OpenRMS.Contexts.ProductManagement": "1.0.0-*",
-    "OpenRMS.Contexts.ProductManagement.Infrastructure": "1.0.0-*",
+    "OpenRMS.Contexts.ItemManagement.Infrastructure": "1.0.0-*",
     "OpenRMS.Shared.Kernel": "1.0.0-*",
-    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0"
+    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
+    "OpenRMS.Contexts.ItemManagement": "1.0.0-*"
   },
 
   "frameworks": {

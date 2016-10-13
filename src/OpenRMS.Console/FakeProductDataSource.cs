@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenRMS.Contexts.ProductManagement.QueryStack.Dto;
+using OpenRMS.Contexts.ItemManagement.QueryStack.Dto;
 using OpenRMS.Shared.Kernel.Interfaces;
 
 namespace OpenRMS.Console
@@ -10,9 +10,9 @@ namespace OpenRMS.Console
     {
         private IEnumerable<ProductDto> _products = new List<ProductDto>()
         {
-            new ProductDto() { Id = Guid.NewGuid(), Name = "Product 1", Description = "Product 1 Description" },
-            new ProductDto() { Id = Guid.NewGuid(), Name = "Product 2", Description = "Product 2 Description" },
-            new ProductDto() { Id = Guid.NewGuid(), Name = "Product 3", Description = "Product 3 Description" }
+            new ProductDto() { Id = Guid.NewGuid(), Name = "Item 1", Description = "Item 1 Description" },
+            new ProductDto() { Id = Guid.NewGuid(), Name = "Item 2", Description = "Item 2 Description" },
+            new ProductDto() { Id = Guid.NewGuid(), Name = "Item 3", Description = "Item 3 Description" }
         };
 
         public IEnumerable<ProductDto> GetAll()

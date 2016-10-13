@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="NoEntityToReturn" xml:space="preserve">
-    <value>There is no entity of type '{0}' to return. Please consider using '{1}' member to check if an entity exists before calling this method.</value>
+    <value>There is no @value of type '{0}' to return. Please consider using '{1}' member to check if an @value exists before calling this method.</value>
   </data>
 </root>

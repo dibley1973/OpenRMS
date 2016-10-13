@@ -114,7 +114,7 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, Description, description,);
+            Action action = () => new Item(id, Description, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();

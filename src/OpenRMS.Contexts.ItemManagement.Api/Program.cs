@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 
-namespace OpenRMS.Contexts.ProductManagement.Api
+namespace OpenRMS.Contexts.ItemManagement.Api
 {
     public class Program
     {

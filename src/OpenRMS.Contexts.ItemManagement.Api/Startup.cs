@@ -7,20 +7,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using OpenRMS.Contexts.ProductManagement.Interfaces;
+using OpenRMS.Contexts.ItemManagement.Interfaces;
 using OpenRMS.Shared.Kernel.Interfaces;
-using OpenRMS.Contexts.ProductManagement.CommandStack.Services;
-using OpenRMS.Contexts.ProductManagement.QueryStack.Services;
-using OpenRMS.Contexts.ProductManagement.CommandStack.Handlers;
-using OpenRMS.Contexts.ProductManagement.CommandStack.Commands;
-using OpenRMS.Contexts.ProductManagement.Domain;
-using OpenRMS.Contexts.ProductManagement.QueryStack.Queries;
-using OpenRMS.Contexts.ProductManagement.QueryStack.Dto;
-using OpenRMS.Contexts.ProductManagement.QueryStack.Handlers;
-using OpenRMS.Contexts.ProductManagement.Infrastructure.PostgreSql;
+using OpenRMS.Contexts.ItemManagement.CommandStack.Services;
+using OpenRMS.Contexts.ItemManagement.CommandStack.Handlers;
+using OpenRMS.Contexts.ItemManagement.CommandStack.Commands;
+using OpenRMS.Contexts.ItemManagement.Domain;
+using OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql;
 using Microsoft.EntityFrameworkCore;
 
-namespace OpenRMS.Contexts.ProductManagement.Api
+namespace OpenRMS.Contexts.ItemManagement.Api
 {
     public class Startup
     {
@@ -43,7 +39,7 @@ namespace OpenRMS.Contexts.ProductManagement.Api
             services.AddMvc();
 
             // Add data services
-            services.AddDbContext<PostgreSqlProductManagementContext>(options =>
+            services.AddDbContext<PostgreSqlItemManagementContext>(options =>
                 options.UseNpgsql("User ID=openrms;Password=password;Host=openrms-db;Port=5432;Database=openrms;Pooling=true;")
             );
 
@@ -61,7 +57,7 @@ namespace OpenRMS.Contexts.ProductManagement.Api
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                 .CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<PostgreSqlProductManagementContext>().Database.EnsureCreated();
+                serviceScope.ServiceProvider.GetService<PostgreSqlItemManagementContext>().Database.EnsureCreated();
             }
 
             app.UseMvc();
@@ -74,22 +70,16 @@ namespace OpenRMS.Contexts.ProductManagement.Api
         private void ConfigureDependencies(IServiceCollection services)
         {
             // Repository/infrastructure
-            services.AddTransient<IProductRepository, PostgreSqlProductRepository>();
-            services.AddTransient<IProductManagementUnitOfWork, PostgreSqlProductManagementUnitOfWork>();
-            services.AddTransient<IProductManagementUnitOfWorkFactory, PostgreSqlProductManagementUnitOfWorkFactory>();
-            services.AddTransient<PostgreSqlProductManagementContext, PostgreSqlProductManagementContext>();
+            services.AddTransient<IItemRepository, PostgreSqlItemRepository>();
+            services.AddTransient<IItemManagementUnitOfWork, PostgreSqlItemManagementUnitOfWork>();
+            services.AddTransient<IItemManagementUnitOfWorkFactory, PostgreSqlItemManagementUnitOfWorkFactory>();
+            services.AddTransient<PostgreSqlItemManagementContext, PostgreSqlItemManagementContext>();
 
             // Commands
-            services.AddTransient<IProductCommandService, ProductCommandService>();
-            services.AddTransient<ICommandHandler<CreateProductCommand, Product>, CreateProductHandler>();
-            services.AddTransient<ICommandHandler<UpdateProductCommand>, UpdateProductHandler>();
-            services.AddTransient<ICommandHandler<DeleteProductCommand>, DeleteProductHandler>();
-
-            // Queries
-            services.AddTransient<IProductQueryService, ProductQueryService>();
-            services.AddTransient<IQueryHandler<GetAllProductsQuery, IEnumerable<ProductDto>>, GetAllProductsHandler>();
-            services.AddTransient<IQueryHandler<GetProductForIdQuery, ProductDto>, GetProductForIdHandler>();
-            services.AddTransient<IQueryHandler<SearchProductsQuery, IEnumerable<ProductDto>>, SearchProductsHandler>();
+            services.AddTransient<IItemCommandService, ItemCommandService>();
+            services.AddTransient<ICommandHandler<CreateItemCommand, Item>, CreateItemHandler>();
+            services.AddTransient<ICommandHandler<UpdateItemCommand>, UpdateItemHandler>();
+            services.AddTransient<ICommandHandler<DeleteItemCommand>, DeleteItemHandler>();
         }
     }
 }

@@ -1,24 +1,24 @@
 ﻿using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenRMS.Contexts.ProductManagement.Domain;
+using OpenRMS.Contexts.ItemManagement.Domain;
 
-namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
+namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
 {
     [TestClass]
-    public class ProductTests
+    public class ItemTests
     {
         [TestMethod]
         public  void Construct_WhenGivenDefaultGuid_ThrowsException()
         {
             // ARRANGE
             var id = default(Guid);
-            string name = "Product 1";
-            string description = "Product One";
+            string name = "Item 1";
+            string description = "Item One";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Product(id, name, description, null);
+            Action action = () => new Item(id, name, description, null);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -29,12 +29,12 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
         {
             // ARRANGE
             var id = Guid.Empty;
-            string name = "Product 1";
-            string description = "Product One";
+            string name = "Item 1";
+            string description = "Item One";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Product(id, name, description, null);
+            Action action = () => new Item(id, name, description, null);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -46,11 +46,11 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
             // ARRANGE
             var id = Guid.NewGuid();
             string name = null;
-            string description = "Product One";
+            string description = "Item One";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Product(id, name, description, null);
+            Action action = () => new Item(id, name, description, null);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -62,11 +62,11 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
             // ARRANGE
             var id = Guid.NewGuid();
             string name = "";
-            string description = "Product One";
+            string description = "Item One";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Product(id, name, description, null);
+            Action action = () => new Item(id, name, description, null);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -78,11 +78,11 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
             // ARRANGE
             var id = Guid.NewGuid();
             string name = "   ";
-            string description = "Product One";
+            string description = "Item One";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Product(id, name, description, null);
+            Action action = () => new Item(id, name, description, null);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -94,10 +94,10 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
             // ARRANGE
             var id = Guid.NewGuid();
             string name = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
-            string description = "Product One";
+            string description = "Item One";
 
             // ACT
-            var actual = new Product(id, name, description, null);
+            var actual = new Item(id, name, description, null);
 
             // ASSERT
             actual.Should().NotBeNull();
@@ -109,12 +109,12 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string Description = "Product 1";
+            string Description = "Item 1";
             string description = null;
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Product(id, Description, description, null);
+            Action action = () => new Item(id, Description, description, null);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -125,12 +125,12 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string Description = "Product 1";
+            string Description = "Item 1";
             string description = "";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Product(id, Description, description, null);
+            Action action = () => new Item(id, Description, description, null);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -141,12 +141,12 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string Description = "Product 1";
+            string Description = "Item 1";
             string description = " ";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Product(id, Description, description, null);
+            Action action = () => new Item(id, Description, description, null);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -157,11 +157,11 @@ namespace OpenRMS.Contexts.ProductManagement.Tests.Tests.Domain
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string name = "Product 1";
+            string name = "Item 1";
             string description = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
 
             // ACT
-            var actual = new Product(id, name, description, null);
+            var actual = new Item(id, name, description, null);
 
             // ASSERT
             actual.Should().NotBeNull();

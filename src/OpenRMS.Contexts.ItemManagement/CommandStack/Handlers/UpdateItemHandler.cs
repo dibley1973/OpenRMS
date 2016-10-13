@@ -34,7 +34,6 @@ namespace OpenRMS.Contexts.ItemManagement.CommandStack.Handlers
 
             using (IItemManagementUnitOfWork unitOfWork = _unitOfWorkFactory.CreateUnitOfWork())
             {
-
                 var result = unitOfWork.ItemRepository.GetForId(command.Id);
 
                 // Ensure product exists to update

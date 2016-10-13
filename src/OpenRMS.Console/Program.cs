@@ -9,7 +9,7 @@ namespace OpenRMS.Console
 {
     public class Program
     {
-        public class ProductModel
+        public class ItemModel
         {
             public Guid Id { get; set; }
             public string Name { get; set; }
@@ -20,84 +20,81 @@ namespace OpenRMS.Console
         {
             using (var httpClient = new HttpClient())
             {
-                // Output info on the products
-                OutputProductInfo(httpClient);
-
-                // Delete products if they exist
-                System.Console.WriteLine("Deleting existing products.");
-                foreach (ProductModel product in GetProducts(httpClient))
+                // Delete items if they exist
+                System.Console.WriteLine("Deleting existing items.");
+                foreach (ItemModel item in GetItems(httpClient))
                 {
-                    var deleteResponse = httpClient.DeleteAsync("http://localhost:49269/productmanagement/products/" + product.Id).Result;
-                    System.Console.WriteLine(string.Format("Deleted Product Id: {0}", product.Id));
+                    var deleteResponse = httpClient.DeleteAsync("http://localhost:49269/itemmanagement/items/" + item.Id).Result;
+                    System.Console.WriteLine(string.Format("Deleted Item Id: {0}", item.Id));
                 }
                 System.Console.WriteLine();
 
-                // Create some products
-                System.Console.WriteLine("Creating some new products");
+                // Create some items
+                System.Console.WriteLine("Creating some new items");
                 for (int i = 0; i < 3; i++)
                 {
-                    var productId = CreateProduct(httpClient, i + 1);
-                    System.Console.WriteLine(string.Format("Created Product Id: {0}", productId));
+                    var itemId = CreateItem(httpClient, i + 1);
+                    System.Console.WriteLine(string.Format("Created Item Id: {0}", itemId));
                 }
                 System.Console.WriteLine();
 
-                // Output info on the products
-                OutputProductInfo(httpClient);
+                // Output info on the items
+                OutputItemInfo(httpClient);
 
-                // Updating products
-                System.Console.WriteLine("Updating products");
-                foreach (ProductModel product in GetProducts(httpClient))
+                // Updating items
+                System.Console.WriteLine("Updating items");
+                foreach (ItemModel item in GetItems(httpClient))
                 {
-                    UpdateProduct(httpClient, product);
-                    System.Console.WriteLine(string.Format("Updated Product Id: {0}", product.Id));
+                    UpdateItem(httpClient, item);
+                    System.Console.WriteLine(string.Format("Updated Item Id: {0}", item.Id));
                 }
                 System.Console.WriteLine();
 
-                // Output info on the products
-                OutputProductInfo(httpClient);
+                // Output info on the items
+                OutputItemInfo(httpClient);
 
                 System.Console.ReadLine();
             }
         }
 
-        private static IEnumerable<ProductModel> GetProducts(HttpClient httpClient)
+        private static IEnumerable<ItemModel> GetItems(HttpClient httpClient)
         {
-            var response = httpClient.GetAsync("http://localhost:49269/productmanagement/products").Result;
+            var response = httpClient.GetAsync("http://localhost:49269/itemmanagement/items").Result;
             var responseJson = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<IEnumerable<ProductModel>>(responseJson);
+            return JsonConvert.DeserializeObject<IEnumerable<ItemModel>>(responseJson);
         }
 
-        private static Guid CreateProduct(HttpClient httpClient, int productNumber)
+        private static Guid CreateItem(HttpClient httpClient, int itemNumber)
         {
-            var requestJson = new StringContent(string.Format("{{ name: 'Product {0}', description: 'Product {0} description' }}", productNumber), Encoding.UTF8, "application/json");
-            var response = httpClient.PostAsync("http://localhost:49269/productmanagement/products/", requestJson).Result;
+            var requestJson = new StringContent(string.Format("{{ name: 'Item {0}', description: 'Item {0} description' }}", itemNumber), Encoding.UTF8, "application/json");
+            var response = httpClient.PostAsync("http://localhost:49269/itemmanagement/items/", requestJson).Result;
             var responseJson = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<Guid>(responseJson);
         }
 
-        private static void UpdateProduct(HttpClient httpClient, ProductModel product)
+        private static void UpdateItem(HttpClient httpClient, ItemModel item)
         {
-            var updatedProductName = product.Name + " Updated";
-            var updatedProductDescription = product.Description + " updated";
-            var requestJson = new StringContent(string.Format("{{ id: '{0}', name: '{1}', description: '{2}' }}", product.Id, updatedProductName, updatedProductDescription), Encoding.UTF8, "application/json");
-            var response = httpClient.PutAsync("http://localhost:49269/productmanagement/products/" + product.Id, requestJson).Result;
+            var updatedItemName = item.Name + " Updated";
+            var updatedItemDescription = item.Description + " updated";
+            var requestJson = new StringContent(string.Format("{{ id: '{0}', name: '{1}', description: '{2}' }}", item.Id, updatedItemName, updatedItemDescription), Encoding.UTF8, "application/json");
+            var response = httpClient.PutAsync("http://localhost:49269/itemmanagement/items/" + item.Id, requestJson).Result;
             var responseJson = response.Content.ReadAsStringAsync().Result;            
         }
 
-        private static void OutputProductInfo(HttpClient httpClient)
+        private static void OutputItemInfo(HttpClient httpClient)
         {
-            var products = GetProducts(httpClient);
+            var items = GetItems(httpClient);
 
-            System.Console.WriteLine("Fetching information on products.");
+            System.Console.WriteLine("Fetching information on items.");
             System.Console.WriteLine();
-            System.Console.WriteLine("Count of products in repository: {0}", products.Count());
+            System.Console.WriteLine("Count of items in repository: {0}", items.Count());
             System.Console.WriteLine();
 
-            foreach (ProductModel product in products)
+            foreach (ItemModel item in items)
             {
-                System.Console.WriteLine(string.Format("Product Id: {0}", product.Id));
-                System.Console.WriteLine(string.Format("Name: {0}", product.Name));
-                System.Console.WriteLine(string.Format("Description: {0}", product.Description));
+                System.Console.WriteLine(string.Format("Item Id: {0}", item.Id));
+                System.Console.WriteLine(string.Format("Name: {0}", item.Name));
+                System.Console.WriteLine(string.Format("Description: {0}", item.Description));
                 System.Console.WriteLine();
             }
         }

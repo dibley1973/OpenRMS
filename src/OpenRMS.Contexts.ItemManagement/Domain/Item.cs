@@ -10,7 +10,6 @@ namespace OpenRMS.Contexts.ItemManagement.Domain
     {
         #region Properties
 
-        public string Code { get; }
         public string Name { get; private set; }
         public string Description { get; private set; }
 
@@ -23,18 +22,14 @@ namespace OpenRMS.Contexts.ItemManagement.Domain
         /// </summary>
         private Item() : base() { }
 
-        public Item(string code, string name)
-            : this(Guid.NewGuid(), code, name, string.Empty)
-        { }
-        
-        public Item(Guid id, string code , string name, string description)
-            : base(id)
+        /// <summary>
+        /// Construct.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        public Item(string name, string description)
+            : base(Guid.NewGuid())
         {
-            if (string.IsNullOrWhiteSpace(code))
-                throw new ArgumentNullException(nameof(code));
-
-            Code = code;
-            
             ChangeName(name);
             ChangeDescription(description);
         }

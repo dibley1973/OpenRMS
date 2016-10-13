@@ -9,7 +9,7 @@ namespace OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql
     public class PostgreSqlItemManagementUnitOfWork : IItemManagementUnitOfWork
     {
         private readonly PostgreSqlItemManagementContext _context;
-        private readonly ItemRepository _itemRepository;
+        private readonly PostgreSqlItemRepository _itemRepository;
         private bool _disposed;
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql
 
             _context = context;
 
-            _itemRepository = new ItemRepository(_context);
+            _itemRepository = new PostgreSqlItemRepository(_context);
         }
 
         /// <summary>

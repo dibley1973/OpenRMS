@@ -10,7 +10,7 @@ namespace OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql
     /// <summary>
     /// A repository of products.
     /// </summary>
-    public class ItemRepository : IItemRepository
+    public class PostgreSqlItemRepository : IItemRepository
     {
         private readonly PostgreSqlItemManagementContext _context;
 
@@ -18,7 +18,7 @@ namespace OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql
         /// Construct.
         /// </summary>
         /// <param name="context">A data context to retrieve products from.</param>
-        public ItemRepository(PostgreSqlItemManagementContext context)
+        public PostgreSqlItemRepository(PostgreSqlItemManagementContext context)
         {
             if(context == null)
                 throw new ArgumentNullException(nameof(context));

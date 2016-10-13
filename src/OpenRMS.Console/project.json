@@ -15,7 +15,7 @@
     "OpenRMS.Contexts.ItemManagement.Infrastructure": "1.0.0-*",
     "OpenRMS.Shared.Kernel": "1.0.0-*",
     "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
-    "OpenRMS.Contexts.ItemManagement": "1.0.0-*"
+    "OpenRMS.Contexts.ItemManagement": "1.0.0-*",
     "Newtonsoft.Json": "9.0.1"
 
   },

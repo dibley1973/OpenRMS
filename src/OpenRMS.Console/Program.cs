@@ -76,7 +76,7 @@ namespace OpenRMS.Console
         {
             var updatedItemName = item.Name + " Updated";
             var updatedItemDescription = item.Description + " updated";
-            var requestJson = new StringContent(string.Format("{{ id: '{0}', name: '{1}', description: '{2}' }}", item.Id, updatedItemName, updatedItemDescription), Encoding.UTF8, "application/json");
+            var requestJson = new StringContent(string.Format("{{ name: '{1}', description: '{2}' }}", item.Id, updatedItemName, updatedItemDescription), Encoding.UTF8, "application/json");
             var response = httpClient.PutAsync("http://localhost:49269/itemmanagement/items/" + item.Id, requestJson).Result;
             var responseJson = response.Content.ReadAsStringAsync().Result;            
         }

@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Shared.Kernel.Interfaces;
-using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Services;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
 using OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql;
@@ -76,7 +75,6 @@ namespace OpenRMS.Contexts.ItemManagement.Api
             services.AddTransient<PostgreSqlItemManagementContext, PostgreSqlItemManagementContext>();
 
             // Commands
-            services.AddTransient<IItemCommandService, ItemCommandService>();
             services.AddTransient<ICommandHandler<CreateItemCommand, Item>, CreateItemHandler>();
             services.AddTransient<ICommandHandler<UpdateItemCommand>, UpdateItemHandler>();
             services.AddTransient<ICommandHandler<DeleteItemCommand>, DeleteItemHandler>();

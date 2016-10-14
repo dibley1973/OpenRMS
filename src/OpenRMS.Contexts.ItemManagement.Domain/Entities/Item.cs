@@ -6,7 +6,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
     /// <summary>
     /// Represents a product.
     /// </summary>
-    public class Item : AggregateRoot<Guid>
+    public class Item : AggregateRoot
     {
         #region Properties
 
@@ -56,7 +56,8 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="name">The new name of the product.</param>
         public void ChangeName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
 
             Name = name;
         }
@@ -67,7 +68,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="description">The new description of the product.</param>
         public void ChangeDescription(string description)
         {
-            if (description==null)
+            if (description == null)
                 throw new ArgumentNullException(nameof(description));
 
             Description = description;

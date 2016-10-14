@@ -9,7 +9,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Interfaces
     /// <summary>
     /// An interface that provides access to a repository of products.
     /// </summary>
-    public interface IItemRepository : IRepository<Item, Guid>
+    public interface IItemRepository : IRepository<Item>
     {
         Maybe<Item> GetForName(string name);
     }

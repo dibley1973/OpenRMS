@@ -5,23 +5,20 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
     /// <summary>
     /// The base class which all entities should inherit from
     /// </summary>
-    /// <typeparam name="TId">Indicates the type of the entities identifier. Normally a Long or Guid.</typeparam>
-    public abstract class Entity<TId>
-        where TId : struct
+    public abstract class Entity
     {
         private readonly int _hashCode;
 
         /// <summary>
         /// Gets the identity for the entity
         /// </summary>
-        public TId Id { get; private set; }
+        public Guid Id { get; private set; }
 
         /// <summary>
         /// Parameterless contructor.
         /// </summary>
         protected Entity()
         {
-            Id = default(TId);
             _hashCode = GetHashCodeCore();
         }
 
@@ -29,9 +26,10 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
         /// Construct.
         /// </summary>
         /// <param name="id">The identifier of the entity.</param>
-        protected Entity(TId id)
+        protected Entity(Guid id)
         {
-            if (id.Equals(default(TId))) throw new ArgumentNullException(nameof(id));
+            if (id == null || id == default(Guid))
+                throw new ArgumentNullException(nameof(id));
 
             Id = id;
             _hashCode = GetHashCodeCore();
@@ -44,12 +42,12 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            var other = obj as Entity<TId>;
+            var other = obj as Entity;
 
             if (ReferenceEquals(other, null)) return false;
             if (ReferenceEquals(this, other)) return true;
             if (GetType() != other.GetType()) return false;
-            if (Id.Equals(default(TId)) || other.Id.Equals(default(TId))) return false;
+            if (Id.Equals(default(Guid)) || other.Id.Equals(default(Guid))) return false;
 
             if (!IsTransient() && !other.IsTransient() && Id.Equals(other.Id)) return true;
 
@@ -62,7 +60,7 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static bool operator ==(Entity<TId> a, Entity<TId> b)
+        public static bool operator ==(Entity a, Entity b)
         {
             if (ReferenceEquals(a, null) && ReferenceEquals(b, null)) return true;
             if (ReferenceEquals(a, null) || ReferenceEquals(b, null)) return false;
@@ -76,7 +74,7 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static bool operator !=(Entity<TId> a, Entity<TId> b)
+        public static bool operator !=(Entity a, Entity b)
         {
             return !(a == b);
         }
@@ -93,7 +91,7 @@ namespace OpenRMS.Shared.Kernel.BaseClasses
 
         public virtual bool IsTransient()
         {
-            return Id.Equals(default(TId));
+            return Id.Equals(default(Guid));
         }
 
         private int GetHashCodeCore()

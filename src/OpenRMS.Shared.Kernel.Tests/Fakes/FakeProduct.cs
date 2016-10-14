@@ -1,13 +1,14 @@
 ﻿using OpenRMS.Shared.Kernel.BaseClasses;
+using System;
 
 namespace OpenRMS.Shared.Kernel.Tests.Fakes
 {
-    public class FakeProduct : Entity<int>
+    public class FakeProduct : Entity
     {
         public string Name { get; set; }
 
         public FakeProduct() : base() { }
 
-        public FakeProduct(int id) : base(id) { }
+        public FakeProduct(Guid id) : base(id) { }
     }
 }

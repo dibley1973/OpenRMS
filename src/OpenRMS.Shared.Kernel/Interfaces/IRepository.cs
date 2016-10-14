@@ -9,13 +9,11 @@ namespace OpenRMS.Shared.Kernel.Interfaces
     /// An interface that provides access to a repository of entities.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    /// <typeparam name="TId">The type of the entity's identifier.</typeparam>
-    public interface IRepository<TEntity, TId> 
-        where TEntity : Entity<TId>
-        where TId : struct
+    public interface IRepository<TEntity> 
+        where TEntity : Entity
     {
         IEnumerable<TEntity> GetAll();
-        Maybe<TEntity> GetForId(TId id);
+        Maybe<TEntity> GetForId(Guid id);
         void Create(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);

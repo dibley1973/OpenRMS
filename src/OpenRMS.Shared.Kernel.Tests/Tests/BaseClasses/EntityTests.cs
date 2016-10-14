@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenRMS.Shared.Kernel.Tests.Fakes;
+using System;
 
 namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
 {
@@ -12,7 +13,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void Equals_WhenOtherIsSameTypeButNull_ReturnsFalse()
         {
             // ARRANGE
-            var product = new FakeProduct(2);
+            var product = new FakeProduct(Guid.NewGuid());
 
             // ACT
             var actual = product.Equals(null);
@@ -25,7 +26,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void Equals_WhenOtherIsDifferentType_ReturnsFalse()
         {
             // ARRANGE
-            var product = new FakeProduct(2);
+            var product = new FakeProduct(Guid.NewGuid());
             object other = new string('W', 5);
 
             // ACT
@@ -39,7 +40,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void Equals_WhenOtherIsSameReference_ReturnsTrue()
         {
             // ARRANGE
-            var product = new FakeProduct(2);
+            var product = new FakeProduct(Guid.NewGuid());
             object other = product;
 
             // ACT
@@ -67,8 +68,8 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void Equals_WhenOtherIsSameTypeButDifferentIds_ReturnsFalse()
         {
             // ARRANGE
-            var product = new FakeProduct(2);
-            var other = new FakeProduct(3);
+            var product = new FakeProduct(Guid.NewGuid());
+            var other = new FakeProduct(Guid.NewGuid());
 
             // ACT
             var actual = product.Equals(other);
@@ -81,8 +82,9 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void Equals_WhenOtherIsSameTypeWithSameIds_ReturnsFalse()
         {
             // ARRANGE
-            var product = new FakeProduct(2);
-            var other = new FakeProduct(2);
+            var id = Guid.NewGuid();
+            var product = new FakeProduct(id);
+            var other = new FakeProduct(id);
 
             // ACT
             var actual = product.Equals(other);
@@ -92,7 +94,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         }
 
         [TestMethod]
-        public void Id_AfterConstructionWithNoId_ReturnsDefaultValueOfId()
+        public void Id_AfterConstructionWithNoId_ReturnsDefaultValue()
         {
             // ARRANGE
             var product = new FakeProduct();
@@ -101,14 +103,14 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
             var actual = product.Id;
 
             // ASSERT
-            actual.Should().Be(default(int));
+            actual.Should().Be(default(Guid));
         }
 
         [TestMethod]
         public void Id_AfterConstructionWithId_ReturnsValueOfId()
         {
             // ARRANGE
-            var id = 187;
+            var id = Guid.NewGuid();
             var product = new FakeProduct(id);
 
             // ACT
@@ -139,7 +141,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void IsEqualTo_WhenOneInstanceIsInstantiatedAndTheOtherIsNull_Returnsfalse()
         {
             // ARRANGE
-            FakeProduct product = new FakeProduct(7); ;
+            FakeProduct product = new FakeProduct(Guid.NewGuid());
             FakeProduct other = null;
 
             // ACT
@@ -155,8 +157,8 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void IsEqualTo_WhenBothInstanceAreInstantiatedWithDifferentIds_ReturnsFalse()
         {
             // ARRANGE
-            FakeProduct product = new FakeProduct(7); ;
-            FakeProduct other = new FakeProduct(77);
+            FakeProduct product = new FakeProduct(Guid.NewGuid());
+            FakeProduct other = new FakeProduct(Guid.NewGuid());
 
             // ACT
             var actual = product == other;
@@ -169,8 +171,9 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void IsEqualTo_WhenBothInstanceAreInstantiatedWithSameIds_ReturnsTrue()
         {
             // ARRANGE
-            FakeProduct product = new FakeProduct(7); ;
-            FakeProduct other = new FakeProduct(7);
+            var id = Guid.NewGuid();
+            FakeProduct product = new FakeProduct(id);
+            FakeProduct other = new FakeProduct(id);
 
             // ACT
             var actual = product == other;
@@ -201,7 +204,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void IsNotEqualTo_WhenOneInstanceIsInstantiatedAndTheOtherIsNull_ReturnsTrue()
         {
             // ARRANGE
-            FakeProduct product = new FakeProduct(7); ;
+            FakeProduct product = new FakeProduct(Guid.NewGuid());
             FakeProduct other = null;
 
             // ACT
@@ -217,8 +220,8 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void IsNotEqualTo_WhenBothInstanceAreInstantiatedWithDifferentIds_ReturnsTrue()
         {
             // ARRANGE
-            FakeProduct product = new FakeProduct(7); ;
-            FakeProduct other = new FakeProduct(77);
+            FakeProduct product = new FakeProduct(Guid.NewGuid());
+            FakeProduct other = new FakeProduct(Guid.NewGuid());
 
             // ACT
             var actual = product != other;
@@ -231,8 +234,9 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void IsNotEqualTo_WhenBothInstanceAreInstantiatedWithSameIds_ReturnFalse()
         {
             // ARRANGE
-            FakeProduct product = new FakeProduct(7); ;
-            FakeProduct other = new FakeProduct(7);
+            var id = Guid.NewGuid();
+            FakeProduct product = new FakeProduct(id);
+            FakeProduct other = new FakeProduct(id);
 
             // ACT
             var actual = product != other;
@@ -258,7 +262,7 @@ namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
         public void IsTransient_AfterConstructionWithId_ReturnsValueOfId()
         {
             // ARRANGE
-            var id = 187;
+            var id = Guid.NewGuid();
             var product = new FakeProduct(id);
 
             // ACT

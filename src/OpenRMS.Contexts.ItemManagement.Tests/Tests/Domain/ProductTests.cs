@@ -18,7 +18,6 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
             string description = "Item One";
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
             Action action = () => new Item(id, name, description);
 
             // ASSERT
@@ -112,38 +111,6 @@ namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
             var id = Guid.NewGuid();
             string name = "Item 1";
             string description = null;
-
-            // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
-
-            // ASSERT
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        [TestMethod]
-        public void Construct_WhenGivenEmptyDescription_ThrowsException()
-        {
-            // ARRANGE
-            var id = Guid.NewGuid();
-            string name = "Item 1";
-            string description = "";
-
-            // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
-
-            // ASSERT
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        [TestMethod]
-        public void Construct_WhenGivenWhitespaceDescription_ThrowsException()
-        {
-            // ARRANGE
-            var id = Guid.NewGuid();
-            string name = "Item 1";
-            string description = " ";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement

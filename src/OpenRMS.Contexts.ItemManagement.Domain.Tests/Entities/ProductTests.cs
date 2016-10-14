@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenRMS.Contexts.ItemManagement.Domain;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 
-namespace OpenRMS.Contexts.ItemManagement.Tests.Tests.Domain
+namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
 {
     [TestClass]
     public class ItemTests

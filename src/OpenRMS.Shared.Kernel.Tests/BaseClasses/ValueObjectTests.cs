@@ -4,7 +4,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenRMS.Shared.Kernel.Tests.Fakes;
 
-namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
+namespace OpenRMS.Shared.Kernel.Tests.BaseClasses
 {
     [TestClass]
     public class ValueObjectTests

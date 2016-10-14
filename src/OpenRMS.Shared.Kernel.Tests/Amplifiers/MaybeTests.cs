@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenRMS.Shared.Kernel.Amplifiers;
 using OpenRMS.Shared.Kernel.Tests.Fakes;
 
-namespace OpenRMS.Shared.Kernel.Tests.Tests.Amplifiers
+namespace OpenRMS.Shared.Kernel.Tests.Amplifiers
 {
     [TestClass]
     public class HasValueTests

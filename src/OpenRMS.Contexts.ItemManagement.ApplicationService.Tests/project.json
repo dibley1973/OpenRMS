@@ -10,6 +10,7 @@
     },
     "dotnet-test-mstest": "1.0.1-preview",
     "FluentAssertions": "4.14.0",
+    "moq": "4.6.38-alpha",
     "MSTest.TestFramework": "1.0.0-preview",
     "OpenRMS.Contexts.ItemManagement.ApplicationService": "1.0.0-*"
   },

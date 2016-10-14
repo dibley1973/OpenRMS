@@ -3,7 +3,7 @@ using System.Linq;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
 using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Shared.Kernel.Interfaces;
-using OpenRMS.Contexts.ItemManagement.Domain.Resources;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.Resources;
 
 namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers
 {

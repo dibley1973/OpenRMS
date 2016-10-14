@@ -8,9 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Reflection;
-
-namespace OpenRMS.Contexts.ItemManagement.Domain.Resources {
+namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Resources {
+    using System;
+    using System.Reflection;
+    
+    
     /// <summary>
     ///    A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -36,7 +38,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OpenRMS.Contexts.ProductManagement.Resources.ExceptionMessages", typeof(ExceptionMessages).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OpenRMS.Contexts.ItemManagement.ApplicationService.Resources.ExceptionMessages", typeof(ExceptionMessages).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -54,15 +56,6 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Resources {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///    Looks up a localized string similar to The name {0} has already been taken..
-        /// </summary>
-        public static string NameAlreadyTaken {
-            get {
-                return ResourceManager.GetString("NameAlreadyTaken", resourceCulture);
             }
         }
         

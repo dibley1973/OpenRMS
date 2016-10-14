@@ -8,7 +8,7 @@ using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
 using OpenRMS.Shared.Kernel.Interfaces;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 
-namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests
+namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
 {
     [TestClass]
     public class ItemsControllerTests
@@ -32,7 +32,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests
         }
 
         [TestMethod]
-        public void Delete_AFterCalling_CountOfItemsInRepositoryHasDecreasedByOne()
+        public void Delete_AfterCalling_CountOfItemsInRepositoryHasDecreasedByOne()
         {
             // ARRANGE
             var idToDelete = FakeItems.Item3Id;
@@ -48,7 +48,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests
         }
 
         [TestMethod]
-        public void Delete_AFterCalling_DeletedItemInRepositoryIsNotAvailable()
+        public void Delete_AfterCalling_DeletedItemInRepositoryIsNotAvailable()
         {
             // ARRANGE
             var idToDelete = FakeItems.Item3Id;

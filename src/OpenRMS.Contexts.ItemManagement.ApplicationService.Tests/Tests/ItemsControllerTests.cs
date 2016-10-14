@@ -1,26 +1,34 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Services;
 using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Fakes;
 using OpenRMS.Contexts.ItemManagement.Api.Controllers;
 using System.Linq;
 using FluentAssertions;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
+using OpenRMS.Shared.Kernel.Interfaces;
+using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 
 namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests
 {
     [TestClass]
     public class ItemsControllerTests
     {
-        private IItemCommandService _fakeItemCommandService;
+        private ICommandHandler<CreateItemCommand, Item> _fakeCreateItemHandler;
+        private ICommandHandler<UpdateItemCommand> _fakeUpdateItemHandler;
+        private ICommandHandler<DeleteItemCommand> _fakeDeleteItemHandler;
         private IItemRepository _fakeItemRepository;
         private ItemsController _controller;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _fakeItemCommandService = new FakeItemCommandService();
+            _fakeCreateItemHandler = new FakeCreateItemCommandHandler();
+            _fakeUpdateItemHandler = new FakeUpdateItemCommandHandler();
+            _fakeDeleteItemHandler = new FakeDeleteItemCommandHandler();
             _fakeItemRepository = new FakeItemRepository();
-            _controller = new ItemsController(_fakeItemCommandService, _fakeItemRepository);
+
+            _controller = new ItemsController(
+                _fakeItemRepository, _fakeCreateItemHandler, _fakeUpdateItemHandler, _fakeDeleteItemHandler);
         }
 
         [TestMethod]

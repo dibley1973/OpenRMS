@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenRMS.Shared.Kernel.Tests.Fakes;
 using System;
 
-namespace OpenRMS.Shared.Kernel.Tests.Tests.BaseClasses
+namespace OpenRMS.Shared.Kernel.Tests.BaseClasses
 {
     [TestClass]
     public class EntityTests

@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using OpenRMS.Contexts.ItemManagement.Api.Controllers;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
-using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.Models;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
@@ -122,10 +121,10 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
             _itemRepositoryMock.Setup(m => m.GetAll()).Returns(items);
 
             // ACT
-            var returnedItems = _controller.Get();
+            var returnedItems = _controller.Get().ToList();
 
             // ASSERT
-            returnedItems.Count().Should().Be(items.Count);
+            returnedItems.Count.Should().Be(items.Count);
             foreach(GetItemModel returnedItem in returnedItems)
             {
                 Assert.IsTrue(items.Any(item => item.Id == returnedItem.Id));
@@ -136,13 +135,14 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
         public void GetForId_ReturnsTheExpectedItemFromTheRepository()
         {
             // ARRANGE            
-            var itemToFind = new Item(Guid.NewGuid(), "Item 2", "Item 2");            
-            var items = new List<Item>()
-            {
-                new Item(Guid.NewGuid(), "Item 1", "Item 1"),
-                itemToFind,
-                new Item(Guid.NewGuid(), "Item 3", "Item 3")
-            };
+            var itemToFind = new Item(Guid.NewGuid(), "Item 2", "Item 2");     
+            // DW: Resharper advised not used variable. JC to confirm if can be removed.
+            //var items = new List<Item>()
+            //{
+            //    new Item(Guid.NewGuid(), "Item 1", "Item 1"),
+            //    itemToFind,
+            //    new Item(Guid.NewGuid(), "Item 3", "Item 3")
+            //};
             _itemRepositoryMock.Setup(m => m.GetForId(It.IsAny<Guid>())).Returns(itemToFind);
 
             // ACT

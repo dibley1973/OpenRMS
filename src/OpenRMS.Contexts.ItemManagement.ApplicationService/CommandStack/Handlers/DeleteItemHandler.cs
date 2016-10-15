@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.Resources;
+using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Shared.Kernel.Interfaces;
 
@@ -26,22 +27,28 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
         /// Executes the command.
         /// </summary>
         /// <param name="command">The command.</param>
+        /// <exception cref="ArgumentNullException">command</exception>
+        /// <exception cref="InvalidOperationException">if command contains an id for an <see cref="Item"/> that does not exist </exception>
         public void Execute(DeleteItemCommand command)
         {
-            if (command == null)
-                throw new ArgumentNullException(nameof(command));
+            if (command == null) throw new ArgumentNullException(nameof(command));
 
             using (IItemManagementUnitOfWork unitOfWork = _unitOfWorkFactory.CreateUnitOfWork())
             {
                 var result = unitOfWork.ItemRepository.GetForId(command.Id);
 
-                // Ensure product exists to delete
-                if (!result.HasValue())
-                    throw new InvalidOperationException(string.Format(ExceptionMessages.ProductNotFound, command.Id));
+                var itemDoesNotExistForDeletion = !result.HasValue();
+                if (itemDoesNotExistForDeletion)
+                    throw new InvalidOperationException(GetProductDoesNotExistForDeletionExceptionMessage(command.Id));
 
                 unitOfWork.ItemRepository.Delete(result.Value);
                 unitOfWork.Complete();
             }
+        }
+
+        private static string GetProductDoesNotExistForDeletionExceptionMessage(Guid commandId)
+        {
+            return string.Format(ExceptionMessages.ProductNotFound, commandId);
         }
     }
 }

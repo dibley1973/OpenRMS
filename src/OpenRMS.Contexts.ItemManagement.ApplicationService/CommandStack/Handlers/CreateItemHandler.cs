@@ -34,12 +34,13 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
 
             using (IItemManagementUnitOfWork unitOfWork = _unitOfWorkFactory.CreateUnitOfWork())
             {
-                var product = new Item(command.Name, command.Description);
+                var item = new Item(command.Code, command.Name);
+                item.ChangeDescription(command.Description);
 
-                unitOfWork.ItemRepository.Create(product);
+                unitOfWork.ItemRepository.Create(item);
                 unitOfWork.Complete();
                 
-                return product;
+                return item;
             }
         }
     }

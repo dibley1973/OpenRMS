@@ -26,7 +26,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.
         public DeleteItemHandlerTests()
         {
             _itemId = Guid.NewGuid();
-            _testItemToBeUpdated = new Item(_itemId, "Test Item", "Test item description");
+            _testItemToBeUpdated = new Item(id: _itemId, code: new ItemCode("t1"), name: "Test Item");
         }
 
         [TestInitialize]

@@ -72,7 +72,7 @@ namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
         [HttpPost]
         public Guid Post([FromBody]CreateItemModel model)
         {
-            var command = new CreateItemCommand(model.Name, model.Description);
+            var command = new CreateItemCommand(new ItemCode(model.Code), model.Name, model.Description);
             var item = _createItemHandler.Execute(command);
 
             return item.Id;

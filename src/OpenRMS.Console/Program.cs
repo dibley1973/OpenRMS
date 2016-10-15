@@ -66,7 +66,7 @@ namespace OpenRMS.Console
 
         private static Guid CreateItem(HttpClient httpClient, int itemNumber)
         {
-            var requestJson = new StringContent(string.Format("{{ name: 'Item {0}', description: 'Item {0} description' }}", itemNumber), Encoding.UTF8, "application/json");
+            var requestJson = new StringContent(string.Format("{{code: 'Code-{0}', name: 'Item {0}', description: 'Item {0} description' }}", itemNumber), Encoding.UTF8, "application/json");
             var response = httpClient.PostAsync("http://localhost:49269/itemmanagement/items/", requestJson).Result;
             var responseJson = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<Guid>(responseJson);
@@ -83,7 +83,7 @@ namespace OpenRMS.Console
 
         private static void OutputItemInfo(HttpClient httpClient)
         {
-            var items = GetItems(httpClient);
+            var items = GetItems(httpClient).ToList();
 
             System.Console.WriteLine("Fetching information on items.");
             System.Console.WriteLine();

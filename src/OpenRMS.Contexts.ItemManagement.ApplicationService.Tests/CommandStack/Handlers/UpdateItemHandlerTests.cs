@@ -20,7 +20,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.
         // This item will be returned by our mock repository and be updated. We can 
         // use this item to assert that the correct operations have been carried out by the
         // handler.
-        private Item _testItemToBeUpdated = new Item(Guid.NewGuid(), "Test Item", "Test item description");
+        private Item _testItemToBeUpdated = new Item(new ItemCode("t1"), "Test Item");
 
         [TestInitialize]
         public void TestInitialize()

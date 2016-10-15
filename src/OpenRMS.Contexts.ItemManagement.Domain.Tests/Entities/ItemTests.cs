@@ -14,11 +14,11 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         {
             // ARRANGE
             var id = default(Guid);
+            var code = new ItemCode("1");
             string name = "Item 1";
-            string description = "Item One";
 
             // ACT
-            Action action = () => new Item(id, name, description);
+            Action action = () => new Item(id, code, name);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -29,28 +29,41 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         {
             // ARRANGE
             var id = Guid.Empty;
+            var code = new ItemCode("1");
             string name = "Item 1";
-            string description = "Item One";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
+            Action action = () => new Item(id, code, name);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
+        }
+
+
+        [TestMethod]
+        public void Construct_WhenGivenEmptyItemCode_ThrowsException()
+        {
+            // ARRANGE
+            var code = ItemCode.Empty;
+            string name = "Item without a code";
+
+            // ACT
+            Action action = () => new Item(code: code, name: name);
+
+            // ASSERT
+            action.ShouldThrow<ArgumentException>();
         }
 
         [TestMethod]
         public void Construct_WhenGivenNullName_ThrowsException()
         {
             // ARRANGE
-            var id = Guid.NewGuid();
-            string name = null;
-            string description = "Item One";
-
+            var code = new ItemCode("1");
+            
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
+            Action action = () => new Item(code: code, name: null);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -60,13 +73,12 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void Construct_WhenGivenEmptyName_ThrowsException()
         {
             // ARRANGE
-            var id = Guid.NewGuid();
-            string name = "";
-            string description = "Item One";
-
+            var code = new ItemCode("1");
+            string emptyName = "";
+            
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
+            Action action = () => new Item(code: code, name: emptyName);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -76,13 +88,12 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void Construct_WhenGivenWhitespaceName_ThrowsException()
         {
             // ARRANGE
-            var id = Guid.NewGuid();
-            string name = "   ";
-            string description = "Item One";
-
+            var code = new ItemCode("1");
+            string nameWithOnlyWhitespace = "   ";
+            
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
+            Action action = () => new Item(code:code, name: nameWithOnlyWhitespace);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -92,12 +103,12 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void Name_WhenConstructorGivenValidName_ReturnsConstructedValue()
         {
             // ARRANGE
-            var id = Guid.NewGuid();
+            var code = new ItemCode("1");
             string name = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
-            string description = "Item One";
+            
 
             // ACT
-            var actual = new Item(id, name, description);
+            var actual = new Item(code: code, name: name);
 
             // ASSERT
             actual.Should().NotBeNull();
@@ -105,35 +116,31 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         }
 
         [TestMethod]
-        public void Construct_WhenGivenNullDescription_ThrowsException()
+        public void ChangeDescription_WhenGivenNullDescription_ThrowsException()
         {
             // ARRANGE
-            var id = Guid.NewGuid();
-            string name = "Item 1";
-            string description = null;
+            var item = new Item(code: new ItemCode("1"), name: "Item 1");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
+            Action action = () => item.ChangeDescription(null);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
         }
 
         [TestMethod]
-        public void Description_WhenConstructorGivenValidValue_ReturnsConstructedValue()
+        public void ChangeDescription_WhenGivenValidValue_UpdatesTheItemDescription()
         {
             // ARRANGE
-            var id = Guid.NewGuid();
-            string name = "Item 1";
-            string description = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
-
+            var actualItem = new Item(code: new ItemCode("1"), name: "Item 1");
+            var expectedDescription = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
             // ACT
-            var actual = new Item(id, name, description);
+            actualItem.ChangeDescription(expectedDescription);
 
             // ASSERT
-            actual.Should().NotBeNull();
-            actual.Description.Should().Be(description);
+            actualItem.Description.Should().NotBeNull();
+            actualItem.Description.Should().Be(expectedDescription);
         }
     }
 }

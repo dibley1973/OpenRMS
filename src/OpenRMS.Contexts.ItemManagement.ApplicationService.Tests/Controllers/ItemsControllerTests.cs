@@ -25,7 +25,8 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
         [TestInitialize]
         public void TestInitialize()
         {
-            var testItemToCreate = new Item(Guid.NewGuid(), "Test item", "Test description");
+            var testItemToCreate = new Item(new ItemCode("1"), "Test item");
+            testItemToCreate.ChangeDescription("Test description");
 
             _createItemCommandHandlerMock = new Mock<ICommandHandler<CreateItemCommand, Item>>();
             _createItemCommandHandlerMock.Setup(m => m.Execute(It.IsAny<CreateItemCommand>())).Returns(testItemToCreate);
@@ -78,6 +79,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
             // ARRANGE                        
             var createModel = new CreateItemModel()
             {
+                Code="1",
                 Name = "Item name",
                 Description = "Item description"
             };
@@ -93,10 +95,12 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
         public void Post_ReturnsTheIdOfTheCreatedItem()
         {
             // ARRANGE            
-            var createdItem = new Item(Guid.NewGuid(), "Created item", "Created item description");
+            var createdItem = new Item(new ItemCode("1"), "Created item");
+
             _createItemCommandHandlerMock.Setup(m => m.Execute(It.IsAny<CreateItemCommand>())).Returns(createdItem);
             var createModel = new CreateItemModel()
             {
+                Code="1",
                 Name = "Item name",
                 Description = "Item description"
             };
@@ -114,9 +118,9 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
             // ARRANGE            
             var items = new List<Item>()
             {
-                new Item(Guid.NewGuid(), "Item 1", "Item 1"),
-                new Item(Guid.NewGuid(), "Item 2", "Item 2"),
-                new Item(Guid.NewGuid(), "Item 3", "Item 3")
+                new Item(new ItemCode("1"), "Item 1"),
+                new Item(new ItemCode("2"), "Item 2"),
+                new Item(new ItemCode("3"), "Item 3")
             };
             _itemRepositoryMock.Setup(m => m.GetAll()).Returns(items);
 
@@ -135,7 +139,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
         public void GetForId_ReturnsTheExpectedItemFromTheRepository()
         {
             // ARRANGE            
-            var itemToFind = new Item(Guid.NewGuid(), "Item 2", "Item 2");     
+            var itemToFind = new Item(new ItemCode("2"),  "Item 2");     
             // DW: Resharper advised not used variable. JC to confirm if can be removed.
             //var items = new List<Item>()
             //{

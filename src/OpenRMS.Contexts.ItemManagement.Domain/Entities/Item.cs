@@ -10,9 +10,10 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
     {
         #region Properties
 
+        public ItemCode Code { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
-
+        
         #endregion
 
         #region Construct
@@ -25,27 +26,25 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
         /// <summary>
         /// Construct.
         /// </summary>
+        /// <param name="code"></param>
         /// <param name="name">The name of the product.</param>
-        /// <param name="description">The description of the product</param>
-        public Item(string name, string description)
-            : base(Guid.NewGuid())
-        {
-            ChangeName(name);
-            ChangeDescription(description);
-        }
+        public Item(ItemCode code, string name)
+            : this(Guid.NewGuid(), code, name)
+        {}
 
         /// <summary>
         /// Construct.
         /// </summary>
         /// <param name="id">The id of the product.</param>
+        /// <param name="code"></param>
         /// <param name="name">The name of the product.</param>
-        /// <param name="description">The description of the product</param>
-        /// <param name="attributes">The attributes of the product</param>
-        public Item(Guid id, string name, string description)
+        public Item(Guid id, ItemCode code, string name)
             : base(id)
         {
+            if(code == ItemCode.Empty) throw new ArgumentException("The Item Code must be set.  An empty code is not permissable",nameof(code));
+
+            Code = code;
             ChangeName(name);
-            ChangeDescription(description);
         }
 
         #endregion

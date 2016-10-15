@@ -6,6 +6,7 @@ using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Shared.Kernel.Interfaces;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.Models;
+using System.Linq;
 
 namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
 {

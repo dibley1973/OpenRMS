@@ -1,16 +1,17 @@
 ﻿using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
-using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
-using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Shared.Kernel.Interfaces;
-using System;
 
 namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Fakes
 {
     public class FakeDeleteItemCommandHandler : ICommandHandler<DeleteItemCommand>
     {
+        public bool ExecuteCalled { get; private set; } 
+        public DeleteItemCommand CommandSupplied { get; private set; }
+
         public void Execute(DeleteItemCommand command)
         {
-            // Nothing to do...
+            ExecuteCalled = true;
+            CommandSupplied = command;
         }
     }
 }

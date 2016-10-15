@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
-using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers;
-using OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Fakes;
-using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.Commands
+namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.Handlers
 {
     [TestClass]
     public class DeleteItemHandlerTests

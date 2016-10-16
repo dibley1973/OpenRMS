@@ -16,6 +16,7 @@ namespace OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql.EntityConfig
         public ItemConfiguration(EntityTypeBuilder<Item> entityBuilder)
         {
             entityBuilder.HasKey(product => product.Id);
+            entityBuilder.Ignore(product => product.Code);
         }
     }
 }

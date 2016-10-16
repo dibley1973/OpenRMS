@@ -56,6 +56,7 @@ namespace OpenRMS.Contexts.ItemManagement.Api
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                 .CreateScope())
             {
+                serviceScope.ServiceProvider.GetService<PostgreSqlItemManagementContext>().Database.EnsureDeleted();
                 serviceScope.ServiceProvider.GetService<PostgreSqlItemManagementContext>().Database.EnsureCreated();
             }
 

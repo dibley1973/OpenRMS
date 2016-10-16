@@ -8,9 +8,25 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
     /// </summary>
     public class Item : AggregateRoot
     {
+        #region EF Backing Properties
+
+        internal string ItemCodeValue
+        {
+            get { return Code.Value; }
+            private set
+            {
+                if(Code!=ItemCode.Empty)
+                    throw new InvalidOperationException(string.Format("The {0} property cannot be changed. It is provided for data binding operations only", nameof(ItemCodeValue)));
+
+                Code = value;
+            }
+        }
+
+        #endregion
+
         #region Properties
 
-        public ItemCode Code { get; private set; }
+        public ItemCode Code { get; private set; } = ItemCode.Empty;
         public string Name { get; private set; }
         public string Description { get; private set; }
         

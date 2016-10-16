@@ -39,7 +39,7 @@ namespace OpenRMS.Contexts.ItemManagement.Api
 
             // Add data services
             services.AddDbContext<PostgreSqlItemManagementContext>(options =>
-                options.UseNpgsql("User ID=openrms;Password=password;Host=openrms-db;Port=5432;Database=openrms;Pooling=true;")
+                options.UseNpgsql("User ID=postgres;Password=password;Host=openrms-db;Port=5432;Database=openrms;Pooling=true;")
             );
 
             // Add dependency bindings

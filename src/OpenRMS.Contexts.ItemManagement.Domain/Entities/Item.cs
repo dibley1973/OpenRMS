@@ -10,7 +10,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
     {
         #region EF Backing Properties
 
-        internal string ItemCodeValue
+        public string ItemCodeValue
         {
             get { return Code.Value; }
             private set

@@ -135,12 +135,44 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
             // ARRANGE
             var actualItem = new Item(code: new ItemCode("1"), name: "Item 1");
             var expectedDescription = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
+            
             // ACT
             actualItem.ChangeDescription(expectedDescription);
 
             // ASSERT
-            actualItem.Description.Should().NotBeNull();
             actualItem.Description.Should().Be(expectedDescription);
         }
+
+        [DataTestMethod]
+        [DataRow(null)]
+        [DataRow("")]
+        [DataRow("    ")]
+        public void ChangeName_WhenGivenInvalidName_ThrowsException(string invalidName)
+        {
+            // ARRANGE
+            var item = new Item(code: new ItemCode("1"), name: "Item 1");
+
+            // ACT
+            // ReSharper disable once ObjectCreationAsStatement
+            Action action = () => item.ChangeName(invalidName);
+
+            // ASSERT
+            action.ShouldThrow<ArgumentNullException>();
+        }
+
+        [TestMethod]
+        public void ChangeName_WhenGivenValidValue_UpdatesTheItemName()
+        {
+            // ARRANGE
+            var actualItem = new Item(code: new ItemCode("1"), name: "Item 1");
+            var expectedName = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
+
+            // ACT
+            actualItem.ChangeName(expectedName);
+
+            // ASSERT
+            actualItem.Name.Should().Be(expectedName);
+        }
+
     }
 }

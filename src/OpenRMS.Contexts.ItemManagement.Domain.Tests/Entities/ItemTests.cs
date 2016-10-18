@@ -111,8 +111,22 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
             var actual = new Item(code: code, name: name);
 
             // ASSERT
-            actual.Should().NotBeNull();
             actual.Name.Should().Be(name);
+        }
+
+        [TestMethod]
+        public void Construction_WhenGivenValidItemCode_SetsItemCodeValueProperty()
+        {
+            // ARRANGE
+            var code = new ItemCode("SKU1");
+
+
+            // ACT
+            var actual = new Item(code: code, name: "Item 1 Test");
+
+            // ASSERT
+            actual.Code.Value.Should().Be("SKU1");
+            actual.ItemCodeValue.Should().Be("SKU1");
         }
 
         [TestMethod]
@@ -174,5 +188,6 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
             actualItem.Name.Should().Be(expectedName);
         }
 
+        
     }
 }

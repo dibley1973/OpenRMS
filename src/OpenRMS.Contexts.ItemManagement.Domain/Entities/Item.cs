@@ -10,6 +10,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
     {
         #region EF Backing Properties
 
+        //TODO: (J.Adjare 18/10/2016) - Remove once EF7 supports value objects
         public string ItemCodeValue
         {
             get { return Code.Value; }

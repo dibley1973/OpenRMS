@@ -6,6 +6,7 @@ using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Shared.Kernel.Amplifiers;
+using OpenRMS.Shared.Kernel.BaseClasses;
 using System;
 
 namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.Handlers
@@ -49,7 +50,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.
         {
             // ARRANGE
             var createItemHandler = new CreateItemHandler(_unitOfWorkFactoryMock.Object);
-            var command = new CreateItemCommand(new ItemCode("1"), "New item name", "New item description");
+            var command = new CreateItemCommand(new BusinessCode("1"), "New item name", "New item description");
 
             // ACT
             createItemHandler.Execute(command);
@@ -63,7 +64,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.
         {
             // ARRANGE
             var createItemHandler = new CreateItemHandler(_unitOfWorkFactoryMock.Object);
-            var command = new CreateItemCommand(new ItemCode("1"), "New item name", "New item description");
+            var command = new CreateItemCommand(new BusinessCode("1"), "New item name", "New item description");
             Item actualItem = null;
             _itemRepositoryMock.Setup(repository => repository.Create(It.IsAny<Item>()))
                 .Callback((Item item) => actualItem = item);
@@ -81,7 +82,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.
         {
             // ARRANGE
             var createItemHandler = new CreateItemHandler(_unitOfWorkFactoryMock.Object);
-            var command = new CreateItemCommand(new ItemCode("1"), "New item with name", "New item with description");
+            var command = new CreateItemCommand(new BusinessCode("1"), "New item with name", "New item with description");
             Item actualItem = null;
             _itemRepositoryMock.Setup(repository => repository.Create(It.IsAny<Item>()))
                 .Callback((Item item) => actualItem = item);
@@ -100,7 +101,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.
         {
             // ARRANGE
             var createItemHandler = new CreateItemHandler(_unitOfWorkFactoryMock.Object);
-            var command = new CreateItemCommand(new ItemCode("1"), "New item with no description", "");
+            var command = new CreateItemCommand(new BusinessCode("1"), "New item with no description", "");
             Item actualItem = null;
             _itemRepositoryMock.Setup(repository => repository.Create(It.IsAny<Item>()))
                 .Callback((Item item) => actualItem = item);

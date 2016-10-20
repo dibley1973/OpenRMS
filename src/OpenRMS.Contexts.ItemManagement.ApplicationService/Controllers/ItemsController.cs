@@ -7,6 +7,7 @@ using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Shared.Kernel.Interfaces;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.Models;
+using OpenRMS.Shared.Kernel.BaseClasses;
 
 namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
 {
@@ -72,7 +73,7 @@ namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
         [HttpPost]
         public Guid Post([FromBody]CreateItemModel model)
         {
-            var command = new CreateItemCommand(new ItemCode(model.Code), model.Name, model.Description);
+            var command = new CreateItemCommand(new BusinessCode(model.Code), model.Name, model.Description);
             var item = _createItemHandler.Execute(command);
 
             return item.Id;

@@ -48,7 +48,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
 
         private static string GetProductDoesNotExistForDeletionExceptionMessage(Guid commandId)
         {
-            return string.Format(ExceptionMessages.ProductNotFound, commandId);
+            return string.Format(ExceptionMessages.ItemNotFound, commandId);
         }
     }
 }

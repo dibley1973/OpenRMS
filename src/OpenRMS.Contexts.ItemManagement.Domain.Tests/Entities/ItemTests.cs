@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenRMS.Contexts.ItemManagement.Domain;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
+using OpenRMS.Shared.Kernel.BaseClasses;
 
 namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
 {
@@ -14,7 +15,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         {
             // ARRANGE
             var id = default(Guid);
-            var code = new ItemCode("1");
+            var code = new BusinessCode("1");
             string name = "Item 1";
 
             // ACT
@@ -29,7 +30,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         {
             // ARRANGE
             var id = Guid.Empty;
-            var code = new ItemCode("1");
+            var code = new BusinessCode("1");
             string name = "Item 1";
 
             // ACT
@@ -42,10 +43,10 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
 
 
         [TestMethod]
-        public void Construct_WhenGivenEmptyItemCode_ThrowsException()
+        public void Construct_WhenGivenEmptyBusinessCode_ThrowsException()
         {
             // ARRANGE
-            var code = ItemCode.Empty;
+            var code = BusinessCode.Empty;
             string name = "Item without a code";
 
             // ACT
@@ -59,7 +60,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void Construct_WhenGivenNullName_ThrowsException()
         {
             // ARRANGE
-            var code = new ItemCode("1");
+            var code = new BusinessCode("1");
             
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -73,7 +74,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void Construct_WhenGivenEmptyName_ThrowsException()
         {
             // ARRANGE
-            var code = new ItemCode("1");
+            var code = new BusinessCode("1");
             string emptyName = "";
             
             // ACT
@@ -88,7 +89,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void Construct_WhenGivenWhitespaceName_ThrowsException()
         {
             // ARRANGE
-            var code = new ItemCode("1");
+            var code = new BusinessCode("1");
             string nameWithOnlyWhitespace = "   ";
             
             // ACT
@@ -103,7 +104,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void Name_WhenConstructorGivenValidName_ReturnsConstructedValue()
         {
             // ARRANGE
-            var code = new ItemCode("1");
+            var code = new BusinessCode("1");
             string name = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
             
 
@@ -118,7 +119,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void Construction_WhenGivenValidItemCode_SetsItemCodeValueProperty()
         {
             // ARRANGE
-            var code = new ItemCode("SKU1");
+            var code = new BusinessCode("SKU1");
 
 
             // ACT
@@ -133,7 +134,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void ChangeDescription_WhenGivenNullDescription_ThrowsException()
         {
             // ARRANGE
-            var item = new Item(code: new ItemCode("1"), name: "Item 1");
+            var item = new Item(code: new BusinessCode("1"), name: "Item 1");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -147,7 +148,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void ChangeDescription_WhenGivenValidValue_UpdatesTheItemDescription()
         {
             // ARRANGE
-            var actualItem = new Item(code: new ItemCode("1"), name: "Item 1");
+            var actualItem = new Item(code: new BusinessCode("1"), name: "Item 1");
             var expectedDescription = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
             
             // ACT
@@ -164,7 +165,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void ChangeName_WhenGivenInvalidName_ThrowsException(string invalidName)
         {
             // ARRANGE
-            var item = new Item(code: new ItemCode("1"), name: "Item 1");
+            var item = new Item(code: new BusinessCode("1"), name: "Item 1");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -178,7 +179,7 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Tests.Entities
         public void ChangeName_WhenGivenValidValue_UpdatesTheItemName()
         {
             // ARRANGE
-            var actualItem = new Item(code: new ItemCode("1"), name: "Item 1");
+            var actualItem = new Item(code: new BusinessCode("1"), name: "Item 1");
             var expectedName = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
 
             // ACT

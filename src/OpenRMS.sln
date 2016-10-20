@@ -32,6 +32,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Contexts", "1. Contexts"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.ItemManagement.ApplicationService.Tests", "OpenRMS.Contexts.ItemManagement.ApplicationService.Tests\OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.xproj", "{BB2BE5D2-4456-49EE-82E3-92C59BC3437D}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.LocationManagement.Domain", "OpenRMS.Contexts.LocationManagement.Domain\OpenRMS.Contexts.LocationManagement.Domain.xproj", "{6ACBAC69-2CE3-4DF6-8F1C-7576CD25E401}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Location Management", "Location Management", "{C63DCA34-BABC-4050-8AAD-B03BC9935B19}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.LocationManagement.Domain.Tests", "OpenRMS.Contexts.LocationManagement.Domain.Tests\OpenRMS.Contexts.LocationManagement.Domain.Tests.xproj", "{E81D43CD-E90D-4E4B-84B9-99493C9E08B5}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.LocationManagement.Infrastructure", "OpenRMS.Contexts.LocationManagement.Infrastructure\OpenRMS.Contexts.LocationManagement.Infrastructure.xproj", "{5156FD98-B108-4C16-A856-90301886D5B0}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.LocationManagement.ApplicationService", "OpenRMS.Contexts.LocationManagement.ApplicationService\OpenRMS.Contexts.LocationManagement.ApplicationService.xproj", "{13618CBA-9E05-428E-9141-A37C944598DB}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenRMS.Contexts.LocationManagement.ApplicationService.Tests", "OpenRMS.Contexts.LocationManagement.ApplicationService.Tests\OpenRMS.Contexts.LocationManagement.ApplicationService.Tests.xproj", "{BEC55535-F886-4FAA-B5D4-59CEA9A587BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +82,26 @@ Global
 		{BB2BE5D2-4456-49EE-82E3-92C59BC3437D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB2BE5D2-4456-49EE-82E3-92C59BC3437D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB2BE5D2-4456-49EE-82E3-92C59BC3437D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ACBAC69-2CE3-4DF6-8F1C-7576CD25E401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ACBAC69-2CE3-4DF6-8F1C-7576CD25E401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ACBAC69-2CE3-4DF6-8F1C-7576CD25E401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ACBAC69-2CE3-4DF6-8F1C-7576CD25E401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E81D43CD-E90D-4E4B-84B9-99493C9E08B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E81D43CD-E90D-4E4B-84B9-99493C9E08B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E81D43CD-E90D-4E4B-84B9-99493C9E08B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E81D43CD-E90D-4E4B-84B9-99493C9E08B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5156FD98-B108-4C16-A856-90301886D5B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5156FD98-B108-4C16-A856-90301886D5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5156FD98-B108-4C16-A856-90301886D5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5156FD98-B108-4C16-A856-90301886D5B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13618CBA-9E05-428E-9141-A37C944598DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13618CBA-9E05-428E-9141-A37C944598DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13618CBA-9E05-428E-9141-A37C944598DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13618CBA-9E05-428E-9141-A37C944598DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEC55535-F886-4FAA-B5D4-59CEA9A587BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC55535-F886-4FAA-B5D4-59CEA9A587BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC55535-F886-4FAA-B5D4-59CEA9A587BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC55535-F886-4FAA-B5D4-59CEA9A587BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,5 +116,11 @@ Global
 		{EB5E5B3F-BB88-466B-ADB4-F716C44B6A8C} = {72C835A1-1EBF-428D-AE37-A631A6E4769A}
 		{72C835A1-1EBF-428D-AE37-A631A6E4769A} = {6383EFF2-3E8C-4692-9E6B-DA45BBD3846A}
 		{BB2BE5D2-4456-49EE-82E3-92C59BC3437D} = {72C835A1-1EBF-428D-AE37-A631A6E4769A}
+		{6ACBAC69-2CE3-4DF6-8F1C-7576CD25E401} = {C63DCA34-BABC-4050-8AAD-B03BC9935B19}
+		{C63DCA34-BABC-4050-8AAD-B03BC9935B19} = {6383EFF2-3E8C-4692-9E6B-DA45BBD3846A}
+		{E81D43CD-E90D-4E4B-84B9-99493C9E08B5} = {C63DCA34-BABC-4050-8AAD-B03BC9935B19}
+		{5156FD98-B108-4C16-A856-90301886D5B0} = {C63DCA34-BABC-4050-8AAD-B03BC9935B19}
+		{13618CBA-9E05-428E-9141-A37C944598DB} = {C63DCA34-BABC-4050-8AAD-B03BC9935B19}
+		{BEC55535-F886-4FAA-B5D4-59CEA9A587BC} = {C63DCA34-BABC-4050-8AAD-B03BC9935B19}
 	EndGlobalSection
 EndGlobal

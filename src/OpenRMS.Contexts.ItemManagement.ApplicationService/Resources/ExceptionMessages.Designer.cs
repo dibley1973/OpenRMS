@@ -60,11 +60,11 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Resources {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to The product with ID {0} cannot be found..
+        ///    Looks up a localized string similar to The item with ID {0} cannot be found..
         /// </summary>
-        public static string ProductNotFound {
+        public static string ItemNotFound {
             get {
-                return ResourceManager.GetString("ProductNotFound", resourceCulture);
+                return ResourceManager.GetString("ItemNotFound", resourceCulture);
             }
         }
     }

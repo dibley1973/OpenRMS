@@ -38,7 +38,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
 
                 // Ensure product exists to update
                 if (!result.HasValue())
-                    throw new InvalidOperationException(string.Format(ExceptionMessages.ProductNotFound, command.Id));
+                    throw new InvalidOperationException(string.Format(ExceptionMessages.ItemNotFound, command.Id));
 
                 var item = result.Single();
                 

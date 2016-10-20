@@ -7,6 +7,7 @@ using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Shared.Kernel.Amplifiers;
 using FluentAssertions;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
+using OpenRMS.Shared.Kernel.BaseClasses;
 
 namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.Handlers
 {
@@ -26,7 +27,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.CommandStack.
         public DeleteItemHandlerTests()
         {
             _itemId = Guid.NewGuid();
-            _testItemToBeUpdated = new Item(id: _itemId, code: new ItemCode("t1"), name: "Test Item");
+            _testItemToBeUpdated = new Item(id: _itemId, code: new BusinessCode("t1"), name: "Test Item");
         }
 
         [TestInitialize]

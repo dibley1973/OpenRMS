@@ -181,11 +181,9 @@ namespace OpenRMS.Shared.Kernel.Tests.BaseClasses
             FakeOptionCode other = null;
 
             // ACT
-            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             var actual = instance != other;
 
             // ASSERT
-            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             actual.Should().BeTrue();
         }
 

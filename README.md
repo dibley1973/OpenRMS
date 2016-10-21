@@ -106,23 +106,8 @@ The will be a string drive to ensure a separation of commands and queries in met
 
 
 ### Folder Structure
-```
-+-- ORMS
-|   +-- Documentation
-|   +-- Code
-|       +-- Product Managment
-|       |   +-- 01.Client
-|       |   +-- 02.ApplicationServices
-|       |   +-- 03.
-|       + Product Metadata
-|       + Product Inventory
-|       + Location Management
-|       + Store Metadata
-|       + etc.
-|       +-- Shared
-|           + SharedKernal
-|   +-- Wiki
-```
+TBC
+
 
 ### Namespacing
 Even though abreviations in code are evil the base namespace will be `ORMS`, standing for "Open Retail Management Service".

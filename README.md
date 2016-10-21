@@ -99,10 +99,9 @@ The will be a string drive to ensure a separation of commands and queries in met
 
 #### Technologies
 ##### MVC (to serve master views)
-##### Web API (for CRUD)
+##### Web API
 ##### TypeScript
 ##### Angular 2
-##### Sql Server 2016
 
 
 ### Folder Structure

@@ -2,22 +2,22 @@
 
 ~ This document is a work in progress ~
 
-Open RMS is an Open Source project with the intention of delivering a retail management system that is free to install, free to use, free to modify and free to distribute. The aim of the product is to provide system which has key modules which can then be extended with private bespoke modules by developers within retail businessed or additional public modules developed by the wider open source community for the expansion of teh project. The product will continue to evolve as the key technologies mature. 
+Open RMS is an Open Source project with the intention of delivering a retail management system that is free to install, free to use, free to modify and free to distribute. The aim of the product is to provide system which has key modules which can then be extended with private bespoke modules built by developers within retail businessed or additional public modules developed by the wider open source community for the expansion of the project. The product will continue to evolve as the key technologies mature. 
 
 ## Target Consumers
 
-The finished product will be aimed primarily at small to medium size business where Microsoft Excel and Access based solutions are far from ideal.
+The finished product will be aimed primarily at small to medium size business where Microsoft Excel and Access based solutions are far from ideal, and Microsoft and Oracle solutions are till to expensive or awkward to implement for the current maturity of the business.
 
 ## Wiki
-The wiki for this project is available from the Wiki section of this GitHub repository, or can be cloned locally The suggested local folder location for the Wiki is the Wiki sub-folder of main solution. It is also suggetsed that Visual Studio Code is used to manage the Wiki content.
+The wiki for this project is available from the Wiki section of this GitHub repository, or can be cloned locally The suggested local folder location for the Wiki is the Wiki sub-folder of main solution. 
 
 ## Development
-Open RMS will be developed on a .Net platform using .Net Core and will be developed within a Visual Studio 2015 solution. It will feature key modules like *Product Managment*, *Product Metadata*, *Product Stock*, *Location Management* (both *Store* and *Distribution Centre / Hubs*) as part of the main open source code but will allow other modules to be developed independently and plugged into the main application.
+Open RMS will be developed on a .Net platform using .Net Core and will be developed within a Visual Studio 2015+ solution. It will feature key modules like *Product Managment*, *Product Metadata*, *Product Stock*, *Location Management* (both *Store* and *Distribution Centre / Hubs*) as part of the main open source code but will allow other modules to be developed independently and plugged into the main application.
 
 The application will be able to be hosted on public internet servers or private *on-prem* or *off-prem* intranet servers.
 
 ### Milestones
-The development milestones can be found [here](https://github.com/dibley1973/OpenRMS/milestones). There will be an ongoing process to enmsure they are up to date. 
+The development milestones can be found [here](https://github.com/dibley1973/OpenRMS/milestones). There will be an ongoing process to ensure they are up to date. 
 
 
 ### Modules
@@ -63,18 +63,18 @@ It is intended that the solution will use the following architecture, patterns, 
 
 #### Architecture
 
-+ CQRS (Command Query Responsability Segragation) 
++ Type 1 CQRS (Command Query Responsability Segragation) 
  + Queries
  + Commands
 + Onion / Hexagonal Architecture
 
-##### CQRS (Command Query Responsability Segregation) 
-The project will use CQRS and have separarate "stacks" for queries reading from the database and commands writing to the database. The *Query Stack* will use the lightweight [StoredProcedureFramework](https://www.nuget.org/packages/Dibware.StoredProcedureFramework/) for fast querying and [EntityFramework](https://www.nuget.org/packages/EntityFramework/) for the *Command Stack*.
+##### Type 1 CQRS (Command Query Responsability Segregation) 
+The project will use Type 1 CQRS so will have the same "stack" for commands and queries. [EntityFramework](https://www.nuget.org/packages/EntityFramework/) for the *Command Stack* and the *Query Stack*.
 
 ###### Queries
-The *Query Stack* will use a vertical N-Tier *reporting* style of architecture with the *Application Services* referencing the *Read Model*, and the *Read Model* accessing data straight from the database via the *storedProcedureFramework*.
+WHere a query isexpected to return zero or one result the object returned should either be wrapped in a `Maybe<T>` or return a valid instance or an object following a null-object pattern. Never shoud a result return a NULL value.
 
-Queries should return either a SearchResult<T> where zero or more results are expected of a type, or a SingleSearchResult<T> where zero or one results are expected. Where arguments are more than one or two in length an object should be defined to hold the parameters. If paging is required then the object should implement the `IPagedQueryParameter` interface which contains the `StartAt` property which indicates where the paging is to start and the `Take` property indicating upto how many records to take. The 
+Where a query is to returns zero or more results then it should return an IEnumerable<T> with zero or more elements. It shouldnever return a NULL value. Where arguments are more than one or two in length an object should be defined to hold the parameters. If paging is required then the object should implement the `IPagedQueryParameter` interface which contains the `StartAt` property which indicates where the paging is to start and the `Take` property indicating upto how many records to take. The 
 
 ###### Commands
 The *Command Stack* will use Onion architecture and a Domain Driven Development practice. Commands should never return a value and should always be defined as a `void` method. Identities for new entities should be created by the domain and assigned to the Entities before inserting into the database. IF the identity for the entity is a *Long Integer* then the High-Low principle may be followed with the next "n" available identities queried from the database. If the identity for the entity is an Guid then the domain can generate it's own.

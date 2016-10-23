@@ -85,7 +85,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
             };
 
             // ACT
-            _controller.Post(createModel);
+            _controller.Create(createModel);
 
             // ASSERT
             _createItemCommandHandlerMock.Verify(handler => handler.Execute(It.IsAny<CreateItemCommand>()), Times.Once);
@@ -106,7 +106,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
             };
 
             // ACT
-            var createdItemId = _controller.Post(createModel);
+            var createdItemId = _controller.Create(createModel);
 
             // ASSERT
             createdItemId.Should().Be(createdItem.Id);

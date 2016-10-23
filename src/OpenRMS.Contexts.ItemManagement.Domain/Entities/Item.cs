@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using OpenRMS.Shared.Kernel.BaseClasses;
 
 namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
@@ -66,16 +68,33 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
 
         #endregion
 
+        public ValidationResult CanChangeName(string name)
+        {
+            //TODO: Consider localisation concerns and general problem that the domain should not be concerned about localisation - will probably need to use ErrorCodes or Keys (e.g. resource file key)
+            return new ValidationResult(string.IsNullOrWhiteSpace(name) == false,
+                "name must not be null, empty or whitespace");
+        }
+
         /// <summary>
         /// Changes the products name.
         /// </summary>
         /// <param name="name">The new name of the product.</param>
         public void ChangeName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentNullException(nameof(name));
+            var canChangeName = CanChangeName(name);
+
+            if (canChangeName.IsValid == false)
+                throw new ArgumentException(canChangeName.ErrorMessage, nameof(name));
 
             Name = name;
+        }
+
+
+        public ValidationResult CanChangeDescription(string description)
+        {
+            //TODO: Consider localisation concerns and general problem that the domain should not be concerned about localisation - will probably need to use ErrorCodes or Keys (e.g. resource file key)
+            return new ValidationResult(description!=null,
+                "description must not be null, empty strings are permitted");
         }
 
         /// <summary>
@@ -84,11 +103,36 @@ namespace OpenRMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="description">The new description of the product.</param>
         public void ChangeDescription(string description)
         {
-            if (description == null)
-                throw new ArgumentNullException(nameof(description));
+            var canChangeDescription = CanChangeDescription(description);
+            if(canChangeDescription.IsValid==false)
+                throw new ArgumentException(canChangeDescription.ErrorMessage, nameof(description));
 
             Description = description;
         }
 
+    }
+
+    //TODO: This is just here as a temporary measure whilst working out the best route
+    public class ValidationResult
+    {
+        public ValidationResult(bool isValid)
+        {
+            IsValid = isValid;
+        }
+
+        public ValidationResult(bool isValid, string errorMessage) : this(isValid)
+        {
+            if(errorMessage==null) throw new ArgumentNullException(nameof(errorMessage));
+            if(!isValid) ErrorMessage = errorMessage;
+        }
+
+        public bool IsValid { get; }
+
+        public string ErrorMessage { get; } = string.Empty;
+
+        public static implicit operator bool(ValidationResult validationResult)
+        {
+            return validationResult.IsValid;
+        }
     }
 }

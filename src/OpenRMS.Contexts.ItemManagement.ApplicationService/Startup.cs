@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,7 @@ using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
 using OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql;
 using Microsoft.EntityFrameworkCore;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.Models;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 
 namespace OpenRMS.Contexts.ItemManagement.Api
@@ -77,6 +79,7 @@ namespace OpenRMS.Contexts.ItemManagement.Api
 
             // Commands
             services.AddTransient<ICommandHandler<CreateItemCommand, Item>, CreateItemHandler>();
+            services.AddTransient<IActionHandler<UpdateItemModel, IActionResult>, UpdateItemHandlerV2>();
             services.AddTransient<ICommandHandler<UpdateItemCommand>, UpdateItemHandler>();
             services.AddTransient<ICommandHandler<DeleteItemCommand>, DeleteItemHandler>();
         }

@@ -69,7 +69,7 @@ namespace OpenRMS.Console
             var requestJson = new StringContent(string.Format("{{code: 'Code-{0}', name: 'Item {0}', description: 'Item {0} description' }}", itemNumber), Encoding.UTF8, "application/json");
             var response = httpClient.PostAsync("http://localhost:49269/itemmanagement/items/", requestJson).Result;
             var responseJson = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<Guid>(responseJson);
+            return JsonConvert.DeserializeObject<ItemModel>(responseJson).Id;
         }
 
         private static void UpdateItem(HttpClient httpClient, ItemModel item)

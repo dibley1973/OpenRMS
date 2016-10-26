@@ -56,8 +56,7 @@ namespace OpenRMS.Contexts.LocationManagement.ApplicationService
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                 .CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<PostgreSqlLocationManagementContext>().Database.EnsureDeleted();
-                serviceScope.ServiceProvider.GetService<PostgreSqlLocationManagementContext>().Database.EnsureCreated();
+                serviceScope.ServiceProvider.GetService<PostgreSqlLocationManagementContext>().Database.Migrate();
             }
 
             app.UseMvc();

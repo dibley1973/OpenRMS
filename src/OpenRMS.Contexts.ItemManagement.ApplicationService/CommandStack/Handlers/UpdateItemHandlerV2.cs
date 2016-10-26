@@ -31,35 +31,33 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
         /// Executes the command.
         /// </summary>
         /// <param name="model">The command.</param>
-        public IActionResult Execute(UpdateItemModel model, ControllerBase context)
+        public IActionResult Execute(UpdateItemModel model)
         {
-            if (model == null)
-                throw new ArgumentNullException(nameof(model));
+            if (model == null) throw new ArgumentNullException(nameof(model));
 
-            using (IItemManagementUnitOfWork unitOfWork = _unitOfWorkFactory.CreateUnitOfWork())
+            using (var unitOfWork = _unitOfWorkFactory.CreateUnitOfWork())
             {
-                var result = unitOfWork.ItemRepository.GetForId(model.Id);
+                var maybeItem = unitOfWork.ItemRepository.GetForId(model.Id);
+                if (maybeItem.HasValue()==false) return new NotFoundResult();
 
-                // Ensure product exists to update
-                if (!result.HasValue())
-                    return context.NotFound();
-
-                var item = result.Single();
+                var item = maybeItem.Single();
 
                 var canChangeName = item.CanChangeName(model.Name);
                 var canChangeDescription = item.CanChangeDescription(model.Description);
-                var errors = new ModelStateDictionary();
-                if (!canChangeName || !canChangeDescription)
+
+                if (canChangeName && canChangeDescription)
                 {
-                    errors.AddModelError(nameof(model.Name), canChangeName.ErrorMessage);
-                    errors.AddModelError(nameof(model.Description), canChangeDescription.ErrorMessage);
-                    return context.BadRequest(errors);
+                    item.ChangeName(model.Name);
+                    item.ChangeDescription(model.Description);
+
+                    unitOfWork.Complete();
+                    return new OkResult();
                 }
 
-                unitOfWork.ItemRepository.Update(item);
-                unitOfWork.Complete();
-
-                return context.Ok();
+                var errors = new ModelStateDictionary();
+                if (!canChangeName) errors.AddModelError(nameof(model.Name), canChangeName.ErrorMessage);
+                if (!canChangeDescription) errors.AddModelError(nameof(model.Description), canChangeDescription.ErrorMessage);
+                return new BadRequestObjectResult(errors);
             }
         }
 

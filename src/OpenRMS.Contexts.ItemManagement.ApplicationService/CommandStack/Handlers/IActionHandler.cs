@@ -25,7 +25,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
     public interface IActionHandler<in TCommand, out TResult>
         where TCommand : class
     {
-        TResult Execute(TCommand command, ControllerBase context);
+        TResult Execute(TCommand command);
     }
 
 }

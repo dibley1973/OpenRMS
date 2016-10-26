@@ -101,7 +101,7 @@ namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
         [HttpPut("PutV2/{id}")]
         public IActionResult PutV2(Guid id, [FromBody]UpdateItemModel model)
         {
-            return _updateItemHandlerV2.Execute(model, this);
+            return _updateItemHandlerV2.Execute(model);
         }
 
         //TODO: Decide V3 - Does the work directly in the body of the Action Method, forgoing commands and handlers with the downside of having chunky action methods

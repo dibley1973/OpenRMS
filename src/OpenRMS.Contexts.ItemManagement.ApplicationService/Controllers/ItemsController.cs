@@ -96,7 +96,22 @@ namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
             _updateItemHandler.Execute(command);
         }
 
-        
+        //TODO: Decide V4 - Using command handler agnostic to service and web api
+        [HttpPut("PutV4/{id}")]
+        public IActionResult PutV4(Guid id, [FromBody]UpdateItemModel model)
+        {
+            if (ModelState.IsValid == false) return BadRequest(ModelState);
+            var itemDoesNotExist = ! _itemRepository.GetForId(id).Any();
+            if(itemDoesNotExist) return NotFound();
+
+            var command = new UpdateItemCommand(id, model.Name, model.Description);
+            _updateItemHandler.Execute(command);
+
+            return NoContent();
+
+        }
+
+
         //TODO: Decide V2 - Using action handler, inherently tied to web api, uses model to cut out middleman and ensure model state errors reflect model properties
         [HttpPut("PutV2/{id}")]
         public IActionResult PutV2(Guid id, [FromBody]UpdateItemModel model)

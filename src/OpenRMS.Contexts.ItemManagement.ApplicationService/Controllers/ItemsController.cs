@@ -9,6 +9,7 @@ using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Shared.Kernel.Interfaces;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.Models;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.Extensions;
 
 namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
 {
@@ -104,7 +105,7 @@ namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
             var command = new UpdateItemCommand(id, model.Name, model.Description);
 
             var preconditionsMet = _updateItemHandler.PreconditionsMet(command);
-            if (!preconditionsMet) return BadRequest(preconditionsMet.Failures.AsModelState());
+            if (!preconditionsMet) return BadRequest(preconditionsMet.Failures.AsModelState<UpdateItemModel>());
             
             _updateItemHandler.Execute(command);
             return NoContent();

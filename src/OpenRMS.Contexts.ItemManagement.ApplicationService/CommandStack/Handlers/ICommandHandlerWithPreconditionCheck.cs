@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Shared.Kernel.BaseClasses;
 using OpenRMS.Shared.Kernel.Interfaces;
+using System.Reflection;
 
 namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers
 {
@@ -56,19 +57,5 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
         public string Property { get; }
         public string FailureMessage { get; }
 
-    }
-
-    public static class PreconditionCheckResultsExtensions
-    {
-        public static ModelStateDictionary AsModelState (this IEnumerable<PreconditionFailure> instance)
-        {
-            var modelStateErrors = new ModelStateDictionary();
-            foreach (var preconditionFailure in instance)
-            {
-                modelStateErrors.AddModelError(preconditionFailure.Property,preconditionFailure.FailureMessage);
-            }
-
-            return modelStateErrors;
-        }
     }
 }

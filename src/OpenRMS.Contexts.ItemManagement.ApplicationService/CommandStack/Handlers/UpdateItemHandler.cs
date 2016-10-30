@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
 using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
 using OpenRMS.Shared.Kernel.Interfaces;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.Resources;
+using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 
 namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers
 {
     /// <summary>
     /// Handles the command to update a product.
     /// </summary>
-    public class UpdateItemHandler : ICommandHandler<UpdateItemCommand>
+    public class UpdateItemHandler : ICommandHandlerWithPreconditionCheck<UpdateItemCommand>
     {
         private readonly IItemManagementUnitOfWorkFactory _unitOfWorkFactory;
 
@@ -50,5 +52,33 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
             }
         }
 
+        
+        public PreconditionCheckResult PreconditionsMet(UpdateItemCommand command)
+        {
+            var preconditionCheckResults = new PreconditionCheckResult();
+
+            if (command == null) throw new ArgumentNullException(nameof(command));
+
+            using(var unitOfWork = _unitOfWorkFactory.CreateUnitOfWork())
+            {
+                var maybeItem = unitOfWork.ItemRepository.GetForId(command.Id);
+
+                if (maybeItem.Any()==false)
+                {
+                    preconditionCheckResults.AddFailure(new PreconditionFailure(nameof(command.Id), string.Format("Cannot find Item for id: {0}", command.Id)));
+                    return preconditionCheckResults;
+                }
+                var item = maybeItem.Single();
+
+                var canChangeName = item.CanChangeName(command.Name);
+                var canChangeDescription = item.CanChangeDescription(command.Description);
+
+                if(canChangeName==false) preconditionCheckResults.AddFailure(nameof(command.Name), canChangeName.ErrorMessage);
+                if (canChangeDescription == false) preconditionCheckResults.AddFailure(nameof(command.Description), canChangeDescription.ErrorMessage);
+            }
+
+            return preconditionCheckResults;
+        }
+        
     }
 }

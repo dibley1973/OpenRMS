@@ -80,6 +80,7 @@ namespace OpenRMS.Contexts.ItemManagement.Api
             // Commands
             services.AddTransient<ICommandHandler<CreateItemCommand, Item>, CreateItemHandler>();
             services.AddTransient<IActionHandler<UpdateItemModel, IActionResult>, UpdateItemHandlerV2>();
+            services.AddTransient<ICommandHandlerWithPreconditionCheck<UpdateItemCommand>, UpdateItemHandler>();
             services.AddTransient<ICommandHandler<UpdateItemCommand>, UpdateItemHandler>();
             services.AddTransient<ICommandHandler<DeleteItemCommand>, DeleteItemHandler>();
         }

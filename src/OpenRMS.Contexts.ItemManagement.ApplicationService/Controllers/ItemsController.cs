@@ -17,7 +17,7 @@ namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
     {
         private IItemRepository _itemRepository;
         private ICommandHandler<CreateItemCommand, Item> _createItemHandler;
-        private ICommandHandler<UpdateItemCommand> _updateItemHandler;
+        private ICommandHandlerWithPreconditionCheck<UpdateItemCommand> _updateItemHandler;
         private IActionHandler<UpdateItemModel, IActionResult> _updateItemHandlerV2;
         private ICommandHandler<DeleteItemCommand> _deleteItemHandler;
 
@@ -31,7 +31,7 @@ namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
         public ItemsController(
             IItemRepository itemRepository,
             ICommandHandler<CreateItemCommand, Item> createItemHandler,
-            ICommandHandler<UpdateItemCommand> updateItemHandler,
+            ICommandHandlerWithPreconditionCheck<UpdateItemCommand> updateItemHandler,
             IActionHandler<UpdateItemModel, IActionResult> updateItemHandlerV2,
             ICommandHandler<DeleteItemCommand> deleteItemHandler)
         {
@@ -101,14 +101,14 @@ namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
         public IActionResult PutV4(Guid id, [FromBody]UpdateItemModel model)
         {
             if (ModelState.IsValid == false) return BadRequest(ModelState);
-            var itemDoesNotExist = ! _itemRepository.GetForId(id).Any();
-            if(itemDoesNotExist) return NotFound();
-
             var command = new UpdateItemCommand(id, model.Name, model.Description);
+
+            var preconditionsMet = _updateItemHandler.PreconditionsMet(command);
+            if (!preconditionsMet) return BadRequest(preconditionsMet.Failures.AsModelState());
+            
             _updateItemHandler.Execute(command);
-
             return NoContent();
-
+            
         }
 
 

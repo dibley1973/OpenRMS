@@ -103,8 +103,8 @@ namespace OpenRMS.Contexts.ItemManagement.Api.Controllers
             if (ModelState.IsValid == false) return BadRequest(ModelState);
             var command = new UpdateItemCommand(id, model.Name, model.Description);
 
-            var preconditionsMet = _updateItemHandler.PreconditionsMet(command);
-            if (!preconditionsMet) return BadRequest(preconditionsMet.Failures.AsModelState());
+            var preconditionChecks = _updateItemHandler.PreconditionChecks(command);
+            if (preconditionChecks.Failed()) return BadRequest(preconditionChecks.Failures.AsModelState());
             
             _updateItemHandler.Execute(command);
             return NoContent();

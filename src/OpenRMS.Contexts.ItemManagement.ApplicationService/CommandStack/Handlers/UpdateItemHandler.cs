@@ -53,7 +53,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
         }
 
         
-        public PreconditionCheckResult PreconditionsMet(UpdateItemCommand command)
+        public PreconditionCheckResult PreconditionChecks(UpdateItemCommand command)
         {
             var preconditionCheckResults = new PreconditionCheckResult();
 

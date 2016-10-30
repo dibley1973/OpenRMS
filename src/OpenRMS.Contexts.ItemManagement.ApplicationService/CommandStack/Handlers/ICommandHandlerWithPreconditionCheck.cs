@@ -11,17 +11,14 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
 {
     public interface ICommandHandlerWithPreconditionCheck<in TCommand>: ICommandHandler<TCommand> where TCommand: Command
     {
-        PreconditionCheckResult PreconditionsMet(TCommand command);
+        PreconditionCheckResult PreconditionChecks(TCommand command);
     }
 
     public class PreconditionCheckResult
     {
         private readonly List<PreconditionFailure> _failures = new List<PreconditionFailure>();
 
-        public IReadOnlyCollection<PreconditionFailure> Failures
-        {
-            get { return _failures.AsReadOnly(); }
-        }
+        public IReadOnlyCollection<PreconditionFailure> Failures => _failures.AsReadOnly();
 
         public void AddFailure(PreconditionFailure failure)
         {
@@ -34,9 +31,9 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
             _failures.Add(failure);
         }
 
-        public static implicit operator bool(PreconditionCheckResult preconditionCheckResult)
+        public bool Failed()
         {
-            return !preconditionCheckResult.Failures.Any();
+            return _failures.Any();
         }
     }
 
@@ -58,7 +55,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handle
 
     }
 
-    public static class PreconditionCheckResultsExtensions
+    public static class EnumerablePreconditionFailureExtensions
     {
         public static ModelStateDictionary AsModelState (this IEnumerable<PreconditionFailure> instance)
         {

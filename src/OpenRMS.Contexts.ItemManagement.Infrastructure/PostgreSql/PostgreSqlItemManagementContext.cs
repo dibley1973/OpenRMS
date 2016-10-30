@@ -20,6 +20,7 @@ namespace OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql
             
         }
 
+        public DbSet<Item> Items { get; set; }
         /// <summary>
         /// Executes when the model is being created.
         /// </summary>

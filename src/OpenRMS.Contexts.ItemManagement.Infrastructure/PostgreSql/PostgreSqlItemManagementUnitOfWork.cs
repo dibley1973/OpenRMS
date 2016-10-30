@@ -28,7 +28,7 @@ namespace OpenRMS.Contexts.ItemManagement.Infrastructure.PostgreSql
                 throw new ArgumentNullException(nameof(context));
 
             _context = context;
-
+            //TODO - Discuss Unit of Work implementation, in this instance the injected repository is overridden. 
             _itemRepository = new PostgreSqlItemRepository(_context);
         }
 

@@ -1,8 +1,10 @@
 ﻿using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using OpenRMS.Contexts.ItemManagement.Api.Controllers;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Commands;
+using OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers;
 using OpenRMS.Contexts.ItemManagement.ApplicationService.Models;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Contexts.ItemManagement.Domain.Interfaces;
@@ -17,7 +19,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
     public class ItemsControllerTests
     {
         private Mock<ICommandHandler<CreateItemCommand, Item>> _createItemCommandHandlerMock;
-        private Mock<ICommandHandler<UpdateItemCommand>> _updateItemCommandHandlerMock;
+        private Mock<ICommandHandlerWithPreconditionCheck<UpdateItemCommand>> _updateItemCommandHandlerMock;
         private Mock<ICommandHandler<DeleteItemCommand>> _deleteItemCommandHandlerMock;
         private Mock<IItemRepository> _itemRepositoryMock;
         private ItemsController _controller;
@@ -31,7 +33,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
             _createItemCommandHandlerMock = new Mock<ICommandHandler<CreateItemCommand, Item>>();
             _createItemCommandHandlerMock.Setup(m => m.Execute(It.IsAny<CreateItemCommand>())).Returns(testItemToCreate);
 
-            _updateItemCommandHandlerMock = new Mock<ICommandHandler<UpdateItemCommand>>();
+            _updateItemCommandHandlerMock = new Mock<ICommandHandlerWithPreconditionCheck<UpdateItemCommand>>();
 
             _deleteItemCommandHandlerMock = new Mock<ICommandHandler<DeleteItemCommand>>();
 
@@ -41,6 +43,7 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
                 _itemRepositoryMock.Object,
                 _createItemCommandHandlerMock.Object, 
                 _updateItemCommandHandlerMock.Object, 
+                null,
                 _deleteItemCommandHandlerMock.Object);
         }
 
@@ -150,7 +153,8 @@ namespace OpenRMS.Contexts.ItemManagement.ApplicationService.Tests.Controllers
             _itemRepositoryMock.Setup(m => m.GetForId(It.IsAny<Guid>())).Returns(itemToFind);
 
             // ACT
-            var returnedItem = _controller.Get(itemToFind.Id);
+            var result = _controller.Get(itemToFind.Id) as ObjectResult;
+            var returnedItem = result.Value as GetItemModel;
 
             // ASSERT
             returnedItem.Should().NotBe(null);

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using OpenRMS.Contexts.ItemManagement.Domain.Entities;
 using OpenRMS.Shared.Kernel.BaseClasses;
 using OpenRMS.Shared.Kernel.Interfaces;
+using System.Reflection;
 
 namespace OpenRMS.Contexts.ItemManagement.ApplicationService.CommandStack.Handlers
 {

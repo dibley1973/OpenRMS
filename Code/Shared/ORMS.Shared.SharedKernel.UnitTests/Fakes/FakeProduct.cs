@@ -12,7 +12,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Fakes
     using BaseClasses;
 
     /// <summary>
-    /// Represents a fake product for testoing purposes only
+    /// Represents a fake product for testing purposes only
     /// </summary>
     public class FakeProduct : Entity<int>
     {

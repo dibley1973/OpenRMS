@@ -24,7 +24,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Tests Equals when other is same type but null returns false.
         /// </summary>
         [Test]
-        public void Equals_WhenOtherIsSameTypeButNull_ReturnsFalse()
+        public void GivenEquals_WhenOtherIsSameTypeButNull_ReturnsFalse()
         {
             // ARRANGE
             var product = new FakeProduct(2);
@@ -40,7 +40,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Tests Equals when other is different type returns false.
         /// </summary>
         [Test]
-        public void Equals_WhenOtherIsDifferentType_ReturnsFalse()
+        public void GivenEquals_WhenOtherIsDifferentType_ReturnsFalse()
         {
             // ARRANGE
             var product = new FakeProduct(2);
@@ -57,7 +57,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test Equals when other is same reference returns true.
         /// </summary>
         [Test]
-        public void Equals_WhenOtherIsSameReference_ReturnsTrue()
+        public void GivenEquals_WhenOtherIsSameReference_ReturnsTrue()
         {
             // ARRANGE
             var product = new FakeProduct(2);
@@ -74,7 +74,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test Equals when other is same type but default identifier returns false.
         /// </summary>
         [Test]
-        public void Equals_WhenOtherIsSameTypeButDefaultId_ReturnsFalse()
+        public void GivenEquals_WhenOtherIsSameTypeButDefaultId_ReturnsFalse()
         {
             // ARRANGE
             var product = new FakeProduct();
@@ -91,7 +91,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test Equals when other is same type but different ids returns false.
         /// </summary>
         [Test]
-        public void Equals_WhenOtherIsSameTypeButDifferentIds_ReturnsFalse()
+        public void GivenEquals_WhenOtherIsSameTypeButDifferentIds_ReturnsFalse()
         {
             // ARRANGE
             var product = new FakeProduct(2);
@@ -108,7 +108,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test Equals when other is same type with same ids returns false.
         /// </summary>
         [Test]
-        public void Equals_WhenOtherIsSameTypeWithSameIds_ReturnsFalse()
+        public void GivenEquals_WhenOtherIsSameTypeWithSameIds_ReturnsFalse()
         {
             // ARRANGE
             var product = new FakeProduct(2);
@@ -125,7 +125,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Tests the Identifier after construction with no identifier returns default value of identifier.
         /// </summary>
         [Test]
-        public void Id_AfterConstructionWithNoId_ReturnsDefaultValueOfId()
+        public void GivenId_AfterConstructionWithNoId_ReturnsDefaultValueOfId()
         {
             // ARRANGE
             var product = new FakeProduct();
@@ -141,7 +141,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Tests the Identifier after construction with identifier returns value of identifier.
         /// </summary>
         [Test]
-        public void Id_AfterConstructionWithId_ReturnsValueOfId()
+        public void GivenId_AfterConstructionWithId_ReturnsValueOfId()
         {
             // ARRANGE
             var id = 187;
@@ -158,7 +158,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test Equals when both instances are null returns true.
         /// </summary>
         [Test]
-        public void IsEqualTo_WhenBothInstancesAreNull_ReturnsTrue()
+        public void GivenIsEqualTo_WhenBothInstancesAreNull_ReturnsTrue()
         {
             // ARRANGE
             FakeProduct product = null;
@@ -177,7 +177,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test Equals when one instance is instantiated and the other is null returns false.
         /// </summary>
         [Test]
-        public void IsEqualTo_WhenOneInstanceIsInstantiatedAndTheOtherIsNull_ReturnsFalse()
+        public void GivenIsEqualTo_WhenOneInstanceIsInstantiatedAndTheOtherIsNull_ReturnsFalse()
         {
             // ARRANGE
             FakeProduct product = new FakeProduct(7);
@@ -196,7 +196,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test Equals when both instance are instantiated with different ids returns false.
         /// </summary>
         [Test]
-        public void IsEqualTo_WhenBothInstanceAreInstantiatedWithDifferentIds_ReturnsFalse()
+        public void GivenIsEqualTo_WhenBothInstanceAreInstantiatedWithDifferentIds_ReturnsFalse()
         {
             // ARRANGE
             FakeProduct product = new FakeProduct(7);
@@ -213,7 +213,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test Equals when both instance are instantiated with same ids returns true.
         /// </summary>
         [Test]
-        public void IsEqualTo_WhenBothInstanceAreInstantiatedWithSameIds_ReturnsTrue()
+        public void GivenIsEqualTo_WhenBothInstanceAreInstantiatedWithSameIds_ReturnsTrue()
         {
             // ARRANGE
             FakeProduct product = new FakeProduct(7);
@@ -230,7 +230,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test not equal to when both instances are null returns false.
         /// </summary>
         [Test]
-        public void IsNotEqualTo_WhenBothInstancesAreNull_ReturnsFalse()
+        public void GivenIsNotEqualTo_WhenBothInstancesAreNull_ReturnsFalse()
         {
             // ARRANGE
             FakeProduct product = null;
@@ -249,7 +249,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test not equal to when one instance is instantiated and the other is null returns true.
         /// </summary>
         [Test]
-        public void IsNotEqualTo_WhenOneInstanceIsInstantiatedAndTheOtherIsNull_ReturnsTrue()
+        public void GivenIsNotEqualTo_WhenOneInstanceIsInstantiatedAndTheOtherIsNull_ReturnsTrue()
         {
             // ARRANGE
             FakeProduct product = new FakeProduct(7);
@@ -268,7 +268,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test not equal to when both instance are instantiated with different ids returns true.
         /// </summary>
         [Test]
-        public void IsNotEqualTo_WhenBothInstanceAreInstantiatedWithDifferentIds_ReturnsTrue()
+        public void GivenIsNotEqualTo_WhenBothInstanceAreInstantiatedWithDifferentIds_ReturnsTrue()
         {
             // ARRANGE
             FakeProduct product = new FakeProduct(7);
@@ -285,7 +285,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Test not equal to when both instance are instantiated with same ids return false.
         /// </summary>
         [Test]
-        public void IsNotEqualTo_WhenBothInstanceAreInstantiatedWithSameIds_ReturnFalse()
+        public void GivenIsNotEqualTo_WhenBothInstanceAreInstantiatedWithSameIds_ReturnFalse()
         {
             // ARRANGE
             FakeProduct product = new FakeProduct(7);
@@ -302,7 +302,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Determines whether is persistent after construction with no identifier returns false.
         /// </summary>
         [Test]
-        public void IsPersistent_AfterConstructionWithNoId_ReturnsFalse()
+        public void GivenIsPersistent_AfterConstructionWithNoId_ReturnsFalse()
         {
             // ARRANGE
             var product = new FakeProduct();
@@ -318,7 +318,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Determines whether is persistent after construction with identifier returns true.
         /// </summary>
         [Test]
-        public void IsPersistent_AfterConstructionWithId_ReturnsTrue()
+        public void GivenIsPersistent_AfterConstructionWithId_ReturnsTrue()
         {
             // ARRANGE
             var id = 187;
@@ -335,7 +335,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Determines whether is transient after construction with no identifier returns true.
         /// </summary>
         [Test]
-        public void IsTransient_AfterConstructionWithNoId_ReturnsTrue()
+        public void GivenIsTransient_AfterConstructionWithNoId_ReturnsTrue()
         {
             // ARRANGE
             var product = new FakeProduct();
@@ -351,7 +351,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Determines whether is transient after construction with identifier returns false.
         /// </summary>
         [Test]
-        public void IsTransient_AfterConstructionWithId_ReturnsFalse()
+        public void GivenIsTransient_AfterConstructionWithId_ReturnsFalse()
         {
             // ARRANGE
             var id = 187;

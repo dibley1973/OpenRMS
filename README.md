@@ -12,9 +12,17 @@ The finished product will be aimed primarily at small to medium size business wh
 The wiki for this project is available from the Wiki section of this GitHub repository, or can be cloned locally The suggested local folder location for the Wiki is the Wiki sub-folder of main solution. 
 
 ## Development
-Open RMS will be developed on a .Net platform using .Net Core and will be developed within a Visual Studio 2015+ solution. It will feature key modules like *Product Managment*, *Product Metadata*, *Product Stock*, *Location Management* (both *Store* and *Distribution Centre / Hubs*) as part of the main open source code but will allow other modules to be developed independently and plugged into the main application.
+Open RMS will be developed on a .Net platform using .Net Core version 2.0 and will be developed within a Visual Studio 2017+ solution. It will feature key modules like *Product Managment*, *Product Metadata*, *Product Stock*, *Location Management* (both *Store* and *Distribution Centre / Hubs*) as part of the main open source code but will allow other modules to be developed independently and plugged into the main application.
 
 The application will be able to be hosted on public internet servers or private *on-prem* or *off-prem* intranet servers.
+
+## Development Environment
+- Visual Studio 2017 
+- StyleCop (To set agreed styling rules)
+- CodeMade (optional - to apply StyleCop rules) 
+
+### Stylecop Rule and Exclusions
+Infomarmation on StyleCop rules and exclusions can be found [here](https://github.com/dibley1973/OpenRMS/wiki/StyleCop-Rules-and-Agreed-Exclusions)
 
 ### Milestones
 The development milestones can be found [here](https://github.com/dibley1973/OpenRMS/milestones). There will be an ongoing process to ensure they are up to date. 

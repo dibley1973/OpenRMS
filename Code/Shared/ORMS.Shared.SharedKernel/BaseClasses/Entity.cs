@@ -82,8 +82,8 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
             var bothAreNull = firstIsNull && secondIsNull;
             if (bothAreNull) return true;
 
-            var onlyOneIsNull = firstIsNull || secondIsNull;
-            if (onlyOneIsNull) return false;
+            var atLeastOneIsNull = firstIsNull || secondIsNull;
+            if (atLeastOneIsNull) return false;
 
             return first.Equals(second);
         }

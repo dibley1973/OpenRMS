@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{3BB8AE01-0E7D-44A0-A5C4-9E6AB7AEA03C}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,6 +21,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORMS.Shared.SharedKernel", "Code\Shared\ORMS.Shared.SharedKernel\ORMS.Shared.SharedKernel.csproj", "{4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORMS.Shared.SharedKernel.UnitTests", "Code\Shared\ORMS.Shared.SharedKernel.UnitTests\ORMS.Shared.SharedKernel.UnitTests.csproj", "{6E92E743-21A7-47DE-AE87-A5358A72D954}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_styleCop", "_styleCop", "{21A2D60C-4F73-499A-A9BC-C9443768C1DF}"
+	ProjectSection(SolutionItems) = preProject
+		_stylecop\CustomDictionary.xml = _stylecop\CustomDictionary.xml
+		_stylecop\stylecop.json = _stylecop\stylecop.json
+		_stylecop\StyleCopeRules.ruleset = _stylecop\StyleCopeRules.ruleset
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

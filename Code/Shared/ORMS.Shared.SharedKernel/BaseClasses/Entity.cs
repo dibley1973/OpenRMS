@@ -7,10 +7,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ORMS.Shared.SharedKernel.Entities
-{
-    using System;
+using System;
 
+namespace ORMS.Shared.SharedKernel.BaseClasses
+{
     /// <summary>
     /// The base class which all entities should inherit from
     /// </summary>

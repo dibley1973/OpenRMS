@@ -16,12 +16,12 @@ Open RMS will be developed on a .Net platform using .Net Core version 2.0 and wi
 
 The application will be able to be hosted on public internet servers or private *on-prem* or *off-prem* intranet servers.
 
-## Development Environment
+### Development Environment
 - Visual Studio 2017 
 - StyleCop (To set agreed styling rules)
 - CodeMade (optional - to apply StyleCop rules) 
 
-### Stylecop Rule and Exclusions
+#### Stylecop Rule and Exclusions
 Infomarmation on StyleCop rules and exclusions can be found [here](https://github.com/dibley1973/OpenRMS/wiki/StyleCop-Rules-and-Agreed-Exclusions)
 
 ### Milestones

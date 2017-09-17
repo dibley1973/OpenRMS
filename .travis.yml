@@ -9,7 +9,7 @@ branches:
     - master-net-core
 before_script:
   - chmod +x build.sh
-  - chmod +x test.sh
+  - chmod +x run-tests.sh
 script:
   - ./build.sh
   - ./run-tests.sh

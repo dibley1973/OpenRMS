@@ -5,7 +5,6 @@ sudo: required
 dotnet: 2.0.0
 script:
   - ./build.sh --quiet verify
-  - ./test.sh
 before_install:
   - chmod +x build.sh
   - chmod +x test.sh

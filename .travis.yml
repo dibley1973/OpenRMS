@@ -7,5 +7,5 @@ script:
   - ./build.sh --quiet verify
 before_install:
   - chmod +x build.sh
-  env:
+ env:
   - MSBuildEmitSolution=1

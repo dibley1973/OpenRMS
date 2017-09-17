@@ -5,7 +5,8 @@
 Open RMS is an Open Source project with the intention of delivering a retail management system that is free to install, free to use, free to modify and free to distribute. The aim of the product is to provide system which has key modules which can then be extended with private bespoke modules built by developers within retail businessed or additional public modules developed by the wider open source community for the expansion of the project. The product will continue to evolve as the key technologies mature. 
 
 ## Current Status
-master-net-core branch [![Build Status](https://travis-ci.org/dibley1973/OpenRMS.svg?branch=master-net-core)](https://travis-ci.org/dibley1973/OpenRMS)
+**Branches:**
+* master-net-core branch [![Build Status](https://travis-ci.org/dibley1973/OpenRMS.svg?branch=master-net-core)](https://travis-ci.org/dibley1973/OpenRMS)
 
 ## Target Consumers
 

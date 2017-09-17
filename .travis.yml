@@ -3,6 +3,7 @@ dist: trusty
 mono: none
 sudo: required
 dotnet: 2.0.0
+solution: OpenRMS.sln
 script:
   - ./build.sh --quiet verify
 before_install:

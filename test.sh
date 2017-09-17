@@ -1,0 +1,1 @@
+dotnet test Code\Shared\ORMS.Shared.SharedKernel\ORMS.Shared.SharedKernel.csproj

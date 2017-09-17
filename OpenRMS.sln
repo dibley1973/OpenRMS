@@ -32,6 +32,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_styleCop", "_styleCop", "{
 		_stylecop\StyleCopeRules.ruleset = _stylecop\StyleCopeRules.ruleset
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Configuration", "_Configuration", "{28153941-BB3E-4071-B15B-8D81D82B3A86}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.travis.yml = .travis.yml
+		build.sh = build.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

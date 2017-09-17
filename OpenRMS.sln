@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Configuration", "_Configur
 		.gitignore = .gitignore
 		.travis.yml = .travis.yml
 		build.sh = build.sh
-		test.sh = test.sh
+		run-tests.sh = run-tests.sh
 	EndProjectSection
 EndProject
 Global

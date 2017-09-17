@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{162139
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORMS.Shared.SharedKernel", "Code\Shared\ORMS.Shared.SharedKernel\ORMS.Shared.SharedKernel.csproj", "{4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORMS.Shared.SharedKernel.UnitTests", "Code\Shared\ORMS.Shared.SharedKernel.UnitTests\ORMS.Shared.SharedKernel.UnitTests.csproj", "{6E92E743-21A7-47DE-AE87-A5358A72D954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORMS.Shared.SharedKernel.UnitTests", "Code\Shared\ORMS.Shared.SharedKernel.UnitTests\ORMS.Shared.SharedKernel.UnitTests.csproj", "{6E92E743-21A7-47DE-AE87-A5358A72D954}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1} = {4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1}
 	EndProjectSection
@@ -39,8 +39,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Configuration", "_Configur
 		build.sh = build.sh
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{4F98AA80-435C-4908-ADA6-94D4C479D3DB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,10 +53,6 @@ Global
 		{6E92E743-21A7-47DE-AE87-A5358A72D954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E92E743-21A7-47DE-AE87-A5358A72D954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E92E743-21A7-47DE-AE87-A5358A72D954}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F98AA80-435C-4908-ADA6-94D4C479D3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F98AA80-435C-4908-ADA6-94D4C479D3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F98AA80-435C-4908-ADA6-94D4C479D3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F98AA80-435C-4908-ADA6-94D4C479D3DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,7 +62,6 @@ Global
 		{1621397E-8E19-46DD-95EA-2F552FDB8C65} = {D5FA0A16-2438-4106-92B6-3ADE2C1C602B}
 		{4BD7AA9C-E4DC-4A85-BAD3-B23CBF3660C1} = {1621397E-8E19-46DD-95EA-2F552FDB8C65}
 		{6E92E743-21A7-47DE-AE87-A5358A72D954} = {1621397E-8E19-46DD-95EA-2F552FDB8C65}
-		{4F98AA80-435C-4908-ADA6-94D4C479D3DB} = {1621397E-8E19-46DD-95EA-2F552FDB8C65}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE39F522-FEF0-4639-AB35-EEE5D62A9CD7}

@@ -10,8 +10,6 @@
 namespace ORMS.Shared.SharedKernel.Amplifiers
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Amplifies any given Type to provide expression of clear intent that
@@ -20,7 +18,7 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
     /// <typeparam name="T">
     /// Indicates the type of the entities identifier. Normally a Long or Guid
     /// </typeparam>
-    public struct Maybe<T> : IEquatable<Maybe<T>>, IEnumerable<T>
+    public struct Maybe<T> : IEquatable<Maybe<T>>
     {
         private readonly T _value;
 
@@ -154,32 +152,6 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         public static Maybe<T> Wrap(T obj)
         {
             return new Maybe<T>(obj);
-        }
-
-        /// <summary>
-        /// Returns an enumerator that will yield the  &lt;T&gt; if one exists or nothing if it does not.
-        /// </summary>
-        /// <returns>
-        /// An enumerator that can be used to yield the  &lt;T&gt; if it exists.
-        /// </returns>
-        public IEnumerator<T> GetEnumerator()
-        {
-            if (HasValue)
-            {
-                yield return _value;
-            }
-        }
-
-        /// <summary>
-        /// Returns an enumerator that will yield the  &lt;T&gt; if one exists.
-        /// </summary>
-        /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator" /> value that can be used to will
-        /// yield the  &lt;T&gt; if one exists.
-        /// </returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
 
         /// <summary>

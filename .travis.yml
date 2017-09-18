@@ -13,3 +13,5 @@ before_script:
 script:
   - ./build.sh
   - ./run-tests.sh
+ notifications:
+    slack: talkingdev:m42J4mz1cHTMmCQsMZNSpnbV

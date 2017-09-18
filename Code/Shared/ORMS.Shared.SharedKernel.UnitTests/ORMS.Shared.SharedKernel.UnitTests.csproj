@@ -22,6 +22,10 @@
     <DocumentationFile>bin\Debug\netstandard1.6\ORMS.Shared.SharedKernel.UnitTests.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netcoreapp2.0\ORMS.Shared.SharedKernel.UnitTests.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.0.0-beta0001" />
   </ItemGroup>

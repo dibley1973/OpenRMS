@@ -1,1 +1,1 @@
-nunit-console Code/Shared/ORMS.Shared.SharedKernel.UnitTests/bin/Release/netcoreapp2.0/ORMS.Shared.SharedKernel.UnitTests.dll
+dotnet test -c Release --no-build --no-restore Code/Shared/ORMS.Shared.SharedKernel.UnitTests/ORMS.Shared.SharedKernel.UnitTests.csproj

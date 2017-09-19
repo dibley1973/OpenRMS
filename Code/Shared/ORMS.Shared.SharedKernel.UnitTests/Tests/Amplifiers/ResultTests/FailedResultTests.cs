@@ -108,7 +108,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
             var result = Result.Fail<FakeProduct>("Error message");
 
             // ACT
-            Action action = () => { FakeProduct myClass = result.Value; };
+            Action action = () => { FakeProduct dummy = result.Value; };
 
             // ASSERT
             action.ShouldThrow<InvalidOperationException>();

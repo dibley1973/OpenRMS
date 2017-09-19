@@ -134,7 +134,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenAGenericResult_WhenAccessingError_ThenAnExceptionIsThrown()
         {
             // ARRANGE
-            Result<FakeProduct> result = Result.Ok(new FakeProduct());
+            Result<FakeProduct> result = Result.Ok(FakeProductData.CreateEmptyProduct());
 
             // ACT
             Action action = () =>

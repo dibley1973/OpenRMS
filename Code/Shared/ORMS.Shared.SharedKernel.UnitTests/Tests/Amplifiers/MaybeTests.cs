@@ -13,6 +13,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers
     using FluentAssertions;
     using NUnit.Framework;
     using SharedKernel.Amplifiers;
+    using TestData;
 
     /// <summary>
     /// Test for Maybe structure
@@ -59,7 +60,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers
         public void GivenValue_AfterWrappingWithAnInstantiatedObject_ReturnsSameObject()
         {
             // ARRANGE
-            var product = new FakeProduct();
+            var product = FakeProductData.CreateEmptyProduct();
             var maybe = Maybe<FakeProduct>.Wrap(product);
 
             // ACT
@@ -92,7 +93,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers
         public void GivenValue_AfterAssigningInstantiatedObjectToImplicitOperator_ReturnsInstantiatedObject()
         {
             // ARRANGE
-            var product = new FakeProduct();
+            var product = FakeProductData.CreateEmptyProduct();
             Maybe<FakeProduct> maybe = product;
 
             // ACT
@@ -141,7 +142,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers
         public void GivenHasValue_AfterWrappingWithAnInstantiatedObject_ReturnsTrue()
         {
             // ARRANGE
-            var product = new FakeProduct();
+            var product = FakeProductData.CreateEmptyProduct();
             var maybe = Maybe<FakeProduct>.Wrap(product);
 
             // ACT
@@ -173,7 +174,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers
         public void GivenHasValue_AfterAssigningInstantiatedObjectToImplicitOperator_ReturnsTrue()
         {
             // ARRANGE
-            var product = new FakeProduct();
+            var product = FakeProductData.CreateEmptyProduct();
             Maybe<FakeProduct> maybe = product;
 
             // ACT
@@ -221,7 +222,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers
         public void GivenHasNoValue_AfterWrappingWithAnInstantiatedObject_ReturnsFalse()
         {
             // ARRANGE
-            var product = new FakeProduct();
+            var product = FakeProductData.CreateEmptyProduct();
             var maybe = Maybe<FakeProduct>.Wrap(product);
 
             // ACT
@@ -253,7 +254,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers
         public void GivenHasNoValue_AfterAssigningInstantiatedObjectToImplicitOperator_ReturnsFalse()
         {
             // ARRANGE
-            var product = new FakeProduct();
+            var product = FakeProductData.CreateEmptyProduct();
             Maybe<FakeProduct> maybe = product;
 
             // ACT

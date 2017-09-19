@@ -15,6 +15,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
     using FluentAssertions;
     using NUnit.Framework;
     using SharedKernel.BaseClasses;
+    using TestData;
 
     /// <summary>
     /// Provides unit tests for the <see cref="Entity{TId}"/> class.
@@ -46,7 +47,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         {
             // ARRANGE
             var instance = new FakeOptionCode("01", "02");
-            object other = new FakeProduct();
+            object other = FakeProductData.CreateEmptyProduct();
 
             // ACT
             var actual = instance.Equals(other);
@@ -116,8 +117,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
             var products = new Dictionary<FakeOptionCode, FakeProduct>();
             var optionCode1 = new FakeOptionCode("01", "02");
             var optionCode2 = new FakeOptionCode("01", "02");
-            var product1 = new FakeProduct();
-            var product2 = new FakeProduct();
+            var product1 = FakeProductData.CreateEmptyProduct();
+            var product2 = FakeProductData.CreateEmptyProduct();
             products.Add(optionCode1, product1);
 
             // ACT
@@ -137,8 +138,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
             var products = new Dictionary<FakeOptionCode, FakeProduct>();
             var optionCode1 = new FakeOptionCode("01", "02");
             var optionCode2 = new FakeOptionCode("01", "03");
-            var product1 = new FakeProduct();
-            var product2 = new FakeProduct();
+            var product1 = FakeProductData.CreateEmptyProduct();
+            var product2 = FakeProductData.CreateEmptyProduct();
             products.Add(optionCode1, product1);
             products.Add(optionCode2, product2);
 

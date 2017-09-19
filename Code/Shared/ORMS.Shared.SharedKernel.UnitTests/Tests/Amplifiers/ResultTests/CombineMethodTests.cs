@@ -115,7 +115,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenCombine_WhenCombinedArrayOfGenericResultsWhereOneIsAFailure_ThenReturnsFailure()
         {
             // ARRANGE
-            Result<string>[] results = { Result.Ok(string.Empty), Result.Fail<string>(string.Empty) };
+            Result<string>[] results = { Result.Ok(string.Empty), Result.Fail<string>("error") };
 
             // ACT
             var result = Result.Combine(";", results);

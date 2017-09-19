@@ -40,14 +40,6 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Fakes
         }
 
         /// <summary>
-        /// Gets a represents an empty option code.
-        /// </summary>
-        /// <value>
-        /// The empty option code.
-        /// </value>
-        public static FakeOptionCode EmptyOptionCode => new FakeOptionCode("0", "0");
-
-        /// <summary>
         /// Gets the style code.
         /// </summary>
         /// <value>

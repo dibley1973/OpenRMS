@@ -17,7 +17,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
     using TestData;
 
     /// <summary>
-    /// Tests the <see cref="Result"/>class.
+    /// Tests the <see cref="Result"/>class Ok results.
     /// </summary>
     internal class SuccessfulResultTests
     {

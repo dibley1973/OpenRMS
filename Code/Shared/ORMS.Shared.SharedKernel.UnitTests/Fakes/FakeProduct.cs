@@ -14,7 +14,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Fakes
     /// <summary>
     /// Represents a fake product for testing purposes only
     /// </summary>
-    public class FakeProduct : Entity<int>
+    internal class FakeProduct : Entity<int>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FakeProduct"/> class.

@@ -10,6 +10,7 @@
 namespace ORMS.Contexts.ItemManagement.Domain.Entities
 {
     using System;
+    using ORMS.Shared.SharedKernel.CommonEntities;
     using Shared.SharedKernel.BaseClasses;
 
     /// <summary>
@@ -22,7 +23,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
-        public Item(string name, string description)
+        public Item(Name name, string description)
             : base(Guid.NewGuid())
         {
             ChangeName(name);
@@ -35,7 +36,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="id">The identifier.</param>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
-        public Item(Guid id, string name, string description)
+        public Item(Guid id, Name name, string description)
             : base(id)
         {
             ChangeName(name);
@@ -48,7 +49,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <value>
         /// The name.
         /// </value>
-        public string Name { get; private set; }
+        public Name Name { get; private set; }
 
         /// <summary>
         /// Gets the description.
@@ -62,14 +63,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// Changes the products name.
         /// </summary>
         /// <param name="name">The new name of the product.</param>
-        public void ChangeName(string name)
+        public void ChangeName(Name name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            Name = name;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
         /// <summary>

@@ -13,6 +13,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
     using FluentAssertions;
     using NUnit.Framework;
     using ORMS.Contexts.ItemManagement.Domain.Entities;
+    using ORMS.Shared.SharedKernel.CommonEntities;
 
     /// <summary>
     /// Tests the <see cref="Item"/>
@@ -28,8 +29,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = default(Guid);
-            string name = "Item 1";
-            string description = "Item One";
+            var name = new Name("Item 1");
+            var description = "Item One";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -47,8 +48,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.Empty;
-            string name = "Item 1";
-            string description = "Item One";
+            var name = new Name("Item 1");
+            var description = "Item One";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -66,46 +67,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string name = null;
-            string description = "Item One";
-
-            // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
-
-            // ASSERT
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        /// <summary>
-        /// Given the construction when supplied with empty name then throws exception.
-        /// </summary>
-        [Test]
-        public void GivenConstruction_WhenSuppliedWithEmptyName_ThenThrowsException()
-        {
-            // ARRANGE
-            var id = Guid.NewGuid();
-            string name = string.Empty;
-            string description = "Item One";
-
-            // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
-
-            // ASSERT
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        /// <summary>
-        /// Given the construction when supplied with whitespace name then throws exception.
-        /// </summary>
-        [Test]
-        public void GivenConstruction_WhenSuppliedWithWhitespaceName_ThenThrowsException()
-        {
-            // ARRANGE
-            var id = Guid.NewGuid();
-            string name = "   ";
-            string description = "Item One";
+            var name = default(Name);
+            var description = "Item One";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -119,12 +82,12 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         /// Given the name when constructorsupplied valid name then returns constructed value.
         /// </summary>
         [Test]
-        public void GivenName_WhenConstructorsuppliedValidName_ThenReturnsConstructedValue()
+        public void GivenName_WhenConstructorSuppliedValidName_ThenReturnsConstructedValue()
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string name = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
-            string description = "Item One";
+            var name = new Name("Item1");
+            var description = "Item One";
 
             // ACT
             var actual = new Item(id, name, description);
@@ -142,8 +105,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string name = "Item 1";
-            string description = null;
+            var name = new Name("Item 1");
+            var description = default(string);
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -161,8 +124,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string name = "Item 1";
-            string description = string.Empty;
+            var name = new Name("Item 1");
+            var description = string.Empty;
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -180,8 +143,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string name = "Item 1";
-            string description = " ";
+            var name = new Name("Item 1");
+            var description = " ";
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -199,8 +162,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            string name = "Item 1";
-            string description = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
+            var name = new Name("Item 1");
+            var description = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
 
             // ACT
             var actual = new Item(id, name, description);

@@ -10,8 +10,8 @@
 namespace ORMS.Contexts.ItemManagement.Domain.Entities
 {
     using System;
-    using ORMS.Shared.SharedKernel.CommonEntities;
     using Shared.SharedKernel.BaseClasses;
+    using Shared.SharedKernel.CommonEntities;
 
     /// <summary>
     /// Represents a product item.

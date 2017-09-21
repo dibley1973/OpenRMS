@@ -12,7 +12,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
     using System;
     using FluentAssertions;
     using NUnit.Framework;
-    using ORMS.Shared.SharedKernel.CommonEntities;
+    using SharedKernel.CommonEntities;
 
     /// <summary>
     /// Test for <see cref="Name"/> structure
@@ -29,6 +29,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
+            // ReSharper disable once ObjectCreationAsStatement
             Action actual = () => new Name(null);
 
             // ASSERT
@@ -44,6 +45,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
+            // ReSharper disable once ObjectCreationAsStatement
             Action actual = () => new Name(string.Empty);
 
             // ASSERT
@@ -59,6 +61,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
+            // ReSharper disable once ObjectCreationAsStatement
             Action actual = () => new Name("  ");
 
             // ASSERT
@@ -75,6 +78,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             var value = new string('A', Name.MaximumCharacterLength + 1);
 
             // ACT
+            // ReSharper disable once ObjectCreationAsStatement
             Action actual = () => new Name(value);
 
             // ASSERT
@@ -91,6 +95,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             var value = new string('A', Name.MaximumCharacterLength);
 
             // ACT
+            // ReSharper disable once ObjectCreationAsStatement
             Action actual = () => new Name(value);
 
             // ASSERT

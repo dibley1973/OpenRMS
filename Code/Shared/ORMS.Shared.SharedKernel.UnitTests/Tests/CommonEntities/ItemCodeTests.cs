@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ShortDescriptionTests.cs" company="Chesil Media">
+// <copyright file="ItemCodeTests.cs" company="Chesil Media">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -15,10 +15,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
     using SharedKernel.CommonEntities;
 
     /// <summary>
-    /// Test for <see cref="ShortDescription"/> structure
+    /// Test for <see cref="Code"/> structure
     /// </summary>
     [TestFixture]
-    public class ShortDescriptionTests
+    public class ItemCodeTests
     {
         /// <summary>
         /// Given the constructor when called with null value throws exception.
@@ -30,7 +30,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription(null);
+            Action actual = () => new Code(null);
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
@@ -46,7 +46,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription(string.Empty);
+            Action actual = () => new Code(string.Empty);
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
@@ -62,7 +62,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription("  ");
+            Action actual = () => new Code("  ");
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
@@ -75,11 +75,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenConstructor_WhenCalledWithValueLongerThanMaximumLength_ThenThrowsException()
         {
             // ARRANGE
-            var value = new string('A', ShortDescription.MaximumCharacterLength + 1);
+            var value = new string('A', Code.MaximumCharacterLength + 1);
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription(value);
+            Action actual = () => new Code(value);
 
             // ASSERT
             actual.ShouldThrow<ArgumentOutOfRangeException>();
@@ -92,11 +92,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenConstructor_WhenCalledWithValueAtMaximumLength_ThenThrowsException()
         {
             // ARRANGE
-            var value = new string('A', ShortDescription.MaximumCharacterLength);
+            var value = new string('A', Code.MaximumCharacterLength);
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription(value);
+            Action actual = () => new Code(value);
 
             // ASSERT
             actual.ShouldNotThrow();
@@ -109,11 +109,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenConstructor_WhenCalledWithValueLessThanMaximumLength_ThenThrowsException()
         {
             // ARRANGE
-            var value = new string('A', ShortDescription.MaximumCharacterLength - 1);
+            var value = new string('A', Code.MaximumCharacterLength - 1);
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription(value);
+            Action actual = () => new Code(value);
 
             // ASSERT
             actual.ShouldNotThrow();
@@ -126,8 +126,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenValue_WhenReadAfterValidConstruction_ThenReturnsConstructedValue()
         {
             // ARRANGE
-            var value = new string('A', ShortDescription.MaximumCharacterLength - 1);
-            var name = new ShortDescription(value);
+            var value = new string('A', Code.MaximumCharacterLength - 1);
+            var name = new Code(value);
 
             // ACT
             var actual = name.Value;
@@ -143,8 +143,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = new ShortDescription("ShortDescription");
-            var name2 = new ShortDescription("ShortDescription");
+            var name1 = new Code("Code");
+            var name2 = new Code("Code");
 
             // ACT
             var actual = name1.Equals(name2);
@@ -160,8 +160,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = new ShortDescription("ShortDescription1");
-            var name2 = new ShortDescription("ShortDescription2");
+            var name1 = new Code("Code1");
+            var name2 = new Code("Code2");
 
             // ACT
             var actual = name1.Equals(name2);
@@ -177,8 +177,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = new ShortDescription("ShortDescription");
-            var name2 = new ShortDescription("ShortDescription");
+            var name1 = new Code("Code");
+            var name2 = new Code("Code");
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -194,8 +194,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = new ShortDescription("ShortDescription1");
-            var name2 = new ShortDescription("ShortDescription2");
+            var name1 = new Code("Code1");
+            var name2 = new Code("Code2");
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -208,14 +208,14 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         /// Given the explicit string operator when cast from string then created name with same value.
         /// </summary>
         [Test]
-        public void GivenExplicitStringOperator_WhenCastFromString_ThenCreatedShortDescriptionWithSameValue()
+        public void GivenExplicitStringOperator_WhenCastFromString_ThenCreatedCodeWithSameValue()
         {
             // ARRANGE
-            var value = "ShortDescription";
-            ////var name = default(ShortDescription);
+            var value = "Code";
+            ////var name = default(Code);
 
             // ACT
-            var actual = (ShortDescription)value;
+            var actual = (Code)value;
 
             // ASSERT
             actual.Value.Should().Be(value);
@@ -225,11 +225,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         /// Given the implicit string operator when cast to string then created name with same value.
         /// </summary>
         [Test]
-        public void GivenImplicitStringOperator_WhenCastToString_ThenCreatedShortDescriptionWithSameValue()
+        public void GivenImplicitStringOperator_WhenCastToString_ThenCreatedCodeWithSameValue()
         {
             // ARRANGE
-            var value = "ShortDescription";
-            var name = new ShortDescription(value);
+            var value = "Code";
+            var name = new Code(value);
 
             // ACT
             string actual = name;

@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ItemCodeTests.cs" company="Chesil Media">
+// <copyright file="CodeTests.cs" company="Chesil Media">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -18,102 +18,96 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
     /// Test for <see cref="Code"/> structure
     /// </summary>
     [TestFixture]
-    public class ItemCodeTests
+    public class CodeTests
     {
         /// <summary>
-        /// Given the constructor when called with null value throws exception.
+        /// Given creation when called with null value throws exception.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithNullValue_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithNullValue_ThenThrowsException()
         {
             // ARRANGE
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Code(null);
+            Action actual = () => Code.Create(null);
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
         }
 
         /// <summary>
-        /// Given the constructor when called with empty string throws exception.
+        /// Given creation when called with empty string throws exception.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithEmptyValue_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithEmptyValue_ThenThrowsException()
         {
             // ARRANGE
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Code(string.Empty);
+            Action actual = () => Code.Create(string.Empty);
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
         }
 
         /// <summary>
-        /// Given the constructor when called with white space throws exception.
+        /// Given creation when called with white space throws exception.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithWhiteSpace_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithWhiteSpace_ThenThrowsException()
         {
             // ARRANGE
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Code("  ");
+            Action actual = () => Code.Create("  ");
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
         }
 
         /// <summary>
-        /// Given the constructor when called with value longer than maximum length throws exception.
+        /// Given creation when called with value longer than maximum length throws exception.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithValueLongerThanMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueLongerThanMaximumLength_ThenThrowsException()
         {
             // ARRANGE
             var value = new string('A', Code.MaximumCharacterLength + 1);
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Code(value);
+            Action actual = () => Code.Create(value);
 
             // ASSERT
             actual.ShouldThrow<ArgumentOutOfRangeException>();
         }
 
         /// <summary>
-        /// Given the constructor when called with value longer at maximum length throws exception.
+        /// Given creation when called with value longer at maximum length throws exception.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithValueAtMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueAtMaximumLength_ThenThrowsException()
         {
             // ARRANGE
             var value = new string('A', Code.MaximumCharacterLength);
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Code(value);
+            Action actual = () => Code.Create(value);
 
             // ASSERT
             actual.ShouldNotThrow();
         }
 
         /// <summary>
-        /// Given the constructor when called with value less than maximum length throws exception.
+        /// Given creation when called with value less than maximum length throws exception.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithValueLessThanMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueLessThanMaximumLength_ThenThrowsException()
         {
             // ARRANGE
             var value = new string('A', Code.MaximumCharacterLength - 1);
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Code(value);
+            Action actual = () => Code.Create(value);
 
             // ASSERT
             actual.ShouldNotThrow();
@@ -127,7 +121,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = new string('A', Code.MaximumCharacterLength - 1);
-            var name = new Code(value);
+            var name = Code.Create(value);
 
             // ACT
             var actual = name.Value;
@@ -143,8 +137,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = new Code("Code");
-            var name2 = new Code("Code");
+            var name1 = Code.Create("Code");
+            var name2 = Code.Create("Code");
 
             // ACT
             var actual = name1.Equals(name2);
@@ -160,8 +154,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = new Code("Code1");
-            var name2 = new Code("Code2");
+            var name1 = Code.Create("Code1");
+            var name2 = Code.Create("Code2");
 
             // ACT
             var actual = name1.Equals(name2);
@@ -177,8 +171,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = new Code("Code");
-            var name2 = new Code("Code");
+            var name1 = Code.Create("Code");
+            var name2 = Code.Create("Code");
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -194,8 +188,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = new Code("Code1");
-            var name2 = new Code("Code2");
+            var name1 = Code.Create("Code1");
+            var name2 = Code.Create("Code2");
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -229,7 +223,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = "Code";
-            var name = new Code(value);
+            var name = Code.Create(value);
 
             // ACT
             string actual = name;

@@ -44,6 +44,14 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
+        /// Gets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        public Code Code { get; private set; }
+
+        /// <summary>
         /// Gets the name.
         /// </summary>
         /// <value>
@@ -58,6 +66,15 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// The description.
         /// </value>
         public ShortDescription Description { get; private set; }
+
+        /// <summary>
+        /// Changes the products code.
+        /// </summary>
+        /// <param name="code">The new code of the product.</param>
+        public void ChangeCode(Code code)
+        {
+            Code = code ?? throw new ArgumentNullException(nameof(code));
+        }
 
         /// <summary>
         /// Changes the products name.

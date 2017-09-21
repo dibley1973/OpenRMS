@@ -30,7 +30,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = default(Guid);
             var name = new Name("Item 1");
-            var description = "Item One";
+            var description = new ShortDescription("Item One");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -49,7 +49,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.Empty;
             var name = new Name("Item 1");
-            var description = "Item One";
+            var description = new ShortDescription("Item One");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -68,7 +68,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var name = default(Name);
-            var description = "Item One";
+            var description = new ShortDescription("Item One");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -87,7 +87,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var name = new Name("Item1");
-            var description = "Item One";
+            var description = new ShortDescription("Item One");
 
             // ACT
             var actual = new Item(id, name, description);
@@ -98,63 +98,6 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the construction when supplied with null description then throws exception.
-        /// </summary>
-        [Test]
-        public void GivenConstruction_WhenSuppliedWithNullDescription_ThenThrowsException()
-        {
-            // ARRANGE
-            var id = Guid.NewGuid();
-            var name = new Name("Item 1");
-            var description = default(string);
-
-            // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
-
-            // ASSERT
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        /// <summary>
-        /// Given the construction when supplied with empty description then throws exception.
-        /// </summary>
-        [Test]
-        public void GivenConstruction_WhenSuppliedWithEmptyDescription_ThenThrowsException()
-        {
-            // ARRANGE
-            var id = Guid.NewGuid();
-            var name = new Name("Item 1");
-            var description = string.Empty;
-
-            // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
-
-            // ASSERT
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        /// <summary>
-        /// Given the construction when supplied with whitespace description then throws exception.
-        /// </summary>
-        [Test]
-        public void GivenConstruction_WhenSuppliedWithWhitespaceDescription_ThenThrowsException()
-        {
-            // ARRANGE
-            var id = Guid.NewGuid();
-            var name = new Name("Item 1");
-            var description = " ";
-
-            // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
-
-            // ASSERT
-            action.ShouldThrow<ArgumentNullException>();
-        }
-
-        /// <summary>
         /// Given the description when constructor given valid value then returns constructed value.
         /// </summary>
         [Test]
@@ -162,8 +105,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            var name = new Name("Item 1");
-            var description = "ABCDEFGHIJKLMNOPQRSTUVWXZ abcdefghijklmnopqrstuvwxyz 1234567890";
+            var name = new Name("Item One");
+            var description = new ShortDescription("Item 1");
 
             // ACT
             var actual = new Item(id, name, description);

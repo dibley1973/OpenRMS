@@ -23,7 +23,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
-        public Item(Name name, string description)
+        public Item(Name name, ShortDescription description)
             : base(Guid.NewGuid())
         {
             ChangeName(name);
@@ -36,7 +36,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="id">The identifier.</param>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
-        public Item(Guid id, Name name, string description)
+        public Item(Guid id, Name name, ShortDescription description)
             : base(id)
         {
             ChangeName(name);
@@ -57,7 +57,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <value>
         /// The description.
         /// </value>
-        public string Description { get; private set; }
+        public ShortDescription Description { get; private set; }
 
         /// <summary>
         /// Changes the products name.
@@ -72,14 +72,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// Changes the products description.
         /// </summary>
         /// <param name="description">The new description of the product.</param>
-        public void ChangeDescription(string description)
+        public void ChangeDescription(ShortDescription description)
         {
-            if (string.IsNullOrWhiteSpace(description))
-            {
-                throw new ArgumentNullException(nameof(description));
-            }
-
-            Description = description;
+            Description = description ?? throw new ArgumentNullException(nameof(description));
         }
     }
 }

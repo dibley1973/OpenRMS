@@ -17,6 +17,9 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
     public static class ResultExtensions
     {
         // TODO: Uncomment other extensions as required but write tests to cover them!
+        // Ref:
+        // https://github.com/vkhorikov/CSharpFunctionalExtensions/blob/master/CSharpFunctionalExtensions/ResultExtensions.cs
+
         ////public static Result<K> OnSuccess<T, K>(this Result<T> result, Func<T, K> func)
         ////{
         ////    if (result.IsFailure) return Result.Fail<K>(result.Error);

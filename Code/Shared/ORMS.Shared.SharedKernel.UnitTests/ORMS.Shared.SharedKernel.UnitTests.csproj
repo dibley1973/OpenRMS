@@ -27,7 +27,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.0.0-beta0001" />
+    <PackageReference Include="FluentAssertions" Version="5.0.0-beta0002" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +36,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0-preview-20170914-09" />
-    <PackageReference Include="NUnit" Version="3.8.0" />
+    <PackageReference Include="NUnit" Version="3.8.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.8.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
   </ItemGroup>

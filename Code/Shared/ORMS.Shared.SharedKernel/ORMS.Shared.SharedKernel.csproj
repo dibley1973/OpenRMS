@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <AssemblyTitle>Open RMS Shared Kernel</AssemblyTitle>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>ORMS.Shared.SharedKernel</AssemblyName>
     <PackageId>ORMS.Shared.SharedKernel</PackageId>
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>

@@ -57,7 +57,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// </returns>
         public static explicit operator Code(string value)
         {
-            return new Code(value);
+            return Create(value);
         }
 
         /// <summary>

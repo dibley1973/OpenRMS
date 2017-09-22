@@ -57,7 +57,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// </returns>
         public static explicit operator ShortDescription(string value)
         {
-            return new ShortDescription(value);
+            return Create(value);
         }
 
         /// <summary>

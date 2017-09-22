@@ -29,8 +29,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Name(null);
+            Action actual = () => Name.Create(null);
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
@@ -45,8 +44,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Name(string.Empty);
+            Action actual = () => Name.Create(string.Empty);
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
@@ -61,8 +59,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Name("  ");
+            Action actual = () => Name.Create("  ");
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
@@ -78,8 +75,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             var value = new string('A', Name.MaximumCharacterLength + 1);
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Name(value);
+            Action actual = () => Name.Create(value);
 
             // ASSERT
             actual.ShouldThrow<ArgumentOutOfRangeException>();
@@ -95,8 +91,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             var value = new string('A', Name.MaximumCharacterLength);
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new Name(value);
+            Action actual = () => Name.Create(value);
 
             // ASSERT
             actual.ShouldNotThrow();
@@ -112,7 +107,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             var value = new string('A', Name.MaximumCharacterLength - 1);
 
             // ACT
-            Action actual = () => new Name(value);
+            Action actual = () => Name.Create(value);
 
             // ASSERT
             actual.ShouldNotThrow();
@@ -126,7 +121,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = new string('A', Name.MaximumCharacterLength - 1);
-            var name = new Name(value);
+            var name = Name.Create(value);
 
             // ACT
             var actual = name.Value;
@@ -142,8 +137,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = new Name("Name");
-            var name2 = new Name("Name");
+            var name1 = Name.Create("Name");
+            var name2 = Name.Create("Name");
 
             // ACT
             var actual = name1.Equals(name2);
@@ -159,8 +154,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = new Name("Name1");
-            var name2 = new Name("Name2");
+            var name1 = Name.Create("Name1");
+            var name2 = Name.Create("Name2");
 
             // ACT
             var actual = name1.Equals(name2);
@@ -176,8 +171,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = new Name("Name");
-            var name2 = new Name("Name");
+            var name1 = Name.Create("Name");
+            var name2 = Name.Create("Name");
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -193,8 +188,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = new Name("Name1");
-            var name2 = new Name("Name2");
+            var name1 = Name.Create("Name1");
+            var name2 = Name.Create("Name2");
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -228,7 +223,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = "Name";
-            var name = new Name(value);
+            var name = Name.Create(value);
 
             // ACT
             string actual = name;

@@ -30,7 +30,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = default(Guid);
             var name = new Name("Item 1");
-            var description = new ShortDescription("Item One");
+            var description = ShortDescription.Create("Item One");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -49,7 +49,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.Empty;
             var name = new Name("Item 1");
-            var description = new ShortDescription("Item One");
+            var description = ShortDescription.Create("Item One");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -68,7 +68,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var name = default(Name);
-            var description = new ShortDescription("Item One");
+            var description = ShortDescription.Create("Item One");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
@@ -87,7 +87,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var name = new Name("Item 1");
-            var description = new ShortDescription("Item One");
+            var description = ShortDescription.Create("Item One");
 
             // ACT
             var actual = new Item(id, name, description);
@@ -106,7 +106,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var name = new Name("Item 1");
-            var description = new ShortDescription("Item One");
+            var description = ShortDescription.Create("Item One");
 
             // ACT
             var actual = new Item(id, name, description);
@@ -125,7 +125,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var name = new Name("Item 1");
-            var description = new ShortDescription("Item One");
+            var description = ShortDescription.Create("Item One");
             var item = new Item(id, name, description);
 
             // ACT
@@ -145,14 +145,14 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             var id = Guid.NewGuid();
             var codeUpdated = Code.Create("C0001");
             var name = new Name("Item 1");
-            var description = new ShortDescription("Item One");
+            var description = ShortDescription.Create("Item One");
             var item = new Item(id, name, description);
 
             // ACT
             item.ChangeCode(codeUpdated);
 
             // ASSERT
-            item.Name.Should().Be(codeUpdated);
+            item.Code.Should().Be(codeUpdated);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var name = new Name("Item 1");
-            var description = new ShortDescription("Item One");
+            var description = ShortDescription.Create("Item One");
             var item = new Item(id, name, description);
 
             // ACT
@@ -184,7 +184,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             var id = Guid.NewGuid();
             var name = new Name("Item 1");
             var nameUpdated = new Name("Item 1 Deluxe");
-            var description = new ShortDescription("Item One");
+            var description = ShortDescription.Create("Item One");
             var item = new Item(id, name, description);
 
             // ACT
@@ -203,7 +203,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var name = new Name("Item 1");
-            var description = new ShortDescription("Item One");
+            var description = ShortDescription.Create("Item One");
             var item = new Item(id, name, description);
 
             // ACT
@@ -222,8 +222,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var name = new Name("Item 1");
-            var description = new ShortDescription("Item One");
-            var descriptionUpdated = new ShortDescription("Item One Deluxe");
+            var description = ShortDescription.Create("Item One");
+            var descriptionUpdated = ShortDescription.Create("Item One Deluxe");
             var item = new Item(id, name, description);
 
             // ACT

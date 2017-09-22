@@ -23,27 +23,22 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// </summary>
         public const byte MaximumCharacterLength = 255;
 
-        private readonly string _value;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ShortDescription" /> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <exception cref="ArgumentNullException">Thrown if value is null, empty or white space.</exception>
-        public ShortDescription(string value)
+        private ShortDescription(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
-            if (value.Length > MaximumCharacterLength) throw new ArgumentOutOfRangeException(nameof(value), $"Must not exceed {MaximumCharacterLength} characters in length");
-
-            _value = value;
+            Value = value;
         }
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="ShortDescription"/> class from being created.
+        /// Gets an empty special case <see cref="ShortDescription"/>.
         /// </summary>
-        private ShortDescription()
-        {
-        }
+        /// <value>
+        /// The empty.
+        /// </value>
+        public static ShortDescription Empty => CreateInternal(string.Empty);
 
         /// <summary>
         /// Gets the value.
@@ -51,7 +46,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// <value>
         /// The value.
         /// </value>
-        public string Value => _value;
+        public string Value { get; }
 
         /// <summary>
         /// Performs an explicit conversion from <see cref="string"/> to <see cref="ShortDescription"/>.
@@ -78,6 +73,23 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         }
 
         /// <summary>
+        /// Creates a new instance of the <see cref="ShortDescription" /> class using.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>Returns a newly constructed <see cref="ShortDescription"/>.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if value is null, empty or white space.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if value length exceeds <see cref="MaximumCharacterLength"/>.
+        /// </exception>
+        public static ShortDescription Create(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
+            if (value.Length > MaximumCharacterLength) throw new ArgumentOutOfRangeException(nameof(value), $"Must not exceed {MaximumCharacterLength} characters in length");
+
+            return CreateInternal(value);
+        }
+
+        /// <summary>
         /// Determines whether the specified <see cref="T:System.Object" />, is equal to this instance
         /// of <see cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1" />.
         /// </summary>
@@ -99,6 +111,17 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         protected override int GetHashCodeCore()
         {
             return GetType().ToString().GetHashCode() * Value.GetHashCode() ^ 307;
+        }
+
+        /// <summary>
+        /// internal method to create a <see cref="ShortDescription"/> object.
+        /// Warning: This function bypasses argument validation.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>Returns a newly constructed <see cref="ShortDescription"/>.</returns>
+        private static ShortDescription CreateInternal(string value)
+        {
+            return new ShortDescription(value);
         }
     }
 }

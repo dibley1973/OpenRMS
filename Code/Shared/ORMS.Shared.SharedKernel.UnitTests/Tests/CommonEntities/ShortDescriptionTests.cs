@@ -29,8 +29,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription(null);
+            Action actual = () => ShortDescription.Create(null);
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
@@ -45,8 +44,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription(string.Empty);
+            Action actual = () => ShortDescription.Create(string.Empty);
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
@@ -61,8 +59,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription("  ");
+            Action actual = () => ShortDescription.Create("  ");
 
             // ASSERT
             actual.ShouldThrow<ArgumentNullException>();
@@ -78,8 +75,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             var value = new string('A', ShortDescription.MaximumCharacterLength + 1);
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription(value);
+            Action actual = () => ShortDescription.Create(value);
 
             // ASSERT
             actual.ShouldThrow<ArgumentOutOfRangeException>();
@@ -95,8 +91,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             var value = new string('A', ShortDescription.MaximumCharacterLength);
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription(value);
+            Action actual = () => ShortDescription.Create(value);
 
             // ASSERT
             actual.ShouldNotThrow();
@@ -112,8 +107,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             var value = new string('A', ShortDescription.MaximumCharacterLength - 1);
 
             // ACT
-            // ReSharper disable once ObjectCreationAsStatement
-            Action actual = () => new ShortDescription(value);
+            Action actual = () => ShortDescription.Create(value);
 
             // ASSERT
             actual.ShouldNotThrow();
@@ -127,7 +121,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = new string('A', ShortDescription.MaximumCharacterLength - 1);
-            var name = new ShortDescription(value);
+            var name = ShortDescription.Create(value);
 
             // ACT
             var actual = name.Value;
@@ -143,8 +137,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = new ShortDescription("ShortDescription");
-            var name2 = new ShortDescription("ShortDescription");
+            var name1 = ShortDescription.Create("ShortDescription");
+            var name2 = ShortDescription.Create("ShortDescription");
 
             // ACT
             var actual = name1.Equals(name2);
@@ -160,8 +154,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = new ShortDescription("ShortDescription1");
-            var name2 = new ShortDescription("ShortDescription2");
+            var name1 = ShortDescription.Create("ShortDescription1");
+            var name2 = ShortDescription.Create("ShortDescription2");
 
             // ACT
             var actual = name1.Equals(name2);
@@ -177,8 +171,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = new ShortDescription("ShortDescription");
-            var name2 = new ShortDescription("ShortDescription");
+            var name1 = ShortDescription.Create("ShortDescription");
+            var name2 = ShortDescription.Create("ShortDescription");
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -194,8 +188,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = new ShortDescription("ShortDescription1");
-            var name2 = new ShortDescription("ShortDescription2");
+            var name1 = ShortDescription.Create("ShortDescription1");
+            var name2 = ShortDescription.Create("ShortDescription2");
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -229,7 +223,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = "ShortDescription";
-            var name = new ShortDescription(value);
+            var name = ShortDescription.Create(value);
 
             // ACT
             string actual = name;

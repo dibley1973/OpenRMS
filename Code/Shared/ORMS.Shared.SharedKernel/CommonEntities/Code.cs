@@ -27,14 +27,13 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// Initializes a new instance of the <see cref="Code" /> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <exception cref="ArgumentNullException">Thrown if value is null, empty or white space.</exception>
         private Code(string value)
         {
             Value = value;
         }
 
         /// <summary>
-        /// Gets an empty special case code.
+        /// Gets an empty special case <see cref="Code"/>.
         /// </summary>
         /// <value>
         /// The empty.
@@ -115,7 +114,8 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         }
 
         /// <summary>
-        /// internal method to create a <see cref="Code"/> object. Bypasses argument validation.
+        /// internal method to create a <see cref="Code"/> object.
+        /// Warning: This function bypasses argument validation.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>Returns a newly constructed <see cref="Code"/>.</returns>

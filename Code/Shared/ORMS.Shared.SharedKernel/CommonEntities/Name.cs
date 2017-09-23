@@ -80,14 +80,13 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Name" /> class using.
+        /// If the specified value is valid then creates and returns a new instance of 
+        /// the <see cref="Name" /> class using the value and wraps it in an 
+        /// Ok <see cref="Result{name}"/>; otherwise creates a fail <see cref="Result{Name}"/>.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>Returns a newly constructed <see cref="Name"/>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if value is null, empty or white space.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">
+        /// <returns>Returns a newly constructed <see cref="Result{Name}"/>.</returns>
         /// Thrown if value length exceeds <see cref="MaximumCharacterLength"/>.
-        /// </exception>
         public static Result<Name> Create(string value)
         {
             if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Name>(NameErrorKeys.NameIsNullEmptyOrWhiteSpace);

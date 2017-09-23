@@ -9,6 +9,8 @@
 
 namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 {
+    using System;
+
     using Constants.ResultErrorKeys;
     using FluentAssertions;
     using NUnit.Framework;
@@ -212,20 +214,41 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         }
 
         /// <summary>
-        /// Given the explicit string operator when cast from string then created name with same value.
+        /// Given the explicit string operator when cast from string at maximum length then created code with same value.
         /// </summary>
         [Test]
-        public void GivenExplicitStringOperator_WhenCastFromString_ThenCreatedCodeWithSameValue()
+        public void GivenExplicitStringOperator_WhenCastFromStringAtMaximumLength_ThenCreatedCodeWithSameValue()
         {
             // ARRANGE
-            var value = "Code";
-            ////var name = default(Code);
+            var value = new string('A', Code.MaximumCharacterLength);
 
             // ACT
             var actual = (Code)value;
 
             // ASSERT
             actual.Value.Should().Be(value);
+        }
+
+        /// <summary>
+        /// Given the explicit string operator when cast from string over maximum length then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenExplicitStringOperator_WhenCastFromStringOverMaximumLength_ThrowsException()
+        {
+            // ARRANGE
+            var value = new string('A', Code.MaximumCharacterLength + 1);
+
+            // ReSharper disable once NotAccessedVariable
+            var code = default(Code);
+
+            // ACT
+            Action actual = () =>
+            {
+                code = (Code)value;
+            };
+
+            // ASSERT
+            actual.ShouldThrow<InvalidCastException>();
         }
 
         /// <summary>

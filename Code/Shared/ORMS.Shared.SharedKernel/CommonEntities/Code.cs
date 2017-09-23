@@ -61,11 +61,11 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// </returns>
         public static explicit operator Code(string value)
         {
-            var nameResult = Create(value);
+            var codeResult = Create(value);
 
-            if (nameResult.IsFailure) throw new InvalidCastException(nameResult.Error);
+            if (codeResult.IsFailure) throw new InvalidCastException(codeResult.Error);
 
-            return nameResult.Value;
+            return codeResult.Value;
         }
 
         /// <summary>
@@ -90,8 +90,8 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// Thrown if value length exceeds <see cref="MaximumCharacterLength"/>.
         public static Result<Code> Create(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Code>(CodeErrorKeys.CodeIsNullEmptyOrWhiteSpace);
-            if (value.Length > MaximumCharacterLength) return Result.Fail<Code>(CodeErrorKeys.CodeIsTooLong);
+            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Code>(CodeErrorKeys.IsNullEmptyOrWhiteSpace);
+            if (value.Length > MaximumCharacterLength) return Result.Fail<Code>(CodeErrorKeys.IsTooLong);
 
             return Result.Ok(CreateInternal(value));
         }

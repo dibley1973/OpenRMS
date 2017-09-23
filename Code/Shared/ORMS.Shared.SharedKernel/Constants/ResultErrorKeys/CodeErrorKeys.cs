@@ -9,20 +9,22 @@
 
 namespace ORMS.Shared.SharedKernel.Constants.ResultErrorKeys
 {
+    using CommonEntities;
+
     /// <summary>
-    /// Represents the keys strings for Name errors, which
+    /// Represents the keys strings for <see cref="Code"/> errors, which
     /// can be converted by the UI to meaningful messages;
     /// </summary>
     public class CodeErrorKeys
     {
         /// <summary>
-        /// The key for when a name is null, empty or, white space
+        /// The key for when the value is null, empty or, white space
         /// </summary>
-        public const string CodeIsNullEmptyOrWhiteSpace = "CodeIsNullEmptyOrwhiteSpace";
+        public const string IsNullEmptyOrWhiteSpace = "CodeIsNullEmptyOrwhiteSpace";
 
         /// <summary>
-        /// The key for when a name is too long
+        /// The key for when the value is too long
         /// </summary>
-        public const string CodeIsTooLong = "CodeIsTooLong";
+        public const string IsTooLong = "IsTooLong";
     }
 }

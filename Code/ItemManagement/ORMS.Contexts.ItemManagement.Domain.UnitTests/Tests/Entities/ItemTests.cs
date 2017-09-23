@@ -29,12 +29,12 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = default(Guid);
-            var name = Name.Create("Item 1");
+            var nameResult = Name.Create("Item 1");
             var description = ShortDescription.Create("Item One");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
+            Action action = () => new Item(id, nameResult.Value, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -48,12 +48,12 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.Empty;
-            var name = Name.Create("Item 1");
+            var nameResult = Name.Create("Item 1");
             var description = ShortDescription.Create("Item One");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
+            Action action = () => new Item(id, nameResult.Value, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -67,12 +67,11 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            var name = default(Name);
             var description = ShortDescription.Create("Item One");
 
             // ACT
             // ReSharper disable once ObjectCreationAsStatement
-            Action action = () => new Item(id, name, description);
+            Action action = () => new Item(id, null, description);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -86,15 +85,15 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            var name = Name.Create("Item 1");
+            var nameResult = Name.Create("Item 1");
             var description = ShortDescription.Create("Item One");
 
             // ACT
-            var actual = new Item(id, name, description);
+            var actual = new Item(id, nameResult.Value, description);
 
             // ASSERT
             actual.Should().NotBeNull();
-            actual.Name.Should().Be(name);
+            actual.Name.Should().Be(nameResult);
         }
 
         /// <summary>
@@ -105,11 +104,11 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            var name = Name.Create("Item 1");
+            var nameResult = Name.Create("Item 1");
             var description = ShortDescription.Create("Item One");
 
             // ACT
-            var actual = new Item(id, name, description);
+            var actual = new Item(id, nameResult.Value, description);
 
             // ASSERT
             actual.Should().NotBeNull();
@@ -124,9 +123,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            var name = Name.Create("Item 1");
+            var nameResult = Name.Create("Item 1");
             var description = ShortDescription.Create("Item One");
-            var item = new Item(id, name, description);
+            var item = new Item(id, nameResult.Value, description);
 
             // ACT
             Action action = () => item.ChangeCode(null);
@@ -144,9 +143,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var codeUpdated = Code.Create("C0001");
-            var name = Name.Create("Item 1");
+            var nameResult = Name.Create("Item 1");
             var description = ShortDescription.Create("Item One");
-            var item = new Item(id, name, description);
+            var item = new Item(id, nameResult.Value, description);
 
             // ACT
             item.ChangeCode(codeUpdated);
@@ -163,9 +162,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            var name = Name.Create("Item 1");
+            var result = Name.Create("Item 1");
             var description = ShortDescription.Create("Item One");
-            var item = new Item(id, name, description);
+            var item = new Item(id, result.Value, description);
 
             // ACT
             Action action = () => item.ChangeName(null);
@@ -182,13 +181,13 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            var name = Name.Create("Item 1");
+            var nameResult = Name.Create("Item 1");
             var nameUpdated = Name.Create("Item 1 Deluxe");
             var description = ShortDescription.Create("Item One");
-            var item = new Item(id, name, description);
+            var item = new Item(id, nameResult.Value, description);
 
             // ACT
-            item.ChangeName(nameUpdated);
+            item.ChangeName(nameUpdated.Value);
 
             // ASSERT
             item.Name.Should().Be(nameUpdated);
@@ -202,9 +201,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            var name = Name.Create("Item 1");
+            var nameResult = Name.Create("Item 1");
             var description = ShortDescription.Create("Item One");
-            var item = new Item(id, name, description);
+            var item = new Item(id, nameResult.Value, description);
 
             // ACT
             Action action = () => item.ChangeDescription(null);
@@ -221,10 +220,10 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            var name = Name.Create("Item 1");
+            var nameResult = Name.Create("Item 1");
             var description = ShortDescription.Create("Item One");
             var descriptionUpdated = ShortDescription.Create("Item One Deluxe");
-            var item = new Item(id, name, description);
+            var item = new Item(id, nameResult.Value, description);
 
             // ACT
             item.ChangeDescription(descriptionUpdated);

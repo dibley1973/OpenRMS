@@ -223,7 +223,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = "Name";
-            var name = Name.Create(value);
+            var nameResult = Name.Create(value);
+            var name = nameResult.Value;
 
             // ACT
             string actual = name;

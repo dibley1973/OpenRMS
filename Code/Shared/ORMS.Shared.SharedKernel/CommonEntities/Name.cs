@@ -10,7 +10,9 @@
 namespace ORMS.Shared.SharedKernel.CommonEntities
 {
     using System;
+    using Amplifiers;
     using BaseClasses;
+    using Constants.ResultErrorKeys;
 
     /// <summary>
     /// Represents a name
@@ -58,7 +60,11 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// </returns>
         public static explicit operator Name(string value)
         {
-            return Create(value);
+            var nameResult = Create(value);
+
+            if (nameResult.IsFailure) throw new InvalidCastException(nameResult.Error);
+
+            return nameResult.Value;
         }
 
         /// <summary>
@@ -82,12 +88,12 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown if value length exceeds <see cref="MaximumCharacterLength"/>.
         /// </exception>
-        public static Name Create(string value)
+        public static Result<Name> Create(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
-            if (value.Length > MaximumCharacterLength) throw new ArgumentOutOfRangeException(nameof(value), $"Must not exceed {MaximumCharacterLength} characters in length");
+            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Name>(NameErrorKeys.NameIsNullEmptyOrwhiteSpace);
+            if (value.Length > MaximumCharacterLength) return Result.Fail<Name>(NameErrorKeys.NameIsTooLong);
 
-            return CreateInternal(value);
+            return Result.Ok(CreateInternal(value));
         }
 
         /// <summary>

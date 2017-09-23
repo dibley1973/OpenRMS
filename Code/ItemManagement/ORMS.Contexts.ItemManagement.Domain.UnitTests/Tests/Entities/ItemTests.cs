@@ -86,14 +86,15 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
             var description = ShortDescription.Create("Item One");
 
             // ACT
-            var actual = new Item(id, nameResult.Value, description);
+            var actual = new Item(id, name, description);
 
             // ASSERT
             actual.Should().NotBeNull();
-            actual.Name.Should().Be(nameResult);
+            actual.Name.Should().Be(name);
         }
 
         /// <summary>
@@ -142,7 +143,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         {
             // ARRANGE
             var id = Guid.NewGuid();
-            var codeUpdated = Code.Create("C0001");
+            var codeUpdatedResult = Code.Create("C0001");
+            var codeUpdated = codeUpdatedResult.Value;
             var nameResult = Name.Create("Item 1");
             var description = ShortDescription.Create("Item One");
             var item = new Item(id, nameResult.Value, description);
@@ -182,12 +184,14 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ARRANGE
             var id = Guid.NewGuid();
             var nameResult = Name.Create("Item 1");
-            var nameUpdated = Name.Create("Item 1 Deluxe");
+            var name = nameResult.Value;
+            var nameUpdatedResul = Name.Create("Item 1 Deluxe");
+            var nameUpdated = nameUpdatedResul.Value;
             var description = ShortDescription.Create("Item One");
-            var item = new Item(id, nameResult.Value, description);
+            var item = new Item(id, name, description);
 
             // ACT
-            item.ChangeName(nameUpdated.Value);
+            item.ChangeName(nameUpdated);
 
             // ASSERT
             item.Name.Should().Be(nameUpdated);

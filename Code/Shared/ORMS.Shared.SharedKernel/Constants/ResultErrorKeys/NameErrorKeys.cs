@@ -18,7 +18,7 @@ namespace ORMS.Shared.SharedKernel.Constants.ResultErrorKeys
         /// <summary>
         /// The key for when a name is null, empty or, white space
         /// </summary>
-        public const string NameIsNullEmptyOrwhiteSpace = "NameIsNullEmptyOrwhiteSpace";
+        public const string NameIsNullEmptyOrWhiteSpace = "NameIsNullEmptyOrWhiteSpace";
 
         /// <summary>
         /// The key for when a name is too long

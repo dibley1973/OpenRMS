@@ -90,7 +90,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// </exception>
         public static Result<Name> Create(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Name>(NameErrorKeys.NameIsNullEmptyOrwhiteSpace);
+            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Name>(NameErrorKeys.NameIsNullEmptyOrWhiteSpace);
             if (value.Length > MaximumCharacterLength) return Result.Fail<Name>(NameErrorKeys.NameIsTooLong);
 
             return Result.Ok(CreateInternal(value));

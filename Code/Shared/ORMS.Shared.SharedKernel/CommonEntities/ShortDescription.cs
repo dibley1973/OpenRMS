@@ -10,12 +10,14 @@
 namespace ORMS.Shared.SharedKernel.CommonEntities
 {
     using System;
+    using System.Diagnostics;
     using BaseClasses;
 
     /// <summary>
     /// Represents a short description
     /// </summary>
     /// <seealso cref="ValueObject{ShortDescription}" />
+    [DebuggerDisplay("Value:{" + nameof(Value) + "}")]
     public class ShortDescription : ValueObject<ShortDescription>
     {
         /// <summary>

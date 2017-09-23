@@ -11,7 +11,9 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
 {
     using System;
     using System.Diagnostics;
+    using Amplifiers;
     using BaseClasses;
+    using Constants.ResultErrorKeys;
 
     /// <summary>
     /// Represents a short description
@@ -59,7 +61,11 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// </returns>
         public static explicit operator ShortDescription(string value)
         {
-            return Create(value);
+            var descriptionResult = Create(value);
+
+            if (descriptionResult.IsFailure) throw new InvalidCastException(descriptionResult.Error);
+
+            return descriptionResult.Value;
         }
 
         /// <summary>
@@ -75,20 +81,19 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="ShortDescription" /> class using.
+        /// If the specified value is valid then creates and returns a new instance of
+        /// the <see cref="ShortDescription" /> class using the value and wraps it in an
+        /// Ok <see cref="Result{name}"/>; otherwise creates a fail <see cref="Result{ShortDescription}"/>.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>Returns a newly constructed <see cref="ShortDescription"/>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if value is null, empty or white space.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">
+        /// <returns>Returns a newly constructed <see cref="Result{ShortDescription}"/>.</returns>
         /// Thrown if value length exceeds <see cref="MaximumCharacterLength"/>.
-        /// </exception>
-        public static ShortDescription Create(string value)
+        public static Result<ShortDescription> Create(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
-            if (value.Length > MaximumCharacterLength) throw new ArgumentOutOfRangeException(nameof(value), $"Must not exceed {MaximumCharacterLength} characters in length");
+            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<ShortDescription>(ShortDescriptionErrorKeys.IsNullEmptyOrWhiteSpace);
+            if (value.Length > MaximumCharacterLength) return Result.Fail<ShortDescription>(ShortDescriptionErrorKeys.IsTooLong);
 
-            return CreateInternal(value);
+            return Result.Ok(CreateInternal(value));
         }
 
         /// <summary>

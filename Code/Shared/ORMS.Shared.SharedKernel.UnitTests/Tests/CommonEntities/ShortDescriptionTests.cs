@@ -223,10 +223,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = "ShortDescription";
-            var name = ShortDescription.Create(value);
+            var descriptionResult = ShortDescription.Create(value);
+            var description = descriptionResult.Value;
 
             // ACT
-            string actual = name;
+            string actual = description;
 
             // ASSERT
             actual.Should().Be(value);

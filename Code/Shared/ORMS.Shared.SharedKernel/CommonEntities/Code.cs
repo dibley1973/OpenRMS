@@ -10,12 +10,16 @@
 namespace ORMS.Shared.SharedKernel.CommonEntities
 {
     using System;
+    using System.Diagnostics;
+    using Amplifiers;
     using BaseClasses;
+    using Constants.ResultErrorKeys;
 
     /// <summary>
     /// Represents a code
     /// </summary>
     /// <seealso cref="ValueObject{Code}" />
+    [DebuggerDisplay("Value:{" + nameof(Value) + "}")]
     public class Code : ValueObject<Code>
     {
         /// <summary>
@@ -57,7 +61,11 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// </returns>
         public static explicit operator Code(string value)
         {
-            return Create(value);
+            var nameResult = Create(value);
+
+            if (nameResult.IsFailure) throw new InvalidCastException(nameResult.Error);
+
+            return nameResult.Value;
         }
 
         /// <summary>
@@ -73,20 +81,19 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         }
 
         /// <summary>
-        /// Creates a <see cref="Code"/> using the specified value.
+        /// If the specified value is valid then creates and returns a new instance of
+        /// the <see cref="Code" /> class using the value and wraps it in an
+        /// Ok <see cref="Result{name}"/>; otherwise creates a fail <see cref="Result{Code}"/>.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>Returns a newly constructed <see cref="Code"/>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown value is null, empty or whitespace</exception>
-        /// <exception cref="ArgumentOutOfRangeException">
+        /// <returns>Returns a newly constructed <see cref="Result{Code}"/>.</returns>
         /// Thrown if value length exceeds <see cref="MaximumCharacterLength"/>.
-        /// </exception>
-        public static Code Create(string value)
+        public static Result<Code> Create(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
-            if (value.Length > MaximumCharacterLength) throw new ArgumentOutOfRangeException(nameof(value), $"Must not exceed {MaximumCharacterLength} characters in length");
+            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Code>(CodeErrorKeys.CodeIsNullEmptyOrWhiteSpace);
+            if (value.Length > MaximumCharacterLength) return Result.Fail<Code>(CodeErrorKeys.CodeIsTooLong);
 
-            return CreateInternal(value);
+            return Result.Ok(CreateInternal(value));
         }
 
         /// <summary>

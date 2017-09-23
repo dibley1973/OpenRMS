@@ -9,7 +9,7 @@
 
 namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 {
-    using System;
+    using Constants.ResultErrorKeys;
     using FluentAssertions;
     using NUnit.Framework;
     using SharedKernel.CommonEntities;
@@ -21,96 +21,100 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
     public class CodeTests
     {
         /// <summary>
-        /// Given creation when called with null value throws exception.
+        /// Given Create method when called with null value then returns fail result.
         /// </summary>
         [Test]
-        public void GivenCreate_WhenCalledWithNullValue_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithNullValue_ThenReturnsFailResult()
         {
             // ARRANGE
 
             // ACT
-            Action actual = () => Code.Create(null);
+            var actual = Code.Create(null);
 
             // ASSERT
-            actual.ShouldThrow<ArgumentNullException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(CodeErrorKeys.CodeIsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given creation when called with empty string throws exception.
+        /// Given Create method when called with empty string then returns fail result.
         /// </summary>
         [Test]
-        public void GivenCreate_WhenCalledWithEmptyValue_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithEmptyValue_ThenReturnsFailResult()
         {
             // ARRANGE
 
             // ACT
-            Action actual = () => Code.Create(string.Empty);
+            var actual = Code.Create(string.Empty);
 
             // ASSERT
-            actual.ShouldThrow<ArgumentNullException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(CodeErrorKeys.CodeIsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given creation when called with white space throws exception.
+        /// Given Create method when called with white space then returns fail result.
         /// </summary>
         [Test]
-        public void GivenCreate_WhenCalledWithWhiteSpace_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithWhiteSpace_ThenReturnsFailResult()
         {
             // ARRANGE
 
             // ACT
-            Action actual = () => Code.Create("  ");
+            var actual = Code.Create("  ");
 
             // ASSERT
-            actual.ShouldThrow<ArgumentNullException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(CodeErrorKeys.CodeIsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given creation when called with value longer than maximum length throws exception.
+        /// Given Create method when called with value longer than maximum length then returns fail result.
         /// </summary>
         [Test]
-        public void GivenCreate_WhenCalledWithValueLongerThanMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueLongerThanMaximumLength_ThenReturnsFailResult()
         {
             // ARRANGE
             var value = new string('A', Code.MaximumCharacterLength + 1);
 
             // ACT
-            Action actual = () => Code.Create(value);
+            var actual = Code.Create(value);
 
             // ASSERT
-            actual.ShouldThrow<ArgumentOutOfRangeException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(CodeErrorKeys.CodeIsTooLong);
         }
 
         /// <summary>
-        /// Given creation when called with value longer at maximum length throws exception.
+        /// Given Create method when called with value at maximum returns success result.
         /// </summary>
         [Test]
-        public void GivenCreate_WhenCalledWithValueAtMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueAtMaximumLength_ThenReturnsSuccessResult()
         {
             // ARRANGE
             var value = new string('A', Code.MaximumCharacterLength);
 
             // ACT
-            Action actual = () => Code.Create(value);
+            var actual = Code.Create(value);
 
             // ASSERT
-            actual.ShouldNotThrow();
+            actual.IsSuccess.Should().BeTrue();
         }
 
         /// <summary>
-        /// Given creation when called with value less than maximum length throws exception.
+        /// Given Create method when called with value less than maximum returns success result.
         /// </summary>
         [Test]
-        public void GivenCreate_WhenCalledWithValueLessThanMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueLessThanMaximumLength_ThenReturnsSuccessResult()
         {
             // ARRANGE
             var value = new string('A', Code.MaximumCharacterLength - 1);
 
             // ACT
-            Action actual = () => Code.Create(value);
+            var actual = Code.Create(value);
 
             // ASSERT
-            actual.ShouldNotThrow();
+            actual.IsSuccess.Should().BeTrue();
         }
 
         /// <summary>
@@ -121,10 +125,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = new string('A', Code.MaximumCharacterLength - 1);
-            var name = Code.Create(value);
+            var codeResult = Code.Create(value);
+            var code = codeResult.Value;
 
             // ACT
-            var actual = name.Value;
+            var actual = code.Value;
 
             // ASSERT
             actual.Should().Be(value);
@@ -137,11 +142,13 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = Code.Create("Code");
-            var name2 = Code.Create("Code");
+            var code1Result = Code.Create("Code");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.Equals(name2);
+            var actual = code1.Equals(code2);
 
             // ASSERT
             actual.Should().BeTrue();
@@ -154,11 +161,13 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = Code.Create("Code1");
-            var name2 = Code.Create("Code2");
+            var code1Result = Code.Create("Code1");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code2");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.Equals(name2);
+            var actual = code1.Equals(code2);
 
             // ASSERT
             actual.Should().BeFalse();
@@ -171,11 +180,13 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = Code.Create("Code");
-            var name2 = Code.Create("Code");
+            var code1Result = Code.Create("Code");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.GetHashCode().Equals(name2.GetHashCode());
+            var actual = code1.GetHashCode().Equals(code2.GetHashCode());
 
             // ASSERT
             actual.Should().BeTrue();
@@ -188,11 +199,13 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = Code.Create("Code1");
-            var name2 = Code.Create("Code2");
+            var code1Result = Code.Create("Code1");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code2");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.GetHashCode().Equals(name2.GetHashCode());
+            var actual = code1.GetHashCode().Equals(code2.GetHashCode());
 
             // ASSERT
             actual.Should().BeFalse();
@@ -223,7 +236,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = "Code";
-            var name = Code.Create(value);
+            var nameResult = Code.Create(value);
+            var name = nameResult.Value;
 
             // ACT
             string actual = name;

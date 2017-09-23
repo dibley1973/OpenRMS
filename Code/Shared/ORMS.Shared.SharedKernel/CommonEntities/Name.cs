@@ -91,8 +91,8 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// Thrown if value length exceeds <see cref="MaximumCharacterLength"/>.
         public static Result<Name> Create(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Name>(NameErrorKeys.NameIsNullEmptyOrWhiteSpace);
-            if (value.Length > MaximumCharacterLength) return Result.Fail<Name>(NameErrorKeys.NameIsTooLong);
+            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Name>(NameErrorKeys.IsNullEmptyOrWhiteSpace);
+            if (value.Length > MaximumCharacterLength) return Result.Fail<Name>(NameErrorKeys.IsTooLong);
 
             return Result.Ok(CreateInternal(value));
         }

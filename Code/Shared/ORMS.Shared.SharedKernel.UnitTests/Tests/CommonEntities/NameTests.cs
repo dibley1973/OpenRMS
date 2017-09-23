@@ -33,7 +33,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(NameErrorKeys.NameIsNullEmptyOrWhiteSpace);
+            actual.Error.Should().Be(NameErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(NameErrorKeys.NameIsNullEmptyOrWhiteSpace);
+            actual.Error.Should().Be(NameErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(NameErrorKeys.NameIsNullEmptyOrWhiteSpace);
+            actual.Error.Should().Be(NameErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(NameErrorKeys.NameIsTooLong);
+            actual.Error.Should().Be(NameErrorKeys.IsTooLong);
         }
 
         /// <summary>

@@ -9,7 +9,7 @@
 
 namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 {
-    using System;
+    using Constants.ResultErrorKeys;
     using FluentAssertions;
     using NUnit.Framework;
     using SharedKernel.CommonEntities;
@@ -21,96 +21,100 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
     public class NameTests
     {
         /// <summary>
-        /// Given the constructor when called with null value throws exception.
+        /// Given the create method when called with null value then returns fail result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithNullValue_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithNullValue_ThenReturnsFailResult()
         {
             // ARRANGE
 
             // ACT
-            Action actual = () => Name.Create(null);
+            var actual = Name.Create(null);
 
             // ASSERT
-            actual.ShouldThrow<ArgumentNullException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(NameErrorKeys.NameIsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the constructor when called with empty string throws exception.
+        /// Given the Create method when called with empty string then returns fail result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithEmptyValue_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithEmptyValue_ThenReturnsFailResult()
         {
             // ARRANGE
 
             // ACT
-            Action actual = () => Name.Create(string.Empty);
+            var actual = Name.Create(string.Empty);
 
             // ASSERT
-            actual.ShouldThrow<ArgumentNullException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(NameErrorKeys.NameIsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the constructor when called with white space throws exception.
+        /// Given the Create method when called with white space then returns fail result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithWhiteSpace_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithWhiteSpace_ThenReturnsFailResult()
         {
             // ARRANGE
 
             // ACT
-            Action actual = () => Name.Create("  ");
+            var actual = Name.Create("  ");
 
             // ASSERT
-            actual.ShouldThrow<ArgumentNullException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(NameErrorKeys.NameIsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the constructor when called with value longer than maximum length throws exception.
+        /// Given the Create method when called with value longer than maximum length then returns fail result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithValueLongerThanMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueLongerThanMaximumLength_ThenReturnsFailResult()
         {
             // ARRANGE
             var value = new string('A', Name.MaximumCharacterLength + 1);
 
             // ACT
-            Action actual = () => Name.Create(value);
+            var actual = Name.Create(value);
 
             // ASSERT
-            actual.ShouldThrow<ArgumentOutOfRangeException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(NameErrorKeys.NameIsTooLong);
         }
 
         /// <summary>
-        /// Given the constructor when called with value longer at maximum length throws exception.
+        /// Given the Create method when called with value at maximum length returns success result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithValueAtMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueAtMaximumLength_ThenReturnsSuccessResult()
         {
             // ARRANGE
             var value = new string('A', Name.MaximumCharacterLength);
 
             // ACT
-            Action actual = () => Name.Create(value);
+            var actual = Name.Create(value);
 
             // ASSERT
-            actual.ShouldNotThrow();
+            actual.IsSuccess.Should().BeTrue();
         }
 
         /// <summary>
-        /// Given the constructor when called with value less than maximum length throws exception.
+        /// Given the Create method when called with value less than maximum length returns success result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithValueLessThanMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueLessThanMaximumLength_ThenReturnsSuccessResult()
         {
             // ARRANGE
             var value = new string('A', Name.MaximumCharacterLength - 1);
 
             // ACT
-            Action actual = () => Name.Create(value);
+            var actual = Name.Create(value);
 
             // ASSERT
-            actual.ShouldNotThrow();
+            actual.IsSuccess.Should().BeTrue();
         }
 
         /// <summary>
@@ -121,7 +125,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = new string('A', Name.MaximumCharacterLength - 1);
-            var name = Name.Create(value);
+            var nameResult = Name.Create(value);
+            var name = nameResult.Value;
 
             // ACT
             var actual = name.Value;
@@ -137,8 +142,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = Name.Create("Name");
-            var name2 = Name.Create("Name");
+            var name1Result = Name.Create("Name");
+            var name1 = name1Result.Value;
+            var name2Result = Name.Create("Name");
+            var name2 = name2Result.Value;
 
             // ACT
             var actual = name1.Equals(name2);
@@ -154,8 +161,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = Name.Create("Name1");
-            var name2 = Name.Create("Name2");
+            var name1Result = Name.Create("Name1");
+            var name1 = name1Result.Value;
+            var name2Result = Name.Create("Name2");
+            var name2 = name2Result.Value;
 
             // ACT
             var actual = name1.Equals(name2);
@@ -171,8 +180,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = Name.Create("Name");
-            var name2 = Name.Create("Name");
+            var name1Result = Name.Create("Name");
+            var name1 = name1Result.Value;
+            var name2Result = Name.Create("Name");
+            var name2 = name2Result.Value;
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -188,8 +199,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = Name.Create("Name1");
-            var name2 = Name.Create("Name2");
+            var name1Result = Name.Create("Name1");
+            var name1 = name1Result.Value;
+            var name2Result = Name.Create("Name2");
+            var name2 = name2Result.Value;
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -206,7 +219,6 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = "Name";
-            ////var name = default(Name);
 
             // ACT
             var actual = (Name)value;

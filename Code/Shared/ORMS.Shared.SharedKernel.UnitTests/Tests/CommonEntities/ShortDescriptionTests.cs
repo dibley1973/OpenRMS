@@ -10,6 +10,7 @@
 namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 {
     using System;
+    using Constants.ResultErrorKeys;
     using FluentAssertions;
     using NUnit.Framework;
     using SharedKernel.CommonEntities;
@@ -21,96 +22,100 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
     public class ShortDescriptionTests
     {
         /// <summary>
-        /// Given the constructor when called with null value throws exception.
+        /// Given the create method when called with null value then returns fail result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithNullValue_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithNullValue_ThenReturnsFailResult()
         {
             // ARRANGE
 
             // ACT
-            Action actual = () => ShortDescription.Create(null);
+            var actual = ShortDescription.Create(null);
 
             // ASSERT
-            actual.ShouldThrow<ArgumentNullException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(ShortDescriptionErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the constructor when called with empty string throws exception.
+        /// Given the create method when called with empty string then returns fail result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithEmptyValue_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithEmptyValue_ThenReturnsFailResult()
         {
             // ARRANGE
 
             // ACT
-            Action actual = () => ShortDescription.Create(string.Empty);
+            var actual = ShortDescription.Create(string.Empty);
 
             // ASSERT
-            actual.ShouldThrow<ArgumentNullException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(ShortDescriptionErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the constructor when called with white space throws exception.
+        /// Given the create method when called with white space then returns fail result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithWhiteSpace_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithWhiteSpace_ThenReturnsFailResult()
         {
             // ARRANGE
 
             // ACT
-            Action actual = () => ShortDescription.Create("  ");
+            var actual = ShortDescription.Create("  ");
 
             // ASSERT
-            actual.ShouldThrow<ArgumentNullException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(ShortDescriptionErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the constructor when called with value longer than maximum length throws exception.
+        /// Given the create method when called with value longer than maximum length then returns fail result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithValueLongerThanMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueLongerThanMaximumLength_ThenReturnsFailResult()
         {
             // ARRANGE
             var value = new string('A', ShortDescription.MaximumCharacterLength + 1);
 
             // ACT
-            Action actual = () => ShortDescription.Create(value);
+            var actual = ShortDescription.Create(value);
 
             // ASSERT
-            actual.ShouldThrow<ArgumentOutOfRangeException>();
+            actual.IsFailure.Should().BeTrue();
+            actual.Error.Should().Be(ShortDescriptionErrorKeys.IsTooLong);
         }
 
         /// <summary>
-        /// Given the constructor when called with value longer at maximum length throws exception.
+        /// Given the create method when called with value longer at maximum length returns success result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithValueAtMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueAtMaximumLength_ThenReturnsSuccessResult()
         {
             // ARRANGE
             var value = new string('A', ShortDescription.MaximumCharacterLength);
 
             // ACT
-            Action actual = () => ShortDescription.Create(value);
+            var actual = ShortDescription.Create(value);
 
             // ASSERT
-            actual.ShouldNotThrow();
+            actual.IsSuccess.Should().BeTrue();
         }
 
         /// <summary>
-        /// Given the constructor when called with value less than maximum length throws exception.
+        /// Given the create method when called with value less than maximum length returns success result.
         /// </summary>
         [Test]
-        public void GivenConstructor_WhenCalledWithValueLessThanMaximumLength_ThenThrowsException()
+        public void GivenCreate_WhenCalledWithValueLessThanMaximumLength_ThenReturnsSuccessResult()
         {
             // ARRANGE
             var value = new string('A', ShortDescription.MaximumCharacterLength - 1);
 
             // ACT
-            Action actual = () => ShortDescription.Create(value);
+            var actual = ShortDescription.Create(value);
 
             // ASSERT
-            actual.ShouldNotThrow();
+            actual.IsSuccess.Should().BeTrue();
         }
 
         /// <summary>
@@ -121,7 +126,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         {
             // ARRANGE
             var value = new string('A', ShortDescription.MaximumCharacterLength - 1);
-            var name = ShortDescription.Create(value);
+            var nameResult = ShortDescription.Create(value);
+            var name = nameResult.Value;
 
             // ACT
             var actual = name.Value;
@@ -137,8 +143,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = ShortDescription.Create("ShortDescription");
-            var name2 = ShortDescription.Create("ShortDescription");
+            var name1Result = ShortDescription.Create("ShortDescription");
+            var name1 = name1Result.Value;
+            var name2Result = ShortDescription.Create("ShortDescription");
+            var name2 = name2Result.Value;
 
             // ACT
             var actual = name1.Equals(name2);
@@ -154,8 +162,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = ShortDescription.Create("ShortDescription1");
-            var name2 = ShortDescription.Create("ShortDescription2");
+            var name1Result = ShortDescription.Create("ShortDescription1");
+            var name1 = name1Result.Value;
+            var name2Result = ShortDescription.Create("ShortDescription2");
+            var name2 = name2Result.Value;
 
             // ACT
             var actual = name1.Equals(name2);
@@ -171,8 +181,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1 = ShortDescription.Create("ShortDescription");
-            var name2 = ShortDescription.Create("ShortDescription");
+            var name1Result = ShortDescription.Create("ShortDescription");
+            var name1 = name1Result.Value;
+            var name2Result = ShortDescription.Create("ShortDescription");
+            var name2 = name2Result.Value;
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -188,8 +200,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1 = ShortDescription.Create("ShortDescription1");
-            var name2 = ShortDescription.Create("ShortDescription2");
+            var name1Result = ShortDescription.Create("ShortDescription1");
+            var name1 = name1Result.Value;
+            var name2Result = ShortDescription.Create("ShortDescription2");
+            var name2 = name2Result.Value;
 
             // ACT
             var actual = name1.GetHashCode().Equals(name2.GetHashCode());
@@ -199,20 +213,41 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         }
 
         /// <summary>
-        /// Given the explicit string operator when cast from string then created name with same value.
+        /// Given the explicit string operator when cast from string at maximum length then created name with same value.
         /// </summary>
         [Test]
-        public void GivenExplicitStringOperator_WhenCastFromString_ThenCreatedShortDescriptionWithSameValue()
+        public void GivenExplicitStringOperator_WhenCastFromStringAtMaximumLength_ThenCreatedShortDescriptionWithSameValue()
         {
             // ARRANGE
-            var value = "ShortDescription";
-            ////var name = default(ShortDescription);
+            var value = new string('A', ShortDescription.MaximumCharacterLength);
 
             // ACT
             var actual = (ShortDescription)value;
 
             // ASSERT
             actual.Value.Should().Be(value);
+        }
+
+        /// <summary>
+        /// Given the explicit string operator when cast from string over maximum length then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenExplicitStringOperator_WhenCastFromStringOverMaximumLength_ThrowsException()
+        {
+            // ARRANGE
+            var value = new string('A', ShortDescription.MaximumCharacterLength + 1);
+
+            // ReSharper disable once NotAccessedVariable
+            var description = default(ShortDescription);
+
+            // ACT
+            Action actual = () =>
+            {
+                description = (ShortDescription)value;
+            };
+
+            // ASSERT
+            actual.ShouldThrow<InvalidCastException>();
         }
 
         /// <summary>

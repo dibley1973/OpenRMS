@@ -10,6 +10,7 @@
 namespace ORMS.Shared.SharedKernel.CommonEntities
 {
     using System;
+    using System.Diagnostics;
     using Amplifiers;
     using BaseClasses;
     using Constants.ResultErrorKeys;
@@ -18,6 +19,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
     /// Represents a name
     /// </summary>
     /// <seealso cref="ValueObject{Name}" />
+    [DebuggerDisplay("Value:{" + nameof(Value) + "}")]
     public class Name : ValueObject<Name>
     {
         /// <summary>
@@ -80,8 +82,8 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         }
 
         /// <summary>
-        /// If the specified value is valid then creates and returns a new instance of 
-        /// the <see cref="Name" /> class using the value and wraps it in an 
+        /// If the specified value is valid then creates and returns a new instance of
+        /// the <see cref="Name" /> class using the value and wraps it in an
         /// Ok <see cref="Result{name}"/>; otherwise creates a fail <see cref="Result{Name}"/>.
         /// </summary>
         /// <param name="value">The value.</param>

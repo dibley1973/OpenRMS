@@ -10,6 +10,8 @@
 namespace ORMS.Contexts.ItemManagement.Domain.Entities
 {
     using System;
+    using Constants.ResultErrorKeys;
+    using Shared.SharedKernel.Amplifiers;
     using Shared.SharedKernel.BaseClasses;
     using Shared.SharedKernel.CommonEntities;
 
@@ -87,6 +89,42 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// The description.
         /// </value>
         public ShortDescription Description { get; private set; }
+
+        /// <summary>
+        /// If the specified arguments are valid, then creates a new instance of
+        /// the <see cref="Item"/> and wraps it in a <see cref="Result{Item}"/>.
+        /// Otherwise returns a fail <see cref="Result{Item}"/>.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="description">The description.</param>
+        /// <returns>Returns a <see cref="Result{Item}"/></returns>
+        public static Result<Item> Create(Name name, ShortDescription description)
+        {
+            if (name == null) return Result.Fail<Item>(ItemErrorKeys.NameIsNull);
+            if (description == null) return Result.Fail<Item>(ItemErrorKeys.DescriptionIsNull);
+
+            return Result.Ok(new Item(name, description));
+        }
+
+        /// <summary>
+        /// If the specified arguments are valid, then creates a new instance of
+        /// the <see cref="Item"/> and wraps it in a <see cref="Result{Item}"/>.
+        /// Otherwise returns a fail <see cref="Result{Item}"/>.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="state">The state.</param>
+        /// <returns>Returns a <see cref="Result{Item}"/></returns>
+        public static Result<Item> Create(Guid id, Name name, ShortDescription description, ItemState state)
+        {
+            if (id == Guid.Empty) return Result.Fail<Item>(ItemErrorKeys.IdIsNull);
+            if (name == null) return Result.Fail<Item>(ItemErrorKeys.NameIsNull);
+            if (description == null) return Result.Fail<Item>(ItemErrorKeys.DescriptionIsNull);
+            if (state == null) return Result.Fail<Item>(ItemErrorKeys.StateIsNull);
+
+            return Result.Ok(new Item(id, name, description, state));
+        }
 
         /// <summary>
         /// Changes the products code.

@@ -37,10 +37,23 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
         public Item(Guid id, Name name, ShortDescription description)
+            : this(id, name, description, ItemState.Created)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Item" /> class.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="state">The state.</param>
+        public Item(Guid id, Name name, ShortDescription description, ItemState state)
             : base(id)
         {
             ChangeName(name);
             ChangeDescription(description);
+            ChangeItemState(state);
         }
 
         /// <summary>
@@ -50,6 +63,14 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// The code.
         /// </value>
         public Code Code { get; private set; }
+
+        /// <summary>
+        /// Gets the state of the item.
+        /// </summary>
+        /// <value>
+        /// The state of the item.
+        /// </value>
+        public ItemState ItemState { get; private set; }
 
         /// <summary>
         /// Gets the name.
@@ -74,6 +95,16 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         public void ChangeCode(Code code)
         {
             Code = code ?? throw new ArgumentNullException(nameof(code));
+        }
+
+        /// <summary>
+        /// Changes the state of the item.
+        /// </summary>
+        /// <param name="state">The state.</param>
+        /// <exception cref="ArgumentNullException">state</exception>
+        public void ChangeItemState(ItemState state)
+        {
+            ItemState = state ?? throw new ArgumentNullException(nameof(state));
         }
 
         /// <summary>

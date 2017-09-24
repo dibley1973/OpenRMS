@@ -86,6 +86,27 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
+        /// Given the construction when supplied with null name then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenConstruction_WhenSuppliedWithNullItemState_ThenThrowsException()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+
+            // ACT
+            // ReSharper disable once ObjectCreationAsStatement
+            Action action = () => new Item(id, name, description, null);
+
+            // ASSERT
+            action.ShouldThrow<ArgumentNullException>();
+        }
+
+        /// <summary>
         /// Given the name when constructorsupplied valid name then returns constructed value.
         /// </summary>
         [Test]
@@ -125,6 +146,46 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             // ASSERT
             actual.Should().NotBeNull();
             actual.Description.Should().Be(description);
+        }
+
+        /// <summary>
+        /// Given the state of the item state when constructed returns created item.
+        /// </summary>
+        public void GivenItemState_WhenConstructed_ReturnsCreatedItemState()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var item = new Item(id, name, description);
+
+            // ACT
+            var actual = item.ItemState;
+
+            // ASSERT
+            actual.Should().Be(ItemState.Created);
+        }
+
+        /// <summary>
+        /// Given the state of the item state when constructed returns created item.
+        /// </summary>
+        public void GivenItemState_WhenConstructedWithActiveItemState_ReturnsActiveItemState()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var item = new Item(id, name, description, ItemState.Active);
+
+            // ACT
+            var actual = item.ItemState;
+
+            // ASSERT
+            actual.Should().Be(ItemState.Active);
         }
 
         /// <summary>
@@ -254,6 +315,48 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
 
             // ASSERT
             item.Description.Should().Be(descriptionUpdated);
+        }
+
+        /// <summary>
+        /// Given the change ItemState method when given null ItemState throws exception.
+        /// </summary>
+        [Test]
+        public void GivenChangeItemState_WhenGivenNullItemState_ThrowsException()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var item = new Item(id, name, description);
+
+            // ACT
+            Action action = () => item.ChangeItemState(null);
+
+            // ASSERT
+            action.ShouldThrow<ArgumentNullException>();
+        }
+
+        /// <summary>
+        /// Given the change ItemState method when given valid value updates the item ItemState.
+        /// </summary>
+        [Test]
+        public void GivenChangeItemState_WhenGivenValidValue_UpdatesTheItemItemState()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var item = new Item(id, name, description);
+
+            // ACT
+            item.ChangeItemState(ItemState.Deactivated);
+
+            // ASSERT
+            item.ItemState.Should().Be(ItemState.Deactivated);
         }
     }
 }

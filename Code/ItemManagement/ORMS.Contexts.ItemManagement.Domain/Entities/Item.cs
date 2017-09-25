@@ -25,23 +25,24 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
-        public Item(Name name, ShortDescription description)
+        private Item(Name name, ShortDescription description)
             : base(Guid.NewGuid())
         {
             ChangeName(name);
             ChangeDescription(description);
+            ChangeItemState(ItemState.Created);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Item"/> class.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="description">The description.</param>
-        public Item(Guid id, Name name, ShortDescription description)
-            : this(id, name, description, ItemState.Created)
-        {
-        }
+        /////// <summary>
+        /////// Initializes a new instance of the <see cref="Item"/> class.
+        /////// </summary>
+        /////// <param name="id">The identifier.</param>
+        /////// <param name="name">The name.</param>
+        /////// <param name="description">The description.</param>
+        ////public Item(Guid id, Name name, ShortDescription description)
+        ////    : this(id, name, description, ItemState.Created)
+        ////{
+        ////}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Item" /> class.
@@ -50,7 +51,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
         /// <param name="state">The state.</param>
-        public Item(Guid id, Name name, ShortDescription description, ItemState state)
+        private Item(Guid id, Name name, ShortDescription description, ItemState state)
             : base(id)
         {
             ChangeName(name);
@@ -118,10 +119,10 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <returns>Returns a <see cref="Result{Item}"/></returns>
         public static Result<Item> Create(Guid id, Name name, ShortDescription description, ItemState state)
         {
-            if (id == Guid.Empty) return Result.Fail<Item>(ItemErrorKeys.IdIsNull);
+            if (id == Guid.Empty) return Result.Fail<Item>(ItemErrorKeys.IdIsNullOrEmpty);
             if (name == null) return Result.Fail<Item>(ItemErrorKeys.NameIsNull);
             if (description == null) return Result.Fail<Item>(ItemErrorKeys.DescriptionIsNull);
-            if (state == null) return Result.Fail<Item>(ItemErrorKeys.StateIsNull);
+            if (state == null) return Result.Fail<Item>(ItemErrorKeys.ItemStateIsNull);
 
             return Result.Ok(new Item(id, name, description, state));
         }

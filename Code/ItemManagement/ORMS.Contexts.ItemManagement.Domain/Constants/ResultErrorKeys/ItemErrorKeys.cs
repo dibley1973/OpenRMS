@@ -23,9 +23,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.Constants.ResultErrorKeys
         public const string DescriptionIsNull = "DescriptionIsNull ";
 
         /// <summary>
-        /// The key for when the id is null.
+        /// The key for when the id is null or empty.
         /// </summary>
-        public const string IdIsNull = "IdIsNull";
+        public const string IdIsNullOrEmpty = "IdIsNullOrEmpty";
 
         /// <summary>
         /// The key for when the name is null.
@@ -35,6 +35,6 @@ namespace ORMS.Contexts.ItemManagement.Domain.Constants.ResultErrorKeys
         /// <summary>
         /// The key for when the state is null.
         /// </summary>
-        public const string StateIsNull = "StateIsNull";
+        public const string ItemStateIsNull = "ItemStateIsNull";
     }
 }

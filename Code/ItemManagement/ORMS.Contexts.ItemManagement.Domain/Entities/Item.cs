@@ -57,10 +57,10 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         public Code Code { get; private set; }
 
         /// <summary>
-        /// Gets the state of the item.
+        /// Gets the state of this instance.
         /// </summary>
         /// <value>
-        /// The state of the item.
+        /// The state of this instance.
         /// </value>
         public ItemState ItemState { get; private set; }
 
@@ -126,7 +126,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
-        /// Changes the state of the item.
+        /// Changes the state of this instance.
         /// </summary>
         /// <param name="state">The state.</param>
         /// <exception cref="ArgumentNullException">state</exception>

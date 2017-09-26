@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+    <PropertyGroup>
+        <CodeAnalysisRuleSet>$(SolutionDir)\_stylecop\StyleCopeRules.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DocumentationFile>bin\Debug\netcoreapp2.0\ORMS.Contexts.LocationManagement.Domain.UnitTests.xml</DocumentationFile>
+    </PropertyGroup>
+
+  <ItemGroup>
+      <PackageReference Include="FluentAssertions" Version="5.0.0-beta0002" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
+      <PackageReference Include="NUnit" Version="3.8.1" />
+      <PackageReference Include="NUnit3TestAdapter" Version="3.8.0" />
+      <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Tests\" />
+  </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="$(SolutionDir)\_stylecop\stylecop.json" Link="stylecop.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ORMS.Contexts.LocationManagement.Domain\ORMS.Contexts.LocationManagement.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

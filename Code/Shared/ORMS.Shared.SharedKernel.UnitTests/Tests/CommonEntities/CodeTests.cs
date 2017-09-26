@@ -176,7 +176,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         }
 
         /// <summary>
-        /// Givens the get hash code, when same value strings then returns true.
+        /// Given the get hash code, when same value strings then returns true.
         /// </summary>
         [Test]
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
@@ -195,7 +195,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         }
 
         /// <summary>
-        /// Givens the get hash code, when different value strings then returns false.
+        /// Given the get hash code, when different value strings then returns false.
         /// </summary>
         [Test]
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()

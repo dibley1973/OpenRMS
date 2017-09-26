@@ -24,7 +24,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
     public class ValueObjectTests
     {
         /// <summary>
-        /// Givens the equals when given null object returns false.
+        /// Given the equals when given null object returns false.
         /// </summary>
         [Test]
         public void GivenEquals_WhenGivenNullObject_ReturnsFalse()
@@ -41,7 +41,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the equals when given null object returns false.
+        /// Given the equals when given null object returns false.
         /// </summary>
         [Test]
         public void GivenEquals_WhenGivenNullSameType_ReturnsFalse()
@@ -60,7 +60,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the equals when given different type returns false.
+        /// Given the equals when given different type returns false.
         /// </summary>
         [Test]
         public void GivenEquals_WhenGivenDifferentType_ReturnsFalse()
@@ -77,7 +77,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the equals when given same type different reference returns false.
+        /// Given the equals when given same type different reference returns false.
         /// </summary>
         [Test]
         public void GivenEquals_WhenGivenSameTypeDifferentReference_ReturnsFalse()
@@ -94,7 +94,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the equals when given same type same reference returns true.
+        /// Given the equals when given same type same reference returns true.
         /// </summary>
         [Test]
         public void GivenEquals_WhenGivenSameTypeSameReference_ReturnsTrue()
@@ -111,7 +111,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the equals when given same type different reference same values returns true.
+        /// Given the equals when given same type different reference same values returns true.
         /// </summary>
         [Test]
         public void GivenEquals_WhenGivenSameTypeDifferentReferenceSameValues_ReturnsTrue()
@@ -128,7 +128,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the get hash code when used same property values are used calculates same code.
+        /// Given the get hash code when used same property values are used calculates same code.
         /// </summary>
         [Test]
         public void GivenGetHashCode_WhenUsedSamePropertyValuesAreUsed_CalculatesSameCode()
@@ -149,7 +149,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the get hash code when used different property values are used calculates different code.
+        /// Given the get hash code when used different property values are used calculates different code.
         /// </summary>
         [Test]
         public void GivenGetHashCode_WhenUsedDifferentPropertyValuesAreUsed_CalculatesDifferentCode()
@@ -171,7 +171,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the is equal to when given null object returns false.
+        /// Given the is equal to when given null object returns false.
         /// </summary>
         [Test]
         public void GivenIsEqualTo_WhenGivenNullObject_ReturnsFalse()
@@ -190,7 +190,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the is equal to when given same type different reference returns false.
+        /// Given the is equal to when given same type different reference returns false.
         /// </summary>
         [Test]
         public void GivenIsEqualTo_WhenGivenSameTypeDifferentReference_ReturnsFalse()
@@ -207,7 +207,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the is equal to when given same type same reference returns true.
+        /// Given the is equal to when given same type same reference returns true.
         /// </summary>
         [Test]
         public void GivenIsEqualTo_WhenGivenSameTypeSameReference_ReturnsTrue()
@@ -224,7 +224,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the is equal to when given same type different reference same values returns true.
+        /// Given the is equal to when given same type different reference same values returns true.
         /// </summary>
         [Test]
         public void GivenIsEqualTo_WhenGivenSameTypeDifferentReferenceSameValues_ReturnsTrue()
@@ -241,7 +241,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the is not equal to when given null object returns true.
+        /// Given the is not equal to when given null object returns true.
         /// </summary>
         [Test]
         public void GivenIsNotEqualTo_WhenGivenNullObject_ReturnsTrue()
@@ -260,7 +260,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the is not equal to when given same type different reference returns true.
+        /// Given the is not equal to when given same type different reference returns true.
         /// </summary>
         [Test]
         public void GivenIsNotEqualTo_WhenGivenSameTypeDifferentReference_ReturnsTrue()
@@ -277,7 +277,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the is not equal to when given same type same reference returns false.
+        /// Given the is not equal to when given same type same reference returns false.
         /// </summary>
         [Test]
         public void GivenIsNotEqualTo_WhenGivenSameTypeSameReference_ReturnsFalse()
@@ -294,7 +294,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         }
 
         /// <summary>
-        /// Givens the is not equal to when given same type different reference same values returns false.
+        /// Given the is not equal to when given same type different reference same values returns false.
         /// </summary>
         [Test]
         public void GivenIsNotEqualTo_WhenGivenSameTypeDifferentReferenceSameValues_ReturnsFalse()

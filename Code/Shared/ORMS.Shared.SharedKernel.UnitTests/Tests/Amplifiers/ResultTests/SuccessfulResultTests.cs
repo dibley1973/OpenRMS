@@ -64,7 +64,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         }
 
         /// <summary>
-        /// Givens a generic result when ok then success should be true.
+        /// Given a generic result when ok then success should be true.
         /// </summary>
         [Test]
         public void GivenAGenericResult_WhenOk_ThenSuccessShouldBeTrue()
@@ -80,7 +80,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         }
 
         /// <summary>
-        /// Givens a generic result when ok then value should be supplied value.
+        /// Given a generic result when ok then value should be supplied value.
         /// </summary>
         [Test]
         public void GivenAGenericResult_WhenOk_ThenValueShouldBeSuppliedValue()
@@ -96,7 +96,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         }
 
         /// <summary>
-        /// Givens a generic result when ok with null then exception is thrown.
+        /// Given a generic result when ok with null then exception is thrown.
         /// </summary>
         [Test]
         public void GivenAGenericResult_WhenOkWithNull_ThenExceptionIsThrown()
@@ -109,7 +109,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         }
 
         /// <summary>
-        /// Givens a non generic result when accessing error then an exception is thrown.
+        /// Given a non generic result when accessing error then an exception is thrown.
         /// </summary>
         [Test]
         public void GivenANonGenericResult_WhenAccessingError_ThenAnExceptionIsThrown()
@@ -128,7 +128,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         }
 
         /// <summary>
-        /// Givens a generic result when accessing error then an exception is thrown.
+        /// Given a generic result when accessing error then an exception is thrown.
         /// </summary>
         [Test]
         public void GivenAGenericResult_WhenAccessingError_ThenAnExceptionIsThrown()

@@ -31,6 +31,26 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         {
             // ARRANGE
             var instance = FakeOptionCodeData.CreateOptionCodeNo1();
+            var other = FakeOptionCodeData.CreateDefaultOptionCode();
+
+            // ACT
+            var actual = instance.Equals(other);
+
+            // ASSERT
+            actual.Should().BeFalse();
+        }
+
+        /// <summary>
+        /// Givens the equals when given null object returns false.
+        /// </summary>
+        [Test]
+        public void GivenEquals_WhenGivenNullSameType_ReturnsFalse()
+        {
+            // ARRANGE
+            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
+#pragma warning disable 219
+            var other = default(FakeOptionCode);
+#pragma warning restore 219
 
             // ACT
             var actual = instance.Equals(null);

@@ -17,7 +17,7 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
     /// <typeparam name="TId">
     /// Indicates the type of the entities identifier. Normally a Long or Guid
     /// </typeparam>
-    public abstract class Entity<TId>
+    public abstract class Entity<TId> : IEquatable<Entity<TId>>
         where TId : struct
     {
         /// <summary>
@@ -102,7 +102,7 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="object" />, is equal to this instance.
+        /// Indicates whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
@@ -112,17 +112,29 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         {
             var compareTo = obj as Entity<TId>;
 
-            var compareToIsNull = ReferenceEquals(compareTo, null);
+            return Equals(compareTo);
+        }
+
+        /// <summary>
+        /// Indicates whether the current instance is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this instance.</param>
+        /// <returns>
+        /// <c>true</c> if the instance object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
+        /// </returns>
+        public bool Equals(Entity<TId> other)
+        {
+            var compareToIsNull = ReferenceEquals(other, null);
             if (compareToIsNull) return false;
 
-            var compareToIsSameReference = ReferenceEquals(this, compareTo);
+            var compareToIsSameReference = ReferenceEquals(this, other);
             if (compareToIsSameReference) return true;
 
-            var compareToIsDifferentType = GetType() != compareTo.GetType();
+            var compareToIsDifferentType = GetType() != other.GetType();
             if (compareToIsDifferentType) return false;
 
-            var bothArePersistent = IsPersistent && compareTo.IsPersistent;
-            var bothIdentitiesMatch = Id.Equals(compareTo.Id);
+            var bothArePersistent = IsPersistent && other.IsPersistent;
+            var bothIdentitiesMatch = Id.Equals(other.Id);
             if (bothArePersistent && bothIdentitiesMatch) return true;
 
             return false;

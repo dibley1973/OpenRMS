@@ -17,7 +17,7 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
     /// <typeparam name="T">
     /// Defines the <see cref="Type"/> of the "leaf" class which the value object actually is.
     /// </typeparam>
-    public abstract class ValueObject<T>
+    public abstract class ValueObject<T> : IEquatable<T>
         where T : ValueObject<T>
     {
         /// <summary>
@@ -68,10 +68,27 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         {
             var valueObject = obj as T;
 
-            var objectIsDifferentType = ReferenceEquals(valueObject, null);
+            return Equals(valueObject);
+
+            ////var objectIsDifferentType = ReferenceEquals(valueObject, null);
+            ////if (objectIsDifferentType) return false;
+
+            ////return EqualsCore(valueObject);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="ValueObject{T}" />, is equal to this instance of <see cref="ValueObject{T}"/>.
+        /// </summary>
+        /// <param name="other">The <see cref="ValueObject{T}" /> to compare with this instance.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the specified <see cref="ValueObject{T}" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public bool Equals(T other)
+        {
+            var objectIsDifferentType = ReferenceEquals(other, null);
             if (objectIsDifferentType) return false;
 
-            return EqualsCore(valueObject);
+            return EqualsCore(other);
         }
 
         /// <summary>

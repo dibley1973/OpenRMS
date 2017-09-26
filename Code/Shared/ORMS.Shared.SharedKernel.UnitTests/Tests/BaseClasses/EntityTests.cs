@@ -25,13 +25,32 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         /// Tests Equals when other is same type but null returns false.
         /// </summary>
         [Test]
+        public void GivenEquals_WhenOtherIsObjectButNull_ReturnsFalse()
+        {
+            // ARRANGE
+            var product = FakeProductData.CreateProductNo2();
+            var other = (object)null;
+
+            // ACT
+            // ReSharper disable once ExpressionIsAlwaysNull
+            var actual = product.Equals(other);
+
+            // ASSERT
+            actual.Should().BeFalse();
+        }
+
+        /// <summary>
+        /// Tests Equals when other is same type but null returns false.
+        /// </summary>
+        [Test]
         public void GivenEquals_WhenOtherIsSameTypeButNull_ReturnsFalse()
         {
             // ARRANGE
             var product = FakeProductData.CreateProductNo2();
+            var other = FakeProductData.CreateNullProduct();
 
             // ACT
-            var actual = product.Equals(null);
+            var actual = product.Equals(other);
 
             // ASSERT
             actual.Should().BeFalse();

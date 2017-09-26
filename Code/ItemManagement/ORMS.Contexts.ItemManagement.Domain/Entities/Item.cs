@@ -33,17 +33,6 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
             ChangeItemState(ItemState.Created);
         }
 
-        /////// <summary>
-        /////// Initializes a new instance of the <see cref="Item"/> class.
-        /////// </summary>
-        /////// <param name="id">The identifier.</param>
-        /////// <param name="name">The name.</param>
-        /////// <param name="description">The description.</param>
-        ////public Item(Guid id, Name name, ShortDescription description)
-        ////    : this(id, name, description, ItemState.Created)
-        ////{
-        ////}
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Item" /> class.
         /// </summary>

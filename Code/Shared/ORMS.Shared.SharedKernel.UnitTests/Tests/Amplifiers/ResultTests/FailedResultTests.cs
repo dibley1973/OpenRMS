@@ -66,7 +66,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenError_WhenAGenericResultFail_ThenMessageShouldMatchSuppliedMessage()
         {
             // ARRANGE
-            var result = Result.Fail<FakeProduct>("Error message");
+            var result = Result.Fail<FakeEntity>("Error message");
 
             // ASSERT
             result.Error.Should().Be("Error message");
@@ -79,7 +79,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenIsFailure_WhenAGenericResultFail_ThenShouldBeTrue()
         {
             // ARRANGE
-            var result = Result.Fail<FakeProduct>("Error message");
+            var result = Result.Fail<FakeEntity>("Error message");
 
             // ASSERT
             result.IsFailure.Should().Be(true);
@@ -92,7 +92,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenIsSuccess_WhenAGenericFailResult_ThenShouldBeFalse()
         {
             // ARRANGE
-            var result = Result.Fail<FakeProduct>("Error message");
+            var result = Result.Fail<FakeEntity>("Error message");
 
             // ASSERT
             result.IsSuccess.Should().Be(false);
@@ -105,10 +105,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenValueProperty_WhenAGenericfailResult_ThenThrowsException()
         {
             // ARRANGE
-            var result = Result.Fail<FakeProduct>("Error message");
+            var result = Result.Fail<FakeEntity>("Error message");
 
             // ACT
-            Action action = () => { FakeProduct dummy = result.Value; };
+            Action action = () => { FakeEntity dummy = result.Value; };
 
             // ASSERT
             action.ShouldThrow<InvalidOperationException>();
@@ -147,7 +147,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenAGenericFailCreation_WhenNullMessage_ThrowsException()
         {
             // ARRANGE
-            Action action3 = () => { Result.Fail<FakeProduct>(null); };
+            Action action3 = () => { Result.Fail<FakeEntity>(null); };
 
             // ASSERT
             action3.ShouldThrow<ArgumentNullException>();
@@ -160,7 +160,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenAGenericFailCreation_WhenEmptyStringMessage_ThrowsException()
         {
             // ARRANGE
-            Action action4 = () => { Result.Fail<FakeProduct>(string.Empty); };
+            Action action4 = () => { Result.Fail<FakeEntity>(string.Empty); };
 
             // ASSERT
             action4.ShouldThrow<ArgumentNullException>();

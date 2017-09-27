@@ -28,7 +28,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenOtherIsObjectButNull_ReturnsFalse()
         {
             // ARRANGE
-            var product = FakeProductData.CreateProductNo2();
+            var product = FakeEntityData.CreateProductNo2();
             var other = (object)null;
 
             // ACT
@@ -46,8 +46,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenOtherIsSameTypeButNull_ReturnsFalse()
         {
             // ARRANGE
-            var product = FakeProductData.CreateProductNo2();
-            var other = FakeProductData.CreateNullProduct();
+            var product = FakeEntityData.CreateProductNo2();
+            var other = FakeEntityData.CreateNullProduct();
 
             // ACT
             var actual = product.Equals(other);
@@ -63,7 +63,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenOtherIsDifferentType_ReturnsFalse()
         {
             // ARRANGE
-            var product = FakeProductData.CreateProductNo2();
+            var product = FakeEntityData.CreateProductNo2();
             object other = new string('W', 5);
 
             // ACT
@@ -80,7 +80,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenOtherIsSameReference_ReturnsTrue()
         {
             // ARRANGE
-            var product = FakeProductData.CreateProductNo2();
+            var product = FakeEntityData.CreateProductNo2();
             object other = product;
 
             // ACT
@@ -97,8 +97,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenOtherIsSameTypeButDefaultId_ReturnsFalse()
         {
             // ARRANGE
-            var product = FakeProductData.CreateEmptyProduct();
-            var other = FakeProductData.CreateEmptyProduct();
+            var product = FakeEntityData.CreateEmptyProduct();
+            var other = FakeEntityData.CreateEmptyProduct();
 
             // ACT
             var actual = product.Equals(other);
@@ -114,8 +114,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenOtherIsSameTypeButDifferentIds_ReturnsFalse()
         {
             // ARRANGE
-            var product = FakeProductData.CreateProductNo2();
-            var other = FakeProductData.CreateProductNo3();
+            var product = FakeEntityData.CreateProductNo2();
+            var other = FakeEntityData.CreateProductNo3();
 
             // ACT
             var actual = product.Equals(other);
@@ -131,8 +131,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenOtherIsSameTypeWithSameIds_ReturnsTrue()
         {
             // ARRANGE
-            var product = FakeProductData.CreateProductNo2();
-            var other = FakeProductData.CreateProductNo2();
+            var product = FakeEntityData.CreateProductNo2();
+            var other = FakeEntityData.CreateProductNo2();
 
             // ACT
             var actual = product.Equals(other);
@@ -148,7 +148,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenId_AfterConstructionWithNoId_ReturnsDefaultValueOfId()
         {
             // ARRANGE
-            var product = FakeProductData.CreateEmptyProduct();
+            var product = FakeEntityData.CreateEmptyProduct();
 
             // ACT
             var actual = product.Id;
@@ -165,7 +165,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         {
             // ARRANGE
             var id = 187;
-            var product = FakeProductData.CreateProduct(id);
+            var product = FakeEntityData.CreateProduct(id);
 
             // ACT
             var actual = product.Id;
@@ -181,12 +181,12 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsEqualTo_WhenBothInstancesAreNull_ReturnsTrue()
         {
             // ARRANGE
-            FakeProduct product = FakeProductData.CreateNullProduct();
-            FakeProduct other = FakeProductData.CreateNullProduct();
+            FakeEntity entity = FakeEntityData.CreateNullProduct();
+            FakeEntity other = FakeEntityData.CreateNullProduct();
 
             // ACT
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            var actual = product == other;
+            var actual = entity == other;
 
             // ASSERT
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
@@ -200,12 +200,12 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsEqualTo_WhenOneInstanceIsInstantiatedAndTheOtherIsNull_ReturnsFalse()
         {
             // ARRANGE
-            FakeProduct product = FakeProductData.CreateProductNo2();
-            FakeProduct other = FakeProductData.CreateNullProduct();
+            FakeEntity entity = FakeEntityData.CreateProductNo2();
+            FakeEntity other = FakeEntityData.CreateNullProduct();
 
             // ACT
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            var actual = product == other;
+            var actual = entity == other;
 
             // ASSERT
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
@@ -219,11 +219,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsEqualTo_WhenBothInstanceAreInstantiatedWithDifferentIds_ReturnsFalse()
         {
             // ARRANGE
-            FakeProduct product = new FakeProduct(7);
-            FakeProduct other = new FakeProduct(77);
+            FakeEntity entity = new FakeEntity(7);
+            FakeEntity other = new FakeEntity(77);
 
             // ACT
-            var actual = product == other;
+            var actual = entity == other;
 
             // ASSERT
             actual.Should().BeFalse();
@@ -236,11 +236,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsEqualTo_WhenBothInstanceAreInstantiatedWithSameIds_ReturnsTrue()
         {
             // ARRANGE
-            FakeProduct product = new FakeProduct(7);
-            FakeProduct other = new FakeProduct(7);
+            FakeEntity entity = new FakeEntity(7);
+            FakeEntity other = new FakeEntity(7);
 
             // ACT
-            var actual = product == other;
+            var actual = entity == other;
 
             // ASSERT
             actual.Should().BeTrue();
@@ -253,12 +253,12 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsNotEqualTo_WhenBothInstancesAreNull_ReturnsFalse()
         {
             // ARRANGE
-            FakeProduct product = null;
-            FakeProduct other = null;
+            FakeEntity entity = null;
+            FakeEntity other = null;
 
             // ACT
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            var actual = product != other;
+            var actual = entity != other;
 
             // ASSERT
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
@@ -272,12 +272,12 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsNotEqualTo_WhenOneInstanceIsInstantiatedAndTheOtherIsNull_ReturnsTrue()
         {
             // ARRANGE
-            FakeProduct product = new FakeProduct(7);
-            FakeProduct other = null;
+            FakeEntity entity = new FakeEntity(7);
+            FakeEntity other = null;
 
             // ACT
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            var actual = product != other;
+            var actual = entity != other;
 
             // ASSERT
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
@@ -291,11 +291,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsNotEqualTo_WhenBothInstanceAreInstantiatedWithDifferentIds_ReturnsTrue()
         {
             // ARRANGE
-            FakeProduct product = FakeProductData.CreateProductNo2();
-            FakeProduct other = FakeProductData.CreateProductNo3();
+            FakeEntity entity = FakeEntityData.CreateProductNo2();
+            FakeEntity other = FakeEntityData.CreateProductNo3();
 
             // ACT
-            var actual = product != other;
+            var actual = entity != other;
 
             // ASSERT
             actual.Should().BeTrue();
@@ -308,11 +308,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsNotEqualTo_WhenBothInstanceAreInstantiatedWithSameIds_ReturnTrue()
         {
             // ARRANGE
-            FakeProduct product = FakeProductData.CreateProductNo2();
-            FakeProduct other = FakeProductData.CreateProductNo3();
+            FakeEntity entity = FakeEntityData.CreateProductNo2();
+            FakeEntity other = FakeEntityData.CreateProductNo3();
 
             // ACT
-            var actual = product != other;
+            var actual = entity != other;
 
             // ASSERT
             actual.Should().BeTrue();
@@ -325,7 +325,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsPersistent_AfterConstructionWithNoId_ReturnsFalse()
         {
             // ARRANGE
-            var product = FakeProductData.CreateEmptyProduct();
+            var product = FakeEntityData.CreateEmptyProduct();
 
             // ACT
             var actual = product.IsPersistent;
@@ -341,7 +341,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsPersistent_AfterConstructionWithId_ReturnsTrue()
         {
             // ARRANGE
-            var product = FakeProductData.CreateProductNo2();
+            var product = FakeEntityData.CreateProductNo2();
 
             // ACT
             var actual = product.IsPersistent;
@@ -357,7 +357,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsTransient_AfterConstructionWithNoId_ReturnsTrue()
         {
             // ARRANGE
-            var product = FakeProductData.CreateEmptyProduct();
+            var product = FakeEntityData.CreateEmptyProduct();
 
             // ACT
             var actual = product.IsTransient;
@@ -373,7 +373,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsTransient_AfterConstructionWithId_ReturnsFalse()
         {
             // ARRANGE
-            var product = FakeProductData.CreateProductNo2();
+            var product = FakeEntityData.CreateProductNo2();
 
             // ACT
             var actual = product.IsTransient;

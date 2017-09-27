@@ -54,10 +54,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenAGenericResult_WhenOk_ThenFailureShouldBeFalse()
         {
             // ARRANGE
-            var emptyProduct = FakeProductData.CreateEmptyProduct();
+            var emptyProduct = FakeEntityData.CreateEmptyProduct();
 
             // ACT
-            Result<FakeProduct> result = Result.Ok(emptyProduct);
+            Result<FakeEntity> result = Result.Ok(emptyProduct);
 
             // ASSERT
             result.IsFailure.Should().Be(false);
@@ -70,10 +70,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenAGenericResult_WhenOk_ThenSuccessShouldBeTrue()
         {
             // ARRANGE
-            var emptyProduct = FakeProductData.CreateEmptyProduct();
+            var emptyProduct = FakeEntityData.CreateEmptyProduct();
 
             // ACT
-            Result<FakeProduct> result = Result.Ok(emptyProduct);
+            Result<FakeEntity> result = Result.Ok(emptyProduct);
 
             // ASSERT
             result.IsSuccess.Should().Be(true);
@@ -86,10 +86,10 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenAGenericResult_WhenOk_ThenValueShouldBeSuppliedValue()
         {
             // ARRANGE
-            var emptyProduct = FakeProductData.CreateEmptyProduct();
+            var emptyProduct = FakeEntityData.CreateEmptyProduct();
 
             // ACT
-            Result<FakeProduct> result = Result.Ok(emptyProduct);
+            Result<FakeEntity> result = Result.Ok(emptyProduct);
 
             // ASSERT
             result.Value.Should().Be(emptyProduct);
@@ -102,7 +102,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenAGenericResult_WhenOkWithNull_ThenExceptionIsThrown()
         {
             // ARRANGE
-            Action action = () => { Result.Ok((FakeProduct)null); };
+            Action action = () => { Result.Ok((FakeEntity)null); };
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>();
@@ -134,7 +134,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         public void GivenAGenericResult_WhenAccessingError_ThenAnExceptionIsThrown()
         {
             // ARRANGE
-            Result<FakeProduct> result = Result.Ok(FakeProductData.CreateEmptyProduct());
+            Result<FakeEntity> result = Result.Ok(FakeEntityData.CreateEmptyProduct());
 
             // ACT
             Action action = () =>

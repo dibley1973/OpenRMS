@@ -46,7 +46,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         {
             // ARRANGE
             var myBool = false;
-            var myResult = Result.Fail<FakeProduct>(_errorMessage);
+            var myResult = Result.Fail<FakeEntity>(_errorMessage);
 
             // ACT
             myResult.OnFailure(() => myBool = true);
@@ -63,7 +63,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Amplifiers.ResultTests
         {
             // ARRANGE
             var myError = string.Empty;
-            var myResult = Result.Fail<FakeProduct>(_errorMessage);
+            var myResult = Result.Fail<FakeEntity>(_errorMessage);
 
             // ACT
             myResult.OnFailure(error => myError = error);

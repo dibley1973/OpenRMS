@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="FakeProduct.cs" company="Chesil Media">
+// <copyright file="FakeEntity.cs" company="Chesil Media">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -12,22 +12,22 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Fakes
     using BaseClasses;
 
     /// <summary>
-    /// Represents a fake product for testing purposes only
+    /// Represents a fake entity for testing purposes only
     /// </summary>
-    internal class FakeProduct : Entity<int>
+    internal class FakeEntity : Entity<int>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FakeProduct"/> class.
+        /// Initializes a new instance of the <see cref="FakeEntity"/> class.
         /// </summary>
-        public FakeProduct()
+        public FakeEntity()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FakeProduct"/> class.
+        /// Initializes a new instance of the <see cref="FakeEntity"/> class.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        public FakeProduct(int id)
+        public FakeEntity(int id)
             : base(id)
         {
         }

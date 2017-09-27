@@ -30,8 +30,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenGivenNullObject_ReturnsFalse()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
-            var other = FakeOptionCodeData.CreateDefaultOptionCode();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var other = FakeValueObjectData.CreateDefaultFakeValueObject();
 
             // ACT
             var actual = instance.Equals(other);
@@ -47,9 +47,9 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenGivenNullSameType_ReturnsFalse()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
 #pragma warning disable 219
-            var other = default(FakeOptionCode);
+            var other = default(FakeValueObject);
 #pragma warning restore 219
 
             // ACT
@@ -66,8 +66,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenGivenDifferentType_ReturnsFalse()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
-            object other = FakeProductData.CreateEmptyProduct();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
+            object other = FakeEntityData.CreateEmptyProduct();
 
             // ACT
             var actual = instance.Equals(other);
@@ -83,8 +83,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenGivenSameTypeDifferentReference_ReturnsFalse()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
-            var other = FakeOptionCodeData.CreateOptionCodeNo2();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var other = FakeValueObjectData.CreateFakeValueObjectNo2();
 
             // ACT
             var actual = instance.Equals(other);
@@ -100,7 +100,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenGivenSameTypeSameReference_ReturnsTrue()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
             var other = instance;
 
             // ACT
@@ -117,8 +117,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenEquals_WhenGivenSameTypeDifferentReferenceSameValues_ReturnsTrue()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
-            var other = FakeOptionCodeData.CreateOptionCodeNo1();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var other = FakeValueObjectData.CreateFakeValueObjectNo1();
 
             // ACT
             var actual = instance.Equals(other);
@@ -134,15 +134,15 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenGetHashCode_WhenUsedSamePropertyValuesAreUsed_CalculatesSameCode()
         {
             // ARRANGE
-            var products = new Dictionary<FakeOptionCode, FakeProduct>();
-            var optionCode1 = FakeOptionCodeData.CreateOptionCodeNo1();
-            var optionCode2 = FakeOptionCodeData.CreateOptionCodeNo1();
-            var product1 = FakeProductData.CreateEmptyProduct();
-            var product2 = FakeProductData.CreateEmptyProduct();
-            products.Add(optionCode1, product1);
+            var dictionary = new Dictionary<FakeValueObject, FakeEntity>();
+            var valueObjectNo1 = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var valueObjectNo2 = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var entity1 = FakeEntityData.CreateEmptyProduct();
+            var entity2 = FakeEntityData.CreateEmptyProduct();
+            dictionary.Add(valueObjectNo1, entity1);
 
             // ACT
-            void Action() => products.Add(optionCode2, product2);
+            void Action() => dictionary.Add(valueObjectNo2, entity2);
 
             // ASSERT
             Assert.Throws<ArgumentException>(Action);
@@ -155,16 +155,16 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenGetHashCode_WhenUsedDifferentPropertyValuesAreUsed_CalculatesDifferentCode()
         {
             // ARRANGE
-            var products = new Dictionary<FakeOptionCode, FakeProduct>();
-            var optionCode1 = FakeOptionCodeData.CreateOptionCodeNo1();
-            var optionCode2 = FakeOptionCodeData.CreateOptionCodeNo2();
-            var product1 = FakeProductData.CreateEmptyProduct();
-            var product2 = FakeProductData.CreateEmptyProduct();
-            products.Add(optionCode1, product1);
-            products.Add(optionCode2, product2);
+            var dictionary = new Dictionary<FakeValueObject, FakeEntity>();
+            var valueObjectNo1 = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var valueObjectNo2 = FakeValueObjectData.CreateFakeValueObjectNo2();
+            var entity1 = FakeEntityData.CreateEmptyProduct();
+            var entity2 = FakeEntityData.CreateEmptyProduct();
+            dictionary.Add(valueObjectNo1, entity1);
+            dictionary.Add(valueObjectNo2, entity2);
 
             // ACT
-            var actual = products.Count;
+            var actual = dictionary.Count;
 
             // ASSERT
             actual.Should().Be(2);
@@ -177,8 +177,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsEqualTo_WhenGivenNullObject_ReturnsFalse()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
-            var other = FakeOptionCodeData.CreateDefaultOptionCode();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var other = FakeValueObjectData.CreateDefaultFakeValueObject();
 
             // ACT
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
@@ -196,8 +196,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsEqualTo_WhenGivenSameTypeDifferentReference_ReturnsFalse()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
-            var other = FakeOptionCodeData.CreateOptionCodeNo2();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var other = FakeValueObjectData.CreateFakeValueObjectNo2();
 
             // ACT
             var actual = instance == other;
@@ -213,7 +213,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsEqualTo_WhenGivenSameTypeSameReference_ReturnsTrue()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
             var other = instance;
 
             // ACT
@@ -230,8 +230,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsEqualTo_WhenGivenSameTypeDifferentReferenceSameValues_ReturnsTrue()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
-            var other = FakeOptionCodeData.CreateOptionCodeNo1();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var other = FakeValueObjectData.CreateFakeValueObjectNo1();
 
             // ACT
             var actual = instance == other;
@@ -247,8 +247,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsNotEqualTo_WhenGivenNullObject_ReturnsTrue()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
-            var other = FakeOptionCodeData.CreateDefaultOptionCode();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var other = FakeValueObjectData.CreateDefaultFakeValueObject();
 
             // ACT
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
@@ -266,8 +266,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsNotEqualTo_WhenGivenSameTypeDifferentReference_ReturnsTrue()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
-            var other = FakeOptionCodeData.CreateOptionCodeNo2();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var other = FakeValueObjectData.CreateFakeValueObjectNo2();
 
             // ACT
             var actual = instance != other;
@@ -283,7 +283,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsNotEqualTo_WhenGivenSameTypeSameReference_ReturnsFalse()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
             var other = instance;
 
             // ACT
@@ -300,8 +300,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.BaseClasses
         public void GivenIsNotEqualTo_WhenGivenSameTypeDifferentReferenceSameValues_ReturnsFalse()
         {
             // ARRANGE
-            var instance = FakeOptionCodeData.CreateOptionCodeNo1();
-            var other = FakeOptionCodeData.CreateOptionCodeNo1();
+            var instance = FakeValueObjectData.CreateFakeValueObjectNo1();
+            var other = FakeValueObjectData.CreateFakeValueObjectNo1();
 
             // ACT
             var actual = instance != other;

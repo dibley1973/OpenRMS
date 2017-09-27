@@ -41,7 +41,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(ItemErrorKeys.IdIsNullOrEmpty);
+            actual.Error.Should().Be(ItemErrorKeys.IdIsDefaultOrEmpty);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(ItemErrorKeys.IdIsNullOrEmpty);
+            actual.Error.Should().Be(ItemErrorKeys.IdIsDefaultOrEmpty);
         }
 
         /// <summary>

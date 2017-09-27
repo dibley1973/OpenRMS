@@ -22,6 +22,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Item"/> class.
+        /// Sets the state to <see cref="Entities.ItemState.Created"/>.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
@@ -108,7 +109,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <returns>Returns a <see cref="Result{Item}"/></returns>
         public static Result<Item> Create(Guid id, Name name, ShortDescription description, ItemState state)
         {
-            if (id == Guid.Empty) return Result.Fail<Item>(ItemErrorKeys.IdIsNullOrEmpty);
+            if (id == Guid.Empty) return Result.Fail<Item>(ItemErrorKeys.IdIsDefaultOrEmpty);
             if (name == null) return Result.Fail<Item>(ItemErrorKeys.NameIsNull);
             if (description == null) return Result.Fail<Item>(ItemErrorKeys.DescriptionIsNull);
             if (state == null) return Result.Fail<Item>(ItemErrorKeys.ItemStateIsNull);

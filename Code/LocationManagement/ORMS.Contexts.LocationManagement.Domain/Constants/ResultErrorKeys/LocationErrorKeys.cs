@@ -18,24 +18,14 @@ namespace ORMS.Contexts.LocationManagement.Domain.Constants.ResultErrorKeys
     public class LocationErrorKeys
     {
         /// <summary>
-        /// The key for when the identifier is default
-        /// </summary>
-        public const string IdIsDefault = "IdIsDefault";
-
-        /// <summary>
-        /// The key for when the identifier is empty
-        /// </summary>
-        public const string IdIsEmpty = "IdIsEmpty";
-
-        /// <summary>
         /// The key for when the business code is null.
         /// </summary>
-        public const string BusinessCodeIsNull = "businessCodeIsNull ";
+        public const string BusinessCodeIsNull = "BusinessCodeIsNull";
 
         /// <summary>
-        /// The key for when the id is null or empty.
+        /// The key for when the identifier is default/empty
         /// </summary>
-        public const string IdIsNullOrEmpty = "IdIsNullOrEmpty";
+        public const string IdIsDefaultOrEmpty = "IdIsDefaultOrEmpty";
 
         /// <summary>
         /// The key for when the name is null.

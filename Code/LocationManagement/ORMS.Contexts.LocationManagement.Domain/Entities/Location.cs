@@ -22,11 +22,12 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Location" /> class.
+        /// Sets the state to <see cref="ORMS.Contexts.LocationManagement.Domain.Entities.LocationState.Created"/>
         /// </summary>
         /// <param name="businessCode">The business code.</param>
         /// <param name="name">The name.</param>
         private Location(Code businessCode, Name name)
-            : this(Guid.NewGuid(), businessCode, name)
+            : this(Guid.NewGuid(), businessCode, name, LocationState.Created)
         {
         }
 
@@ -36,11 +37,13 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <param name="id">The identifier.</param>
         /// <param name="businessCode">The business code.</param>
         /// <param name="name">The name.</param>
-        private Location(Guid id, Code businessCode, Name name)
+        /// <param name="state">The state.</param>
+        private Location(Guid id, Code businessCode, Name name, LocationState state)
             : base(id)
         {
             ChangeBusinessCode(businessCode);
             ChangeName(name);
+            ChangeLocationState(state);
         }
 
         /// <summary>
@@ -65,7 +68,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <value>
         /// The state of this instance.
         /// </value>
-        public LocationState ItemState { get; private set; }
+        public LocationState LocationState { get; private set; }
 
         /// <summary>
         /// Gets the name for this instance.
@@ -101,16 +104,16 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <param name="id">The identifier.</param>
         /// <param name="businessCode">The business code.</param>
         /// <param name="name">The name.</param>
+        /// <param name="state">The state.</param>
         /// <returns>
         /// Returns a <see cref="Result{Location}" />
         /// </returns>
-        public static Result<Location> Create(Guid id, Code businessCode, Name name)
+        public static Result<Location> Create(Guid id, Code businessCode, Name name, LocationState state)
         {
-            if (id.Equals(default(Guid))) return Result.Fail<Location>(LocationErrorKeys.IdIsDefault);
-            if (id.Equals(Guid.Empty)) return Result.Fail<Location>(LocationErrorKeys.IdIsEmpty);
-
+            if (id.Equals(Guid.Empty)) return Result.Fail<Location>(LocationErrorKeys.IdIsDefaultOrEmpty);
             if (businessCode == null) return Result.Fail<Location>(LocationErrorKeys.BusinessCodeIsNull);
             if (name == null) return Result.Fail<Location>(LocationErrorKeys.NameIsNull);
+            if (state == null) return Result.Fail<Location>(LocationErrorKeys.LocationStateIsNull);
 
             return Result.Ok(new Location(businessCode, name));
         }
@@ -128,6 +131,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// Changes the description of this instance.
         /// </summary>
         /// <param name="description">The new description for this instance.</param>
+        /// <exception cref="ArgumentNullException">description</exception>
         public void ChangeDescription(ShortDescription description)
         {
             Description = description ?? throw new ArgumentNullException(nameof(description));
@@ -138,15 +142,16 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// </summary>
         /// <param name="state">The state.</param>
         /// <exception cref="ArgumentNullException">state</exception>
-        public void ChangeItemState(LocationState state)
+        public void ChangeLocationState(LocationState state)
         {
-            ItemState = state ?? throw new ArgumentNullException(nameof(state));
+            LocationState = state ?? throw new ArgumentNullException(nameof(state));
         }
 
         /// <summary>
         /// Changes the name of this instance.
         /// </summary>
         /// <param name="name">The new name for this instance.</param>
+        /// <exception cref="ArgumentNullException">name</exception>
         public void ChangeName(Name name)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));

@@ -7,9 +7,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ORMS.Contexts.LocationManagement.Domain.Constants.ResultErrorKeys
+namespace ORMS.Contexts.LocationManagement.Domain.Entities
 {
-    using Entities;
     using Shared.SharedKernel.BaseClasses;
 
     /// <summary>

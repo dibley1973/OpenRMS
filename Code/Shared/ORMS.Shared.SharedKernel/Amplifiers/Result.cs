@@ -85,6 +85,21 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         }
 
         /// <summary>
+        /// Creates and returns a fail <see cref="Result" /> with the specified error.
+        /// </summary>
+        /// <param name="errorFormatString">A composite format error string.</param>
+        /// <param name="args">An object array that contains zero or more objects to format.</param>
+        /// <returns>
+        /// A newly created fail <see cref="Result" />.
+        /// </returns>
+        [DebuggerStepThrough]
+        public static Result Fail(string errorFormatString, params object[] args)
+        {
+            var message = string.Format(errorFormatString, args);
+            return Result.Fail(message);
+        }
+
+        /// <summary>
         /// Creates and returns an Oks <see cref="Result{T}"/> using the specified value.
         /// </summary>
         /// <typeparam name="T">Represents the type of the value the result wraps.</typeparam>

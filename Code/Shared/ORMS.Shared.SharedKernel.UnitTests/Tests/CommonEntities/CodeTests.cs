@@ -10,7 +10,7 @@
 namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
 {
     using System;
-    using Constants.ResultErrorKeys;
+    using Constants.ErrorKeys;
     using FluentAssertions;
     using NUnit.Framework;
     using SharedKernel.CommonEntities;

@@ -13,7 +13,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
     using System.Diagnostics;
     using Amplifiers;
     using BaseClasses;
-    using Constants.ResultErrorKeys;
+    using Constants.ErrorKeys;
 
     /// <summary>
     /// Represents a code

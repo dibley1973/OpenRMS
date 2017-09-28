@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="CodeErrorKeys.cs" company="Chesil Media">
+// <copyright file="CheckErrorKeys.cs" company="Chesil Media">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -9,22 +9,27 @@
 
 namespace ORMS.Shared.SharedKernel.Constants.ErrorKeys
 {
-    using CommonEntities;
+    using Guards;
 
     /// <summary>
-    /// Represents the keys strings for <see cref="Code"/> errors, which
+    /// Represents the keys strings for <see cref="Check"/> errors, which
     /// can be converted by the UI to meaningful messages;
     /// </summary>
-    public class CodeErrorKeys
+    public class CheckErrorKeys
     {
         /// <summary>
-        /// The key for when the value is null, empty or, white space
+        /// The key for when the value is null
         /// </summary>
-        public const string IsNullEmptyOrWhiteSpace = "CodeIsNullEmptyOrwhiteSpace";
+        public const string ArgumentIsNull = "ArgumentIsNull";
 
         /// <summary>
-        /// The key for when the value is too long
+        /// The key for when the value is null or empty
         /// </summary>
-        public const string IsTooLong = "IsTooLong";
+        public const string ArgumentIsNullOrEmpty = "ArgumentIsNullOrEmpty";
+
+        /// <summary>
+        /// The key for when the value is null, empty or white space
+        /// </summary>
+        public const string ArgumentIsNullEmptyOrWhiteSpace = "ArgumentIsNullEmptyOrWhiteSpace";
     }
 }

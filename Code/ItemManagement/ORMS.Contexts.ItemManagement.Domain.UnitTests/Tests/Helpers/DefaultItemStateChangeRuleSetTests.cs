@@ -24,7 +24,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Helpers
         /// Given the can change function when supplied with invalid state options then retursn false.
         /// </summary>
         [Test]
-        public void GivenCanChange_whenSuppliedWithInvalidStateOptions_ThenRetursnFalse()
+        public void GivenCanChange_WhenSuppliedWithInvalidStateOptions_ThenRetursnFalse()
         {
             // ARRANGE
             var currentState = ItemState.Created;
@@ -39,14 +39,86 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Helpers
         }
 
         /// <summary>
-        /// Given the can change functionwhen supplied with valid state options then retursn true.
+        /// Given the can change function when supplied with Created to Active then retursn true.
         /// </summary>
         [Test]
-        public void GivenCanChange_WhenSuppliedWithValidStateOptions_ThenRetursnTrue()
+        public void GivenCanChange_WhenSuppliedWithCreatedToActive_ThenReturnsTrue()
         {
             // ARRANGE
             var currentState = ItemState.Created;
             var newState = ItemState.Active;
+            var ruleSet = new DefaultItemStateChangeRuleSet();
+
+            // ACT
+            var actual = ruleSet.CanChange(currentState, newState);
+
+            // ASSERT
+            actual.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the can change function when supplied with Active to Deactivated then retursn true.
+        /// </summary>
+        [Test]
+        public void GivenCanChange_WhenSuppliedWithActiveToDeactivated_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var currentState = ItemState.Active;
+            var newState = ItemState.Deactivated;
+            var ruleSet = new DefaultItemStateChangeRuleSet();
+
+            // ACT
+            var actual = ruleSet.CanChange(currentState, newState);
+
+            // ASSERT
+            actual.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the can change function when supplied with Active to Discontinued then retursn true.
+        /// </summary>
+        [Test]
+        public void GivenCanChange_WhenSuppliedWithActiveToDiscontinued_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var currentState = ItemState.Active;
+            var newState = ItemState.Discontinued;
+            var ruleSet = new DefaultItemStateChangeRuleSet();
+
+            // ACT
+            var actual = ruleSet.CanChange(currentState, newState);
+
+            // ASSERT
+            actual.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the can change function when supplied with Deactivated to Active then retursn true.
+        /// </summary>
+        [Test]
+        public void GivenCanChange_WhenSuppliedWithDeactivatedToActive_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var currentState = ItemState.Deactivated;
+            var newState = ItemState.Active;
+            var ruleSet = new DefaultItemStateChangeRuleSet();
+
+            // ACT
+            var actual = ruleSet.CanChange(currentState, newState);
+
+            // ASSERT
+            actual.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the can change function when supplied with Deactivated to Discontinued then retursn true.
+        /// </summary>
+        [Test]
+        public void GivenCanChange_WhenSuppliedWithDeactivatedToDiscontinued_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var currentState = ItemState.Deactivated;
+            var newState = ItemState.Discontinued;
             var ruleSet = new DefaultItemStateChangeRuleSet();
 
             // ACT

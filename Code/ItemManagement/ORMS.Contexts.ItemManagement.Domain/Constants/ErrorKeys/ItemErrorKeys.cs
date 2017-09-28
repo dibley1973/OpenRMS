@@ -41,5 +41,10 @@ namespace ORMS.Contexts.ItemManagement.Domain.Constants.ErrorKeys
         /// The key for when the item state cannot change.
         /// </summary>
         public const string CannotChangeItemStateConsiderCallingCanChangeFirst = "CannotChangeItemStateConsiderCallingCanChangeFirst";
+
+        /// <summary>
+        /// The key for when the item state change rule set is null
+        /// </summary>
+        public const string ItemStateChangeRuleSetIsNull = "ItemStateChangeRuleSetIsNull";
     }
 }

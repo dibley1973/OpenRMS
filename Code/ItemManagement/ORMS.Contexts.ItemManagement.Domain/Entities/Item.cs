@@ -22,7 +22,10 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
     /// </summary>
     public class Item : AggregateRoot<Guid>
     {
-        private readonly IStateChangeRuleSet<ItemState> _itemStateChangeRuleSet;
+        private IStateChangeRuleSet<ItemState> _itemStateChangeRuleSet;
+        private Guid id;
+        private ItemState state;
+        private IStateChangeRuleSet<ItemState> itemStateChangeRuleSet;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Item"/> class, with
@@ -51,6 +54,21 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Item" /> class.
+        /// Sets the state to <see cref="Entities.ItemState.Created" />.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="itemStateChangeRuleSet">The item state change rule set.</param>
+        private Item(Name name, ShortDescription description, IStateChangeRuleSet<ItemState> itemStateChangeRuleSet)
+            : this(Guid.NewGuid())
+        {
+            ChangeName(name);
+            ChangeDescription(description);
+            SetItemStateChangeRuleSet(itemStateChangeRuleSet);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Item" /> class.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="name">The name.</param>
@@ -62,6 +80,21 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
             ChangeName(name);
             ChangeDescription(description);
             SetInitialItemState(state);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Item"/> class.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="state">The state.</param>
+        /// <param name="itemStateChangeRuleSet">The item state change rule set.</param>
+        /// <exception cref="ArgumentNullException">Thrown if itemStateChangeRuleSet is null.</exception>
+        private Item(Guid id, Name name, ShortDescription description, ItemState state, IStateChangeRuleSet<ItemState> itemStateChangeRuleSet)
+            : this(id, name, description, state)
+        {
+            SetItemStateChangeRuleSet(itemStateChangeRuleSet);
         }
 
         /// <summary>
@@ -103,7 +136,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
-        /// <returns>Returns a <see cref="Result{Item}"/></returns>
+        /// <returns>Returns a <see cref="Result{Item}"/>.</returns>
         public static Result<Item> Create(Name name, ShortDescription description)
         {
             if (name == null) return Result.Fail<Item>(ItemErrorKeys.NameIsNull);
@@ -121,7 +154,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
         /// <param name="state">The newItemState.</param>
-        /// <returns>Returns a <see cref="Result{Item}"/></returns>
+        /// <returns>Returns a <see cref="Result{Item}"/>.</returns>
         public static Result<Item> Create(Guid id, Name name, ShortDescription description, ItemState state)
         {
             if (id == Guid.Empty) return Result.Fail<Item>(ItemErrorKeys.IdIsDefaultOrEmpty);
@@ -130,6 +163,28 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
             if (state == null) return Result.Fail<Item>(ItemErrorKeys.ItemStateIsNull);
 
             return Result.Ok(new Item(id, name, description, state));
+        }
+
+        /// <summary>
+        /// If the specified arguments are valid, then creates a new instance of
+        /// the <see cref="Item"/> and wraps it in a <see cref="Result{Item}"/>.
+        /// Otherwise returns a fail <see cref="Result{Item}"/>.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="state">The state.</param>
+        /// <param name="itemStateChangeRuleSet">The item state change rule set.</param>
+        /// <returns>Returns a <see cref="Result{Item}"/>.</returns>
+        public static Result<Item> Create(Guid id, Name name, ShortDescription description, ItemState state, IStateChangeRuleSet<ItemState> itemStateChangeRuleSet)
+        {
+            if (id == Guid.Empty) return Result.Fail<Item>(ItemErrorKeys.IdIsDefaultOrEmpty);
+            if (name == null) return Result.Fail<Item>(ItemErrorKeys.NameIsNull);
+            if (description == null) return Result.Fail<Item>(ItemErrorKeys.DescriptionIsNull);
+            if (state == null) return Result.Fail<Item>(ItemErrorKeys.ItemStateIsNull);
+            if (itemStateChangeRuleSet == null) return Result.Fail<Item>(ItemErrorKeys.ItemStateChangeRuleSetIsNull);
+
+            return Result.Ok(new Item(id, name, description, state, itemStateChangeRuleSet));
         }
 
         /// <summary>
@@ -190,6 +245,16 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         public void ChangeDescription(ShortDescription description)
         {
             Description = description ?? throw new ArgumentNullException(nameof(description));
+        }
+
+        /// <summary>
+        /// Sets the item state change rule set, and overrides any existing rule set.
+        /// </summary>
+        /// <param name="itemStateChangeRuleSet">The item state change rule set.</param>
+        /// <exception cref="ArgumentNullException">Thrown if itemStateChangeRuleSet is null</exception>
+        public void SetItemStateChangeRuleSet(IStateChangeRuleSet<ItemState> itemStateChangeRuleSet)
+        {
+            _itemStateChangeRuleSet = itemStateChangeRuleSet ?? throw new ArgumentNullException(nameof(itemStateChangeRuleSet));
         }
 
         /// <summary>

@@ -12,6 +12,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
     using System;
     using Constants.ErrorKeys;
     using Domain.Entities;
+    using Fakes.IStateChangeRuleSet;
     using FluentAssertions;
     using NUnit.Framework;
     using Shared.SharedKernel.CommonEntities;
@@ -545,6 +546,100 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             var itemResult = Item.Create(name, description);
             var item = itemResult.Value;
             var newState = ItemState.Deactivated;
+
+            // ACT
+            var actual = item.CanChangeState(newState);
+
+            // ASSERT
+            actual.Should().BeFalse();
+        }
+
+        /// <summary>
+        /// Given the can change when after creation with always true rule set returns true.
+        /// </summary>
+        [Test]
+        public void GivenCanChange_WhenAfterCreationWithAlwaysTrueRuleSet_ReturnsTrue()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var itemState = ItemState.Deactivated;
+            var itemResult = Item.Create(id, name, description, itemState, new AlwaysTrueStateChangeRuleSet());
+            var item = itemResult.Value;
+            var newState = ItemState.Created;
+
+            // ACT
+            var actual = item.CanChangeState(newState);
+
+            // ASSERT
+            actual.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the can change when after creation with always false rule set returnsfalse.
+        /// </summary>
+        [Test]
+        public void GivenCanChange_WhenAfterCreationWithAlwaysFalseRuleSet_ReturnsFalse()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var itemState = ItemState.Deactivated;
+            var itemResult = Item.Create(id, name, description, itemState, new AlwaysFalseStateChangeRuleSet());
+            var item = itemResult.Value;
+            var newState = ItemState.Created;
+
+            // ACT
+            var actual = item.CanChangeState(newState);
+
+            // ASSERT
+            actual.Should().BeFalse();
+        }
+
+        /// <summary>
+        /// Given the can change when set item state change rule set is provided with always true rule set returns true.
+        /// </summary>
+        [Test]
+        public void GivenCanChange_WhenSetItemStateChangeRuleSetIsProvidedWithAlwaysTrueRuleSet_ReturnsTrue()
+        {
+            // ARRANGE
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var itemResult = Item.Create(name, description);
+            var item = itemResult.Value;
+            var newState = ItemState.Deactivated;
+            item.SetItemStateChangeRuleSet(new AlwaysTrueStateChangeRuleSet());
+
+            // ACT
+            var actual = item.CanChangeState(newState);
+
+            // ASSERT
+            actual.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the can change when set item state change rule set is provided with always false rule set returnsfalse.
+        /// </summary>
+        [Test]
+        public void GivenCanChange_WhenSetItemStateChangeRuleSetIsProvidedWithAlwaysFalseRuleSet_ReturnsFalse()
+        {
+            // ARRANGE
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var itemResult = Item.Create(name, description);
+            var item = itemResult.Value;
+            var newState = ItemState.Deactivated;
+            item.SetItemStateChangeRuleSet(new AlwaysFalseStateChangeRuleSet());
 
             // ACT
             var actual = item.CanChangeState(newState);

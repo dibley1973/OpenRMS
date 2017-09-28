@@ -7,7 +7,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ORMS.Contexts.ItemManagement.Domain.Interfaces
+namespace ORMS.Contexts.ItemManagement.Domain.Contracts
 {
     using System;
     using Entities;
@@ -15,7 +15,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Interfaces
     using Shared.SharedKernel.Interfaces;
 
     /// <summary>
-    /// An interface that provides access to a repository of products.
+    /// An interface that provides access to a repository of items.
     /// </summary>
     public interface IItemRepository : IRepository<Item, Guid>
     {

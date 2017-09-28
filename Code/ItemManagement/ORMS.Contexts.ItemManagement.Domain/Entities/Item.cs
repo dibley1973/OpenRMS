@@ -23,9 +23,6 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
     public class Item : AggregateRoot<Guid>
     {
         private IStateChangeRuleSet<ItemState> _itemStateChangeRuleSet;
-        private Guid id;
-        private ItemState state;
-        private IStateChangeRuleSet<ItemState> itemStateChangeRuleSet;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Item"/> class, with

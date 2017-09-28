@@ -56,9 +56,4 @@ namespace ORMS.Contexts.ItemManagement.Domain.Helpers
             return true;
         }
     }
-
-    ////public interface IStateChangeRuleSet<TState>
-    ////{
-    ////    bool CanChange(TState currentState, TState newState);
-    ////}
 }

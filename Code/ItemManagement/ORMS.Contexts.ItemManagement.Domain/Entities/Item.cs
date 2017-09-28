@@ -10,16 +10,32 @@
 namespace ORMS.Contexts.ItemManagement.Domain.Entities
 {
     using System;
-    using Constants.ResultErrorKeys;
+    using Constants.ErrorKeys;
+    using Helpers;
     using Shared.SharedKernel.Amplifiers;
     using Shared.SharedKernel.BaseClasses;
     using Shared.SharedKernel.CommonEntities;
+    using Shared.SharedKernel.Contracts;
 
     /// <summary>
     /// Represents a product item.
     /// </summary>
     public class Item : AggregateRoot<Guid>
     {
+        private readonly IStateChangeRuleSet<ItemState> _itemStateChangeRuleSet;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Item"/> class, with
+        /// the default implementation of the item state change rule set.
+        /// </summary>
+        /// <param name="id">The id of the aggregate root.</param>
+        private Item(Guid id)
+            : base(id)
+        {
+            _itemStateChangeRuleSet = new DefaultItemStateChangeRuleSet();
+            SetInitialItemState(ItemState.Created);
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Item"/> class.
         /// Sets the state to <see cref="Entities.ItemState.Created"/>.
@@ -27,11 +43,10 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
         private Item(Name name, ShortDescription description)
-            : base(Guid.NewGuid())
+            : this(Guid.NewGuid())
         {
             ChangeName(name);
             ChangeDescription(description);
-            ChangeItemState(ItemState.Created);
         }
 
         /// <summary>
@@ -42,11 +57,11 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="description">The description.</param>
         /// <param name="state">The state.</param>
         private Item(Guid id, Name name, ShortDescription description, ItemState state)
-            : base(id)
+            : this(id)
         {
             ChangeName(name);
             ChangeDescription(description);
-            ChangeItemState(state);
+            SetInitialItemState(state);
         }
 
         /// <summary>
@@ -105,7 +120,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="id">The identifier.</param>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
-        /// <param name="state">The state.</param>
+        /// <param name="state">The newItemState.</param>
         /// <returns>Returns a <see cref="Result{Item}"/></returns>
         public static Result<Item> Create(Guid id, Name name, ShortDescription description, ItemState state)
         {
@@ -118,6 +133,20 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
+        /// Determines whether the current item state for this instance
+        /// can be changed to the new specofied state; or not.
+        /// </summary>
+        /// <param name="newItemState">New state of the item.</param>
+        /// <returns>
+        /// <c>true</c> if the current item state for this instance
+        /// can change to the specified state; otherwise <c>false</c>.
+        /// </returns>
+        public bool CanChangeState(ItemState newItemState)
+        {
+            return _itemStateChangeRuleSet.CanChange(ItemState, newItemState);
+        }
+
+        /// <summary>
         /// Changes the products code.
         /// </summary>
         /// <param name="code">The new code of the product.</param>
@@ -127,13 +156,22 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
-        /// Changes the state of this instance.
+        /// Changes the newItemState of this instance.
         /// </summary>
-        /// <param name="state">The state.</param>
-        /// <exception cref="ArgumentNullException">state</exception>
-        public void ChangeItemState(ItemState state)
+        /// <param name="newItemState">The newItemState.</param>
+        /// <exception cref="ArgumentNullException">newItemState</exception>
+        public void ChangeItemState(ItemState newItemState)
         {
-            ItemState = state ?? throw new ArgumentNullException(nameof(state));
+            if (newItemState == null) throw new ArgumentNullException(nameof(newItemState));
+
+            if (CanChangeState(newItemState))
+            {
+                ItemState = newItemState;
+            }
+            else
+            {
+                throw new InvalidOperationException(ItemErrorKeys.CannotChangeItemStateConsiderCallingCanChangeFirst);
+            }
         }
 
         /// <summary>
@@ -152,6 +190,17 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         public void ChangeDescription(ShortDescription description)
         {
             Description = description ?? throw new ArgumentNullException(nameof(description));
+        }
+
+        /// <summary>
+        /// Changes the item state but by-passes validity checks, so should
+        /// only be used for initial setting only.
+        /// </summary>
+        /// <param name="newItemState">New state of the item.</param>
+        /// <exception cref="ArgumentNullException">newItemState</exception>
+        private void SetInitialItemState(ItemState newItemState)
+        {
+            ItemState = newItemState ?? throw new ArgumentNullException(nameof(newItemState));
         }
     }
 }

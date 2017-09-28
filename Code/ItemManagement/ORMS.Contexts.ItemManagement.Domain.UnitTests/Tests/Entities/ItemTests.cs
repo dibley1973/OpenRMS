@@ -10,7 +10,7 @@
 namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
 {
     using System;
-    using Constants.ResultErrorKeys;
+    using Constants.ErrorKeys;
     using Domain.Entities;
     using FluentAssertions;
     using NUnit.Framework;
@@ -463,10 +463,34 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the change ItemState method when given valid value updates the item ItemState.
+        /// Given the change ItemState method when given invalid value throws exception.
         /// </summary>
         [Test]
-        public void GivenChangeItemState_WhenGivenValidValue_UpdatesTheItemItemState()
+        public void GivenChangeItemState_WhenGivenInvalidValue_ThenThrowsException()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var itemState = ItemState.Discontinued;
+            var itemResult = Item.Create(id, name, description, itemState);
+            var item = itemResult.Value;
+
+            // ACT
+            Action action = () => item.ChangeItemState(ItemState.Deactivated);
+
+            // ASSERT
+            action.ShouldThrow<InvalidOperationException>()
+                .WithMessage(ItemErrorKeys.CannotChangeItemStateConsiderCallingCanChangeFirst);
+        }
+
+        /// <summary>
+        /// Given the change ItemState method when given valid value then updates the item ItemState.
+        /// </summary>
+        [Test]
+        public void GivenChangeItemState_WhenGivenValidValue_ThenUpdatesTheItemItemState()
         {
             // ARRANGE
             var id = Guid.NewGuid();
@@ -483,6 +507,50 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
 
             // ASSERT
             item.ItemState.Should().Be(ItemState.Deactivated);
+        }
+
+        /// <summary>
+        /// Given the can change state function when fter default creation and supplied with invalid state options then retursn false.
+        /// </summary>
+        [Test]
+        public void GivenCanChangeState_WhenAfterDefaultCreationAndSuppliedWithInvalidStateOptions_ThenRetursnFalse()
+        {
+            // ARRANGE
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var itemResult = Item.Create(name, description);
+            var item = itemResult.Value;
+            var newState = ItemState.Deactivated;
+
+            // ACT
+            var actual = item.CanChangeState(newState);
+
+            // ASSERT
+            actual.Should().BeFalse();
+        }
+
+        /// <summary>
+        /// Given the can change state function when after default creation and supplied with Created to Active then retursn true.
+        /// </summary>
+        [Test]
+        public void GivenCanChange_WhenAfterDefaultCreationAndSuppliedWithCreatedToActive_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var nameResult = Name.Create("Item 1");
+            var name = nameResult.Value;
+            var descriptionResult = ShortDescription.Create("Item One");
+            var description = descriptionResult.Value;
+            var itemResult = Item.Create(name, description);
+            var item = itemResult.Value;
+            var newState = ItemState.Deactivated;
+
+            // ACT
+            var actual = item.CanChangeState(newState);
+
+            // ASSERT
+            actual.Should().BeFalse();
         }
     }
 }

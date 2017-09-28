@@ -7,7 +7,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ORMS.Contexts.ItemManagement.Domain.Constants.ResultErrorKeys
+namespace ORMS.Contexts.ItemManagement.Domain.Constants.ErrorKeys
 {
     using Entities;
 
@@ -36,5 +36,10 @@ namespace ORMS.Contexts.ItemManagement.Domain.Constants.ResultErrorKeys
         /// The key for when the state is null.
         /// </summary>
         public const string ItemStateIsNull = "ItemStateIsNull";
+
+        /// <summary>
+        /// The key for when the item state cannot change.
+        /// </summary>
+        public const string CannotChangeItemStateConsiderCallingCanChangeFirst = "CannotChangeItemStateConsiderCallingCanChangeFirst";
     }
 }

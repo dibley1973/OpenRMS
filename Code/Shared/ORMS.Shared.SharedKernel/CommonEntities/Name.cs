@@ -20,12 +20,12 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
     /// </summary>
     /// <seealso cref="ValueObject{Name}"/>
     [DebuggerDisplay("Value:{" + nameof(Value) + "}")]
-    public class Name : ValueObject<Name>
+    public class Name : NameBase // ValueObject<Name>
     {
         /// <summary>
         /// The maximum number of characters this instance can be.
         /// </summary>
-        public const byte MaximumCharacterLength = 100;
+        public new const byte MaximumCharacterLength = 100;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Name"/> class.
@@ -35,8 +35,8 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// Thrown if value is null, empty or white space.
         /// </exception>
         private Name(string value)
+            : base(value)
         {
-            Value = value;
         }
 
         /// <summary>
@@ -44,12 +44,6 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// </summary>
         /// <value>The empty.</value>
         public static Name Empty => CreateInternal(string.Empty);
-
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        /// <value>The value.</value>
-        public string Value { get; }
 
         /// <summary>
         /// Performs an explicit conversion from <see cref="string"/> to <see cref="Name"/>.
@@ -103,9 +97,9 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1"/> is equal to this instance;
         /// otherwise, <c>false</c>.
         /// </returns>
-        protected override bool EqualsCore(Name other)
+        protected bool EqualsCore(Name other)
         {
-            return Value == other.Value;
+            return base.EqualsCore(other);
         }
 
         /// <summary>

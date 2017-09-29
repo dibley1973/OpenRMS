@@ -13,7 +13,7 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
     using System.Diagnostics;
 
     /// <summary>
-    /// Represents a name
+    /// The base class for name obejcts to inherit from
     /// </summary>
     /// <seealso cref="ValueObject{NameBase}"/>
     [DebuggerDisplay("Value:{" + nameof(Value) + "}")]

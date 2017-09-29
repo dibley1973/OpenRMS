@@ -101,12 +101,15 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <returns>Returns a <see cref="Result{Location}"/></returns>
         public static Result<Location> Create(Guid id, Code businessCode, Name name, LocationState state)
         {
-            if (id.Equals(Guid.Empty)) return Result.Fail<Location>(LocationErrorKeys.IdIsDefaultOrEmpty);
-            if (businessCode == null) return Result.Fail<Location>(LocationErrorKeys.BusinessCodeIsNull);
-            if (name == null) return Result.Fail<Location>(LocationErrorKeys.NameIsNull);
-            if (state == null) return Result.Fail<Location>(LocationErrorKeys.LocationStateIsNull);
+            var validationResult = Result.Combine(
+                Check.IsNotEqual(id, Guid.Empty, LocationErrorKeys.IdIsDefaultOrEmpty),
+                Check.IsNotNull(businessCode, LocationErrorKeys.BusinessCodeIsNull),
+                Check.IsNotNull(name, LocationErrorKeys.NameIsNull),
+                Check.IsNotNull(state, LocationErrorKeys.LocationStateIsNull));
 
-            return Result.Ok(new Location(businessCode, name));
+            return validationResult.IsSuccess
+                ? Result.Ok(new Location(id, businessCode, name, state))
+                : Result.Fail<Location>(validationResult.Error);
         }
 
         /// <summary>

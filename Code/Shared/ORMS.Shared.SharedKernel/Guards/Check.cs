@@ -86,5 +86,19 @@ namespace ORMS.Shared.SharedKernel.Guards
                 ? Result.Fail(ErrorKeyBase.FormatString, CheckErrorKeys.ArgumentIsNullEmptyOrWhiteSpace, argumentName)
                 : Result.Ok();
         }
+
+        public static Result IsEqual<T>(IEquatable<T> first, IEquatable<T> second, string errorMesasge)
+        {
+            return first.Equals(second)
+                ? Result.Ok()
+                : Result.Fail(errorMesasge);
+        }
+
+        public static Result IsNotEqual<T>(IEquatable<T> first, IEquatable<T> second, string errorMesasge)
+        {
+            return !first.Equals(second)
+                ? Result.Ok()
+                : Result.Fail(errorMesasge);
+        }
     }
 }

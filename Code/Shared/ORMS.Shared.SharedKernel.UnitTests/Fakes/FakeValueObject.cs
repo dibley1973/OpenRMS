@@ -11,6 +11,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Fakes
 {
     using System;
     using BaseClasses;
+    using Guards;
 
     /// <summary>
     /// Represents a fake value object for testing purposes only
@@ -32,8 +33,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Fakes
         /// </exception>
         public FakeValueObject(string code, string name)
         {
-            if (string.IsNullOrWhiteSpace(code)) throw new ArgumentNullException(nameof(code));
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
+            Ensure.IsNotNullEmptyOrWhiteSpace(code, nameof(code));
+            Ensure.IsNotNullEmptyOrWhiteSpace(name, nameof(name));
 
             _code = code;
             _name = name;

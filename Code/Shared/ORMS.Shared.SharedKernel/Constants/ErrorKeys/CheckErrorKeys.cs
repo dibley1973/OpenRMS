@@ -12,10 +12,10 @@ namespace ORMS.Shared.SharedKernel.Constants.ErrorKeys
     using Guards;
 
     /// <summary>
-    /// Represents the keys strings for <see cref="Check"/> errors, which
-    /// can be converted by the UI to meaningful messages;
+    /// Represents the keys strings for <see cref="Check"/> errors, which can be converted by the UI
+    /// to meaningful messages;
     /// </summary>
-    public class CheckErrorKeys
+    public class CheckErrorKeys : ErrorKeyBase
     {
         /// <summary>
         /// The key for when the value is null

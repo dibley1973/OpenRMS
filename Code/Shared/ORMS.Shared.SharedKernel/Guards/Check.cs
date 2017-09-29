@@ -20,56 +20,70 @@ namespace ORMS.Shared.SharedKernel.Guards
     public class Check
     {
         /// <summary>
-        /// Checks if the specified value is not null, and returns a <see cref="Result" /> indicating the state.
+        /// Checks if the specified value is not null, and returns a <see cref="Result"/> indicating
+        /// the state.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="argumentName">Name of the argument.</param>
-        /// <returns>
-        /// Returns a <see cref="Result" />.
-        /// </returns>
+        /// <returns>Returns a <see cref="Result"/>.</returns>
         /// <exception cref="ArgumentNullException">thrown if value is null.</exception>
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public static Result IsNotNullResult(object value, string argumentName)
+        public static Result IsNotNull(object value, ArgumentName argumentName)
         {
             return value == null
-                ? Result.Fail(CheckErrorKeys.ArgumentIsNull, argumentName)
+                ? Result.Fail(ErrorKeyBase.FormatString, CheckErrorKeys.ArgumentIsNull, argumentName.Value)
                 : Result.Ok();
         }
 
         /// <summary>
-        /// Checks if the specified value is not null or empty, and returns a <see cref="Result" /> indicating the state.
+        /// Checks if the specified value is not null, and returns a <see cref="Result"/> indicating
+        /// the state.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <param name="argumentName">Name of the argument.</param>
-        /// <returns>
-        /// Returns a <see cref="Result" />.
-        /// </returns>
+        /// <param name="errorMesasge">The error mesasge.</param>
+        /// <returns>Returns a <see cref="Result"/>.</returns>
         /// <exception cref="ArgumentNullException">thrown if value is null.</exception>
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public static Result IsNotNullOrEmpty(string value, string argumentName)
+        public static Result IsNotNull(object value, string errorMesasge)
+        {
+            return value == null
+                ? Result.Fail(errorMesasge)
+                : Result.Ok();
+        }
+
+        /// <summary>
+        /// Checks if the specified value is not null or empty, and returns a <see cref="Result"/>
+        /// indicating the state.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="argumentName">Name of the argument.</param>
+        /// <returns>Returns a <see cref="Result"/>.</returns>
+        /// <exception cref="ArgumentNullException">thrown if value is null.</exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static Result IsNotNullOrEmpty(string value, ArgumentName argumentName)
         {
             return string.IsNullOrEmpty(value)
-                ? Result.Fail(CheckErrorKeys.ArgumentIsNullOrEmpty, argumentName)
+                ? Result.Fail(ErrorKeyBase.FormatString, CheckErrorKeys.ArgumentIsNullOrEmpty, argumentName)
                 : Result.Ok();
         }
 
         /// <summary>
-        /// Checks if the specified value is not null, empty or white space, and returns a <see cref="Result" /> indicating the state.
+        /// Checks if the specified value is not null, empty or white space, and returns a <see
+        /// cref="Result"/> indicating the state.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="argumentName">Name of the argument.</param>
-        /// <returns>
-        /// Returns a <see cref="Result" />.
-        /// </returns>
+        /// <returns>Returns a <see cref="Result"/>.</returns>
         /// <exception cref="ArgumentNullException">thrown if value is null.</exception>
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public static Result IsNotNullEmptyOrWhiteSpace(string value, string argumentName)
+        public static Result IsNotNullEmptyOrWhiteSpace(string value, ArgumentName argumentName)
         {
             return string.IsNullOrWhiteSpace(value)
-                ? Result.Fail(CheckErrorKeys.ArgumentIsNullEmptyOrWhiteSpace, argumentName)
+                ? Result.Fail(ErrorKeyBase.FormatString, CheckErrorKeys.ArgumentIsNullEmptyOrWhiteSpace, argumentName)
                 : Result.Ok();
         }
     }

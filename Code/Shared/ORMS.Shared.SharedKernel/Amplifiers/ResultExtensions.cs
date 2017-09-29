@@ -62,6 +62,13 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         ////    return func(result.Value);
         ////}
 
+        ////public static Result OnSuccess<T>(this Result result, Result<T> otherResult)
+        ////{
+        ////    if (result.IsSuccess) return otherResult;
+
+        ////    return Result.Fail<T>(result.Error);
+        ////}
+
         ////public static Result OnSuccess(this Result result, Func<Result> func)
         ////{
         ////    if (result.IsFailure) return result;
@@ -180,6 +187,13 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
 
             return result;
         }
+
+        ////public static Result<T> OnFailure<T>(this Result<T> result, Result<T> otherResult)
+        ////{
+        ////    if (result.IsFailure) return result;
+
+        ////    return otherResult;
+        ////}
 
         ////public static Result OnFailure(this Result result, Action<string> action)
         ////{

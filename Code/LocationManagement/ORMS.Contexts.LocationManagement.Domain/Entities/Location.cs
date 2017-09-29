@@ -14,6 +14,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
     using Shared.SharedKernel.Amplifiers;
     using Shared.SharedKernel.BaseClasses;
     using Shared.SharedKernel.CommonEntities;
+    using Shared.SharedKernel.Guards;
 
     /// <summary>
     /// Represents a location.
@@ -21,10 +22,9 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
     public class Location : AggregateRoot<Guid>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Location" /> class.
-        /// Sets the state to <see cref="ORMS.Contexts.LocationManagement.Domain.Entities.LocationState.Created"/>
+        /// Initializes a new instance of the <see cref="Location"/> class. Sets the state to <see cref="ORMS.Contexts.LocationManagement.Domain.Entities.LocationState.Created"/>
         /// </summary>
-        /// <param name="businessCode">The business code.</param>
+        /// <param name="businessCode">The business businessCode.</param>
         /// <param name="name">The name.</param>
         private Location(Code businessCode, Name name)
             : this(Guid.NewGuid(), businessCode, name, LocationState.Created)
@@ -32,10 +32,10 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Location" /> class.
+        /// Initializes a new instance of the <see cref="Location"/> class.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <param name="businessCode">The business code.</param>
+        /// <param name="businessCode">The business businessCode.</param>
         /// <param name="name">The name.</param>
         /// <param name="state">The state.</param>
         private Location(Guid id, Code businessCode, Name name, LocationState state)
@@ -47,67 +47,58 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         }
 
         /// <summary>
-        /// Gets the code for this instance.
+        /// Gets the businessCode for this instance.
         /// </summary>
-        /// <value>
-        /// The code.
-        /// </value>
+        /// <value>The businessCode.</value>
         public Code BusinessCode { get; private set; }
 
         /// <summary>
         /// Gets the description for this instance.
         /// </summary>
-        /// <value>
-        /// The description.
-        /// </value>
+        /// <value>The description.</value>
         public ShortDescription Description { get; private set; }
 
         /// <summary>
         /// Gets the state of this instance.
         /// </summary>
-        /// <value>
-        /// The state of this instance.
-        /// </value>
+        /// <value>The state of this instance.</value>
         public LocationState LocationState { get; private set; }
 
         /// <summary>
         /// Gets the name for this instance.
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
+        /// <value>The name.</value>
         public Name Name { get; private set; }
 
         /// <summary>
-        /// If the specified arguments are valid, then creates a new instance of
-        /// the <see cref="Location" /> and wraps it in a <see cref="Result{Location}" />.
-        /// Otherwise returns a fail <see cref="Result{Location}" />.
+        /// If the specified arguments are valid, then creates a new instance of the <see
+        /// cref="Location"/> and wraps it in a <see cref="Result{Location}"/>. Otherwise returns a
+        /// fail <see cref="Result{Location}"/>.
         /// </summary>
-        /// <param name="businessCode">The business code.</param>
+        /// <param name="businessCode">The business businessCode.</param>
         /// <param name="name">The name.</param>
-        /// <returns>
-        /// Returns a <see cref="Result{Location}" />
-        /// </returns>
+        /// <returns>Returns a <see cref="Result{Location}"/></returns>
         public static Result<Location> Create(Code businessCode, Name name)
         {
-            if (businessCode == null) return Result.Fail<Location>(LocationErrorKeys.BusinessCodeIsNull);
-            if (name == null) return Result.Fail<Location>(LocationErrorKeys.NameIsNull);
+            var validationResult = Result.Combine(
+                Check.IsNotNull(businessCode, LocationErrorKeys.BusinessCodeIsNull),
+                Check.IsNotNull(name, LocationErrorKeys.NameIsNull));
 
-            return Result.Ok(new Location(businessCode, name));
+            return validationResult.IsSuccess
+                ? Result.Ok(new Location(businessCode, name))
+                : Result.Fail<Location>(validationResult.Error);
         }
 
         /// <summary>
-        /// If the specified arguments are valid, then creates a new instance of
-        /// the <see cref="Location" /> and wraps it in a <see cref="Result{Location}" />.
-        /// Otherwise returns a fail <see cref="Result{Location}" />.
+        /// If the specified arguments are valid, then creates a new instance of the <see
+        /// cref="Location"/> and wraps it in a <see cref="Result{Location}"/>. Otherwise returns a
+        /// fail <see cref="Result{Location}"/>.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <param name="businessCode">The business code.</param>
+        /// <param name="businessCode">The business businessCode.</param>
         /// <param name="name">The name.</param>
         /// <param name="state">The state.</param>
-        /// <returns>
-        /// Returns a <see cref="Result{Location}" />
-        /// </returns>
+        /// <returns>Returns a <see cref="Result{Location}"/></returns>
         public static Result<Location> Create(Guid id, Code businessCode, Name name, LocationState state)
         {
             if (id.Equals(Guid.Empty)) return Result.Fail<Location>(LocationErrorKeys.IdIsDefaultOrEmpty);
@@ -119,12 +110,14 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         }
 
         /// <summary>
-        /// Changes the code of this instance.
+        /// Changes the business code of this instance.
         /// </summary>
-        /// <param name="code">The new code for this instance.</param>
-        public void ChangeBusinessCode(Code code)
+        /// <param name="businessCode">The new business code for this instance.</param>
+        public void ChangeBusinessCode(Code businessCode)
         {
-            BusinessCode = code ?? throw new ArgumentNullException(nameof(code));
+            Ensure.IsNotNull(businessCode, nameof(businessCode));
+
+            BusinessCode = businessCode ?? throw new ArgumentNullException(nameof(businessCode));
         }
 
         /// <summary>
@@ -134,7 +127,9 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">description</exception>
         public void ChangeDescription(ShortDescription description)
         {
-            Description = description ?? throw new ArgumentNullException(nameof(description));
+            Ensure.IsNotNull(description, nameof(description));
+
+            Description = description;
         }
 
         /// <summary>
@@ -144,7 +139,9 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">state</exception>
         public void ChangeLocationState(LocationState state)
         {
-            LocationState = state ?? throw new ArgumentNullException(nameof(state));
+            Ensure.IsNotNull(state, nameof(state));
+
+            LocationState = state;
         }
 
         /// <summary>
@@ -154,7 +151,9 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">name</exception>
         public void ChangeName(Name name)
         {
-            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Ensure.IsNotNull(name, nameof(name));
+
+            Name = name;
         }
     }
 }

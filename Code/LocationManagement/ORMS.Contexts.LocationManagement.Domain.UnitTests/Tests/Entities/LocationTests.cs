@@ -17,13 +17,14 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
     using Shared.SharedKernel.CommonEntities;
 
     /// <summary>
-    /// Tests the Location />
+    /// Tests the Location /&gt;
     /// </summary>
     [TestFixture]
     public class LocationTests
     {
         /// <summary>
-        /// Given the create with Id method when supplied with default unique identifier then result is failure is true.
+        /// Given the create with Id method when supplied with default unique identifier then result
+        /// is failure is true.
         /// </summary>
         [Test]
         public void GivenCreateWithId_WhenSuppliedWithDefaultGuid_ThenResultIsFailureIsTrue()
@@ -45,7 +46,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create with Id method when supplied with empty unique identifier then then result is failure is true.
+        /// Given the create with Id method when supplied with empty unique identifier then then
+        /// result is failure is true.
         /// </summary>
         [Test]
         public void GivenCreateWithId_WhenSuppliedWithEmptyGuid_ThenResultIsFailureIsTrue()
@@ -67,7 +69,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create with Id method when supplied with null businessCode then then result is failure is true.
+        /// Given the create with Id method when supplied with null businessCode then then result is
+        /// failure is true.
         /// </summary>
         [Test]
         public void GivenCreateWithId_WhenSuppliedWithNullCode_ThenResultIsFailureIsTrue()
@@ -79,8 +82,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
             var name = nameResult.Value;
             var locationState = LocationState.Active;
 
-            // ACT
-            // ReSharper disable once ExpressionIsAlwaysNull
+            // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Location.Create(id, businessCode, name, locationState);
 
             // ASSERT
@@ -89,7 +91,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create with Id method when supplied with null name then then result is failure is true.
+        /// Given the create with Id method when supplied with null name then then result is failure
+        /// is true.
         /// </summary>
         [Test]
         public void GivenCreateWithId_WhenSuppliedWithNullName_ThenResultIsFailureIsTrue()
@@ -101,8 +104,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
             var name = default(Name);
             var locationState = LocationState.Active;
 
-            // ACT
-            // ReSharper disable once ExpressionIsAlwaysNull
+            // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Location.Create(id, businessCode, name, locationState);
 
             // ASSERT
@@ -111,7 +113,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create with Id method when supplied with null LocationState then result is failure is true.
+        /// Given the create with Id method when supplied with null LocationState then result is
+        /// failure is true.
         /// </summary>
         [Test]
         public void GivenCreateWithId_WhenSuppliedWithNullLocationState_ThenResultIsFailureIsTrue()
@@ -124,8 +127,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
             var name = nameResult.Value;
             var locationState = default(LocationState);
 
-            // ACT
-            // ReSharper disable once ExpressionIsAlwaysNull
+            // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Location.Create(id, businessCode, name, locationState);
 
             // ASSERT
@@ -134,7 +136,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create without Id method when supplied with null name then then result is failure is true.
+        /// Given the create without Id method when supplied with null name then then result is
+        /// failure is true.
         /// </summary>
         [Test]
         public void GivenCreateWithoutId_WhenSuppliedWithNullName_ThenResultIsFailureIsTrue()
@@ -144,8 +147,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
             var businessCodeResult = Code.Create("L1");
             var businessCode = businessCodeResult.Value;
 
-            // ACT
-            // ReSharper disable once ExpressionIsAlwaysNull
+            // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Location.Create(businessCode, name);
 
             // ASSERT
@@ -154,18 +156,19 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create without Id method when supplied with null businessCode then then result is failure is true.
+        /// Given the create without Id method when supplied with null businessCode then then result
+        /// is failure is true.
         /// </summary>
         [Test]
-        public void GivenCreateWithoutId_WhenSuppliedWithNullDescription_ThenResultIsFailureIsTrue()
+        public void GivenCreateWithoutId_WhenSuppliedWithNullBusinessCode_ThenResultIsFailureIsTrue()
         {
             // ARRANGE
             var nameResult = Name.Create("Location 1");
             var name = nameResult.Value;
             var businessCode = default(Code);
+            ////var expectedErrorMessage = string.Format(ErrorKeyBase.FormatString, CheckErrorKeys.ArgumentIsNullEmptyOrWhiteSpace, argumentName);
 
-            // ACT
-            // ReSharper disable once ExpressionIsAlwaysNull
+            // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Location.Create(businessCode, name);
 
             // ASSERT
@@ -174,7 +177,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the name when after creation method with Id supplied and supplied valid name then returns constructed value.
+        /// Given the name when after creation method with Id supplied and supplied valid name then
+        /// returns constructed value.
         /// </summary>
         [Test]
         public void GivenName_WhenAfterCreationWithIdAndSuppliedValidName_ThenReturnsConstructedValue()
@@ -197,7 +201,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the name when after creation method without Id supplied valid name then returns constructed value.
+        /// Given the name when after creation method without Id supplied valid name then returns
+        /// constructed value.
         /// </summary>
         [Test]
         public void GivenName_WhenAfterCreationWithoutIdAndSuppliedValidName_ThenReturnsConstructedValue()
@@ -218,7 +223,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the businessCode when after creation method with Id supplied valid businessCode then returns constructed value.
+        /// Given the businessCode when after creation method with Id supplied valid businessCode
+        /// then returns constructed value.
         /// </summary>
         [Test]
         public void GivenBusinessCode_WhenAfterCreationWithIdAndSuppliedValidBusinessCode_ThenReturnsConstructedValue()
@@ -241,7 +247,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the businessCode when after creation method without Id supplied valid businessCode then returns constructed value.
+        /// Given the businessCode when after creation method without Id supplied valid businessCode
+        /// then returns constructed value.
         /// </summary>
         [Test]
         public void GivenBusinessCode_WhenAfterCreationWithoutIdAndSuppliedValidBusinessCode_ThenReturnsConstructedValue()

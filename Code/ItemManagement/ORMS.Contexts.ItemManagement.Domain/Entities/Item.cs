@@ -16,6 +16,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
     using Shared.SharedKernel.BaseClasses;
     using Shared.SharedKernel.CommonEntities;
     using Shared.SharedKernel.Contracts;
+    using Shared.SharedKernel.Guards;
 
     /// <summary>
     /// Represents a product item.
@@ -204,7 +205,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="code">The new code of the product.</param>
         public void ChangeCode(Code code)
         {
-            Code = code ?? throw new ArgumentNullException(nameof(code));
+            Ensure.IsNotNull(code, nameof(code));
+
+            Code = code;
         }
 
         /// <summary>
@@ -214,7 +217,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">newItemState</exception>
         public void ChangeItemState(ItemState newItemState)
         {
-            if (newItemState == null) throw new ArgumentNullException(nameof(newItemState));
+            Ensure.IsNotNull(newItemState, nameof(newItemState));
 
             if (CanChangeState(newItemState))
             {
@@ -232,7 +235,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="name">The new name of the product.</param>
         public void ChangeName(Name name)
         {
-            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Ensure.IsNotNull(name, nameof(name));
+
+            Name = name;
         }
 
         /// <summary>
@@ -241,7 +246,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="description">The new description of the product.</param>
         public void ChangeDescription(ShortDescription description)
         {
-            Description = description ?? throw new ArgumentNullException(nameof(description));
+            Ensure.IsNotNull(description, nameof(description));
+
+            Description = description;
         }
 
         /// <summary>
@@ -251,7 +258,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">Thrown if itemStateChangeRuleSet is null</exception>
         public void SetItemStateChangeRuleSet(IStateChangeRuleSet<ItemState> itemStateChangeRuleSet)
         {
-            _itemStateChangeRuleSet = itemStateChangeRuleSet ?? throw new ArgumentNullException(nameof(itemStateChangeRuleSet));
+            Ensure.IsNotNull(itemStateChangeRuleSet, nameof(itemStateChangeRuleSet));
+
+            _itemStateChangeRuleSet = itemStateChangeRuleSet;
         }
 
         /// <summary>
@@ -262,7 +271,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">newItemState</exception>
         private void SetInitialItemState(ItemState newItemState)
         {
-            ItemState = newItemState ?? throw new ArgumentNullException(nameof(newItemState));
+            Ensure.IsNotNull(newItemState, nameof(newItemState));
+
+            ItemState = newItemState;
         }
     }
 }

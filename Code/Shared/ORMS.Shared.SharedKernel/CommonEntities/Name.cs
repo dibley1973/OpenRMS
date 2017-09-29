@@ -18,7 +18,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
     /// <summary>
     /// Represents a name
     /// </summary>
-    /// <seealso cref="ValueObject{Name}" />
+    /// <seealso cref="ValueObject{Name}"/>
     [DebuggerDisplay("Value:{" + nameof(Value) + "}")]
     public class Name : ValueObject<Name>
     {
@@ -28,10 +28,12 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         public const byte MaximumCharacterLength = 100;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Name" /> class.
+        /// Initializes a new instance of the <see cref="Name"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <exception cref="ArgumentNullException">Thrown if value is null, empty or white space.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if value is null, empty or white space.
+        /// </exception>
         private Name(string value)
         {
             Value = value;
@@ -40,26 +42,20 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// <summary>
         /// Gets an empty special case <see cref="Name"/>.
         /// </summary>
-        /// <value>
-        /// The empty.
-        /// </value>
+        /// <value>The empty.</value>
         public static Name Empty => CreateInternal(string.Empty);
 
         /// <summary>
         /// Gets the value.
         /// </summary>
-        /// <value>
-        /// The value.
-        /// </value>
+        /// <value>The value.</value>
         public string Value { get; }
 
         /// <summary>
         /// Performs an explicit conversion from <see cref="string"/> to <see cref="Name"/>.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>
-        /// The result of the conversion.
-        /// </returns>
+        /// <returns>The result of the conversion.</returns>
         public static explicit operator Name(string value)
         {
             var nameResult = Create(value);
@@ -70,25 +66,25 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="string" /> to <see cref="Name" />.
+        /// Performs an implicit conversion from <see cref="Name"/> to <see cref="string"/> .
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <returns>
-        /// The result of the conversion.
-        /// </returns>
+        /// <returns>The result of the conversion.</returns>
         public static implicit operator string(Name name)
         {
             return name.Value;
         }
 
         /// <summary>
-        /// If the specified value is valid then creates and returns a new instance of
-        /// the <see cref="Name" /> class using the value and wraps it in an
-        /// Ok <see cref="Result{name}"/>; otherwise creates a fail <see cref="Result{Name}"/>.
+        /// If the specified value is valid then creates and returns a new instance of the <see
+        /// cref="Name"/> class using the value and wraps it in an Ok <see cref="Result{name}"/>;
+        /// otherwise creates a fail <see cref="Result{Name}"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>Returns a newly constructed <see cref="Result{Name}"/>.</returns>
-        /// Thrown if value length exceeds <see cref="MaximumCharacterLength"/>.
+        /// Thrown if value length exceeds
+        /// <see cref="MaximumCharacterLength"/>
+        /// .
         public static Result<Name> Create(string value)
         {
             if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Name>(NameErrorKeys.IsNullEmptyOrWhiteSpace);
@@ -98,12 +94,14 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object" />, is equal to this instance
-        /// of <see cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1" />.
+        /// Determines whether the specified <see cref="T:System.Object"/>, is equal to this instance
+        /// of <see cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1"/>.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1" /> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see
+        /// cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1"/> is equal to this instance;
+        /// otherwise, <c>false</c>.
         /// </returns>
         protected override bool EqualsCore(Name other)
         {
@@ -113,9 +111,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
-        /// <returns>
-        /// Returns a hash code for this instance
-        /// </returns>
+        /// <returns>Returns a hash code for this instance</returns>
         protected override int GetHashCodeCore()
         {
             return GetType().ToString().GetHashCode() * Value.GetHashCode() ^ 307;

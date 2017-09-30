@@ -9,6 +9,7 @@
 
 namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
 {
+    using System;
     using System.Text;
     using Constants.ErrorKeys;
     using FluentAssertions;
@@ -171,7 +172,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Given the Check function is not null empty or white space when passed populated string
+        /// Given the Check function is not null, empty or white space when passed populated string
         /// then returns success result.
         /// </summary>
         [Test]
@@ -183,6 +184,158 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
 
             // ACT
             var actual = Check.IsNotNullEmptyOrWhiteSpace(value, argumentName);
+
+            // ASSERT
+            actual.IsSuccess.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the check is equal when both items are equal returns success result.
+        /// </summary>
+        [Test]
+        public void GivenCheckIsEqual_WhenBothItemsAreEqual_ReturnsSuccessResult()
+        {
+            // ARRANGE
+            var item1 = Guid.Empty;
+            var item2 = Guid.Empty;
+            var errorMessage = "NotEqual";
+
+            // ACT
+            var actual = Check.IsEqual(item1, item2, errorMessage);
+
+            // ASSERT
+            actual.IsSuccess.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the check is equal when both items are not equal returns fail result.
+        /// </summary>
+        [Test]
+        public void GivenCheckIsEqual_WhenBothItemsAreNotEqual_ReturnsFailResult()
+        {
+            // ARRANGE
+            var item1 = Guid.NewGuid();
+            var item2 = Guid.NewGuid();
+            var errorMessage = "NotEqual";
+
+            // ACT
+            var actual = Check.IsEqual(item1, item2, errorMessage);
+
+            // ASSERT
+            actual.IsSuccess.Should().BeFalse();
+            actual.Error.Should().Be(errorMessage);
+        }
+
+        /// <summary>
+        /// Given the check is not equal when both items are equal returns fail result.
+        /// </summary>
+        [Test]
+        public void GivenCheckIsNotEqual_WhenBothItemsAreEqual_ReturnsFailResult()
+        {
+            // ARRANGE
+            var item1 = Guid.Empty;
+            var item2 = Guid.Empty;
+            var errorMessage = "NotEqual";
+
+            // ACT
+            var actual = Check.IsNotEqual(item1, item2, errorMessage);
+
+            // ASSERT
+            actual.IsSuccess.Should().BeFalse();
+            actual.Error.Should().Be(errorMessage);
+        }
+
+        /// <summary>
+        /// Given the check is not equal when both items are not equal returns success result.
+        /// </summary>
+        [Test]
+        public void GivenCheckIsNotEqual_WhenBothItemsAreNotEqual_ReturnsSuccessResult()
+        {
+            // ARRANGE
+            var item1 = Guid.NewGuid();
+            var item2 = Guid.NewGuid();
+            var errorMessage = "NotEqual";
+
+            // ACT
+            var actual = Check.IsNotEqual(item1, item2, errorMessage);
+
+            // ASSERT
+            actual.IsSuccess.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the check is true when both items are equal returns success result.
+        /// </summary>
+        [Test]
+        public void GivenCheckIsTrue_WhenBothItemsAreEqual_ReturnsSuccessResult()
+        {
+            // ARRANGE
+            var item1 = Guid.Empty;
+            var item2 = Guid.Empty;
+            var errorMessage = "NotTrue";
+            Func<bool> isTrueCallback = () => { return item1 == item2; };
+
+            // ACT
+            var actual = Check.IsTrue(isTrueCallback, errorMessage);
+
+            // ASSERT
+            actual.IsSuccess.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the check is true when both items are not equal returns fail result.
+        /// </summary>
+        [Test]
+        public void GivenCheckIsTrue_WhenBothItemsAreNotEqual_ReturnsFailResult()
+        {
+            // ARRANGE
+            var item1 = Guid.NewGuid();
+            var item2 = Guid.NewGuid();
+            var errorMessage = "NotTrue";
+            Func<bool> isTrueCallback = () => { return item1 == item2; };
+
+            // ACT
+            var actual = Check.IsTrue(isTrueCallback, errorMessage);
+
+            // ASSERT
+            actual.IsSuccess.Should().BeFalse();
+            actual.Error.Should().Be(errorMessage);
+        }
+
+        /// <summary>
+        /// Given the check is false when both items are equal returns fail result.
+        /// </summary>
+        [Test]
+        public void GivenCheckIsFalse_WhenBothItemsAreEqual_ReturnsFailResult()
+        {
+            // ARRANGE
+            var item1 = Guid.Empty;
+            var item2 = Guid.Empty;
+            var errorMessage = "NotFalse";
+            Func<bool> isFalseCallback = () => { return item1 == item2; };
+
+            // ACT
+            var actual = Check.IsFalse(isFalseCallback, errorMessage);
+
+            // ASSERT
+            actual.IsSuccess.Should().BeFalse();
+            actual.Error.Should().Be(errorMessage);
+        }
+
+        /// <summary>
+        /// Given the check is false when both items are not equal returns success result.
+        /// </summary>
+        [Test]
+        public void GivenCheckIsFalse_WhenBothItemsAreNotEqual_ReturnsSuccessResult()
+        {
+            // ARRANGE
+            var item1 = Guid.NewGuid();
+            var item2 = Guid.NewGuid();
+            var errorMessage = "NotFalse";
+            Func<bool> isFalseCallback = () => { return item1 == item2; };
+
+            // ACT
+            var actual = Check.IsFalse(isFalseCallback, errorMessage);
 
             // ASSERT
             actual.IsSuccess.Should().BeTrue();

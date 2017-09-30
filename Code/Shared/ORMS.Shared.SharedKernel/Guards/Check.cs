@@ -87,18 +87,84 @@ namespace ORMS.Shared.SharedKernel.Guards
                 : Result.Ok();
         }
 
-        public static Result IsEqual<T>(IEquatable<T> first, IEquatable<T> second, string errorMesasge)
+        /// <summary>
+        /// Checks whether the first specified <see cref="IEquatable{T}"/> is equal to the second
+        /// <see cref="IEquatable{T}"/>.
+        /// </summary>
+        /// <typeparam name="T">Defines the type to check and the type the result wraps</typeparam>
+        /// <param name="first">The first <see cref="IEquatable{T}"/> item.</param>
+        /// <param name="second">The second <see cref="IEquatable{T}"/> item.</param>
+        /// <param name="errorMessage">
+        /// The error message which the <see cref="Result{T}"/> carries in the event that the first
+        /// is not equal to the second.
+        /// </param>
+        /// <returns>Returns a <see cref="Result{T}"/></returns>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static Result IsEqual<T>(IEquatable<T> first, IEquatable<T> second, string errorMessage)
         {
             return first.Equals(second)
                 ? Result.Ok()
-                : Result.Fail(errorMesasge);
+                : Result.Fail(errorMessage);
         }
 
-        public static Result IsNotEqual<T>(IEquatable<T> first, IEquatable<T> second, string errorMesasge)
+        /// <summary>
+        /// Checks whether the first specified <see cref="IEquatable{T}"/> is not equal to the second
+        /// <see cref="IEquatable{T}"/>.
+        /// </summary>
+        /// <typeparam name="T">Defines the type to check and the type the result wraps</typeparam>
+        /// <param name="first">The first <see cref="IEquatable{T}"/> item.</param>
+        /// <param name="second">The second <see cref="IEquatable{T}"/> item.</param>
+        /// <param name="errorMessage">
+        /// The error message which the <see cref="Result{T}"/> carries in the event that the first
+        /// is equal to the second.
+        /// </param>
+        /// <returns>Returns a <see cref="Result{T}"/></returns>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static Result IsNotEqual<T>(IEquatable<T> first, IEquatable<T> second, string errorMessage)
         {
             return !first.Equals(second)
                 ? Result.Ok()
-                : Result.Fail(errorMesasge);
+                : Result.Fail(errorMessage);
+        }
+
+        /// <summary>
+        /// Determines whether the specified callBack predicate returns <c>true</c>, if it does then
+        /// a success result is returned, otherwise a fail result is returned.
+        /// </summary>
+        /// <param name="callBackPredicate">
+        /// The predicate which this function should call to determine what result to return.
+        /// </param>
+        /// <param name="errorMessage">
+        /// The error message which the <see cref="Result"/> carries in the event that the callback
+        /// returns <c>false</c>.
+        /// </param>
+        /// <returns>Returns a <see cref="Result"/></returns>
+        public static Result IsTrue(Func<bool> callBackPredicate, string errorMessage)
+        {
+            return callBackPredicate()
+                ? Result.Ok()
+                : Result.Fail(errorMessage);
+        }
+
+        /// <summary>
+        /// Determines whether the specified callBack predicate returns <c>false</c>, if it does then
+        /// a success result is returned, otherwise a fail result is returned.
+        /// </summary>
+        /// <param name="callBackPredicate">
+        /// The predicate which this function should call to determine what result to return.
+        /// </param>
+        /// <param name="errorMessage">
+        /// The error message which the <see cref="Result"/> carries in the event that the callback
+        /// returns <c>true</c>.
+        /// </param>
+        /// <returns>Returns a <see cref="Result"/></returns>
+        public static Result IsFalse(Func<bool> callBackPredicate, string errorMessage)
+        {
+            return !callBackPredicate()
+                ? Result.Ok()
+                : Result.Fail(errorMessage);
         }
     }
 }

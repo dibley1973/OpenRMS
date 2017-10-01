@@ -271,6 +271,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         /// <summary>
         /// Given the location state after creation with Active LocationState returns active location state.
         /// </summary>
+        [Test]
         public void GivenLocationState_WhenCreationWithActiveLocationState_ReturnsActiveLocationState()
         {
             // ARRANGE
@@ -293,6 +294,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
         /// <summary>
         /// Given the location state after creation without LocationState returns created location state.
         /// </summary>
+        [Test]
         public void GivenLocationState_WhenAfterCreationWithoutLocationStateArgument_ReturnsCreatedLocationState()
         {
             // ARRANGE

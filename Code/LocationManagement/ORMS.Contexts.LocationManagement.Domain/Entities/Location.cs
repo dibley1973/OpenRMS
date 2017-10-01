@@ -118,7 +118,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <param name="businessCode">The new business code for this instance.</param>
         public void ChangeBusinessCode(Code businessCode)
         {
-            Ensure.IsNotNull(businessCode, nameof(businessCode));
+            Ensure.IsNotNull(businessCode, (ArgumentName)nameof(businessCode));
 
             BusinessCode = businessCode;
         }
@@ -130,7 +130,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">description</exception>
         public void ChangeDescription(ShortDescription description)
         {
-            Ensure.IsNotNull(description, nameof(description));
+            Ensure.IsNotNull(description, (ArgumentName)nameof(description));
 
             Description = description;
         }
@@ -142,7 +142,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">state</exception>
         public void ChangeLocationState(LocationState state)
         {
-            Ensure.IsNotNull(state, nameof(state));
+            Ensure.IsNotNull(state, (ArgumentName)nameof(state));
 
             LocationState = state;
         }
@@ -154,7 +154,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">name</exception>
         public void ChangeName(Name name)
         {
-            Ensure.IsNotNull(name, nameof(name));
+            Ensure.IsNotNull(name, (ArgumentName)nameof(name));
 
             Name = name;
         }

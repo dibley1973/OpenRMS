@@ -192,7 +192,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="code">The new code of the product.</param>
         public void ChangeCode(Code code)
         {
-            Ensure.IsNotNull(code, nameof(code));
+            Ensure.IsNotNull(code, (ArgumentName)nameof(code));
 
             Code = code;
         }
@@ -204,7 +204,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">newItemState</exception>
         public void ChangeItemState(ItemState newItemState)
         {
-            Ensure.IsNotNull(newItemState, nameof(newItemState));
+            Ensure.IsNotNull(newItemState, (ArgumentName)nameof(newItemState));
             Ensure.IsNotInvalidOperation(CanChangeState(newItemState), ItemErrorKeys.CannotChangeItemStateConsiderCallingCanChangeFirst);
 
             ItemState = newItemState;
@@ -216,7 +216,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="name">The new name of the product.</param>
         public void ChangeName(Name name)
         {
-            Ensure.IsNotNull(name, nameof(name));
+            Ensure.IsNotNull(name, (ArgumentName)nameof(name));
 
             Name = name;
         }
@@ -227,7 +227,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <param name="description">The new description of the product.</param>
         public void ChangeDescription(ShortDescription description)
         {
-            Ensure.IsNotNull(description, nameof(description));
+            Ensure.IsNotNull(description, (ArgumentName)nameof(description));
 
             Description = description;
         }
@@ -239,7 +239,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">Thrown if itemStateChangeRuleSet is null</exception>
         public void SetItemStateChangeRuleSet(IStateChangeRuleSet<ItemState> itemStateChangeRuleSet)
         {
-            Ensure.IsNotNull(itemStateChangeRuleSet, nameof(itemStateChangeRuleSet));
+            Ensure.IsNotNull(itemStateChangeRuleSet, (ArgumentName)nameof(itemStateChangeRuleSet));
 
             _itemStateChangeRuleSet = itemStateChangeRuleSet;
         }
@@ -252,7 +252,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <exception cref="ArgumentNullException">newItemState</exception>
         private void SetInitialItemState(ItemState newItemState)
         {
-            Ensure.IsNotNull(newItemState, nameof(newItemState));
+            Ensure.IsNotNull(newItemState, (ArgumentName)nameof(newItemState));
 
             ItemState = newItemState;
         }

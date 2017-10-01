@@ -26,7 +26,7 @@ namespace ORMS.Shared.SharedKernel.Guards
         /// <exception cref="ArgumentNullException">thrown if value is null.</exception>
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public static void IsNotNull(object value, string argumentName)
+        public static void IsNotNull(object value, ArgumentName argumentName)
         {
             if (value == null) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNull);
         }
@@ -39,9 +39,23 @@ namespace ORMS.Shared.SharedKernel.Guards
         /// <exception cref="ArgumentNullException">thrown if value is null.</exception>
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public static void IsNotNullOrEmpty(string value, string argumentName)
+        public static void IsNotNullOrEmpty(string value, ArgumentName argumentName)
         {
             if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNotNullOrEmpty);
+        }
+
+        /// <summary>
+        /// Ensures the specified value is not null, empty or white space and throws an exception if
+        /// it is.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="errorMessage">The error message to display</param>
+        /// <exception cref="ArgumentNullException">thrown if value is null.</exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static void IsNotNullEmptyOrWhiteSpace(string value, string errorMessage)
+        {
+            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(errorMessage);
         }
 
         /// <summary>
@@ -53,7 +67,7 @@ namespace ORMS.Shared.SharedKernel.Guards
         /// <exception cref="ArgumentNullException">thrown if value is null.</exception>
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public static void IsNotNullEmptyOrWhiteSpace(string value, string argumentName)
+        public static void IsNotNullEmptyOrWhiteSpace(string value, ArgumentName argumentName)
         {
             if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace);
         }

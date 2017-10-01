@@ -37,8 +37,9 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         {
             if (isFailure)
             {
-                if (string.IsNullOrEmpty(error))
-                    throw new ArgumentNullException(nameof(error), "There must be error message for failure.");
+                Ensure.IsNotNullEmptyOrWhiteSpace(error, "There must be error message for failure.");
+                ////if (string.IsNullOrEmpty(error))
+                ////    throw new ArgumentNullException(nameof(error), "There must be error message for failure.");
             }
             else
             {

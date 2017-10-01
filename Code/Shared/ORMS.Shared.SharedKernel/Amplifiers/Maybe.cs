@@ -10,10 +10,11 @@
 namespace ORMS.Shared.SharedKernel.Amplifiers
 {
     using System;
+    using Guards;
 
     /// <summary>
-    /// Amplifies any given Type to provide expression of clear intent that
-    /// the given object may be an instance or may be nothing.
+    /// Amplifies any given Type to provide expression of clear intent that the given object may be
+    /// an instance or may be nothing.
     /// </summary>
     /// <typeparam name="T">
     /// Indicates the type of the entities identifier. Normally a Long or Guid
@@ -34,33 +35,25 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         /// <summary>
         /// Gets an empty maybe.
         /// </summary>
-        /// <value>
-        /// The none.
-        /// </value>
+        /// <value>The none.</value>
         public static Maybe<T> Nothing => default(Maybe<T>);
 
         /// <summary>
         /// Gets a value indicating whether this instance has value.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance has value; otherwise, <c>false</c>.
-        /// </value>
+        /// <value><c>true</c> if this instance has value; otherwise, <c>false</c>.</value>
         public bool HasValue => _value != null;
 
         /// <summary>
         /// Gets a value indicating whether this instance has no value.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance has no value; otherwise, <c>false</c>.
-        /// </value>
+        /// <value><c>true</c> if this instance has no value; otherwise, <c>false</c>.</value>
         public bool HasNoValue => !HasValue;
 
         /// <summary>
         /// Gets the value, of this instance has a value to get; otherwise throws an exception.
         /// </summary>
-        /// <value>
-        /// The value.
-        /// </value>
+        /// <value>The value.</value>
         /// <exception cref="InvalidOperationException">
         /// Thrown is this property is accessed when this instance does not have a value.
         /// </exception>
@@ -68,7 +61,7 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         {
             get
             {
-                if (HasNoValue) throw new InvalidOperationException();
+                Ensure.IsNotInvalidOperation(HasValue, "Canot return value if no value has been set");
 
                 return _value;
             }
@@ -78,23 +71,19 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         /// Performs an implicit conversion from object of type &lt;T&gt; to <see cref="Maybe{T}"/>.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>
-        /// The result of the conversion.
-        /// </returns>
+        /// <returns>The result of the conversion.</returns>
         public static implicit operator Maybe<T>(T value)
         {
             return new Maybe<T>(value);
         }
 
         /// <summary>
-        /// Determines whether the value of the specified <see cref="Maybe{T}"/> is
-        /// the same as the specified value
+        /// Determines whether the value of the specified <see cref="Maybe{T}"/> is the same as the
+        /// specified value
         /// </summary>
         /// <param name="maybe">The maybe.</param>
         /// <param name="value">The value.</param>
-        /// <returns>
-        /// The result of the operator.
-        /// </returns>
+        /// <returns>The result of the operator.</returns>
         public static bool operator ==(Maybe<T> maybe, T value)
         {
             if (maybe.HasNoValue) return false;
@@ -103,49 +92,44 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         }
 
         /// <summary>
-        /// Determines whether the value of the specified <see cref="Maybe{T}"/> is
-        /// not the same as the specified value
+        /// Determines whether the value of the specified <see cref="Maybe{T}"/> is not the same as
+        /// the specified value
         /// </summary>
         /// <param name="maybe">The maybe.</param>
         /// <param name="value">The value.</param>
-        /// <returns>
-        /// The result of the operator.
-        /// </returns>
+        /// <returns>The result of the operator.</returns>
         public static bool operator !=(Maybe<T> maybe, T value)
         {
             return !(maybe == value);
         }
 
         /// <summary>
-        /// Determines whether the value of the first specified <see cref="Maybe{T}"/> is
-        /// the same as the value of the second specified <see cref="Maybe{T}"/>.
+        /// Determines whether the value of the first specified <see cref="Maybe{T}"/> is the same as
+        /// the value of the second specified <see cref="Maybe{T}"/>.
         /// </summary>
         /// <param name="first">The first maybe.</param>
         /// <param name="second">The second value.</param>
-        /// <returns>
-        /// The result of the operator.
-        /// </returns>
+        /// <returns>The result of the operator.</returns>
         public static bool operator ==(Maybe<T> first, Maybe<T> second)
         {
             return first.Equals(second);
         }
 
         /// <summary>
-        /// Determines whether the value of the first specified <see cref="Maybe{T}"/> is
-        /// not the same as the value of the second specified <see cref="Maybe{T}"/>.
+        /// Determines whether the value of the first specified <see cref="Maybe{T}"/> is not the
+        /// same as the value of the second specified <see cref="Maybe{T}"/>.
         /// </summary>
         /// <param name="first">The first maybe.</param>
         /// <param name="second">The second value.</param>
-        /// <returns>
-        /// The result of the operator.
-        /// </returns>
+        /// <returns>The result of the operator.</returns>
         public static bool operator !=(Maybe<T> first, Maybe<T> second)
         {
             return !(first == second);
         }
 
         /// <summary>
-        /// Wraps the specified type in a <see cref="Maybe{T}"/> with the <see cref="Value"/> set to the specified object.
+        /// Wraps the specified type in a <see cref="Maybe{T}"/> with the <see cref="Value"/> set to
+        /// the specified object.
         /// </summary>
         /// <param name="obj">The object to wrap.</param>
         /// <returns>Returns an instance of a <see cref="Maybe{T}"/> with the type as the value</returns>
@@ -155,11 +139,11 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object"/>, is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="object"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -182,7 +166,7 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
         /// <returns>
-        /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         public bool Equals(Maybe<T> other)
         {
@@ -199,7 +183,8 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures
+        /// like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -209,11 +194,9 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         }
 
         /// <summary>
-        /// Returns a <see cref="string" /> that represents this instance.
+        /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
-        /// <returns>
-        /// A <see cref="string" /> that represents this instance.
-        /// </returns>
+        /// <returns>A <see cref="string"/> that represents this instance.</returns>
         public override string ToString()
         {
             if (HasNoValue) return "No value";

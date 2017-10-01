@@ -61,8 +61,6 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
 
             Ensure.IsNotInvalidCast(descriptionResult.IsSuccess, errorMessageCallback);
 
-            //if (descriptionResult.IsFailure) throw new InvalidCastException(descriptionResult.Error);
-
             return descriptionResult.Value;
         }
 

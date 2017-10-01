@@ -37,8 +37,10 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         [DebuggerStepThrough]
         internal Result(bool isFailure, T value, string error)
         {
-            if (!isFailure && value == null)
-                throw new ArgumentNullException(nameof(value));
+            // WARNING: Do not be tempted to replace the guard clause below this comment with the
+            //          line below: if (!isFailure) Ensure.IsNotNull(value, (ArgumentName)nameof(value));
+            // If you do you will create a lovely StackOverflowException!
+            if (!isFailure && value == null) throw new ArgumentNullException(nameof(value));
 
             _logic = new ResultCommonLogic(isFailure, error);
             _value = value;

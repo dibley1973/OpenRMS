@@ -34,7 +34,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
             var argumentName = "arg1";
 
             // ACT
-            Action action = () => Ensure.IsNotNull(null, argumentName);
+            Action action = () => Ensure.IsNotNull(null, (ArgumentName)argumentName);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNull + ParameterNameSuffix);
@@ -51,7 +51,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
             var argumentValue = new StringBuilder();
 
             // ACT
-            Action action = () => Ensure.IsNotNull(argumentValue, argumentName);
+            Action action = () => Ensure.IsNotNull(argumentValue, (ArgumentName)argumentName);
 
             // ASSERT
             action.ShouldNotThrow<ArgumentNullException>();
@@ -67,7 +67,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
             var argumentName = "arg1";
 
             // ACT
-            Action action = () => Ensure.IsNotNullOrEmpty(null, argumentName);
+            Action action = () => Ensure.IsNotNullOrEmpty(null, (ArgumentName)argumentName);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullOrEmpty + ParameterNameSuffix);
@@ -84,7 +84,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
             var value = string.Empty;
 
             // ACT
-            Action action = () => Ensure.IsNotNullOrEmpty(value, argumentName);
+            Action action = () => Ensure.IsNotNullOrEmpty(value, (ArgumentName)argumentName);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullOrEmpty + ParameterNameSuffix);
@@ -101,7 +101,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
             var value = new string('A', 5);
 
             // ACT
-            Action action = () => Ensure.IsNotNullOrEmpty(value, argumentName);
+            Action action = () => Ensure.IsNotNullOrEmpty(value, (ArgumentName)argumentName);
 
             // ASSERT
             action.ShouldNotThrow<ArgumentNullException>();
@@ -117,7 +117,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
             var argumentName = "arg1";
 
             // ACT
-            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(null, argumentName);
+            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(null, (ArgumentName)argumentName);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace + ParameterNameSuffix);
@@ -134,7 +134,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
             var value = string.Empty;
 
             // ACT
-            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(value, argumentName);
+            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(value, (ArgumentName)argumentName);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace + ParameterNameSuffix);
@@ -152,7 +152,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
             var value = new string(' ', 5);
 
             // ACT
-            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(value, argumentName);
+            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(value, (ArgumentName)argumentName);
 
             // ASSERT
             action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace + ParameterNameSuffix);
@@ -170,7 +170,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
             var value = new string('A', 5);
 
             // ACT
-            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(value, argumentName);
+            Action action = () => Ensure.IsNotNullEmptyOrWhiteSpace(value, (ArgumentName)argumentName);
 
             // ASSERT
             action.ShouldNotThrow<ArgumentNullException>();

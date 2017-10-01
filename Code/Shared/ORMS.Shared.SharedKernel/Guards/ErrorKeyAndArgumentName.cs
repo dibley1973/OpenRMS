@@ -27,8 +27,8 @@ namespace ORMS.Shared.SharedKernel.Guards
         /// <param name="argumentName">Name of the argument.</param>
         private ErrorKeyAndArgumentName(string errorKey, string argumentName)
         {
-            Ensure.IsNotNullEmptyOrWhiteSpace(errorKey, nameof(errorKey));
-            Ensure.IsNotNullEmptyOrWhiteSpace(argumentName, nameof(argumentName));
+            Ensure.IsNotNullEmptyOrWhiteSpace(errorKey, (ArgumentName)nameof(errorKey));
+            Ensure.IsNotNullEmptyOrWhiteSpace(argumentName, (ArgumentName)nameof(argumentName));
 
             _errorKey = errorKey;
             _argumentName = argumentName;
@@ -57,8 +57,8 @@ namespace ORMS.Shared.SharedKernel.Guards
         /// </exception>
         public static ErrorKeyAndArgumentName Create(string errorKey, string argumentName)
         {
-            Ensure.IsNotNullEmptyOrWhiteSpace(errorKey, nameof(errorKey));
-            Ensure.IsNotNullEmptyOrWhiteSpace(argumentName, nameof(argumentName));
+            Ensure.IsNotNullEmptyOrWhiteSpace(errorKey, (ArgumentName)nameof(errorKey));
+            Ensure.IsNotNullEmptyOrWhiteSpace(argumentName, (ArgumentName)nameof(argumentName));
 
             return new ErrorKeyAndArgumentName(errorKey, argumentName);
         }

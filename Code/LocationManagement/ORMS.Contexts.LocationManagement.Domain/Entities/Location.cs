@@ -120,7 +120,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         {
             Ensure.IsNotNull(businessCode, nameof(businessCode));
 
-            BusinessCode = businessCode ?? throw new ArgumentNullException(nameof(businessCode));
+            BusinessCode = businessCode;
         }
 
         /// <summary>

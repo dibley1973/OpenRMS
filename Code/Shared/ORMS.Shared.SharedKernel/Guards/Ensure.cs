@@ -45,7 +45,8 @@ namespace ORMS.Shared.SharedKernel.Guards
         }
 
         /// <summary>
-        /// Ensures the specified value is not null, empty or white space and throws an exception if it is.
+        /// Ensures the specified value is not null, empty or white space and throws an exception if
+        /// it is.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="argumentName">The name of the argument.</param>
@@ -55,6 +56,44 @@ namespace ORMS.Shared.SharedKernel.Guards
         public static void IsNotNullEmptyOrWhiteSpace(string value, string argumentName)
         {
             if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsNotNullEmptyOrWhiteSpace);
+        }
+
+        /// <summary>
+        /// Determines whether the specified valid condition is <c>false and if it is, throws an <see
+        /// cref="InvalidOperationException"/> with the specified message</c>.
+        /// </summary>
+        /// <param name="validCondition">
+        /// Set to <c>true</c> to indicate an valid condition; otherwise <c>false</c>.
+        /// </param>
+        /// <param name="message">The message.</param>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if the specified validCondition argument evaluates to false
+        /// </exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static void IsNotInvalidOperation(bool validCondition, string message)
+        {
+            if (!validCondition) throw new InvalidOperationException(message);
+        }
+
+        /// <summary>
+        /// Determines whether the specified valid condition is <c>false and if it is, throws an <see
+        /// cref="InvalidOperationException"/> with the specified message</c>.
+        /// </summary>
+        /// <param name="validConditionCallBackPredicate">
+        /// A callback function which when the result is evaluated should be the <c>true</c> to
+        /// indicate an valid condition; otherwise <c>false</c>.
+        /// </param>
+        /// <param name="message">The message.</param>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if when the specified validConditionCallBackPredicate argument is evaluated the
+        /// result is <c>false</c>.
+        /// </exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static void IsNotInvalidOperation(Func<bool> validConditionCallBackPredicate, string message)
+        {
+            if (!validConditionCallBackPredicate()) throw new InvalidOperationException(message);
         }
     }
 }

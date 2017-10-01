@@ -17,7 +17,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
     using SharedKernel.Guards;
 
     /// <summary>
-    /// Tests the guard clauses>
+    /// Tests the guard clauses&gt;
     /// </summary>
     [TestFixture]
     public class EnsureTests
@@ -141,7 +141,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Given the ensure is not null empty or white space when passed white space string then thows exception.
+        /// Given the ensure is not null empty or white space when passed white space string then
+        /// thows exception.
         /// </summary>
         [Test]
         public void GivenEnsureIsNotNullEmptyOrWhiteSpace_WhenPassedWhiteSpaceString_ThenThowsException()
@@ -158,7 +159,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
         }
 
         /// <summary>
-        /// Given the ensure is not null empty or white space when passed populated string then does not thow exception.
+        /// Given the ensure is not null empty or white space when passed populated string then does
+        /// not thow exception.
         /// </summary>
         [Test]
         public void GivenEnsureIsNotNullEmptyOrWhiteSpace_WhenPassedPopulatedString_ThenDoesNotThowException()
@@ -172,6 +174,76 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
 
             // ASSERT
             action.ShouldNotThrow<ArgumentNullException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid operation when passed true value then does not throw exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidOperation_WhenPassedTrueValue_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            const bool condition = true;
+            var errorMessage = "IsInvalid";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidOperation(condition, errorMessage);
+
+            // ASSERT
+            action.ShouldNotThrow<InvalidOperationException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid operation when passed false value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidOperation_WhenPassedFalseValue_ThenThrowsException()
+        {
+            // ARRANGE
+            const bool condition = false;
+            var errorMessage = "IsInvalid";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidOperation(condition, errorMessage);
+
+            // ASSERT
+            action.ShouldThrow<InvalidOperationException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid operation when passed function which returns true value then
+        /// does not throw exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidOperation_WhenPassedFunctionWhichReturnsTrueValue_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            Func<bool> conditionCallback = () => { return true; };
+            var errorMessage = "IsInvalid";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidOperation(conditionCallback, errorMessage);
+
+            // ASSERT
+            action.ShouldNotThrow<InvalidOperationException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid operation when passed function which returns false value then
+        /// throws exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidOperation_WhenPassedFunctionWhichReturnsFalseValue_ThenThrowsException()
+        {
+            // ARRANGE
+            Func<bool> conditionCallback = () => { return false; };
+            var errorMessage = "IsInvalid";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidOperation(conditionCallback, errorMessage);
+
+            // ASSERT
+            action.ShouldThrow<InvalidOperationException>();
         }
     }
 }

@@ -26,8 +26,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         private IStateChangeRuleSet<ItemState> _itemStateChangeRuleSet;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Item"/> class, with
-        /// the default implementation of the item state change rule set.
+        /// Initializes a new instance of the <see cref="Item"/> class, with the default
+        /// implementation of the item state change rule set.
         /// </summary>
         /// <param name="id">The id of the aggregate root.</param>
         private Item(Guid id)
@@ -38,8 +38,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Item"/> class.
-        /// Sets the state to <see cref="Entities.ItemState.Created"/>.
+        /// Initializes a new instance of the <see cref="Item"/> class. Sets the state to <see cref="Entities.ItemState.Created"/>.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
@@ -51,8 +50,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Item" /> class.
-        /// Sets the state to <see cref="Entities.ItemState.Created" />.
+        /// Initializes a new instance of the <see cref="Item"/> class. Sets the state to <see cref="Entities.ItemState.Created"/>.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
@@ -66,7 +64,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Item" /> class.
+        /// Initializes a new instance of the <see cref="Item"/> class.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="name">The name.</param>
@@ -98,39 +96,30 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         /// <summary>
         /// Gets the code.
         /// </summary>
-        /// <value>
-        /// The code.
-        /// </value>
+        /// <value>The code.</value>
         public Code Code { get; private set; }
 
         /// <summary>
         /// Gets the state of this instance.
         /// </summary>
-        /// <value>
-        /// The state of this instance.
-        /// </value>
+        /// <value>The state of this instance.</value>
         public ItemState ItemState { get; private set; }
 
         /// <summary>
         /// Gets the name.
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
+        /// <value>The name.</value>
         public Name Name { get; private set; }
 
         /// <summary>
         /// Gets the description.
         /// </summary>
-        /// <value>
-        /// The description.
-        /// </value>
+        /// <value>The description.</value>
         public ShortDescription Description { get; private set; }
 
         /// <summary>
-        /// If the specified arguments are valid, then creates a new instance of
-        /// the <see cref="Item"/> and wraps it in a <see cref="Result{Item}"/>.
-        /// Otherwise returns a fail <see cref="Result{Item}"/>.
+        /// If the specified arguments are valid, then creates a new instance of the <see
+        /// cref="Item"/> and wraps it in a <see cref="Result{Item}"/>. Otherwise returns a fail <see cref="Result{Item}"/>.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
@@ -144,9 +133,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
-        /// If the specified arguments are valid, then creates a new instance of
-        /// the <see cref="Item"/> and wraps it in a <see cref="Result{Item}"/>.
-        /// Otherwise returns a fail <see cref="Result{Item}"/>.
+        /// If the specified arguments are valid, then creates a new instance of the <see
+        /// cref="Item"/> and wraps it in a <see cref="Result{Item}"/>. Otherwise returns a fail <see cref="Result{Item}"/>.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="name">The name.</param>
@@ -164,9 +152,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
-        /// If the specified arguments are valid, then creates a new instance of
-        /// the <see cref="Item"/> and wraps it in a <see cref="Result{Item}"/>.
-        /// Otherwise returns a fail <see cref="Result{Item}"/>.
+        /// If the specified arguments are valid, then creates a new instance of the <see
+        /// cref="Item"/> and wraps it in a <see cref="Result{Item}"/>. Otherwise returns a fail <see cref="Result{Item}"/>.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="name">The name.</param>
@@ -186,13 +173,13 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
-        /// Determines whether the current item state for this instance
-        /// can be changed to the new specofied state; or not.
+        /// Determines whether the current item state for this instance can be changed to the new
+        /// specofied state; or not.
         /// </summary>
         /// <param name="newItemState">New state of the item.</param>
         /// <returns>
-        /// <c>true</c> if the current item state for this instance
-        /// can change to the specified state; otherwise <c>false</c>.
+        /// <c>true</c> if the current item state for this instance can change to the specified
+        /// state; otherwise <c>false</c>.
         /// </returns>
         public bool CanChangeState(ItemState newItemState)
         {
@@ -218,15 +205,9 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         public void ChangeItemState(ItemState newItemState)
         {
             Ensure.IsNotNull(newItemState, nameof(newItemState));
+            Ensure.IsNotInvalidOperation(CanChangeState(newItemState), ItemErrorKeys.CannotChangeItemStateConsiderCallingCanChangeFirst);
 
-            if (CanChangeState(newItemState))
-            {
-                ItemState = newItemState;
-            }
-            else
-            {
-                throw new InvalidOperationException(ItemErrorKeys.CannotChangeItemStateConsiderCallingCanChangeFirst);
-            }
+            ItemState = newItemState;
         }
 
         /// <summary>
@@ -264,8 +245,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
         }
 
         /// <summary>
-        /// Changes the item state but by-passes validity checks, so should
-        /// only be used for initial setting only.
+        /// Changes the item state but by-passes validity checks, so should only be used for initial
+        /// setting only.
         /// </summary>
         /// <param name="newItemState">New state of the item.</param>
         /// <exception cref="ArgumentNullException">newItemState</exception>

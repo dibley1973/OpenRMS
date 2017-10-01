@@ -11,6 +11,7 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
 {
     using System;
     using System.Diagnostics;
+    using Guards;
 
     /// <summary>
     /// Indicates the success of a request, and wraps the resultant object in the case of a
@@ -71,8 +72,7 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
             [DebuggerStepThrough]
             get
             {
-                if (!IsSuccess)
-                    throw new InvalidOperationException("There is no value for failure.");
+                Ensure.IsNotInvalidOperation(IsSuccess, "There is no value for failure.");
 
                 return _value;
             }

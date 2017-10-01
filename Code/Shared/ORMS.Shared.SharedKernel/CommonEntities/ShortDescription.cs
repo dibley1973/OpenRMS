@@ -14,11 +14,12 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
     using Amplifiers;
     using BaseClasses;
     using Constants.ResultErrorKeys;
+    using Guards;
 
     /// <summary>
     /// Represents a short description
     /// </summary>
-    /// <seealso cref="ValueObject{ShortDescription}" />
+    /// <seealso cref="ValueObject{ShortDescription}"/>
     [DebuggerDisplay("Value:{" + nameof(Value) + "}")]
     public class ShortDescription : ValueObject<ShortDescription>
     {
@@ -28,7 +29,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         public const byte MaximumCharacterLength = 255;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortDescription" /> class.
+        /// Initializes a new instance of the <see cref="ShortDescription"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
         private ShortDescription(string value)
@@ -39,55 +40,52 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// <summary>
         /// Gets an empty special case <see cref="ShortDescription"/>.
         /// </summary>
-        /// <value>
-        /// The empty.
-        /// </value>
+        /// <value>The empty.</value>
         public static ShortDescription Empty => CreateInternal(string.Empty);
 
         /// <summary>
         /// Gets the value.
         /// </summary>
-        /// <value>
-        /// The value.
-        /// </value>
+        /// <value>The value.</value>
         public string Value { get; }
 
         /// <summary>
         /// Performs an explicit conversion from <see cref="string"/> to <see cref="ShortDescription"/>.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>
-        /// The result of the conversion.
-        /// </returns>
+        /// <returns>The result of the conversion.</returns>
         public static explicit operator ShortDescription(string value)
         {
             var descriptionResult = Create(value);
+            Func<string> errorMessageCallback = () => descriptionResult.Error;
 
-            if (descriptionResult.IsFailure) throw new InvalidCastException(descriptionResult.Error);
+            Ensure.IsNotInvalidCast(descriptionResult.IsSuccess, errorMessageCallback);
+
+            //if (descriptionResult.IsFailure) throw new InvalidCastException(descriptionResult.Error);
 
             return descriptionResult.Value;
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="string" /> to <see cref="ShortDescription" />.
+        /// Performs an implicit conversion from <see cref="string"/> to <see cref="ShortDescription"/>.
         /// </summary>
         /// <param name="description">The description.</param>
-        /// <returns>
-        /// The result of the conversion.
-        /// </returns>
+        /// <returns>The result of the conversion.</returns>
         public static implicit operator string(ShortDescription description)
         {
             return description.Value;
         }
 
         /// <summary>
-        /// If the specified value is valid then creates and returns a new instance of
-        /// the <see cref="ShortDescription" /> class using the value and wraps it in an
-        /// Ok <see cref="Result{name}"/>; otherwise creates a fail <see cref="Result{ShortDescription}"/>.
+        /// If the specified value is valid then creates and returns a new instance of the <see
+        /// cref="ShortDescription"/> class using the value and wraps it in an Ok <see
+        /// cref="Result{name}"/>; otherwise creates a fail <see cref="Result{ShortDescription}"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>Returns a newly constructed <see cref="Result{ShortDescription}"/>.</returns>
-        /// Thrown if value length exceeds <see cref="MaximumCharacterLength"/>.
+        /// Thrown if value length exceeds
+        /// <see cref="MaximumCharacterLength"/>
+        /// .
         public static Result<ShortDescription> Create(string value)
         {
             if (string.IsNullOrWhiteSpace(value)) return Result.Fail<ShortDescription>(ShortDescriptionErrorKeys.IsNullEmptyOrWhiteSpace);
@@ -97,12 +95,14 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object" />, is equal to this instance
-        /// of <see cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1" />.
+        /// Determines whether the specified <see cref="T:System.Object"/>, is equal to this instance
+        /// of <see cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1"/>.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1" /> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see
+        /// cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1"/> is equal to this instance;
+        /// otherwise, <c>false</c>.
         /// </returns>
         protected override bool EqualsCore(ShortDescription other)
         {
@@ -112,9 +112,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
-        /// <returns>
-        /// Returns a hash code for this instance
-        /// </returns>
+        /// <returns>Returns a hash code for this instance</returns>
         protected override int GetHashCodeCore()
         {
             return GetType().ToString().GetHashCode() * Value.GetHashCode() ^ 307;

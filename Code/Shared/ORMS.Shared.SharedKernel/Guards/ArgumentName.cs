@@ -45,8 +45,9 @@ namespace ORMS.Shared.SharedKernel.Guards
         public static explicit operator ArgumentName(string value)
         {
             var nameResult = Create(value);
+            Func<string> errorMessageCallback = () => nameResult.Error;
 
-            if (nameResult.IsFailure) throw new InvalidCastException(nameResult.Error);
+            Ensure.IsNotInvalidCast(nameResult.IsSuccess, errorMessageCallback);
 
             return nameResult.Value;
         }

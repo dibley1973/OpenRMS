@@ -95,5 +95,85 @@ namespace ORMS.Shared.SharedKernel.Guards
         {
             if (!validConditionCallBackPredicate()) throw new InvalidOperationException(message);
         }
+
+        /// <summary>
+        /// Determines whether the specified valid condition is <c>false and if it is, throws an <see
+        /// cref="InvalidCastException"/> with the specified message</c>.
+        /// </summary>
+        /// <param name="validCondition">
+        /// Set to <c>true</c> to indicate an valid condition; otherwise <c>false</c>.
+        /// </param>
+        /// <param name="message">The message.</param>
+        /// <exception cref="InvalidCastException">
+        /// Thrown if the specified validCondition argument evaluates to false
+        /// </exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static void IsNotInvalidCast(bool validCondition, string message)
+        {
+            if (!validCondition) throw new InvalidCastException(message);
+        }
+
+        /// <summary>
+        /// Determines whether the specified valid condition is <c>false and if it is, throws an <see
+        /// cref="InvalidCastException"/> with the specified message</c>.
+        /// </summary>
+        /// <param name="validCondition">
+        /// Set to <c>true</c> to indicate an valid condition; otherwise <c>false</c>.
+        /// </param>
+        /// <param name="errorMessageCallback">
+        /// A callback function which when executed returns the error message.
+        /// </param>
+        /// <exception cref="InvalidCastException">
+        /// Thrown if the specified validCondition argument evaluates to false
+        /// </exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static void IsNotInvalidCast(bool validCondition, Func<string> errorMessageCallback)
+        {
+            if (!validCondition) throw new InvalidCastException(errorMessageCallback());
+        }
+
+        /// <summary>
+        /// Determines whether the specified valid condition is <c>false and if it is, throws an <see
+        /// cref="InvalidCastException"/> with the specified message</c>.
+        /// </summary>
+        /// <param name="validConditionCallBackPredicate">
+        /// A callback function which when the result is evaluated should be the <c>true</c> to
+        /// indicate an valid condition; otherwise <c>false</c>.
+        /// </param>
+        /// <param name="message">The message.</param>
+        /// <exception cref="InvalidCastException">
+        /// Thrown if when the specified validConditionCallBackPredicate argument is evaluated the
+        /// result is <c>false</c>.
+        /// </exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static void IsNotInvalidCast(Func<bool> validConditionCallBackPredicate, string message)
+        {
+            if (!validConditionCallBackPredicate()) throw new InvalidCastException(message);
+        }
+
+        /// <summary>
+        /// Determines whether the specified valid condition is <c>false and if it is, throws an <see
+        /// cref="InvalidCastException"/> with the specified message</c>.
+        /// </summary>
+        /// <param name="validConditionCallBackPredicate">
+        /// A callback function which when the result is evaluated should be the <c>true</c> to
+        /// indicate an valid condition; otherwise <c>false</c>.
+        /// </param>
+        /// <param name="errorMessageCallback">
+        /// A callback function which when executed returns the error message.
+        /// </param>
+        /// <exception cref="InvalidCastException">
+        /// Thrown if when the specified validConditionCallBackPredicate argument is evaluated the
+        /// result is <c>false</c>.
+        /// </exception>
+        [DebuggerHidden]
+        [DebuggerStepThrough]
+        public static void IsNotInvalidCast(Func<bool> validConditionCallBackPredicate, Func<string> errorMessageCallback)
+        {
+            if (!validConditionCallBackPredicate()) throw new InvalidCastException(errorMessageCallback());
+        }
     }
 }

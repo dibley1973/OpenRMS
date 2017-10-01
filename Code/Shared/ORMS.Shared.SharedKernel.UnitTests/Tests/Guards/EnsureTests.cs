@@ -184,7 +184,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
         {
             // ARRANGE
             const bool condition = true;
-            var errorMessage = "IsInvalid";
+            var errorMessage = "IsInvalidOperation";
 
             // ACT
             Action action = () => Ensure.IsNotInvalidOperation(condition, errorMessage);
@@ -201,7 +201,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
         {
             // ARRANGE
             const bool condition = false;
-            var errorMessage = "IsInvalid";
+            var errorMessage = "IsInvalidOperation";
 
             // ACT
             Action action = () => Ensure.IsNotInvalidOperation(condition, errorMessage);
@@ -219,7 +219,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
         {
             // ARRANGE
             Func<bool> conditionCallback = () => { return true; };
-            var errorMessage = "IsInvalid";
+            var errorMessage = "IsInvalidOperation";
 
             // ACT
             Action action = () => Ensure.IsNotInvalidOperation(conditionCallback, errorMessage);
@@ -237,13 +237,154 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
         {
             // ARRANGE
             Func<bool> conditionCallback = () => { return false; };
-            var errorMessage = "IsInvalid";
+            var errorMessage = "IsInvalidOperation";
 
             // ACT
             Action action = () => Ensure.IsNotInvalidOperation(conditionCallback, errorMessage);
 
             // ASSERT
             action.ShouldThrow<InvalidOperationException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid cast when passed true value then does not throw exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidCast_WhenPassedTrueValue_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            const bool condition = true;
+            var errorMessage = "IsInvalidCast";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidCast(condition, errorMessage);
+
+            // ASSERT
+            action.ShouldNotThrow<InvalidCastException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid cast when passed false value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidCast_WhenPassedFalseValue_ThenThrowsException()
+        {
+            // ARRANGE
+            const bool condition = false;
+            var errorMessage = "IsInvalidCast";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidCast(condition, errorMessage);
+
+            // ASSERT
+            action.ShouldThrow<InvalidCastException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid cast when passed true and a function which returns the error
+        /// message value then does not throw exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidCast_WhenTrueAndFunctionWhichReturnsMessageValue_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            const bool condition = true;
+            Func<string> errorMessageCallback = () => "IsInvalidCast";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidCast(condition, errorMessageCallback);
+
+            // ASSERT
+            action.ShouldNotThrow<InvalidCastException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid cast when passed false and a function which returns the error
+        /// message value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidCast_WhenPassedFalseAndFunctionWhichReturnsMessageValue_ThenThrowsException()
+        {
+            // ARRANGE
+            const bool condition = false;
+            Func<string> errorMessageCallback = () => "IsInvalidCast";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidCast(condition, errorMessageCallback);
+
+            // ASSERT
+            action.ShouldThrow<InvalidCastException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid cast when passed function which returns true value then does not
+        /// throw exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidCast_WhenPassedFunctionWhichReturnsTrueValue_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            Func<bool> conditionCallback = () => { return true; };
+            var errorMessage = "IsInvalidCast";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidCast(conditionCallback, errorMessage);
+
+            // ASSERT
+            action.ShouldNotThrow<InvalidCastException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid cast when passed function which returns false value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidCast_WhenPassedFunctionWhichReturnsFalseValue_ThenThrowsException()
+        {
+            // ARRANGE
+            Func<bool> conditionCallback = () => { return false; };
+            var errorMessage = "IsInvalidCast";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidCast(conditionCallback, errorMessage);
+
+            // ASSERT
+            action.ShouldThrow<InvalidCastException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid cast when passed function which returns true and a function
+        /// which returns the error message value then does not throw exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidCast_WhenPassedFunctionWhichReturnsTrueAndFunctionWhichReturnsMessageValue_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            Func<bool> conditionCallback = () => { return true; };
+            Func<string> errorMessageCallback = () => "IsInvalidCast";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidCast(conditionCallback, errorMessageCallback);
+
+            // ASSERT
+            action.ShouldNotThrow<InvalidCastException>();
+        }
+
+        /// <summary>
+        /// Given the is not invalid cast when passed function which returns false and a function
+        /// which returns the error message value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotInvalidCast_WhenPassedFunctionWhichReturnsFalseAndFunctionWhichReturnsMessageValue_ThenThrowsException()
+        {
+            // ARRANGE
+            Func<bool> conditionCallback = () => { return false; };
+            Func<string> errorMessageCallback = () => "IsInvalidCast";
+
+            // ACT
+            Action action = () => Ensure.IsNotInvalidCast(conditionCallback, errorMessageCallback);
+
+            // ASSERT
+            action.ShouldThrow<InvalidCastException>();
         }
     }
 }

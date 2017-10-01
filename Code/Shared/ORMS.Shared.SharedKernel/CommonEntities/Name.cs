@@ -14,6 +14,7 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
     using Amplifiers;
     using BaseClasses;
     using Constants.ResultErrorKeys;
+    using Guards;
 
     /// <summary>
     /// Represents a name
@@ -53,8 +54,9 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         public static explicit operator Name(string value)
         {
             var nameResult = Create(value);
+            Func<string> errorMessageCallback = () => nameResult.Error;
 
-            if (nameResult.IsFailure) throw new InvalidCastException(nameResult.Error);
+            Ensure.IsNotInvalidCast(nameResult.IsSuccess, errorMessageCallback);
 
             return nameResult.Value;
         }

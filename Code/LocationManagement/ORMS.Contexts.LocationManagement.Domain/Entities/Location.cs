@@ -65,6 +65,12 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         public LocationState LocationState { get; private set; }
 
         /// <summary>
+        /// Gets the optional parent <see cref="Location"/>.
+        /// </summary>
+        /// <value>The parent.</value>
+        public Maybe<Location> Parent { get; private set; }
+
+        /// <summary>
         /// Gets the name for this instance.
         /// </summary>
         /// <value>The name.</value>
@@ -116,6 +122,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// Changes the business code of this instance.
         /// </summary>
         /// <param name="businessCode">The new business code for this instance.</param>
+        /// <exception cref="ArgumentNullException">Thrown if business code is null.</exception>
         public void ChangeBusinessCode(Code businessCode)
         {
             Ensure.IsNotNull(businessCode, (ArgumentName)nameof(businessCode));
@@ -127,7 +134,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// Changes the description of this instance.
         /// </summary>
         /// <param name="description">The new description for this instance.</param>
-        /// <exception cref="ArgumentNullException">description</exception>
+        /// <exception cref="ArgumentNullException">Thrown if description is null.</exception>
         public void ChangeDescription(ShortDescription description)
         {
             Ensure.IsNotNull(description, (ArgumentName)nameof(description));
@@ -139,7 +146,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// Changes the state of this instance.
         /// </summary>
         /// <param name="state">The state.</param>
-        /// <exception cref="ArgumentNullException">state</exception>
+        /// <exception cref="ArgumentNullException">Thrown if state is null.</exception>
         public void ChangeLocationState(LocationState state)
         {
             Ensure.IsNotNull(state, (ArgumentName)nameof(state));
@@ -151,12 +158,24 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// Changes the name of this instance.
         /// </summary>
         /// <param name="name">The new name for this instance.</param>
-        /// <exception cref="ArgumentNullException">name</exception>
+        /// <exception cref="ArgumentNullException">Thrown if name is null.</exception>
         public void ChangeName(Name name)
         {
             Ensure.IsNotNull(name, (ArgumentName)nameof(name));
 
             Name = name;
+        }
+
+        /// <summary>
+        /// Changes the parent.
+        /// </summary>
+        /// <param name="parent">The parent.</param>
+        /// <exception cref="ArgumentNullException">Thrown if parent is null.</exception>
+        public void ChangeParent(Location parent)
+        {
+            Ensure.IsNotNull(parent, (ArgumentName)nameof(parent));
+
+            Parent = Maybe<Location>.Wrap(parent);
         }
     }
 }

@@ -25,6 +25,40 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.Guards
         private const string ParameterNameSuffix = "\r\nParameter name: arg1";
 
         /// <summary>
+        /// Given the is not default when passed default value then throws exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotDefault_WhenPassedDefaultValue_ThenThrowsException()
+        {
+            // ARRANGE
+            var argumentName = "arg1";
+            var argumentValue = default(Guid);
+
+            // ACT
+            Action action = () => Ensure.IsNotDefault(argumentValue, (ArgumentName)argumentName);
+
+            // ASSERT
+            action.ShouldThrow<ArgumentNullException>().WithMessage(EnsureErrorKeys.ArgumentIsDefault + ParameterNameSuffix);
+        }
+
+        /// <summary>
+        /// Given the is not default when passed non default value then does not throw exception.
+        /// </summary>
+        [Test]
+        public void GivenIsNotDefault_WhenPassedNonDefaultValue_ThenDoesNotThrowException()
+        {
+            // ARRANGE
+            var argumentName = "arg1";
+            var argumentValue = Guid.NewGuid();
+
+            // ACT
+            Action action = () => Ensure.IsNotDefault(argumentValue, (ArgumentName)argumentName);
+
+            // ASSERT
+            action.ShouldNotThrow();
+        }
+
+        /// <summary>
         /// Given the ensure is not null when passed a null object then throws an exception.
         /// </summary>
         [Test]

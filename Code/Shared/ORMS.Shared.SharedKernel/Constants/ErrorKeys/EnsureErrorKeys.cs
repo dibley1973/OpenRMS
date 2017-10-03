@@ -18,6 +18,11 @@ namespace ORMS.Shared.SharedKernel.Constants.ErrorKeys
     public class EnsureErrorKeys : ErrorKeyBase
     {
         /// <summary>
+        /// The key for when the value is default.
+        /// </summary>
+        public const string ArgumentIsDefault = "ArgumentIsDefault";
+
+        /// <summary>
         /// The key for when the value is null.
         /// </summary>
         public const string ArgumentIsNull = "ArgumentIsNull";

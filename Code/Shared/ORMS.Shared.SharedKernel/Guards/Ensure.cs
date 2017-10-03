@@ -19,6 +19,21 @@ namespace ORMS.Shared.SharedKernel.Guards
     public static class Ensure
     {
         /// <summary>
+        /// Ensures that the specified value does not equal the default for the type, and throws an
+        /// exception if it is..
+        /// </summary>
+        /// <typeparam name="T">Indicates the type of the value.</typeparam>
+        /// <param name="value">The value.</param>
+        /// <param name="argumentName">Name of the argument.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if the value equals it's default type.
+        /// </exception>
+        public static void IsNotDefault<T>(T value, ArgumentName argumentName)
+        {
+            if (value.Equals(default(T))) throw new ArgumentNullException(argumentName, EnsureErrorKeys.ArgumentIsDefault);
+        }
+
+        /// <summary>
         /// Ensures the specified value is not null, and throws an exception if it is.
         /// </summary>
         /// <param name="value">The value.</param>

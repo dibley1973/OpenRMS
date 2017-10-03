@@ -10,6 +10,7 @@
 namespace ORMS.Shared.SharedKernel.BaseClasses
 {
     using System;
+    using Guards;
 
     /// <summary>
     /// The base class which all entities should inherit from
@@ -21,7 +22,8 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         where TId : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Entity{TId}"/> class using the default parameterless contructor (Used only by ORM).
+        /// Initializes a new instance of the <see cref="Entity{TId}"/> class using the default
+        /// parameterless contructor (Used only by ORM).
         /// </summary>
         protected Entity()
         {
@@ -34,10 +36,11 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         /// <param name="id">The identifier.</param>
         protected Entity(TId id)
         {
-            if (id.Equals(default(TId)))
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
+            ////if (id.Equals(default(TId)))
+            ////{
+            ////    throw new ArgumentNullException(nameof(id));
+            ////}
+            Ensure.IsNotDefault(id, (ArgumentName)nameof(id));
 
             Id = id;
         }
@@ -48,32 +51,29 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         public TId Id { get; }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is persistent. TrPersistentansient indicates this
-        /// instance can be persisted to a data store. This state is the opposite of
+        /// Gets a value indicating whether this instance is persistent. TrPersistentansient
+        /// indicates this instance can be persisted to a data store. This state is the opposite of
         /// <see cref="IsTransient"/>
         /// </summary>
-        /// <returns>
-        ///   <c>true</c> if this instance is persistent; otherwise, <c>false</c>.
-        /// </returns>
+        /// <returns><c>true</c> if this instance is persistent; otherwise, <c>false</c>.</returns>
         public virtual bool IsPersistent => !IsTransient;
 
         /// <summary>
         /// Gets a value indicating whether this instance is transient.ransient indicates this
-        /// instance cannot be persisted to a data store. This state is the opposite of
-        /// <see cref="IsPersistent"/>
+        /// instance cannot be persisted to a data store. This state is the opposite of <see cref="IsPersistent"/>
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is transient; otherwise, <c>false</c>.
-        /// </value>
+        /// <value><c>true</c> if this instance is transient; otherwise, <c>false</c>.</value>
         public virtual bool IsTransient => Id.Equals(default(TId));
 
         /// <summary>
-        /// Determines whether the first specified <see cref="Entity{TId}" />, is equal to the second <see cref="Entity{TId}" />.
+        /// Determines whether the first specified <see cref="Entity{TId}"/>, is equal to the second
+        /// <see cref="Entity{TId}"/>.
         /// </summary>
-        /// <param name="first">The first <see cref="Entity{TId}" />.</param>
-        /// <param name="second">The second <see cref="Entity{TId}" />.</param>
+        /// <param name="first">The first <see cref="Entity{TId}"/>.</param>
+        /// <param name="second">The second <see cref="Entity{TId}"/>.</param>
         /// <returns>
-        ///   <c>true</c> if the first specified <see cref="Entity{TId}" /> is equal to the second <see cref="Entity{TId}" />; otherwise, <c>false</c>.
+        /// <c>true</c> if the first specified <see cref="Entity{TId}"/> is equal to the second <see
+        /// cref="Entity{TId}"/>; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(Entity<TId> first, Entity<TId> second)
         {
@@ -89,12 +89,14 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         }
 
         /// <summary>
-        /// Determines whether the first specified <see cref="Entity{TId}" />, is equal to the second <see cref="Entity{TId}" />.
+        /// Determines whether the first specified <see cref="Entity{TId}"/>, is equal to the second
+        /// <see cref="Entity{TId}"/>.
         /// </summary>
-        /// <param name="first">The first <see cref="Entity{TId}" />.</param>
-        /// <param name="second">The second <see cref="Entity{TId}" />.</param>
+        /// <param name="first">The first <see cref="Entity{TId}"/>.</param>
+        /// <param name="second">The second <see cref="Entity{TId}"/>.</param>
         /// <returns>
-        ///   <c>true</c> if the first specified <see cref="Entity{TId}" /> is equal to the second <see cref="Entity{TId}" />; otherwise, <c>false</c>.
+        /// <c>true</c> if the first specified <see cref="Entity{TId}"/> is equal to the second <see
+        /// cref="Entity{TId}"/>; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator !=(Entity<TId> first, Entity<TId> second)
         {
@@ -102,11 +104,11 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         }
 
         /// <summary>
-        /// Indicates whether the specified <see cref="object" />, is equal to this instance.
+        /// Indicates whether the specified <see cref="object"/>, is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="object"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -120,7 +122,8 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         /// </summary>
         /// <param name="other">An object to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the instance object is equal to the <paramref name="other" /> parameter; otherwise, <c>false</c>.
+        /// <c>true</c> if the instance object is equal to the <paramref name="other"/> parameter;
+        /// otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Entity<TId> other)
         {

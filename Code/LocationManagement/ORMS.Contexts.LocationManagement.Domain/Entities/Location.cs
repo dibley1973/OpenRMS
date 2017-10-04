@@ -177,5 +177,13 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
 
             Parent = Maybe<Location>.Wrap(parent);
         }
+
+        /// <summary>
+        /// Removes the parent.
+        /// </summary>
+        public void RemoveParent()
+        {
+            Parent = Maybe<Location>.Empty;
+        }
     }
 }

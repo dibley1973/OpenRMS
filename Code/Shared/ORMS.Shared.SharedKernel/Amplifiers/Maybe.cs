@@ -21,6 +21,14 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
     /// </typeparam>
     public struct Maybe<T> : IEquatable<Maybe<T>>
     {
+        /// <summary>
+        /// Defines the special case "Empty" Maybe
+        /// </summary>
+        public static readonly Maybe<T> Empty = new Maybe<T>(default(T));
+
+        /// <summary>
+        /// Defines the _value
+        /// </summary>
         private readonly T _value;
 
         /// <summary>
@@ -32,11 +40,11 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
             _value = value;
         }
 
-        /// <summary>
-        /// Gets an empty maybe.
-        /// </summary>
-        /// <value>The none.</value>
-        public static Maybe<T> Nothing => default(Maybe<T>);
+        /////// <summary>
+        /////// Gets an empty maybe.
+        /////// </summary>
+        /////// <value>The none.</value>
+        ////public static Maybe<T> Empty => EmptyMaybe;
 
         /// <summary>
         /// Gets a value indicating whether this instance has value.
@@ -61,7 +69,7 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         {
             get
             {
-                Ensure.IsNotInvalidOperation(HasValue, "Canot return value if no value has been set");
+                Ensure.IsNotInvalidOperation(HasValue, "Cannot return value if no value has been set");
 
                 return _value;
             }
@@ -150,7 +158,6 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
             var objectCanBeWrapped = obj is T;
             if (objectCanBeWrapped)
             {
-                ////obj = new Maybe<T>((T)obj);
                 obj = Wrap((T)obj);
             }
 
@@ -199,9 +206,9 @@ namespace ORMS.Shared.SharedKernel.Amplifiers
         /// <returns>A <see cref="string"/> that represents this instance.</returns>
         public override string ToString()
         {
-            if (HasNoValue) return "No value";
+            if (HasNoValue) return "Value: No-value";
 
-            return Value.ToString();
+            return $"Value: {Value.ToString()}";
         }
     }
 }

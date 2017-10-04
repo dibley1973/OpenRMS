@@ -14,6 +14,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
     using Domain.Entities;
     using FluentAssertions;
     using NUnit.Framework;
+    using Shared.SharedKernel.Amplifiers;
     using Shared.SharedKernel.CommonEntities;
 
     /// <summary>
@@ -166,7 +167,6 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
             var nameResult = Name.Create("Location 1");
             var name = nameResult.Value;
             var businessCode = default(Code);
-            ////var expectedErrorMessage = string.Format(ErrorKeyBase.FormatString, CheckErrorKeys.ArgumentIsNullEmptyOrWhiteSpace, argumentName);
 
             // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Location.Create(businessCode, name);
@@ -310,6 +310,87 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
             actual.Should().NotBeNull();
             actual.IsSuccess.Should().BeTrue();
             actual.Value.LocationState.Should().Be(LocationState.Created);
+        }
+
+        /// <summary>
+        /// Givens the parent when class instatiated then parent is empty maybe.
+        /// </summary>
+        [Test]
+        public void GivenParent_WhenClassInstatiated_ThenParentIsEmptyMaybe()
+        {
+            // ARRANGE
+            var businessCodeResult = Code.Create("L1");
+            var businessCode = businessCodeResult.Value;
+            var nameResult = Name.Create("Location 1");
+            var name = nameResult.Value;
+            var locationResult = Location.Create(businessCode, name);
+            var location = locationResult.Value;
+
+            // ACT
+            var actual = location.Parent;
+
+            // ASSERT
+            actual.Should().Be(Maybe<Location>.Empty);
+        }
+
+        /// <summary>
+        /// Given the parent when accessed after changing parent returns parent.
+        /// </summary>
+        [Test]
+        public void GivenParent_WhenAccessedAfterChangingParent_ReturnsParent()
+        {
+            // ARRANGE
+            var businessCodeResult = Code.Create("L1");
+            var businessCode = businessCodeResult.Value;
+            var nameResult = Name.Create("Location 1");
+            var name = nameResult.Value;
+            var locationResult = Location.Create(businessCode, name);
+            var location = locationResult.Value;
+
+            var parentBusinessCodeResult = Code.Create("L2");
+            var parentBusinessCode = parentBusinessCodeResult.Value;
+            var parentNameResult = Name.Create("Location 2");
+            var parentName = parentNameResult.Value;
+            var parentLocationResult = Location.Create(parentBusinessCode, parentName);
+            var parentLocation = parentLocationResult.Value;
+            location.ChangeParent(parentLocation);
+
+            // ACT
+            var actual = location.Parent;
+
+            // ASSERT
+            actual.Value.Should().BeSameAs(parentLocation);
+        }
+
+        /// <summary>
+        /// Given the parent when accessed after changing parent returns parent.
+        /// </summary>
+        [Test]
+        public void GivenParent_WhenAccessedAfterChangingParentAndRemoving_ReturnsEmptyMaybe()
+        {
+            // ARRANGE
+            var expected = Maybe<Location>.Empty;
+            var businessCodeResult = Code.Create("L1");
+            var businessCode = businessCodeResult.Value;
+            var nameResult = Name.Create("Location 1");
+            var name = nameResult.Value;
+            var locationResult = Location.Create(businessCode, name);
+            var location = locationResult.Value;
+
+            var parentBusinessCodeResult = Code.Create("L2");
+            var parentBusinessCode = parentBusinessCodeResult.Value;
+            var parentNameResult = Name.Create("Location 2");
+            var parentName = parentNameResult.Value;
+            var parentLocationResult = Location.Create(parentBusinessCode, parentName);
+            var parentLocation = parentLocationResult.Value;
+            location.ChangeParent(parentLocation);
+            location.RemoveParent();
+
+            // ACT
+            var actual = location.Parent;
+
+            // ASSERT
+            actual.Should().Be(expected);
         }
 
         /// <summary>

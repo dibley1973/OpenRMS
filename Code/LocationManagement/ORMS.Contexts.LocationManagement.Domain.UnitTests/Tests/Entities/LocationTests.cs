@@ -7,11 +7,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Linq;
-
 namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
 {
     using System;
+    using System.Linq;
     using Constants.ResultErrorKeys;
     using Domain.Entities;
     using FluentAssertions;

@@ -10,6 +10,8 @@
 namespace ORMS.Contexts.LocationManagement.Domain.Entities
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using Constants.ResultErrorKeys;
     using Shared.SharedKernel.Amplifiers;
     using Shared.SharedKernel.BaseClasses;
@@ -21,6 +23,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
     /// </summary>
     public class Location : AggregateRoot<Guid>
     {
+        private readonly List<Location> _subLocations;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Location"/> class. Sets the state to <see cref="ORMS.Contexts.LocationManagement.Domain.Entities.LocationState.Created"/>
         /// </summary>
@@ -44,6 +48,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
             ChangeBusinessCode(businessCode);
             ChangeName(name);
             ChangeLocationState(state);
+
+            _subLocations = new List<Location>();
         }
 
         /// <summary>
@@ -59,10 +65,22 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         public ShortDescription Description { get; private set; }
 
         /// <summary>
+        /// Gets a value indicating whether this instance has sub locations.
+        /// </summary>
+        /// <value><c>true</c> if this instance has sub locations; otherwise, <c>false</c>.</value>
+        public bool HasSubLocations => _subLocations.Count > 0;
+
+        /// <summary>
         /// Gets the state of this instance.
         /// </summary>
         /// <value>The state of this instance.</value>
         public LocationState LocationState { get; private set; }
+
+        /// <summary>
+        /// Gets the name for this instance.
+        /// </summary>
+        /// <value>The name.</value>
+        public Name Name { get; private set; }
 
         /// <summary>
         /// Gets the optional parent <see cref="Location"/>.
@@ -71,10 +89,18 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         public Maybe<Location> Parent { get; private set; }
 
         /// <summary>
-        /// Gets the name for this instance.
+        /// Gets the sub locations, if any exist, or an empty <see cref="Maybe{T}"/> wrapping a <see cref="ReadOnlyCollection{Location}"/>.
         /// </summary>
-        /// <value>The name.</value>
-        public Name Name { get; private set; }
+        /// <value>The sub locations.</value>
+        public Maybe<ReadOnlyCollection<Location>> SubLocations
+        {
+            get
+            {
+                return HasSubLocations
+                    ? Maybe<ReadOnlyCollection<Location>>.Wrap(new ReadOnlyCollection<Location>(_subLocations))
+                    : Maybe<ReadOnlyCollection<Location>>.Empty;
+            }
+        }
 
         /// <summary>
         /// If the specified arguments are valid, then creates a new instance of the <see
@@ -116,6 +142,15 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
             return validationResult.IsSuccess
                 ? Result.Ok(new Location(id, businessCode, name, state))
                 : Result.Fail<Location>(validationResult.Error);
+        }
+
+        /// <summary>
+        /// Adds the sub location.
+        /// </summary>
+        /// <param name="subLocation">The sub location.</param>
+        public void AddSubLocation(Location subLocation)
+        {
+            _subLocations.Add(subLocation);
         }
 
         /// <summary>
@@ -176,6 +211,14 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
             Ensure.IsNotNull(parent, (ArgumentName)nameof(parent));
 
             Parent = Maybe<Location>.Wrap(parent);
+        }
+
+        /// <summary>
+        /// Clears the sub locations.
+        /// </summary>
+        public void ClearSubLocations()
+        {
+            _subLocations.Clear();
         }
 
         /// <summary>

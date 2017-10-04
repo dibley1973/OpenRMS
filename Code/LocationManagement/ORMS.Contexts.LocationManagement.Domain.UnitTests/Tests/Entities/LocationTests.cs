@@ -7,6 +7,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Linq;
+
 namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
 {
     using System;
@@ -573,6 +575,163 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
 
             // ASSERT
             location.LocationState.Should().Be(LocationState.Deactivated);
+        }
+
+        /// <summary>
+        /// Given the has sub locations when after instantiation then returns false.
+        /// </summary>
+        [Test]
+        public void GivenHasSubLocations_WhenAfterInstantiation_ThenReturnsFalse()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var businessCodeResult = Code.Create("L1");
+            var businessCode = businessCodeResult.Value;
+            var nameResult = Name.Create("Location 1");
+            var name = nameResult.Value;
+            var locationState = LocationState.Active;
+            var locationResult = Location.Create(id, businessCode, name, locationState);
+            var location = locationResult.Value;
+
+            // ACT
+            var actual = location.HasSubLocations;
+
+            // ASSERT
+            actual.Should().BeFalse();
+        }
+
+        /// <summary>
+        /// Given the has sub locations when after adding sub location then returns true.
+        /// </summary>
+        [Test]
+        public void GivenHasSubLocations_WhenAfterAddingSubLocation_ThenReturnsTrue()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var businessCodeResult = Code.Create("L1");
+            var businessCode = businessCodeResult.Value;
+            var nameResult = Name.Create("Location 1");
+            var name = nameResult.Value;
+            var locationState = LocationState.Active;
+            var locationResult = Location.Create(id, businessCode, name, locationState);
+            var location = locationResult.Value;
+
+            var subBusinessCodeResult = Code.Create("L2");
+            var subBusinessCode = subBusinessCodeResult.Value;
+            var subNameResult = Name.Create("Location 2");
+            var subName = subNameResult.Value;
+            var subLocationResult = Location.Create(subBusinessCode, subName);
+            var subLocation = subLocationResult.Value;
+            location.AddSubLocation(subLocation);
+
+            // ACT
+            var actual = location.HasSubLocations;
+
+            // ASSERT
+            actual.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the sub locations when after instantiation then returns empty maybe.
+        /// </summary>
+        [Test]
+        public void GivenSubLocations_WhenAfterInstantiation_ThenReturnsEmptyMaybe()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var businessCodeResult = Code.Create("L1");
+            var businessCode = businessCodeResult.Value;
+            var nameResult = Name.Create("Location 1");
+            var name = nameResult.Value;
+            var locationState = LocationState.Active;
+            var locationResult = Location.Create(id, businessCode, name, locationState);
+            var location = locationResult.Value;
+
+            // ACT
+            var actual = location.SubLocations;
+
+            // ASSERT
+            actual.Should().NotBeNull();
+            actual.HasNoValue.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Given the sub locations when after adding one sub location then returns added sub location.
+        /// </summary>
+        [Test]
+        public void GivenSubLocations_WhenAfterAddingOneSubLocation_ThenReturnsAddedSubLocation()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var businessCodeResult = Code.Create("L1");
+            var businessCode = businessCodeResult.Value;
+            var nameResult = Name.Create("Location 1");
+            var name = nameResult.Value;
+            var locationState = LocationState.Active;
+            var locationResult = Location.Create(id, businessCode, name, locationState);
+            var location = locationResult.Value;
+
+            var subBusinessCodeResult = Code.Create("L2");
+            var subBusinessCode = subBusinessCodeResult.Value;
+            var subNameResult = Name.Create("Location 2");
+            var subName = subNameResult.Value;
+            var subLocationResult = Location.Create(subBusinessCode, subName);
+            var subLocation = subLocationResult.Value;
+            location.AddSubLocation(subLocation);
+
+            // ACT
+            var actual = location.SubLocations;
+
+            // ASSERT
+            actual.Should().NotBeNull();
+            actual.HasValue.Should().BeTrue();
+            actual.Value.Should().NotBeEmpty();
+            actual.Value.Should().HaveCount(1);
+            actual.Value[0].Should().Be(subLocation);
+        }
+
+        /// <summary>
+        /// Given the sub locations when after adding two sub locations then returns a count of two.
+        /// </summary>
+        [Test]
+        public void GivenSubLocations_WhenAfterAddingTwoSubLocation_ThenReturnsCountOfTwo()
+        {
+            // ARRANGE
+            var id = Guid.NewGuid();
+            var businessCodeResult = Code.Create("L1");
+            var businessCode = businessCodeResult.Value;
+            var nameResult = Name.Create("Location 1");
+            var name = nameResult.Value;
+            var locationState = LocationState.Active;
+            var locationResult = Location.Create(id, businessCode, name, locationState);
+            var location = locationResult.Value;
+
+            var subBusinessCodeResult1 = Code.Create("L2");
+            var subBusinessCode1 = subBusinessCodeResult1.Value;
+            var subNameResult1 = Name.Create("Location 2");
+            var subName1 = subNameResult1.Value;
+            var subLocationResult1 = Location.Create(subBusinessCode1, subName1);
+            var subLocation1 = subLocationResult1.Value;
+            location.AddSubLocation(subLocation1);
+
+            var subBusinessCodeResult2 = Code.Create("L3");
+            var subBusinessCode2 = subBusinessCodeResult2.Value;
+            var subNameResult2 = Name.Create("Location 3");
+            var subName2 = subNameResult2.Value;
+            var subLocationResult2 = Location.Create(subBusinessCode2, subName2);
+            var subLocation2 = subLocationResult2.Value;
+            location.AddSubLocation(subLocation2);
+
+            // ACT
+            var actual = location.SubLocations;
+
+            // ASSERT
+            actual.Should().NotBeNull();
+            actual.HasValue.Should().BeTrue();
+            actual.Value.Should().NotBeEmpty();
+            actual.Value.Should().HaveCount(2);
+            actual.Value.First().Should().Be(subLocation1);
+            actual.Value.Last().Should().Be(subLocation2);
         }
     }
 }

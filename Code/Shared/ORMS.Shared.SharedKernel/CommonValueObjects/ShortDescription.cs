@@ -7,13 +7,13 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ORMS.Shared.SharedKernel.CommonEntities
+namespace ORMS.Shared.SharedKernel.CommonValueObjects
 {
     using System;
     using System.Diagnostics;
     using Amplifiers;
     using BaseClasses;
-    using Constants.ResultErrorKeys;
+    using Constants.ErrorKeys;
     using Guards;
 
     /// <summary>
@@ -93,13 +93,12 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object"/>, is equal to this instance
-        /// of <see cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1"/>.
+        /// Determines whether the specified <see cref="ShortDescription"/>, is equal to this
+        /// instance of <see cref="ShortDescription"/>.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see
-        /// cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1"/> is equal to this instance;
+        /// <c>true</c> if the specified <see cref="ShortDescription"/> is equal to this instance;
         /// otherwise, <c>false</c>.
         /// </returns>
         protected override bool EqualsCore(ShortDescription other)
@@ -113,11 +112,22 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// <returns>Returns a hash code for this instance</returns>
         protected override int GetHashCodeCore()
         {
-            return GetType().ToString().GetHashCode() * Value.GetHashCode() ^ 307;
+            int initialPrimeNumber = 149;
+            int multiplierPrimeNumber = 53;
+
+            // Overflow is fine, just wrap
+            unchecked
+            {
+                int hash = initialPrimeNumber;
+
+                hash = (hash * multiplierPrimeNumber) + Value.GetHashCode();
+
+                return hash;
+            }
         }
 
         /// <summary>
-        /// internal method to create a <see cref="ShortDescription"/> object.
+        /// Internal method to create a <see cref="ShortDescription"/> object.
         /// Warning: This function bypasses argument validation.
         /// </summary>
         /// <param name="value">The value.</param>

@@ -7,13 +7,13 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ORMS.Shared.SharedKernel.Constants.ResultErrorKeys
+namespace ORMS.Shared.SharedKernel.Constants.ErrorKeys
 {
-    using CommonEntities;
+    using CommonValueObjects;
 
     /// <summary>
-    /// Represents the keys strings for <see cref="Name"/> errors, which
-    /// can be converted by the UI to meaningful messages;
+    /// Represents the keys strings for <see cref="Name"/> errors, which can be converted by the UI
+    /// to meaningful messages;
     /// </summary>
     public class NameErrorKeys
     {

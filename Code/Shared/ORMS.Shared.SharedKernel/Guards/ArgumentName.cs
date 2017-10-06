@@ -12,7 +12,7 @@ namespace ORMS.Shared.SharedKernel.Guards
     using System;
     using Amplifiers;
     using BaseClasses;
-    using Constants.ResultErrorKeys;
+    using Constants.ErrorKeys;
 
     /// <summary>
     /// Represents the name of an argument

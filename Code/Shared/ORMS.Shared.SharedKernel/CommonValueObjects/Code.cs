@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="Name.cs" company="Chesil Media">
+// <copyright file="Code.cs" company="Chesil Media">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -7,84 +7,87 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ORMS.Shared.SharedKernel.CommonEntities
+namespace ORMS.Shared.SharedKernel.CommonValueObjects
 {
     using System;
     using System.Diagnostics;
     using Amplifiers;
     using BaseClasses;
-    using Constants.ResultErrorKeys;
+    using Constants.ErrorKeys;
     using Guards;
 
     /// <summary>
-    /// Represents a name
+    /// Represents a code
     /// </summary>
-    /// <seealso cref="ValueObject{Name}"/>
+    /// <seealso cref="ValueObject{Code}"/>
     [DebuggerDisplay("Value:{" + nameof(Value) + "}")]
-    public class Name : NameBase // ValueObject<Name>
+    public class Code : ValueObject<Code>
     {
         /// <summary>
         /// The maximum number of characters this instance can be.
         /// </summary>
-        public new const byte MaximumCharacterLength = 100;
+        public const byte MaximumCharacterLength = 50;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Name"/> class.
+        /// Initializes a new instance of the <see cref="Code"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown if value is null, empty or white space.
-        /// </exception>
-        private Name(string value)
-            : base(value)
+        private Code(string value)
         {
+            Value = value;
         }
 
         /// <summary>
-        /// Gets an empty special case <see cref="Name"/>.
+        /// Gets an empty special case <see cref="Code"/>.
         /// </summary>
         /// <value>The empty.</value>
-        public static Name Empty => CreateInternal(string.Empty);
+        public static Code Empty => CreateInternal(string.Empty);
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="string"/> to <see cref="Name"/>.
+        /// Gets the value.
+        /// </summary>
+        /// <value>The value.</value>
+        public string Value { get; }
+
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="string"/> to <see cref="Code"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator Name(string value)
+        public static explicit operator Code(string value)
         {
-            var nameResult = Create(value);
-            Func<string> errorMessageCallback = () => nameResult.Error;
+            var codeResult = Create(value);
+            Func<string> errorMessageCallback = () => codeResult.Error;
 
-            Ensure.IsNotInvalidCast(nameResult.IsSuccess, errorMessageCallback);
+            Ensure.IsNotInvalidCast(codeResult.IsSuccess, errorMessageCallback);
 
-            return nameResult.Value;
+            return codeResult.Value;
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Name"/> to <see cref="string"/> .
+        /// Performs an implicit conversion from <see cref="string"/> to <see cref="Code"/>.
         /// </summary>
-        /// <param name="name">The name.</param>
+        /// <param name="code">The code.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator string(Name name)
+        public static implicit operator string(Code code)
         {
-            return name.Value;
+            return code.Value;
         }
 
         /// <summary>
         /// If the specified value is valid then creates and returns a new instance of the <see
-        /// cref="Name"/> class using the value and wraps it in an Ok <see cref="Result{name}"/>;
-        /// otherwise creates a fail <see cref="Result{Name}"/>.
+        /// cref="Code"/> class using the value and wraps it in an Ok <see cref="Result{name}"/>;
+        /// otherwise creates a fail <see cref="Result{Code}"/>.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>Returns a newly constructed <see cref="Result{Name}"/>.</returns>
+        /// <returns>Returns a newly constructed <see cref="Result{Code}"/>.</returns>
         /// Thrown if value length exceeds
         /// <see cref="MaximumCharacterLength"/>
         /// .
-        public static Result<Name> Create(string value)
+        public static Result<Code> Create(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Name>(NameErrorKeys.IsNullEmptyOrWhiteSpace);
-            if (value.Length > MaximumCharacterLength) return Result.Fail<Name>(NameErrorKeys.IsTooLong);
+            if (string.IsNullOrWhiteSpace(value)) return Result.Fail<Code>(CodeErrorKeys.IsNullEmptyOrWhiteSpace);
+            if (value.Length > MaximumCharacterLength) return Result.Fail<Code>(CodeErrorKeys.IsTooLong);
 
             return Result.Ok(CreateInternal(value));
         }
@@ -99,9 +102,9 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// cref="T:ORMS.Shared.SharedKernel.BaseClasses.ValueObject`1"/> is equal to this instance;
         /// otherwise, <c>false</c>.
         /// </returns>
-        protected bool EqualsCore(Name other)
+        protected override bool EqualsCore(Code other)
         {
-            return base.EqualsCore(other);
+            return Value == other.Value;
         }
 
         /// <summary>
@@ -110,18 +113,29 @@ namespace ORMS.Shared.SharedKernel.CommonEntities
         /// <returns>Returns a hash code for this instance</returns>
         protected override int GetHashCodeCore()
         {
-            return GetType().ToString().GetHashCode() * Value.GetHashCode() ^ 307;
+            int initialPrimeNumber = 47;
+            int multiplierPrimeNumber = 71;
+
+            // Overflow is fine, just wrap
+            unchecked
+            {
+                int hash = initialPrimeNumber;
+
+                hash = (hash * multiplierPrimeNumber) + Value.GetHashCode();
+
+                return hash;
+            }
         }
 
         /// <summary>
-        /// Internal method to create a <see cref="Name"/> object.
+        /// internal method to create a <see cref="Code"/> object.
         /// Warning: This function bypasses argument validation.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>Returns a newly constructed <see cref="Name"/>.</returns>
-        private static Name CreateInternal(string value)
+        /// <returns>Returns a newly constructed <see cref="Code"/>.</returns>
+        private static Code CreateInternal(string value)
         {
-            return new Name(value);
+            return new Code(value);
         }
     }
 }

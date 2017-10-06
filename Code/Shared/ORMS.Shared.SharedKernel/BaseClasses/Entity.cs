@@ -146,10 +146,21 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         /// <summary>
         /// Gets the hash code for this entity. This is based upon the type name and the <see cref="Id"/>.
         /// </summary>
-        /// <returns>Returns the hash code for this entity</returns>
+        /// <returns>Returns a hash code for this instance</returns>
         public override int GetHashCode()
         {
-            return (GetType().ToString() + Id).GetHashCode();
+            int initialPrimeNumber = 71;
+            int multiplierPrimeNumber = 101;
+
+            // Overflow is fine, just wrap
+            unchecked
+            {
+                int hash = initialPrimeNumber;
+
+                hash = (hash * multiplierPrimeNumber) + Id.GetHashCode();
+
+                return hash;
+            }
         }
     }
 }

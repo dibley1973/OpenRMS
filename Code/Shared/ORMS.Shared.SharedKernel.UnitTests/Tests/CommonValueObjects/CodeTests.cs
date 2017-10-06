@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="NameTests.cs" company="Chesil Media">
+// <copyright file="CodeTests.cs" company="Chesil Media">
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
@@ -7,22 +7,22 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
+namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonValueObjects
 {
     using System;
-    using Constants.ResultErrorKeys;
+    using Constants.ErrorKeys;
     using FluentAssertions;
     using NUnit.Framework;
-    using SharedKernel.CommonEntities;
+    using SharedKernel.CommonValueObjects;
 
     /// <summary>
-    /// Test for <see cref="Name"/> structure
+    /// Test for <see cref="Code"/> structure
     /// </summary>
     [TestFixture]
-    public class NameTests
+    public class CodeTests
     {
         /// <summary>
-        /// Given the create method when called with null value then returns fail result.
+        /// Given Create method when called with null value then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithNullValue_ThenReturnsFailResult()
@@ -30,15 +30,15 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
-            var actual = Name.Create(null);
+            var actual = Code.Create(null);
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(NameErrorKeys.IsNullEmptyOrWhiteSpace);
+            actual.Error.Should().Be(CodeErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the Create method when called with empty string then returns fail result.
+        /// Given Create method when called with empty string then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithEmptyValue_ThenReturnsFailResult()
@@ -46,15 +46,15 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
-            var actual = Name.Create(string.Empty);
+            var actual = Code.Create(string.Empty);
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(NameErrorKeys.IsNullEmptyOrWhiteSpace);
+            actual.Error.Should().Be(CodeErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the Create method when called with white space then returns fail result.
+        /// Given Create method when called with white space then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithWhiteSpace_ThenReturnsFailResult()
@@ -62,57 +62,57 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
             // ARRANGE
 
             // ACT
-            var actual = Name.Create("  ");
+            var actual = Code.Create("  ");
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(NameErrorKeys.IsNullEmptyOrWhiteSpace);
+            actual.Error.Should().Be(CodeErrorKeys.IsNullEmptyOrWhiteSpace);
         }
 
         /// <summary>
-        /// Given the Create method when called with value longer than maximum length then returns fail result.
+        /// Given Create method when called with value longer than maximum length then returns fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithValueLongerThanMaximumLength_ThenReturnsFailResult()
         {
             // ARRANGE
-            var value = new string('A', Name.MaximumCharacterLength + 1);
+            var value = new string('A', Code.MaximumCharacterLength + 1);
 
             // ACT
-            var actual = Name.Create(value);
+            var actual = Code.Create(value);
 
             // ASSERT
             actual.IsFailure.Should().BeTrue();
-            actual.Error.Should().Be(NameErrorKeys.IsTooLong);
+            actual.Error.Should().Be(CodeErrorKeys.IsTooLong);
         }
 
         /// <summary>
-        /// Given the Create method when called with value at maximum length returns success result.
+        /// Given Create method when called with value at maximum returns success result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithValueAtMaximumLength_ThenReturnsSuccessResult()
         {
             // ARRANGE
-            var value = new string('A', Name.MaximumCharacterLength);
+            var value = new string('A', Code.MaximumCharacterLength);
 
             // ACT
-            var actual = Name.Create(value);
+            var actual = Code.Create(value);
 
             // ASSERT
             actual.IsSuccess.Should().BeTrue();
         }
 
         /// <summary>
-        /// Given the Create method when called with value less than maximum length returns success result.
+        /// Given Create method when called with value less than maximum returns success result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithValueLessThanMaximumLength_ThenReturnsSuccessResult()
         {
             // ARRANGE
-            var value = new string('A', Name.MaximumCharacterLength - 1);
+            var value = new string('A', Code.MaximumCharacterLength - 1);
 
             // ACT
-            var actual = Name.Create(value);
+            var actual = Code.Create(value);
 
             // ASSERT
             actual.IsSuccess.Should().BeTrue();
@@ -125,12 +125,12 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenValue_WhenReadAfterValidConstruction_ThenReturnsConstructedValue()
         {
             // ARRANGE
-            var value = new string('A', Name.MaximumCharacterLength - 1);
-            var nameResult = Name.Create(value);
-            var name = nameResult.Value;
+            var value = new string('A', Code.MaximumCharacterLength - 1);
+            var codeResult = Code.Create(value);
+            var code = codeResult.Value;
 
             // ACT
-            var actual = name.Value;
+            var actual = code.Value;
 
             // ASSERT
             actual.Should().Be(value);
@@ -143,13 +143,13 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1Result = Name.Create("Name");
-            var name1 = name1Result.Value;
-            var name2Result = Name.Create("Name");
-            var name2 = name2Result.Value;
+            var code1Result = Code.Create("Code");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.Equals(name2);
+            var actual = code1.Equals(code2);
 
             // ASSERT
             actual.Should().BeTrue();
@@ -162,67 +162,68 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenEquals_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1Result = Name.Create("Name1");
-            var name1 = name1Result.Value;
-            var name2Result = Name.Create("Name2");
-            var name2 = name2Result.Value;
+            var code1Result = Code.Create("Code1");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code2");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.Equals(name2);
+            var actual = code1.Equals(code2);
 
             // ASSERT
             actual.Should().BeFalse();
         }
 
         /// <summary>
-        /// Given  the get hash code, when same value strings then returns true.
+        /// Given the get hash code, when same value strings then returns true.
         /// </summary>
         [Test]
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
         {
             // ARRANGE
-            var name1Result = Name.Create("Name");
-            var name1 = name1Result.Value;
-            var name2Result = Name.Create("Name");
-            var name2 = name2Result.Value;
+            var code1Result = Code.Create("Code");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.GetHashCode().Equals(name2.GetHashCode());
+            var actual = code1.GetHashCode().Equals(code2.GetHashCode());
 
             // ASSERT
             actual.Should().BeTrue();
         }
 
         /// <summary>
-        /// Given  the get hash code, when different value strings then returns false.
+        /// Given the get hash code, when different value strings then returns false.
         /// </summary>
         [Test]
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()
         {
             // ARRANGE
-            var name1Result = Name.Create("Name1");
-            var name1 = name1Result.Value;
-            var name2Result = Name.Create("Name2");
-            var name2 = name2Result.Value;
+            var code1Result = Code.Create("Code1");
+            var code1 = code1Result.Value;
+            var code2Result = Code.Create("Code2");
+            var code2 = code2Result.Value;
 
             // ACT
-            var actual = name1.GetHashCode().Equals(name2.GetHashCode());
+            var actual = code1.GetHashCode().Equals(code2.GetHashCode());
 
             // ASSERT
             actual.Should().BeFalse();
         }
 
         /// <summary>
-        /// Given the explicit string operator when cast from string at maximum length then created name with same value.
+        /// Given the explicit string operator when cast from string at maximum length then created
+        /// code with same value.
         /// </summary>
         [Test]
-        public void GivenExplicitStringOperator_WhenCastFromStringAtMaximumLength_ThenCreatedNameWithSameValue()
+        public void GivenExplicitStringOperator_WhenCastFromStringAtMaximumLength_ThenCreatedCodeWithSameValue()
         {
             // ARRANGE
-            var value = new string('A', Name.MaximumCharacterLength);
+            var value = new string('A', Code.MaximumCharacterLength);
 
             // ACT
-            var actual = (Name)value;
+            var actual = (Code)value;
 
             // ASSERT
             actual.Value.Should().Be(value);
@@ -235,15 +236,15 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         public void GivenExplicitStringOperator_WhenCastFromStringOverMaximumLength_ThrowsException()
         {
             // ARRANGE
-            var value = new string('A', Name.MaximumCharacterLength + 1);
+            var value = new string('A', Code.MaximumCharacterLength + 1);
 
             // ReSharper disable once NotAccessedVariable
-            var name = default(Name);
+            var code = default(Code);
 
             // ACT
             Action actual = () =>
             {
-                name = (Name)value;
+                code = (Code)value;
             };
 
             // ASSERT
@@ -254,11 +255,11 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         /// Given the implicit string operator when cast to string then created name with same value.
         /// </summary>
         [Test]
-        public void GivenImplicitStringOperator_WhenCastToString_ThenCreatedNameWithSameValue()
+        public void GivenImplicitStringOperator_WhenCastToString_ThenCreatedCodeWithSameValue()
         {
             // ARRANGE
-            var value = "Name";
-            var nameResult = Name.Create(value);
+            var value = "Code";
+            var nameResult = Code.Create(value);
             var name = nameResult.Value;
 
             // ACT

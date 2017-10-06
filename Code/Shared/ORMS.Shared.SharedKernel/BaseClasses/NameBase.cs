@@ -64,7 +64,18 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         /// <returns>Returns a hash code for this instance</returns>
         protected override int GetHashCodeCore()
         {
-            return GetType().ToString().GetHashCode() * Value.GetHashCode() ^ 307;
+            int initialPrimeNumber = 47;
+            int multiplierPrimeNumber = 71;
+
+            // Overflow is fine, just wrap
+            unchecked
+            {
+                int hash = initialPrimeNumber;
+
+                hash = (hash * multiplierPrimeNumber) + Value.GetHashCode();
+
+                return hash;
+            }
         }
     }
 }

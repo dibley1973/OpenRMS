@@ -7,13 +7,13 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
+namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonValueObjects
 {
     using System;
-    using Constants.ResultErrorKeys;
+    using Constants.ErrorKeys;
     using FluentAssertions;
     using NUnit.Framework;
-    using SharedKernel.CommonEntities;
+    using SharedKernel.CommonValueObjects;
 
     /// <summary>
     /// Test for <see cref="ShortDescription"/> structure
@@ -70,7 +70,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         }
 
         /// <summary>
-        /// Given the create method when called with value longer than maximum length then returns fail result.
+        /// Given the create method when called with value longer than maximum length then returns
+        /// fail result.
         /// </summary>
         [Test]
         public void GivenCreate_WhenCalledWithValueLongerThanMaximumLength_ThenReturnsFailResult()
@@ -175,7 +176,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         }
 
         /// <summary>
-        /// Given  the get hash code, when same value strings then returns true.
+        /// Given the get hash code, when same value strings then returns true.
         /// </summary>
         [Test]
         public void GivenGetHashCode_WhenSameValueStrings_ThenReturnsTrue()
@@ -194,7 +195,7 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         }
 
         /// <summary>
-        /// Given  the get hash code, when different value strings then returns false.
+        /// Given the get hash code, when different value strings then returns false.
         /// </summary>
         [Test]
         public void GivenGetHashCode_WhenDifferentValueStrings_ThenReturnsFalse()
@@ -213,7 +214,8 @@ namespace ORMS.Shared.SharedKernel.UnitTests.Tests.CommonEntities
         }
 
         /// <summary>
-        /// Given the explicit string operator when cast from string at maximum length then created name with same value.
+        /// Given the explicit string operator when cast from string at maximum length then created
+        /// name with same value.
         /// </summary>
         [Test]
         public void GivenExplicitStringOperator_WhenCastFromStringAtMaximumLength_ThenCreatedShortDescriptionWithSameValue()

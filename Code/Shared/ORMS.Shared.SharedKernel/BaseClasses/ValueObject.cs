@@ -26,8 +26,8 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         /// <param name="first">The first <see cref="ValueObject{T}"/> to check.</param>
         /// <param name="second">The second <see cref="ValueObject{T}"/> to check.</param>
         /// <returns>
-        /// The result of the operator; <c>true</c> if the two <see cref="ValueObject{T}"/>
-        /// objects are equal, otherwise <c>false</c>.
+        /// The result of the operator; <c>true</c> if the two <see cref="ValueObject{T}"/> objects
+        /// are equal, otherwise <c>false</c>.
         /// </returns>
         public static bool operator ==(ValueObject<T> first, ValueObject<T> second)
         {
@@ -49,8 +49,8 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         /// <param name="first">The first <see cref="ValueObject{T}"/> to check.</param>
         /// <param name="second">The second <see cref="ValueObject{T}"/> to check.</param>
         /// <returns>
-        /// The result of the operator; <c>true</c> if the two <see cref="ValueObject{T}"/>
-        /// objects are not equal, otherwise <c>false</c>.
+        /// The result of the operator; <c>true</c> if the two <see cref="ValueObject{T}"/> objects
+        /// are not equal, otherwise <c>false</c>.
         /// </returns>
         public static bool operator !=(ValueObject<T> first, ValueObject<T> second)
         {
@@ -58,30 +58,28 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="object" />, is equal to this instance of <see cref="ValueObject{T}"/>.
+        /// Determines whether the specified <see cref="object"/>, is equal to this instance of <see cref="ValueObject{T}"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>
         /// <returns>
-        /// Returns <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// Returns <c>true</c> if the specified <see cref="object"/> is equal to this instance;
+        /// otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
             var valueObject = obj as T;
 
             return Equals(valueObject);
-
-            ////var objectIsDifferentType = ReferenceEquals(valueObject, null);
-            ////if (objectIsDifferentType) return false;
-
-            ////return EqualsCore(valueObject);
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="ValueObject{T}" />, is equal to this instance of <see cref="ValueObject{T}"/>.
+        /// Determines whether the specified <see cref="ValueObject{T}"/>, is equal to this instance
+        /// of <see cref="ValueObject{T}"/>.
         /// </summary>
-        /// <param name="other">The <see cref="ValueObject{T}" /> to compare with this instance.</param>
+        /// <param name="other">The <see cref="ValueObject{T}"/> to compare with this instance.</param>
         /// <returns>
-        /// Returns <c>true</c> if the specified <see cref="ValueObject{T}" /> is equal to this instance; otherwise, <c>false</c>.
+        /// Returns <c>true</c> if the specified <see cref="ValueObject{T}"/> is equal to this
+        /// instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(T other)
         {
@@ -95,7 +93,8 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures
+        /// like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -103,12 +102,13 @@ namespace ORMS.Shared.SharedKernel.BaseClasses
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="object" />, is equal to this instance
-        /// of <see cref="ValueObject{T}"/>.  This member should be overridden in the derived class.
+        /// Determines whether the specified <see cref="object"/>, is equal to this instance of <see
+        /// cref="ValueObject{T}"/>. This member should be overridden in the derived class.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="ValueObject{T}" /> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="ValueObject{T}"/> is equal to this instance;
+        /// otherwise, <c>false</c>.
         /// </returns>
         protected abstract bool EqualsCore(T other);
 

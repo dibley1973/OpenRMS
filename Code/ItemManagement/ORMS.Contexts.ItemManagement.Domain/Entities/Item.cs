@@ -14,7 +14,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.Entities
     using Helpers;
     using Shared.SharedKernel.Amplifiers;
     using Shared.SharedKernel.BaseClasses;
-    using Shared.SharedKernel.CommonEntities;
+    using Shared.SharedKernel.CommonValueObjects;
     using Shared.SharedKernel.Contracts;
     using Shared.SharedKernel.Guards;
 

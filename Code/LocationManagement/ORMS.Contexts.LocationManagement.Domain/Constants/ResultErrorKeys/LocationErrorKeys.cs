@@ -12,8 +12,8 @@ namespace ORMS.Contexts.LocationManagement.Domain.Constants.ResultErrorKeys
     using Entities;
 
     /// <summary>
-    /// Represents the keys strings for <see cref="Location"/> errors, which
-    /// can be converted by the UI to meaningful messages;
+    /// Represents the keys strings for <see cref="Location"/> errors, which can be converted by the
+    /// UI to meaningful messages;
     /// </summary>
     public class LocationErrorKeys
     {
@@ -31,6 +31,11 @@ namespace ORMS.Contexts.LocationManagement.Domain.Constants.ResultErrorKeys
         /// The key for when the name is null.
         /// </summary>
         public const string NameIsNull = "NameIsNull";
+
+        /// <summary>
+        /// The key for when the identifier is null.
+        /// </summary>
+        public const string IdIsNull = "IdIsNull";
 
         /// <summary>
         /// The key for when the state is null.

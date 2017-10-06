@@ -16,10 +16,10 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
     using FluentAssertions;
     using NUnit.Framework;
     using Shared.SharedKernel.Amplifiers;
-    using Shared.SharedKernel.CommonEntities;
+    using Shared.SharedKernel.CommonValueObjects;
 
     /// <summary>
-    /// Tests the Location /&gt;
+    /// Tests the Location
     /// </summary>
     [TestFixture]
     public class LocationTests
@@ -311,6 +311,53 @@ namespace ORMS.Contexts.LocationManagement.Domain.UnitTests.Tests.Entities
             actual.Should().NotBeNull();
             actual.IsSuccess.Should().BeTrue();
             actual.Value.LocationState.Should().Be(LocationState.Created);
+        }
+
+        /// <summary>
+        /// Givens the type of the location type when after construction then returns not set location.
+        /// </summary>
+        [Test]
+        public void GivenLocationType_WhenAfterConstruction_ThenReturnsNotSetLocationType()
+        {
+            // ARRANGE
+            var businessCodeResult = Code.Create("L1");
+            var businessCode = businessCodeResult.Value;
+            var nameResult = Name.Create("Location 1");
+            var name = nameResult.Value;
+            var locationResult = Location.Create(businessCode, name);
+            var location = locationResult.Value;
+
+            // ACT
+            var actual = location.LocationType;
+
+            // ASSERT
+            actual.Name.Should().Be(LocationType.NotSet.Name);
+            actual.Id.Should().Be(LocationType.NotSet.Id);
+        }
+
+        /// <summary>
+        /// Givens the type of the location type when after construction then returns not set location.
+        /// </summary>
+        [Test]
+        public void GivenLocationType_WhenCallingSetLocationType_ThenReturnsNotSetLocationType()
+        {
+            // ARRANGE
+            var businessCodeResult = Code.Create("L1");
+            var businessCode = businessCodeResult.Value;
+            var nameResult = Name.Create("Location 1");
+            var name = nameResult.Value;
+            var locationResult = Location.Create(businessCode, name);
+            var location = locationResult.Value;
+            var expectedTypeResult = LocationType.Create(Identity.Create(1).Value, (Name)"Warehouse");
+            var expectedType = expectedTypeResult.Value;
+            location.ChangeLocationType(expectedType);
+
+            // ACT
+            var actual = location.LocationType;
+
+            // ASSERT
+            actual.Name.Should().Be(LocationType.NotSet.Name);
+            actual.Id.Should().Be(LocationType.NotSet.Id);
         }
 
         /// <summary>

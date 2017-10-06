@@ -15,7 +15,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
     using Fakes.IStateChangeRuleSet;
     using FluentAssertions;
     using NUnit.Framework;
-    using Shared.SharedKernel.CommonEntities;
+    using Shared.SharedKernel.CommonValueObjects;
 
     /// <summary>
     /// Tests the <see cref="Item"/>
@@ -24,7 +24,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
     public class ItemTests
     {
         /// <summary>
-        /// Given the create with Id method when supplied with default unique identifier then result is failure is true.
+        /// Given the create with Id method when supplied with default unique identifier then result
+        /// is failure is true.
         /// </summary>
         [Test]
         public void GivenCreateWithId_WhenSuppliedWithDefaultGuid_ThenResultIsFailureIsTrue()
@@ -46,7 +47,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create with Id method when supplied with empty unique identifier then then result is failure is true.
+        /// Given the create with Id method when supplied with empty unique identifier then then
+        /// result is failure is true.
         /// </summary>
         [Test]
         public void GivenCreateWithId_WhenSuppliedWithEmptyGuid_ThenResultIsFailureIsTrue()
@@ -68,7 +70,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create with Id method when supplied with null name then then result is failure is true.
+        /// Given the create with Id method when supplied with null name then then result is failure
+        /// is true.
         /// </summary>
         [Test]
         public void GivenCreateWithId_WhenSuppliedWithNullName_ThenResultIsFailureIsTrue()
@@ -80,8 +83,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             var description = descriptionResult.Value;
             var itemState = ItemState.Active;
 
-            // ACT
-            // ReSharper disable once ExpressionIsAlwaysNull
+            // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Item.Create(id, name, description, itemState);
 
             // ASSERT
@@ -90,7 +92,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create with Id method when supplied with null description then then result is failure is true.
+        /// Given the create with Id method when supplied with null description then then result is
+        /// failure is true.
         /// </summary>
         [Test]
         public void GivenCreateWithId_WhenSuppliedWithNullDescription_ThenResultIsFailureIsTrue()
@@ -102,8 +105,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             var description = default(ShortDescription);
             var itemState = ItemState.Active;
 
-            // ACT
-            // ReSharper disable once ExpressionIsAlwaysNull
+            // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Item.Create(id, name, description, itemState);
 
             // ASSERT
@@ -112,7 +114,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create with Id method when supplied with null ItemState then result is failure is true.
+        /// Given the create with Id method when supplied with null ItemState then result is failure
+        /// is true.
         /// </summary>
         [Test]
         public void GivenCreateWithId_WhenSuppliedWithNullItemState_ThenResultIsFailureIsTrue()
@@ -125,8 +128,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             var description = descriptionResult.Value;
             var itemState = default(ItemState);
 
-            // ACT
-            // ReSharper disable once ExpressionIsAlwaysNull
+            // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Item.Create(id, name, description, itemState);
 
             // ASSERT
@@ -135,7 +137,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create without Id method when supplied with null name then then result is failure is true.
+        /// Given the create without Id method when supplied with null name then then result is
+        /// failure is true.
         /// </summary>
         [Test]
         public void GivenCreateWithoutId_WhenSuppliedWithNullName_ThenResultIsFailureIsTrue()
@@ -145,8 +148,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             var descriptionResult = ShortDescription.Create("Item One");
             var description = descriptionResult.Value;
 
-            // ACT
-            // ReSharper disable once ExpressionIsAlwaysNull
+            // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Item.Create(name, description);
 
             // ASSERT
@@ -155,7 +157,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the create without Id method when supplied with null description then then result is failure is true.
+        /// Given the create without Id method when supplied with null description then then result
+        /// is failure is true.
         /// </summary>
         [Test]
         public void GivenCreateWithoutId_WhenSuppliedWithNullDescription_ThenResultIsFailureIsTrue()
@@ -165,8 +168,7 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
             var name = nameResult.Value;
             var description = default(ShortDescription);
 
-            // ACT
-            // ReSharper disable once ExpressionIsAlwaysNull
+            // ACT ReSharper disable once ExpressionIsAlwaysNull
             var actual = Item.Create(name, description);
 
             // ASSERT
@@ -175,7 +177,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the name when after creation method with Id supplied and supplied valid name then returns constructed value.
+        /// Given the name when after creation method with Id supplied and supplied valid name then
+        /// returns constructed value.
         /// </summary>
         [Test]
         public void GivenName_WhenAfterCreationWithIdAndSuppliedValidName_ThenReturnsConstructedValue()
@@ -198,7 +201,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the name when after creation method without Id supplied valid name then returns constructed value.
+        /// Given the name when after creation method without Id supplied valid name then returns
+        /// constructed value.
         /// </summary>
         [Test]
         public void GivenName_WhenAfterCreationWithoutIdAndSuppliedValidName_ThenReturnsConstructedValue()
@@ -219,7 +223,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the description when after creation method with Id supplied valid description then returns constructed value.
+        /// Given the description when after creation method with Id supplied valid description then
+        /// returns constructed value.
         /// </summary>
         [Test]
         public void GivenDescription_WhenAfterCreationWithIdAndSuppliedValidDescription_ThenReturnsConstructedValue()
@@ -242,7 +247,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the description when after creation method without Id supplied valid description then returns constructed value.
+        /// Given the description when after creation method without Id supplied valid description
+        /// then returns constructed value.
         /// </summary>
         [Test]
         public void GivenDescription_WhenAfterCreationWithoutIdAndSuppliedValidDescription_ThenReturnsConstructedValue()
@@ -511,7 +517,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the can change state function when fter default creation and supplied with invalid state options then retursn false.
+        /// Given the can change state function when fter default creation and supplied with invalid
+        /// state options then retursn false.
         /// </summary>
         [Test]
         public void GivenCanChangeState_WhenAfterDefaultCreationAndSuppliedWithInvalidStateOptions_ThenRetursnFalse()
@@ -533,7 +540,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the can change state function when after default creation and supplied with Created to Active then retursn true.
+        /// Given the can change state function when after default creation and supplied with Created
+        /// to Active then retursn true.
         /// </summary>
         [Test]
         public void GivenCanChange_WhenAfterDefaultCreationAndSuppliedWithCreatedToActive_ThenReturnsTrue()
@@ -603,7 +611,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the can change when set item state change rule set is provided with always true rule set returns true.
+        /// Given the can change when set item state change rule set is provided with always true
+        /// rule set returns true.
         /// </summary>
         [Test]
         public void GivenCanChange_WhenSetItemStateChangeRuleSetIsProvidedWithAlwaysTrueRuleSet_ReturnsTrue()
@@ -626,7 +635,8 @@ namespace ORMS.Contexts.ItemManagement.Domain.UnitTests.Tests.Entities
         }
 
         /// <summary>
-        /// Given the can change when set item state change rule set is provided with always false rule set returnsfalse.
+        /// Given the can change when set item state change rule set is provided with always false
+        /// rule set returnsfalse.
         /// </summary>
         [Test]
         public void GivenCanChange_WhenSetItemStateChangeRuleSetIsProvidedWithAlwaysFalseRuleSet_ReturnsFalse()

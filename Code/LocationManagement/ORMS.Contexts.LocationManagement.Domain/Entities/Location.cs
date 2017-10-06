@@ -15,7 +15,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
     using Constants.ResultErrorKeys;
     using Shared.SharedKernel.Amplifiers;
     using Shared.SharedKernel.BaseClasses;
-    using Shared.SharedKernel.CommonEntities;
+    using Shared.SharedKernel.CommonValueObjects;
     using Shared.SharedKernel.Guards;
 
     /// <summary>
@@ -48,7 +48,7 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
             ChangeBusinessCode(businessCode);
             ChangeName(name);
             ChangeLocationState(state);
-
+            ChangeLocationType(LocationType.NotSet);
             _subLocations = new List<Location>();
         }
 
@@ -75,6 +75,12 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
         /// </summary>
         /// <value>The state of this instance.</value>
         public LocationState LocationState { get; private set; }
+
+        /// <summary>
+        /// Gets the type of this instance.
+        /// </summary>
+        /// <value>The type of this instance.</value>
+        public LocationType LocationType { get; private set; }
 
         /// <summary>
         /// Gets the name for this instance.
@@ -187,6 +193,18 @@ namespace ORMS.Contexts.LocationManagement.Domain.Entities
             Ensure.IsNotNull(state, (ArgumentName)nameof(state));
 
             LocationState = state;
+        }
+
+        /// <summary>
+        /// Changes the type of this instance.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <exception cref="ArgumentNullException">Thrown if type is null.</exception>
+        public void ChangeLocationType(LocationType type)
+        {
+            Ensure.IsNotNull(type, (ArgumentName)nameof(type));
+
+            LocationType = type;
         }
 
         /// <summary>
